@@ -10,7 +10,7 @@
 <xsl:output method="xml" indent="yes"/>
 
 <xsl:variable name="RCSId"
-  select='"$Id: plist2rdf.xsl,v 1.1 2002-08-05 05:38:14 connolly Exp $"'/>
+  select='"$Id: plist2rdf.xsl,v 1.2 2002-08-05 05:44:54 connolly Exp $"'/>
 
 <xsl:variable name="P_ns"
   select='"http://www.w3.org/2000/10/swap/util/applePList@@#"'/>
@@ -32,6 +32,13 @@
 <xsl:template match="dict">
   <r:Description>
     <xsl:for-each select="key">
+      <!-- hmm... how to embed key names in URI space...
+           here we just assume one big namespace of plist
+	   keys. But perhaps the namespace should be a param.
+
+	   We have the usual squeeze-it-into-an-XML-name
+	   problem; we only handle a few cases here.
+	   -->
       <xsl:variable name='n1' select='translate(., " ", "_")'/>
       <xsl:variable name='pName'>
         <xsl:choose>
@@ -62,6 +69,7 @@
             </xsl:when>
 
             <xsl:when test='name() = "integer"'>
+	      <!-- using xsi:type in anticipation of RDF Core decisions...-->
               <xsl:attribute name="xsi:type">integer</xsl:attribute>
               <xsl:value-of select='.'/>
             </xsl:when>
