@@ -18,7 +18,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.9 2003-03-22 20:14:07 timbl Exp $
+ $Id: retest.py,v 1.10 2003-03-25 14:00:05 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -154,6 +154,10 @@ def main():
 #	    if description == None: description = case + " (no description)"
 	    inputDocument = kb.the(t, rdft.inputDocument).uriref()
 	    outputDocument = kb.the(t, rdft.outputDocument).uriref()
+	    status = kb.the(t, rdft.status).string
+	    if status != "APPROVED":
+		print "@@@ Not approved: "+ inputDocument
+		continue
 	    RDFTestData.append((t.uriref(), case, description,  inputDocument, outputDocument))
 
 
