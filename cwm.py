@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.135 2003-08-14 00:00:18 timbl Exp $
+$Id: cwm.py,v 1.136 2003-08-20 11:50:57 sandro Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.135 $"
+cvsRevision = "$Revision: 1.136 $"
 
 
 ######################################################### Tests  
@@ -502,7 +502,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.135 2003-08-14 00:00:18 timbl Exp $"
+        version = "$Id: cwm.py,v 1.136 2003-08-20 11:50:57 sandro Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -705,6 +705,10 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             elif arg == "-reify":
                 need(lxkb); touch(lxkb)
                 lxkb.reifyAsTrue()
+
+            elif arg == "-dereify":
+                need(lxkb); touch(lxkb)
+                lxkb.dereifyTrue()
 
             elif arg == "-size":
                 progress("Size: %i statements in store, %i in working formula." %(_store.size, workingContext.size()))
