@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.3 2001-11-15 22:11:23 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.4 2002-02-21 04:55:40 timbl Exp $"
 
 
 
@@ -71,7 +71,7 @@ class RDFSink:
     def startDoc(self):
         print "\nsink: start."
 
-    def endDoc(self):
+    def endDoc(self, rootFormulaPair):
         print "sink: end.\n"
 
     def makeStatement(self, tuple):

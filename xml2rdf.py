@@ -45,12 +45,13 @@ class RDFXMLParser(xmllib.XMLParser):
         self._thisURI = thisURI
         self._state = STATE_NOT_RDF  # Maybe should ignore RDF poutside <rdf:RDF>??
         self._context = thisURI + "#_formula"  # Context of current statements, change in bags
+        self._formula = RESOURCE, self._context
         self._subject = None
         self._predicate = None
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.18 2001-09-07 01:53:17 timbl Exp $"
+        version = "$Id: xml2rdf.py,v 1.19 2002-02-21 04:55:41 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -395,7 +396,7 @@ class RDFXMLParser(xmllib.XMLParser):
     def close(self):
         xmllib.XMLParser.close(self)
         self.flush()
-        self.sink.endDoc()
+        self.sink.endDoc(self._formula)
 
 def test(args = None):
     import sys, getopt
