@@ -9,13 +9,15 @@
 # <!ENTITY b 'http://www.w3.org/2000/01/rdf-schema#'>\012"
 
 #  Notation3 generation by
-#  $Id: tambis-forSome.n3,v 1.1 2000-12-20 22:00:12 timbl Exp $
+#  $Id: tambis-forSome.n3,v 1.2 2000-12-20 22:20:31 timbl Exp $
 
      @prefix ex: <http://www.daml.org/2000/10/daml-ex#> .
      @prefix ont: <http://www.daml.org/2000/10/daml-ont#> .
      @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
      @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-     @prefix : <http://www.daml.org/2000/11/daml-ont#> .
+#     @prefix : <http://www.daml.org/2000/11/daml-ont#> .
+# We need to use the log.n3 namesapce for recognision of lists at the moment.
+     @prefix : <http://www.w3.org/2000/10/swap/log.n3#> .
      @prefix log: <http://www.w3.org/2000/10/swap/log.n3#> .
 
 <> log:forSome
