@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.91 2002-03-12 20:57:15 timbl Exp $
+$Id: cwm.py,v 1.92 2002-03-22 21:36:00 timbl Exp $
 
 Closed World Machine
 
@@ -51,7 +51,7 @@ import llyn
 
 from thing import progress
 
-cvsRevision = "$Revision: 1.91 $"
+cvsRevision = "$Revision: 1.92 $"
 
 
 ######################################################### Tests  
@@ -265,6 +265,7 @@ def doCommand():
 --filter=foo Read rules from foo, apply to store, REPLACING store with conclusions
 --rules     Apply rules in store to store, adding conclusions to store
 --think     as -rules but continue until no more rule matches (or forever!)
+--think=foo as -apply=foo but continue until no more rule matches (or forever!)
 --reify     Replace the statements in the store with statements describing them.
 --flat      Reify only nested subexpressions (not top level) so that no {} remain.
 --help      print this message
@@ -404,7 +405,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.91 2002-03-12 20:57:15 timbl Exp $"
+        version = "$Id: cwm.py,v 1.92 2002-03-22 21:36:00 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -550,6 +551,11 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             elif arg == "-rules":
                 _store.applyRules(workingContext, workingContext)
 
+            elif arg[:7] == "-think=":
+                filterContext = (_store.intern((FORMULA, _uri+ "#_formula")))
+                if thing.verbosity() > 4: progress( "Input rules to --think from " + _uri)
+                _store.loadURI(_uri)
+                _store.think(workingContext, filterContext);
             elif arg == "-think":
                 _store.think(workingContext)
 

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.22 2002-03-17 04:21:15 timbl Exp $
+$Id: llyn.py,v 1.23 2002-03-22 21:36:00 timbl Exp $
 
 RDF Store and Query engine
 
@@ -137,7 +137,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.22 $"
+cvsRevision = "$Revision: 1.23 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -1562,14 +1562,15 @@ class RDFStore(RDFSink.RDFSink) :
 
 #   Iteratively apply rules to a formula
 
-    def think(self, F):
+    def think(self, F, G=None):
         grandtotal = 0
         iterations = 0
+        if G == None: G = F
         self.reopen(F)
         bindingsFound = {}  # rule: list bindings already found
         while 1:
             iterations = iterations + 1
-            step = self.applyRules(F, F, alreadyDictionary=bindingsFound)
+            step = self.applyRules(F, G, alreadyDictionary=bindingsFound)
             if step == 0: break
             grandtotal= grandtotal + step
         if thing.verbosity() > 5: progress("Grand total of %i new statements in %i iterations." %
