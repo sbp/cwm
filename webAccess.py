@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.14 2004-10-28 17:41:59 timbl Exp $
+$Id: webAccess.py,v 1.15 2004-11-08 18:32:36 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -47,7 +47,7 @@ def cacheHack(addr):
 		continue
     return addr
 		
-def urlopenForRDF(addr, referer):
+def urlopenForRDF(addr, referer=None):
     """A version of urllib.urlopen() which asks for RDF by preference
 
     This is now uses urllib2.urlopen(), in order to get better error handling
