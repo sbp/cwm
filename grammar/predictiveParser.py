@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.9 2004-11-10 00:50:21 syosi Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.10 2004-11-29 17:00:29 syosi Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 try:
@@ -437,13 +437,13 @@ def main():
 	yacc=open(yaccFile, "w")
 	yaccConvert(yacc, document, tokenRegexps)
 	yacc.close()
-    
+
     if parseFile == None: exit(0)
 
     
     ip = webAccess.urlopenForRDF(parseFile, None)
     
-    str = ip.read()
+    str = ip.read().decode('utf_8')
     sink = g.newFormula()
     p = PredictiveParser(sink=sink, top=document, branchTable= branchTable,
 	    tokenRegexps= tokenRegexps)
