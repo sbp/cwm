@@ -9,17 +9,11 @@ cf. http://www.w3.org/2000/10/swap/cwm.py
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_crypto.py,v 1.6 2003-06-24 13:44:47 timbl Exp $'
-__version__ = '$Revision: 1.6 $'
+__cvsid__ = '$Id: cwm_crypto.py,v 1.7 2003-08-25 14:54:52 timbl Exp $'
+__version__ = '$Revision: 1.7 $'
 
 import md5, sha, binascii, quopri, base64
-import thing
-
-# from thing import * # nooooooo!
-LightBuiltIn = thing.LightBuiltIn
-Function = thing.Function
-ReverseFunction = thing.ReverseFunction
-LITERAL = thing.LITERAL
+from term import Function, ReverseFunction, LightBuiltIn
 
 USE_PKC = 1
 
@@ -133,8 +127,7 @@ class BI_keyLength(LightBuiltIn, Function, ReverseFunction):
 
    def evaluateObject(self,  subj_py): 
       RSAKey = quoToKey(subj_py)
-      size = str(len(decToBin(RSAKey.n)))
-      return self.store.intern((LITERAL, size))
+      return str(len(decToBin(RSAKey.n))) # @@ not integer?
 
 class BI_sign(LightBuiltIn, Function): 
    def evaluateObject(self, subj_py): 
@@ -143,8 +136,7 @@ class BI_sign(LightBuiltIn, Function):
       hash, keypair = subj_py
       RSAKey = quoToKey(keypair)
       signature = RSAKey.sign(hash, str(time.time())) # sign the hash with the key
-      signature = baseEncode(str(signature[0]))
-      return self.store.intern((LITERAL, signature))
+      return baseEncode(str(signature[0]))
 
 class BI_verify(LightBuiltIn): 
    def evaluate(self, subj_py, obj_py): 

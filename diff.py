@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: diff.py,v 1.2 2002-12-30 15:00:34 timbl Exp $
+$Id: diff.py,v 1.3 2003-08-25 14:54:52 timbl Exp $
 
 Find differences between two webs
 
@@ -24,7 +24,7 @@ import uripath
 import string
 import sys
 from uripath import join
-from thing import  Namespace
+from term import  Namespace
 from notation3 import RDF_NS_URI
 
 from llyn import Formula, CONTEXT, PRED, SUBJ, OBJ

@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.1 2003-08-14 00:00:18 timbl Exp $
+$Id: cwm_list.py,v 1.2 2003-08-25 14:54:52 timbl Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -12,12 +12,11 @@ See cwm.py and the os module in python
 """
 
 
-from thing import LightBuiltIn, Function, ReverseFunction
+from term import LightBuiltIn, Function, ReverseFunction,\
+    List, EmptyList, NonEmptyList
+
 from diag import verbosity, progress
 import uripath
-
-from thing import List, EmptyList, NonEmptyList
-
 
 from RDFSink import List_NS, Logic_NS
 

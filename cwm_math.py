@@ -15,20 +15,15 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.11 2003-06-24 13:44:47 timbl Exp $'
-__version__ = '$Revision: 1.11 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.12 2003-08-25 14:54:52 timbl Exp $'
+__version__ = '$Revision: 1.12 $'
 
 import sys, string, re, urllib
-import thing, notation3
 
-from thing import *
+from term import LightBuiltIn, Function, ReverseFunction
 import types
 
-LITERAL_URI_prefix = 'data:application/n3,'
-DAML_LISTS = notation3.DAML_LISTS
-
-RDF_type_URI = notation3.RDF_type_URI
-DAML_equivalentTo_URI = notation3.DAML_equivalentTo_URI
+# from RDFSink import DAML_LISTS, RDF_type_URI, DAML_equivalentTo_URI
 
 MATH_NS_URI = 'http://www.w3.org/2000/10/swap/math#'
 

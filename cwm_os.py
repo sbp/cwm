@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_os.py,v 1.8 2002-12-31 05:50:30 timbl Exp $
+$Id: cwm_os.py,v 1.9 2003-08-25 14:54:52 timbl Exp $
 
 Operating systems built-ins for cwm
 http://www.w3.org/2000/10/swap/string.py
@@ -13,7 +13,7 @@ See cwm.py and the os module in python
 
 import os
 
-from thing import LightBuiltIn, Function, ReverseFunction
+from term import LightBuiltIn, Function, ReverseFunction
 from diag import verbosity, progress
 import uripath
 

@@ -42,7 +42,6 @@ import urllib   # Opening resources in load()
 import string
 import sys
 
-import thing
 import uripath
 from why import BecauseOfData
 import diag
@@ -123,7 +122,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.34 2003-08-14 00:00:19 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.35 2003-08-25 14:54:54 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -372,7 +371,7 @@ class RDFHandler(xml.sax.ContentHandler):
                     if value == "Resource":
                         c = self._context
                         s = self._subject
-                        self._subject = self.sink.newBlankNode(self._context, why=self._reason2)
+#                        self._subject = self.sink.newBlankNode(self._context, why=self._reason2)
                         self.idAboutAttr(attrs) #@@ not according to current syntax @@@@@@@@@@@
                         self.sink.makeStatement(( c, self._predicate, s, self._subject), why=self._reason2)
                         self._state = STATE_DESCRIPTION  # Nest description

@@ -1,10 +1,12 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.11 2003-04-08 16:12:44 timbl Exp $
+$Id: why.py,v 1.12 2003-08-25 14:54:54 timbl Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves- we could make
 it more complicated here for the recursively minded but i don't see the need at the moment.
+
+Assumes wwe are using the process-glbal store -- uses Namespace() @@@
 """
 
 
@@ -22,7 +24,7 @@ import uripath # DanC's tested and correct one
 import md5, binascii  # for building md5 URIs
 
 from uripath import refTo
-from thing   import Namespace
+from myStore  import Namespace
 
 from diag import verbosity, progress
 

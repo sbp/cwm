@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.9 2003-06-24 13:44:48 timbl Exp $
+$Id: toXML.py,v 1.10 2003-08-25 14:54:54 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -45,7 +45,7 @@ import codecs # python 2-ism; for writing utf-8 in RDF/xml output
 import urlparse
 import urllib
 import re
-import thing
+#import thing
 from uripath import refTo
 from diag import progress
 
