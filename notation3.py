@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.27 2000-11-13 21:42:17 timbl Exp $
+$Id: notation3.py,v 1.28 2000-11-14 22:48:48 timbl Exp $
 
 cf
 
@@ -145,7 +145,7 @@ class SinkParser:
     	self._bindings = bindings
 	self._thisDoc = thisDoc
         self._baseURI = baseURI
-	self._context = RESOURCE , self._thisDoc    # For storing with triples
+	self._context = RESOURCE , self._thisDoc    # For storing with triples @@@@ use stack
         self._contextStack = []      # For nested conjunctions { ... }
         self._varPrefix = varPrefix
         self._nextId = 0
@@ -326,9 +326,9 @@ class SinkParser:
 	    if j>=0:
                 subj = RESOURCE , self._genPrefix + `self._nextId`  #
                 self._nextId = self._nextId + 1
-                self.makeStatement(((RESOURCE, self._thisDoc), # quantifiers - use inverse?
+                self.makeStatement(((RESOURCE, self._context), # quantifiers - use inverse?
                                     (RESOURCE, N3_forSome_URI),
-                                    (RESOURCE, self._thisDoc),
+                                    (RESOURCE, self._context),
                                     subj)) # @@@ Note this is anonymous node
                 i = self.property_list(str, j, subj)
                 if i<0: raise BadSyntax(str, j, "property_list expected")
@@ -340,11 +340,11 @@ class SinkParser:
 	    j = self.tok('{', str, i)
 	    if j>=0:
                 oldContext = self._context
-                subj = RESOURCE , self._genPrefix + `self._nextId` # ANONYMOUS
+                subj = RESOURCE , self._genPrefix + `self._nextId` # ANONYMOUS - Call out???
                 self._nextId = self._nextId + 1  # intern
-                self.makeStatement(((RESOURCE, self._thisDoc), # quantifiers - use inverse?
+                self.makeStatement(((RESOURCE, oldContext), # quantifiers - use inverse?
                                     (RESOURCE, N3_forSome_URI), #pred
-                                    (RESOURCE, self._thisDoc),  #subj
+                                    (RESOURCE, oldContext),  #subj
                                     subj))                      # obj
 
                 self.context = subj
@@ -946,7 +946,7 @@ class SinkToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Start notation3 generation\n")
-        self._write("#  $Id: notation3.py,v 1.27 2000-11-13 21:42:17 timbl Exp $\n\n")
+        self._write("#  $Id: notation3.py,v 1.28 2000-11-14 22:48:48 timbl Exp $\n\n")
         self._write("    " * self.indent)
         self._subj = None
         self._nextId = 0
@@ -1859,7 +1859,7 @@ def doCommand():
                     template = t[SUBJ]
                     conclusion = t[OBJ]
                     unmatched = []
-                    print "# We have %i variables" % (len(template.occursAs[CONTEXT]),)
+                    print "# We have %i content" % (len(template.occursAs[CONTEXT]),)
                     for arc in template.occursAs[CONTEXT]:
                         print "############################### yesy"
                         unmatched.append(arc)
