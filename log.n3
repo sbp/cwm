@@ -1,7 +1,7 @@
 #   n3 definition of some logical terms
 #
 # these raise the level above ontology
-# $Id: log.n3,v 1.4 2001-06-13 23:58:47 timbl Exp $
+# $Id: log.n3,v 1.5 2001-09-17 16:06:53 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -62,7 +62,7 @@ log:resolvesTo a rdf:Property;
 #
 log:uri a rdf:Property;
     rdfs:description """This allows one to look at the actual string of the URI
-        which identifies this.""".
+        which identifies this.""";
     rdfs:range log:String.
 
 ############# Rules
