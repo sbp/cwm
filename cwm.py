@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.146 2004-03-06 20:39:37 timbl Exp $
+$Id: cwm.py,v 1.147 2004-03-09 23:07:05 connolly Exp $
 
 Closed World Machine
 
@@ -18,7 +18,7 @@ Cwm: http://www.w3.org/2000/10/swap/doc/cwm.html
 Copyright (c) 2000-2004 World Wide Web Consortium, (Massachusetts 
 Institute of Technology, European Research Consortium for Informatics 
 and Mathematics, Keio University). All Rights Reserved. This work is 
-distributed under the W3C® Software License [1] in the hope that it 
+distributed under the W3C(R) Software License [1] in the hope that it 
 will be useful, but WITHOUT ANY WARRANTY; without even the implied 
 warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -56,7 +56,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.146 $"
+cvsRevision = "$Revision: 1.147 $"
 
 
 
@@ -318,7 +318,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.146 2004-03-06 20:39:37 timbl Exp $"
+        version = "$Id: cwm.py,v 1.147 2004-03-09 23:07:05 connolly Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
