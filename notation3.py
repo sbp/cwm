@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.36 2000-12-09 03:44:18 timbl Exp $
+$Id: notation3.py,v 1.37 2000-12-18 21:32:59 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -747,7 +747,10 @@ class ToRDF(RDFSink):
         self.indent = self.indent - 1
      
 
-def relativeTo(here, there):    # algorithm!? @@@@
+def relativeTo(here, there):
+    return relativeURI(here[1], there[1])
+    
+def relativeToOld(here, there):    # algorithm!? @@@@
     nh = here[1]
     l = len(nh)
     nt = there[1]
@@ -756,6 +759,23 @@ def relativeTo(here, there):    # algorithm!? @@@@
     else:
 	return nt
 
+# Not perfect - should use root-relative in correct case but never mind.
+def relativeURI(base, uri):
+    i=0
+    while i<len(uri) and i<len(base):
+        if uri[i] == base[i]:
+            i = i + 1
+        else:
+            break
+#    print "# relative", base, uri, "   same up to ", i
+    # i point to end of shortest one or first difference
+    while i>0 and uri[i-1] != '/' : i=i-1  # scan for slash
+    if i == 0: return uri  # No way.
+    if string.find(base, "//", i)>0: return uri # An unshared "//"
+    n = string.count(base, "/", i)
+    return ("../" * n) + uri[i:]
+            
+    
 ########################################### XML Writer
 
 class XMLWriter:
@@ -865,7 +885,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.36 2000-12-09 03:44:18 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.37 2000-12-18 21:32:59 timbl Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         self._write("    " * self.indent)
         self._subj = None
@@ -1036,9 +1056,9 @@ class ToN3(RDFSink):
             if prefix != None : return prefix + ":" + value[j+1:]
         
             if value[:j] == self.base:   # If local to output stream,
-                return "<#" + value[j+1:] + ">" #   use local frag id (@@ lone word?)
+                return "<#" + relativeURI(self.base, value[j+1:]) + ">" #   use local frag id (@@ lone word?)
 
-        return "<" + value + ">"    # Everything else
+        return "<" + relativeURI(self.base, value) + ">"    # Everything else
 
 #########################################################
 #
