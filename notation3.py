@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.40 2000-12-20 22:44:05 timbl Exp $
+$Id: notation3.py,v 1.41 2001-01-03 00:51:22 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -918,15 +918,16 @@ class ToN3(RDFSink):
         """ Just accepting a convention here """
         self._endStatement()
         self.prefixes[nsPair] = prefixString
-        self._write(" @prefix %s: <%s> ." % (prefixString, nsPair[1]) )
+        self._write(" @prefix %s: <%s> ." % (prefixString, relativeURI(self.base, nsPair[1])) )
         self._newline()
 
 
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.40 2000-12-20 22:44:05 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.41 2001-01-03 00:51:22 timbl Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
+        if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
         self._subj = None
         self._nextId = 0
