@@ -23,7 +23,7 @@
 #  conversion as an HTTP service?
 #  ... other issues noted @@ below
 #
-# $Id: n-triples2kif.pl,v 1.2 2001-06-07 19:48:34 connolly Exp $
+# $Id: n-triples2kif.pl,v 1.3 2001-06-07 19:49:48 connolly Exp $
 # see changelog at end
 
 use strict;
@@ -117,7 +117,7 @@ sub term{
   }
   elsif($t =~ s/^_://){
     if($t =~ /^[a-zA-Z0-9]+$/){
-      $t = "ex" . $t.
+      $t = "x" . $t.
       $t = "?" . $t;
       push(@Ex, $t) unless grep($_ eq $t, @Ex);
       return $t;
@@ -133,7 +133,10 @@ sub term{
     
 
 # $Log: n-triples2kif.pl,v $
-# Revision 1.2  2001-06-07 19:48:34  connolly
+# Revision 1.3  2001-06-07 19:49:48  connolly
+# rather: _:1 -> ?x1 to match the test data I already generated
+#
+# Revision 1.2  2001/06/07 19:48:34  connolly
 # handle _:1 -> ?ex1
 #
 # Revision 1.1  2001/06/07 19:22:43  connolly
