@@ -13,8 +13,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.2 2001-12-04 20:22:47 timbl Exp $'
-__version__ = '$Revision: 1.2 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.3 2002-01-23 09:13:11 connolly Exp $'
+__version__ = '$Revision: 1.3 $'
 
 import sys, string, re, urllib
 import thing, notation3
@@ -29,7 +29,12 @@ DAML_equivalentTo_URI = notation3.DAML_equivalentTo_URI
 
 MATH_NS_URI = 'http://www.w3.org/2000/10/swap/math#'
 
-def tidy(x): return string.replace(str(x), '.0', '')
+def tidy(x):
+    #DWC bugfix: "39.03555" got changed to "393555"
+    s = str(x)
+    if s[-2:] == '.0': s=s[:-2]
+    return s
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
