@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.19 2005-01-19 20:14:37 syosi Exp $
+$Id: webAccess.py,v 1.20 2005-01-21 20:54:04 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -137,11 +137,11 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
 	F = openFormula
     else:
 	F = store.newFormula()
+    import os
     if guess == 'application/rdf+xml':
 	if diag.chatty_flag > 49: progress("Parsing as RDF")
 #	import sax2rdf, xml.sax._exceptions
 #	p = sax2rdf.RDFXMLParser(store, F,  thisDoc=asIfFrom, flags=flags)
-        import os
         if flags == 'rdflib' or int(os.environ.get("CWM_RDFLIB", 0)):
             parser = 'rdflib'
             flags = ''
@@ -154,13 +154,14 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
     else:
 	assert guess == 'text/rdf+n3'
 	if diag.chatty_flag > 49: progress("Parsing as N3")
-	p = notation3.SinkParser(store, F,  thisDoc=asIfFrom,flags=flags, why=why)
-#        from grammar import yosiParser
-#        p = yosiParser.SinkParser(store, F,  thisDoc=asIfFrom,flags=flags, why=why)
-#        from n3p import n3p_tm
-#        import triple_maker
-#        tm = triple_maker.TripleMaker(F)
-#        p = n3p_tm.n3p_tm(asIfFrom, tm)
+	if os.environ.get("CWM_N3_PARSER", 0) == 'n3p':
+            import n3p_tm
+            import triple_maker
+            tm = triple_maker.TripleMaker(formula=F, store=store)
+            p = n3p_tm.n3p_tm(asIfFrom, tm)
+        else:
+            p = notation3.SinkParser(store, F,  thisDoc=asIfFrom,flags=flags, why=why)
+
 	p.startDoc()
 	p.feed(buffer)
 	p.endDoc()

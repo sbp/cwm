@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.27 2005-01-13 00:20:27 syosi Exp $
+$Id: term.py,v 1.28 2005-01-21 20:54:04 syosi Exp $
 
 term
 
@@ -502,7 +502,9 @@ class N3Set(ImmutableSet, CompoundTerm): #,
 	
 	[ reify:items ( [ reify:value "foo"]  .... ) ]
 	"""
-	elements = sink.store.newSet([ x.reification(sink, bnodeMap, why) for x in self])
+	m = [ x.reification(sink, bnodeMap, why) for x in self]
+	m.sort(Term.compareAnyTerm)
+	elements = sink.store.newSet(m)
 	b = sink.newBlankNode()
 	sink.add(subj=b, pred=sink.newSymbol(REIFY_NS+"items"), obj=elements, why=why)
 	return b
