@@ -31,8 +31,9 @@ is complete lack of treatment of symmetry between bnodes.
 
 References:
  .google graph isomorphism
+ See also eg http://www.w3.org/2000/10/rdf-tests/rdfcore/utils/ntc/compare.cc
  
- $Id: cant.py,v 1.4 2003-04-02 04:25:12 timbl Exp $
+ $Id: cant.py,v 1.5 2003-04-08 16:12:43 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
