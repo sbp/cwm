@@ -11,7 +11,7 @@ in the patch file.
 
 If from-file but not to-file is given, from-file is smushed and output
 Uris are relative to present working directory.
-$Id: diff.py,v 1.10 2004-05-12 01:27:08 timbl Exp $
+$Id: diff.py,v 1.11 2004-05-16 20:34:48 timbl Exp $
 http://www.w3.org/2000/10/swap/diff.py
 """
 
@@ -89,12 +89,12 @@ def nailFormula(f):
 	for p in fps:  progress("Functional Property:", p)
 	for p in ifps: progress("Inverse Functional: ", p)
     
+    definitions = []
     a = float(len(bnodes))/len(nodes)
     if verbose: progress("Proportion of bodes which are blank: %f", a)
-    if a == 0: return
+    if a == 0: return bnodes, definitions
 
     loose = bnodes.copy()
-    definitions = []
     equivs = Set()
     #  Note possible optmization: First pass only like this, 
     # future passes work from newNodes.
@@ -355,7 +355,7 @@ def main():
 	usage()
 	sys.exit(2)
     graph = loadFiles(testFiles)
-    version = "$Id: diff.py,v 1.10 2004-05-12 01:27:08 timbl Exp $"[1:-1]
+    version = "$Id: diff.py,v 1.11 2004-05-16 20:34:48 timbl Exp $"[1:-1]
     if diffFiles == []:
 	nailFormula(graph)
 	if verbose: print "# Smush by " + version
