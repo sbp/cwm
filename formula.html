@@ -12,7 +12,7 @@ TT { font-family: lucidatypewriter, lucida console, courier }
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/devel/WWW/2000/10/swap/formula.py">/devel/WWW/2000/10/swap/formula.py</a></font></td></tr></table>
     <p><tt><br>
-$Id: formula.html,v 1.6 2004-03-06 20:39:38 timbl Exp $<br>
+$Id: formula.html,v 1.7 2004-03-21 04:24:34 timbl Exp $<br>
 &nbsp;<br>
 <a href="#Formula">Formula</a><br>
 See:&nbsp;&nbsp;<a href="http://www.w3.org/DesignIssues/Notation3">http://www.w3.org/DesignIssues/Notation3</a><br>
@@ -180,7 +180,7 @@ bindings&nbsp;is&nbsp;for&nbsp;use&nbsp;within&nbsp;a&nbsp;query.</tt></dd></dl>
 <dl><dt><a name="Formula-loadFormulaWithSubsitution"><strong>loadFormulaWithSubsitution</strong></a>(self, old, bindings<font color="#909090">={}</font>, why<font color="#909090">=None</font>)</dt><dd><tt>Load&nbsp;information&nbsp;from&nbsp;another&nbsp;formula,&nbsp;subsituting&nbsp;as&nbsp;we&nbsp;go<br>
 returns&nbsp;number&nbsp;of&nbsp;statements&nbsp;added&nbsp;(roughly)</tt></dd></dl>
 
-<dl><dt><a name="Formula-n3String"><strong>n3String</strong></a>(self, flags<font color="#909090">=''</font>)</dt><dd><tt>Dump&nbsp;the&nbsp;formula&nbsp;to&nbsp;an&nbsp;absolute&nbsp;string&nbsp;in&nbsp;N3</tt></dd></dl>
+<dl><dt><a name="Formula-n3String"><strong>n3String</strong></a>(self, base<font color="#909090">=None</font>, flags<font color="#909090">=''</font>)</dt><dd><tt>Dump&nbsp;the&nbsp;formula&nbsp;to&nbsp;an&nbsp;absolute&nbsp;string&nbsp;in&nbsp;N3</tt></dd></dl>
 
 <dl><dt><a name="Formula-newBlankNode"><strong>newBlankNode</strong></a>(self, uri<font color="#909090">=None</font>, why<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;unnamed&nbsp;node&nbsp;with&nbsp;this&nbsp;formula&nbsp;as&nbsp;context.<br>
 &nbsp;<br>
@@ -221,6 +221,8 @@ such&nbsp;that&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;keys&nbsp;is&nbsp;the&n
 strings&nbsp;output.</tt></dd></dl>
 
 <dl><dt><a name="Formula-predicates"><strong>predicates</strong></a>(self, subj<font color="#909090">=None</font>, obj<font color="#909090">=None</font>)</dt><dd><tt>Obsolete&nbsp;-&nbsp;use&nbsp;<a href="#Formula-each">each</a>(subj=...,&nbsp;obj=...)</tt></dd></dl>
+
+<dl><dt><a name="Formula-rdfString"><strong>rdfString</strong></a>(self, base<font color="#909090">=None</font>, flags<font color="#909090">=''</font>)</dt><dd><tt>Dump&nbsp;the&nbsp;formula&nbsp;to&nbsp;an&nbsp;absolute&nbsp;string&nbsp;in&nbsp;RDF/XML</tt></dd></dl>
 
 <dl><dt><a name="Formula-removeStatement"><strong>removeStatement</strong></a>(self, s)</dt><dd><tt>Removes&nbsp;a&nbsp;statement&nbsp;The&nbsp;formula&nbsp;must&nbsp;be&nbsp;open.<br>
 &nbsp;<br>
@@ -397,7 +399,7 @@ Data and non-method functions defined here:<br>
 <strong>__file__</strong> = './formula.pyc'<br>
 <strong>__name__</strong> = 'formula'<br>
 <strong>becauseSubexpression</strong> = &lt;why.BecauseSubexpression instance&gt;<br>
-<strong>cvsRevision</strong> = '$Revision: 1.6 $'<br>
+<strong>cvsRevision</strong> = '$Revision: 1.7 $'<br>
 <strong>forAllSym</strong> = 'http://www.w3.org/2000/10/swap/log#forAll'<br>
 <strong>forSomeSym</strong> = 'http://www.w3.org/2000/10/swap/log#forSome'<br>
 <strong>generators</strong> = _Feature((2, 2, 0, 'alpha', 1), (2, 3, 0, 'final', 0), 4096)<br>

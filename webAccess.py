@@ -1,16 +1,20 @@
 #!/usr/local/bin/python
 """
-$Id: webAccess.py,v 1.3 2004-03-06 20:39:38 timbl Exp $
+$Id: webAccess.py,v 1.4 2004-03-21 04:24:35 timbl Exp $
 
 Web access functionality building on urllib
 
 """
+
+import sys
 
 import urllib
 import uripath # http://www.w3.org/2000/10/swap/uripath.py
 import diag
 from diag import progress
 import notation3   # Parser    @@@ Registery of parsers vs content types woudl be better.
+
+from OrderedSequence import indentString
 
 HTTP_Content_Type = 'content-type' #@@ belongs elsewhere?
 
@@ -160,4 +164,15 @@ def getParser(format, inputURI, workingContext, flags):
                                      sink=lxkb,
                                      flags=flags)
 
+class DocumentAccessError(IOError):
+    def __init__(self, uri, info):
+        self._uri = uri
+        self._info = info
+        
+    def __str__(self):
+        # See C:\Python16\Doc\ref\try.html or URI to that effect
+#        reason = `self._info[0]` + " with args: " + `self._info[1]`
+        reason = indentString(self._info[1].__str__())
+        return ("Unable to access document <%s>, because:\n%s" % ( self._uri, reason))
+    
 

@@ -5,7 +5,7 @@ This is an RDF application.
 
 See also Morten F's http://www.wasab.dk/morten/2003/10/garmin2rdf.py
 
-$Id: fromGarmin.py,v 1.1 2004-02-26 00:50:44 timbl Exp $
+$Id: fromGarmin.py,v 1.2 2004-03-21 04:24:35 timbl Exp $
 """
 
 # Regular python library
@@ -72,7 +72,7 @@ def doCommand(serialDevice=None, outputURI=None, doWaypoints=1, doTracks=1, verb
 	    wpt = symbol(uripath.join(base, w.ident))
 	    f.add(record, GPS.waypoint, wpt)
 	    f.add(wpt, GPS.lat, obj=intern(degrees(w.slat)))
-	    f.add(wpt, GPS.longitude, obj=intern(degrees(w.slon)))
+	    f.add(wpt, GPS.long, obj=intern(degrees(w.slon)))
 
 
    if doTracks:
@@ -92,7 +92,7 @@ def doCommand(serialDevice=None, outputURI=None, doWaypoints=1, doTracks=1, verb
 		point = f.newBlankNode()
 		f.add(track, GPS.trackpoint, point)
 		f.add(point, GPS.lat, obj=intern(degrees(p.slat)))
-		f.add(point, GPS.longitude, obj=intern(degrees(p.slon)))
+		f.add(point, GPS.long, obj=intern(degrees(p.slon)))
 #		if verbose: progress("    time=", p.time)
 		if p.time == 0 or p.time == 0xffffffffL:
 		    if verbose: progress("time=%8x, ignoring" % p.time)

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.147 2004-03-09 23:07:05 connolly Exp $
+$Id: cwm.py,v 1.148 2004-03-21 04:24:32 timbl Exp $
 
 Closed World Machine
 
@@ -18,7 +18,7 @@ Cwm: http://www.w3.org/2000/10/swap/doc/cwm.html
 Copyright (c) 2000-2004 World Wide Web Consortium, (Massachusetts 
 Institute of Technology, European Research Consortium for Informatics 
 and Mathematics, Keio University). All Rights Reserved. This work is 
-distributed under the W3C(R) Software License [1] in the hope that it 
+distributed under the W3C Software License [1] in the hope that it 
 will be useful, but WITHOUT ANY WARRANTY; without even the implied 
 warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -43,6 +43,7 @@ import toXML 		#  RDF generator
 
 from why import BecauseOfCommandLine
 from query import think, applyRules, testIncludes
+from update import patch
 
 import uripath
 import sys
@@ -56,7 +57,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.147 $"
+cvsRevision = "$Revision: 1.148 $"
 
 
 
@@ -97,6 +98,7 @@ steps, in order left to right:
 <uri>         Load document. URI may be relative to current directory.
 
 --apply=foo   Read rules from foo, apply to store, adding conclusions to store
+--patch=foo   Read patches from foo, applying insertions and deletions to store
 --filter=foo  Read rules from foo, apply to store, REPLACING store with conclusions
 --rules       Apply rules in store to store, adding conclusions to store
 --think       as -rules but continue until no more rule matches (or forever!)
@@ -254,6 +256,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             elif _lhs == "-chatty":
                 setVerbosity(int(_rhs))
             elif arg[:7] == "-apply=": pass
+            elif arg[:7] == "-patch=": pass
             elif arg == "-reify": option_reify = 1
             elif arg == "-flat": option_flat = 1
             elif arg == "-help":
@@ -318,7 +321,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.147 2004-03-09 23:07:05 connolly Exp $"
+        version = "$Id: cwm.py,v 1.148 2004-03-21 04:24:32 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -451,6 +454,13 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 filterContext = _store.load(_uri)
 		workingContext.reopen()
                 applyRules(workingContext, filterContext);
+
+            elif arg[:7] == "-patch=":
+		workingContext = workingContext.canonicalize()
+                need(_store); touch(_store)
+                filterContext = _store.load(_uri)
+		workingContext.reopen()
+                patch(workingContext, filterContext);
 
             elif _lhs == "-filter":
 		workingContext = workingContext.canonicalize()

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.39 2004-02-04 17:56:59 timbl Exp $
+# $Id: Makefile,v 1.40 2004-03-21 04:24:31 timbl Exp $
 
 PYTHON=python
 
@@ -28,8 +28,8 @@ tested : package
 	(cd test; make all)
 	echo "Test worked, now can make release"
 
-doc.made : cwm.py notation3.py
-	(cd doc; make all)
+doc.made : cwm.py notation3.py sax2rdf.py toXML.py
+	(cd doc; make)
 
 release : tested doc.made message.txt
 	cvs commit -F message.txt
