@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.130 2003-06-24 13:44:47 timbl Exp $
+$Id: cwm.py,v 1.131 2003-07-12 09:59:50 sandro Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.130 $"
+cvsRevision = "$Revision: 1.131 $"
 
 
 ######################################################### Tests  
@@ -490,7 +490,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.130 2003-06-24 13:44:47 timbl Exp $"
+        version = "$Id: cwm.py,v 1.131 2003-07-12 09:59:50 sandro Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -756,6 +756,7 @@ def getParser(format, inputURI, formulaURI, flags):
         touch(_store)
         return notation3.SinkParser(_store, inputURI, formulaURI=formulaURI, why=r)
     else:
+        need(lxkb)
         touch(lxkb)
         return LX.language.getParser(language=format,
                                      sink=lxkb,
