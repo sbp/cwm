@@ -8,7 +8,7 @@ TT { font-family: lucidatypewriter, lucida console, courier }
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>RDFSink</strong></big></big> (version $Id: RDFSink.html,v 1.8 2003-01-10 17:13:13 timbl Exp $)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>RDFSink</strong></big></big> (version $Id: RDFSink.html,v 1.9 2003-01-16 14:23:37 timbl Exp $)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/devel/WWW/2000/10/swap/RDFSink.py">/devel/WWW/2000/10/swap/RDFSink.py</a></font></td></tr></table>
     <p><tt><a href="#RDFSink">RDFSink</a>&nbsp;--&nbsp;RDF&nbsp;parser/serializer/store&nbsp;interface<br>
@@ -106,7 +106,7 @@ raises&nbsp;<a href="#URISyntaxError">URISyntaxError</a>&nbsp;on&nbsp;bad&nbsp;U
 tuple&nbsp;is&nbsp;a&nbsp;quad&nbsp;(context,&nbsp;predicate,&nbsp;subject,&nbsp;object)&nbsp;of&nbsp;things&nbsp;generated&nbsp;by&nbsp;calls&nbsp;to&nbsp;newLiteral&nbsp;etc<br>
 why&nbsp;is&nbsp;reason&nbsp;for&nbsp;the&nbsp;statement.</tt></dd></dl>
 
-<dl><dt><a name="RDFSink-newBlankNode"><strong>newBlankNode</strong></a>(self, context, why<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="RDFSink-newBlankNode"><strong>newBlankNode</strong></a>(self, context, uri<font color="#909090">=None</font>, why<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="RDFSink-newExistential"><strong>newExistential</strong></a>(self, context, uri<font color="#909090">=None</font>, why<font color="#909090">=None</font>)</dt></dl>
 
@@ -218,7 +218,7 @@ raises&nbsp;<a href="#URISyntaxError">URISyntaxError</a>&nbsp;on&nbsp;bad&nbsp;U
 tuple&nbsp;is&nbsp;a&nbsp;quad&nbsp;(context,&nbsp;predicate,&nbsp;subject,&nbsp;object)&nbsp;of&nbsp;things&nbsp;generated&nbsp;by&nbsp;calls&nbsp;to&nbsp;newLiteral&nbsp;etc<br>
 why&nbsp;is&nbsp;reason&nbsp;for&nbsp;the&nbsp;statement.</tt></dd></dl>
 
-<dl><dt><a name="RDFStructuredOutput-newBlankNode"><strong>newBlankNode</strong></a>(self, context, why<font color="#909090">=None</font>)</dt></dl>
+<dl><dt><a name="RDFStructuredOutput-newBlankNode"><strong>newBlankNode</strong></a>(self, context, uri<font color="#909090">=None</font>, why<font color="#909090">=None</font>)</dt></dl>
 
 <dl><dt><a name="RDFStructuredOutput-newExistential"><strong>newExistential</strong></a>(self, context, uri<font color="#909090">=None</font>, why<font color="#909090">=None</font>)</dt></dl>
 
@@ -330,7 +330,7 @@ Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;
 <strong>_Old_Logic_NS</strong> = 'http://www.w3.org/2000/10/swap/log.n3#'<br>
 <strong>__file__</strong> = './RDFSink.pyc'<br>
 <strong>__name__</strong> = 'RDFSink'<br>
-<strong>__version__</strong> = '$Id: RDFSink.html,v 1.8 2003-01-10 17:13:13 timbl Exp $'<br>
+<strong>__version__</strong> = '$Id: RDFSink.html,v 1.9 2003-01-16 14:23:37 timbl Exp $'<br>
 <strong>forAllSym</strong> = 'http://www.w3.org/2000/10/swap/log#forAll'<br>
 <strong>forSomeSym</strong> = 'http://www.w3.org/2000/10/swap/log#forSome'<br>
 <strong>parsesTo_URI</strong> = 'http://www.w3.org/2000/10/swap/log#parsesTo'<br>
