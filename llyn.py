@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.26 2002-05-14 22:22:58 timbl Exp $
+$Id: llyn.py,v 1.27 2002-05-30 15:22:56 timbl Exp $
 
 RDF Store and Query engine
 
@@ -137,7 +137,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.26 $"
+cvsRevision = "$Revision: 1.27 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -297,6 +297,12 @@ class Formula(Fragment):
         return len(self.statements)
 
     def statementsMatching(self, pred=None, subj=None, obj=None):
+        """Return a READ-ONLY list of StoredStatement objects matching the parts given
+	
+	For example:
+	for s in f.statementsMatching(pred=pantoneColor):
+	    print "We've got one which is ", `s[OBJ]`
+	"""
         return self._index.get((pred, subj, obj), [])
 
     def close(self):
