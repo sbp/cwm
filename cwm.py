@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.134 2003-07-30 19:36:21 timbl Exp $
+$Id: cwm.py,v 1.135 2003-08-14 00:00:18 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.134 $"
+cvsRevision = "$Revision: 1.135 $"
 
 
 ######################################################### Tests  
@@ -502,7 +502,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.134 2003-07-30 19:36:21 timbl Exp $"
+        version = "$Id: cwm.py,v 1.135 2003-08-14 00:00:18 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -617,12 +617,14 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 option_outputStyle = arg            
 
             elif arg[:7] == "-apply=":
+		workingContext = workingContext.canonicalize()
                 need(_store); touch(_store)
                 filterContext = _store.load(_uri)
 		workingContext.reopen()
                 _store.applyRules(workingContext, filterContext);
 
             elif _lhs == "-filter":
+		workingContext = workingContext.canonicalize()
 		if tracking: 
 		    r = BecauseOfCommandLine(sys.argv[0]) # @@ add user, host, pid, date time? Privacy!
 		else:
@@ -642,10 +644,12 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 
             elif arg == "-purge":
                 need(_store); touch(_store)
+		workingContext = workingContext.canonicalize()
                 _store.purge(workingContext)
 		
             elif arg == "-purge-rules" or arg == "-data":
                 need(_store); touch(_store)
+		workingContext = workingContext.canonicalize()
                 _store.purgeExceptData(workingContext)
 
             elif arg == "-rules":

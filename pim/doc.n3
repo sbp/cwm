@@ -19,7 +19,8 @@
 @prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
 @prefix :    <http://www.w3.org/2000/10/swap/pim/contact#> .
 
-<>  doc:version "$Id: doc.n3,v 1.10 2003-07-07 16:10:16 connolly Exp $";
+<>  doc:version "$Id: doc.n3,v 1.11 2003-08-14 00:00:20 timbl Exp $";
+    doc:creator <http://www.w3.org/People/Berners-Lee/card#i>;
     doc:ipr <../LICENSE.n3>.
 
 
