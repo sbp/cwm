@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.68 2003-02-03 04:18:30 timbl Exp $
+$Id: llyn.py,v 1.69 2003-02-15 03:54:23 timbl Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.68 $"
+cvsRevision = "$Revision: 1.69 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -1195,7 +1195,7 @@ class RDFStore(RDFSink) :
 
 #Heavy functions:
 
-        log.internFrag("resolvesTo", BI_semantics) # obsolete
+#        log.internFrag("resolvesTo", BI_semantics) # obsolete
         self.semantics = log.internFrag("semantics", BI_semantics)
         self.cufi = log.internFrag("conclusion", BI_conclusion)
         self.semanticsOrError = log.internFrag("semanticsOrError", BI_semanticsOrError)
@@ -1208,7 +1208,7 @@ class RDFStore(RDFSink) :
 
 	self.definitiveService = log.internFrag("definitiveService", Fragment)
 	self.definitiveDocument = log.internFrag("definitiveDocument", Fragment)
-	self.pointsAt = log.internFrag("pointsAt", Fragment)
+	self.pointsAt = log.internFrag("pointsAt", Fragment)  # This was EricP's
 
 # Constants:
 

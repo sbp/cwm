@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.26 2003-01-20 04:54:50 eric Exp $
+$Id: thing.py,v 1.27 2003-02-15 03:54:24 timbl Exp $
 
 Interning of URIs and strings for storage in SWAP store
 
@@ -124,7 +124,11 @@ def load(uri=None, contentType=None, formulaURI=None, remember=1):
     """
     return _checkStore().load(uri, contentType, formulaURI, remember)
 
-
+import string, sys
+version = string.split(string.split(sys.version)[0], ".")
+if map(int, version) < [2, 2, 0]:
+    raise RuntimeError("Sorry, this software requires python2.2 or newer.")
+    
 class Namespace(object):
     """A shortcut for getting a symbols as interned by the default store
 
