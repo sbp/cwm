@@ -32,7 +32,7 @@ is complete lack of treatment of symmetry between bnodes.
 References:
  .google graph isomorphism
  
- $Id: cant.py,v 1.1 2003-04-01 13:37:38 timbl Exp $
+ $Id: cant.py,v 1.2 2003-04-01 13:38:58 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -65,19 +65,7 @@ comment = re.compile("^"+com+"$")
 statement = re.compile( ws + object + ws + object + ws + object  + com) # 
 
 
-def localize(uri):
-    """Get URI relative to where this lives"""
-    return uripath.refTo("http://www.w3.org/2000/10/swap/test/retest.py", uri)
-
-def problem(str):
-    global ploughOn
-    global problems
-    sys.stderr.write(str + "\n")
-    problems = problems + 1
-    if not ploughOn:
-	sys.exit(-1)
-
-#	raise RuntimeError(str)
+#"
 
 def usage():
     print __doc__
