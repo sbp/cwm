@@ -9,8 +9,8 @@ cf. http://www.w3.org/2000/10/swap/cwm.py
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_crypto.py,v 1.3 2002-04-11 23:33:45 timbl Exp $'
-__version__ = '$Revision: 1.3 $'
+__cvsid__ = '$Id: cwm_crypto.py,v 1.4 2002-05-14 22:22:58 timbl Exp $'
+__version__ = '$Revision: 1.4 $'
 
 import md5, sha, binascii, quopri, base64
 import thing
@@ -127,8 +127,9 @@ class BI_keyLength(LightBuiltIn, Function, ReverseFunction):
          one key pair (per iteration), in order to work around a bug."""
       if self.do: 
          randfunc, self.do = randpool.RandomPool(int(obj_py)), 0
+#         print "#@@@@@@@@@@@@@@@@@@@@@@@@ HERE"
          RSAKey = RSA.generate(int(obj_py), randfunc.getBytes)
-         # print formatObject(RSAKey)
+#         print "#@@@@@@@@@@@@@@@@@@@@@@@@ THERE"
          TextKey = keyToQuo(RSAKey)
          if TextKey != 'N.': return store._fromPython(context, TextKey)
 
