@@ -16,8 +16,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_maths.py,v 1.9 2004-10-19 20:23:08 syosi Exp $'
-__version__ = '$Revision: 1.9 $'
+__cvsid__ = '$Id: cwm_maths.py,v 1.10 2004-10-26 17:10:29 syosi Exp $'
+__version__ = '$Revision: 1.10 $'
 
 import sys, string, re, urllib
 
@@ -105,7 +105,7 @@ class BI_factors(LightBuiltIn, ReverseFunction):
         return tidy(t)
 
 class BI_quotient(LightBuiltIn, Function):
-    def evaluateObject(self, subj_py): 
+    def evaluateObject(self, subj_py):
         t = None
         if len(subj_py) == 2: t = float(subj_py[0]) / float(subj_py[1])
         return tidy(t)

@@ -4,7 +4,7 @@ This is an implementation of the Decimal XML schema datatype in python
 
 magnitude is the log10 of the number we multiply it by to get an integer
 
-$Id: decimal.py,v 1.3 2004-10-19 20:23:08 syosi Exp $
+$Id: decimal.py,v 1.4 2004-10-26 17:10:29 syosi Exp $
 """
 
 from types import IntType, FloatType, LongType, StringTypes
@@ -160,6 +160,8 @@ class Decimal:
             a.magnitude = self.magnitude - other.magnitude
             a.normalize()
         self.normalize()
+        if a == NotImplemented:
+            raise RuntimeError
         return a
     def __divmod__(self, other):
         """x.__divmod__(y) <==> divmod(x, y)

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.59 2004-10-19 20:23:07 syosi Exp $
+# $Id: Makefile,v 1.60 2004-10-26 17:10:29 syosi Exp $
 
 PYTHON=python
 
