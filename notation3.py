@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.34 2000-12-01 23:09:15 timbl Exp $
+$Id: notation3.py,v 1.35 2000-12-07 21:35:48 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -865,7 +865,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        self._write("#  $Id: notation3.py,v 1.34 2000-12-01 23:09:15 timbl Exp $\n\n")
+        self._write("#  $Id: notation3.py,v 1.35 2000-12-07 21:35:48 timbl Exp $\n\n")
         self._write("    " * self.indent)
         self._subj = None
         self._nextId = 0
@@ -884,13 +884,13 @@ class ToN3(RDFSink):
         self._write("\n"+ "    " * (self.indent+extra))
 
     def makeStatement(self, triple):
-        self._makeSubjPred(triple[CONTEXT], triple[SUBJ], triple[PRED])        
+        self._makeSubjPred(triple[SUBJ], triple[PRED])        
         self._write(self.representationOf(triple[OBJ]))
 #        self._write(" (in %s) " % `context`)    #@@@@
         
 # Below is for writing an anonymous node which is the object of only one arc        
     def startAnonymous(self,  triple):
-        self._makeSubjPred(triple[CONTEXT], triple[SUBJ], triple[PRED])
+        self._makeSubjPred(triple[SUBJ], triple[PRED])
         self.indent = self.indent + 1
         self._write(" [")
         self._newline()
@@ -926,8 +926,6 @@ class ToN3(RDFSink):
     def startBagSubject(self, context):
 	if self._subj != context:
 	    self._endStatement()
-	else:
-	    self._write(" = ")   # hack - for things with contentand properties!
         self.indent = self.indent + 1
         self._write("{")
         self._newline()
@@ -942,8 +940,24 @@ class ToN3(RDFSink):
         self._pred = None
         self.indent = self.indent - 1
      
+    def startBagNamed(self, subj):
+        self._makeSubjPred(subj, ( RESOURCE,  DAML_equivalentTo_URI ))
+        self.indent = self.indent + 1
+        self._write("{")
+        self._newline()
+	self._subj = None
+        self._pred = None
+
+    def endBagNamed(self, subj):    # Remove context
+        self._endStatement()     # @@@@@@@@ remove in syntax change to implicit
+        self._newline()
+        self._write("}")
+        self._subj = subj
+        self._pred = None
+        self.indent = self.indent - 1
+     
     def startBagObject(self, triple):
-        self._makeSubjPred(triple[CONTEXT], triple[SUBJ], triple[PRED])
+        self._makeSubjPred(triple[SUBJ], triple[PRED])
         self.indent = self.indent + 1
         self._write("{")
 	self._subj = None
@@ -957,7 +971,7 @@ class ToN3(RDFSink):
         self._subj = subj
         self._pred = pred
      
-    def _makeSubjPred(self, context, subj, pred):
+    def _makeSubjPred(self, subj, pred):
         
 	if self._subj != subj:
 	    self._endStatement()
