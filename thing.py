@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.32 2003-06-24 13:44:48 timbl Exp $
+$Id: thing.py,v 1.33 2003-07-18 20:33:03 timbl Exp $
 
 Interning of URIs and strings for storage in SWAP store
 
@@ -199,7 +199,7 @@ class Term:
     """
     def __init__(self, store=None):
         self.store = _checkStore(store)
-        store.initTerm(self)
+ #       store.initTerm(self)
 
             
     def qname(self):

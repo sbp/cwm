@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.131 2003-07-12 09:59:50 sandro Exp $
+$Id: cwm.py,v 1.132 2003-07-18 20:33:02 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.131 $"
+cvsRevision = "$Revision: 1.132 $"
 
 
 ######################################################### Tests  
@@ -287,6 +287,7 @@ steps, in order left to right:
 --engine=otter use otter (in your $PATH) instead of llyn for linking, etc
 --why         Replace the store with an explanation of its contents
 --mode=flags  Set modus operandi for inference (see below)
+--closure=flags  Control automatic lookup of identifiers (see below)
 --flatten     turn formulas into triples using LX vocabulary
 --unflatten   turn described-as-true LX sentences into formulas
 --think=foo   as -apply=foo but continue until no more rule matches (or forever!)
@@ -316,8 +317,16 @@ Mode flags affect inference extedning to the web:
  m   Schemas and definitive documents laoded are merged into the meta knowledge
      (otherwise they are consulted independently)
  s   Read the schema for any predicate in a query.
- 
  u   Generate unique ids using a run-specific
+
+Closure flags are set to cause the working formula to be automatically exapnded to
+the closure under the operation of looking up:
+
+ s   the subject of a statement added
+ p   the predicate of a statement added
+ o   the object of a statement added
+ i   any owl:imports documents
+ r   any doc:rules documents
 
 See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 """
@@ -402,6 +411,8 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 option_flags["n3"] = _rhs
             elif _lhs == "-mode":
                 option_flags["think"] = _rhs
+            elif _lhs == "-closure":
+		pass
             elif _lhs == "-language":
                 option_format = _rhs
                 if option_first_format == None: option_first_format = option_format
@@ -490,7 +501,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.131 2003-07-12 09:59:50 sandro Exp $"
+        version = "$Id: cwm.py,v 1.132 2003-07-18 20:33:02 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -575,6 +586,8 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 option_flags["rdf"] = _rhs
             elif _lhs == "-mode":
                 option_flags["think"] = _rhs
+            elif _lhs == "-closure":
+		workingContext.setClosureMode(_rhs)
             elif arg == "-n3": option_format = "n3"
             elif _lhs == "-n3":
                 option_format = "n3"
