@@ -17,6 +17,6 @@ How much should be there?
 in python is sufficiently deployed
 (e.g. python on tux doesn't grok,
 nor does pythonwin on TimBL's laptop).
-$Id: strquot.n3,v 1.2 2001-05-21 03:04:38 timbl Exp $
+
 """ .
     

@@ -172,7 +172,7 @@
     <daml-ex.n3>     a daml:Ontology;
          daml:comment "An example ontology";
          daml:imports <http://www.daml.org/2000/10/daml-ont>;
-         daml:versionInfo "$Id: schema1.n3,v 1.3 2001-05-21 03:04:38 timbl Exp $" .
+         daml:versionInfo "" .
     
     <invalid-ex.n3#alex>     :father <invalid-ex.n3#joe> .
     
