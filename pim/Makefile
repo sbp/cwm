@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2002-07-17 20:54:32 connolly Exp $
+# $Id: Makefile,v 1.3 2002-07-18 04:41:45 connolly Exp $
 
 PERL=perl
 PYTHON=python
@@ -29,8 +29,8 @@ ical: ical.n3 ical.rdf
 
 ical.rdf: ical.n3
 
-ical.n3: $(PIMTEST)/testCal.rdf $(PIMTEST)/testTasks.rdf ,chi.rdf $(SWAP)/util/sniffSchema.n3
-	$(PYTHON) $(CWM) --rdf $(PIMTEST)/testCal.rdf $(PIMTEST)/testTasks.rdf ,chi.rdf --filter=$(SWAP)/util/sniffSchema.n3 --n3 >$@
+ical.n3: $(PIMTEST)/testCal.rdf $(PIMTEST)/testTasks.rdf ,chi.rdf
+	$(PYTHON) $(CWM) --rdf $(PIMTEST)/testCal.rdf $(PIMTEST)/testTasks.rdf ,chi.rdf --filter=http://www.w3.org/2000/10/swap/util/sniffSchema.n3 --n3 >$@
 
 ,chi.rdf: ical2rdf.pl /usr/share/libical-evolution/zoneinfo/America/Chicago.ics
 	$(PERL) ical2rdf.pl /usr/share/libical-evolution/zoneinfo/America/Chicago.ics >$@
