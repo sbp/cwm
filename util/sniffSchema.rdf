@@ -18,6 +18,10 @@
         <log:forAll r:resource="#X"/>
     </r:Description>
 
+    <s:Property r:about="#domainIntersects">
+        <s:label>domain intersects</s:label>
+    </s:Property>
+
     <s:Property r:about="#intersectsDomainOf">
         <s:label>intersects domain of</s:label>
     </s:Property>
@@ -26,11 +30,15 @@
         <s:label>label?</s:label>
     </s:Property>
 
+    <s:Property r:about="#rangeIntersects">
+        <s:label>range intersects</s:label>
+    </s:Property>
+
     <r:Description r:about="">
         <dc:description>
 Sniff a schema from some RDF data.
 </dc:description>
-        <dc:description>$Id: sniffSchema.rdf,v 1.1 2002-07-18 05:09:33 connolly Exp $</dc:description>
+        <dc:description>$Id: sniffSchema.rdf,v 1.2 2002-07-18 05:12:52 connolly Exp $</dc:description>
         <dc:relation r:resource=""/>
         <dc:relation r:resource="sniffSchema.rdf"/>
     </r:Description>
