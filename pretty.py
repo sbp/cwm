@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.18 2004-12-03 03:17:29 syosi Exp $
+$Id: pretty.py,v 1.19 2004-12-06 19:56:59 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.18 $"
+cvsRevision = "$Revision: 1.19 $"
 
 # Magic resources we know about
 
@@ -263,11 +263,11 @@ class Serializer:
             aWorks = 0
 	    if pretty:
 		_anon, _incoming = self._topology(v, context)
-	    else:
-		_anon = 0
-	    if not _anon:
-		self._outputStatement(sink, (context, self.store.forSome, context, v), \
-                                      canItbeABNode(context, v))
+		if not _anon:
+		    self._outputStatement(sink, (context, self.store.forSome, context, v), \
+					canItbeABNode(context, v))
+	    else: # not pretty, no formulae, can always use _:a form
+		self._outputStatement(sink, (context, self.store.forSome, context, v), 1)
 
     def dumpBySubject(self, sorting=1):
         """ Dump one formula only by order of subject except forSome's first for n3=a mode"""
