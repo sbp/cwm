@@ -2,7 +2,7 @@
 
 @prefix dc: <http://purl.org/dc/elements/1.1/>.
 <> dc:description """comput xplanet arcs from an itinerary""",
-"$Id: itinArcs.n3,v 1.3 2003-07-19 04:22:03 connolly Exp $";
+"$Id: itinArcs.n3,v 1.4 2004-04-12 21:45:33 connolly Exp $";
 dc:relation <airportLookup.n3>.
 
 @prefix dt: <http://www.w3.org/2001/XMLSchema#> .
@@ -36,7 +36,6 @@ this log:forAll :LAT1, :LON1, :LAT2, :LON2, :NUM, :YMD,
         geo:lat :LAT2;
         geo:long :LON2;
       ];
-      k:startingDate [ dt:date :YMD];
   ] ].
 
   (:LAT1 " " :LON1 " " :LAT2 " " :LON2 " color=blue\n") str:concatenation :TXT.
