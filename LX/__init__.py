@@ -3,8 +3,8 @@ an emphasis on going beyind RDF and handling more expressive logic
 languages (FOL), and various inference engines and syntaxes.
 
 """
-__version__ = "$Revision: 1.8 $"
-# $Id: __init__.py,v 1.8 2003-02-13 19:54:33 sandro Exp $
+__version__ = "$Revision: 1.9 $"
+# $Id: __init__.py,v 1.9 2003-02-14 17:21:59 sandro Exp $
 
 # Needed by test.py, and probably random python utils.
 __all__ = [
@@ -18,10 +18,14 @@ __all__ = [
     "namespace",
     "uri",
     "defaultns",
+    "ns",
     ] 
 
 # $Log: __init__.py,v $
-# Revision 1.8  2003-02-13 19:54:33  sandro
+# Revision 1.9  2003-02-14 17:21:59  sandro
+# Switched to import-as-needed for LX languages and engines
+#
+# Revision 1.8  2003/02/13 19:54:33  sandro
 # cleaned up docs to match moving import-all stuff to all.py
 #
 # Revision 1.7  2003/02/13 19:47:48  sandro

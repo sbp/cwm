@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.23 2003-02-02 16:09:06 timbl Exp $
+# $Id: Makefile,v 1.24 2003-02-14 17:21:54 sandro Exp $
 
 PYTHON=python
 
@@ -55,7 +55,7 @@ package: math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf LICENSE.r
 
 # cwm.py notation3.py llyn.py  RDFSink.py toXML.py
 cwm.tar.Z::
-	tar -cf cwm.tar *.py $(HTMLS) LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py
+	tar -cf cwm.tar *.py $(HTMLS) LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply/*.py
 	compress -f cwm.tar
 
 yappstest: rdfn3_yapps.py rdfn3_yappstest.py

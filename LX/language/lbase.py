@@ -8,8 +8,8 @@ how to wrap as object?    maybe just do?   nah - parse in one pass; no need.
 
 
 """
-__version__ = "$Revision: 1.6 $"
-# $Id: lbase.py,v 1.6 2003-02-14 14:47:24 sandro Exp $
+__version__ = "$Revision: 1.7 $"
+# $Id: lbase.py,v 1.7 2003-02-14 17:21:59 sandro Exp $
 
 import LX.fol
 import LX.expr
@@ -431,8 +431,8 @@ import urllib
 
 class Parser:
 
-    def __init__(self, to_kb):
-        self.kb = to_kb
+    def __init__(self, sink=None):
+        self.kb = sink
 
     def load(self, inputURI):
         stream = urllib.urlopen(inputURI)
@@ -453,7 +453,10 @@ class Serializer:
         pass
 
 # $Log: lbase.py,v $
-# Revision 1.6  2003-02-14 14:47:24  sandro
+# Revision 1.7  2003-02-14 17:21:59  sandro
+# Switched to import-as-needed for LX languages and engines
+#
+# Revision 1.6  2003/02/14 14:47:24  sandro
 # possible fix to yacc warning
 #
 # Revision 1.5  2003/02/14 00:52:03  sandro
