@@ -24,7 +24,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/check-grammar.py
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.4 2004-11-04 22:39:41 timbl Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.5 2004-11-04 22:41:15 timbl Exp $"
 
 # SWAP
 import webAccess
@@ -224,7 +224,7 @@ class PredictiveParser:
 	parser.lineNumber = 1
 	parser.startOfLine = 0	# Offset in buffer
 	parser.keywords = [ "a", "is", "of", "this" ]
-	parser.verb = 0  # Verbosity
+	parser.verb = 1  # Verbosity
 	
     def countLines(parser, buffer, here):
 	"""Count lines since called last time
