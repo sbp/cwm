@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: cwm_os.py,v 1.3 2002-01-04 16:16:10 timbl Exp $
+$Id: cwm_os.py,v 1.4 2002-02-14 23:56:09 connolly Exp $
 
 Operating systems built-ins for cwm
 http://www.w3.org/2000/10/swap/string.py
@@ -10,10 +10,11 @@ See cwm.py and the os module in python
 
 """
 
+import os
+
 from thing import *
 import thing
 
-import os
 
 OS_NS_URI = "http://www.w3.org/2000/10/swap/os#"
 
@@ -32,7 +33,7 @@ OS_NS_URI = "http://www.w3.org/2000/10/swap/os#"
 class BI_environ(LightBuiltIn, Function):
     def evaluateObject(self, store, context, subj, subj_py):
         if thing.verbosity() > 80: progress("os:environ input:"+`subj_py`+ " has value "+os.environ[subj_py])
-        if type(subj_py) == type(''):
+        if isString(subj_py):
             return store._fromPython(os.environ.get(subj_py, None))
 
 # Command line argument: read-only
@@ -41,7 +42,7 @@ class BI_environ(LightBuiltIn, Function):
 class BI_argv(LightBuiltIn, Function):
     def evaluateObject(self, store, context, subj, subj_py):
         if thing.verbosity() > 80: progress("os:argv input:"+`subj_py`+ " has value "+os.environ[subj_py])
-        if type(subj_py) == type('') and store.argv:  # Not None or []
+        if isString(subj_py) and store.argv:  # Not None or []
             try:
                 argnum = int(subj_py) -1
             except ValueError:
@@ -49,6 +50,11 @@ class BI_argv(LightBuiltIn, Function):
             if argnum < len(store.argv):
                 return store._fromPython(store.argv[argnum])
 
+
+
+def isString(x):
+    # in 2.2, evidently we can test for isinstance(types.StringTypes)
+    return type(x) is type('') or type(x) is type(u'')
 
 #  Register the string built-ins with the store
 

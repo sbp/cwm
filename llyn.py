@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.12 2002-01-23 09:13:44 connolly Exp $
+$Id: llyn.py,v 1.13 2002-02-14 23:56:09 connolly Exp $
 
 RDF Store and Query engine
 
@@ -1147,7 +1147,7 @@ class RDFStore(RDFSink.RDFSink) :
             return  [ self._toPython(ld[OBJ], 0, queue) ] + self._toPython(ld[PRED], 0, queue) 
 
     def _fromPython(self, x):
-        if type(x) == type('"'):
+        if isString(x):
             return self.intern((LITERAL, x))
         if type(x) == type(2):
             return self.intern((LITERAL, `x`))
@@ -2330,5 +2330,7 @@ def x2s(x):
     return s
 
 
-
+def isString(x):
+    # in 2.2, evidently we can test for isinstance(types.StringTypes)
+    return type(x) is type('') or type(x) is type(u'')
 

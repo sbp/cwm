@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.83 2002-01-04 16:16:10 timbl Exp $
+$Id: cwm.py,v 1.84 2002-02-14 23:56:09 connolly Exp $
 
 Closed World Machine
 
@@ -252,7 +252,7 @@ def outputStrings(store, formula, seed=None, relation=None):
     pairs = store.each((formula, relation, None, None))  # List of things of (subj, obj) pairs
     pairs.sort(comparePair)
     for key, str in pairs:
-        sys.stdout.write(str.string)
+        sys.stdout.write(str.string.encode('utf-8'))
 
     
             
@@ -411,7 +411,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.83 2002-01-04 16:16:10 timbl Exp $"
+        version = "$Id: cwm.py,v 1.84 2002-02-14 23:56:09 connolly Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
