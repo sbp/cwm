@@ -1,5 +1,5 @@
 # Author: karl
-#  $Id: trigo-test.n3,v 1.3 2003-09-25 22:22:59 kdubost Exp $
+#  $Id: trigo-test.n3,v 1.4 2003-09-25 22:29:20 kdubost Exp $
 
 @prefix : <#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -16,6 +16,7 @@ this log:forAll :x , :y , :z .
 
 #3.1415926535897931 a Pi.
 
+# test very simple
 { (0) math:asin :x } => { :x :valueOf "asin(0) = 0" } .
 { (1) math:acos :x } => { :x :valueOf "acos(1) = 0" } .
 
