@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.123 2003-02-11 04:43:13 timbl Exp $
+$Id: cwm.py,v 1.124 2003-02-14 00:55:50 sandro Exp $
 
 Closed World Machine
 
@@ -52,13 +52,15 @@ import sys
 # from llyn import RDFStore  # A store with query functiuonality
 import llyn
 import LX
-import LX.rdf
+import LX.kb
+# import LX.rdf
 import LX.engine.llynInterface 
 import LX.engine.otter
 import LX.language.htables
+import LX.language.lbase
 import RDFSink
 
-cvsRevision = "$Revision: 1.123 $"
+cvsRevision = "$Revision: 1.124 $"
 
 
 ######################################################### Tests  
@@ -481,9 +483,12 @@ Mode flags affect inference extedning to the web:
         elif option_format == "htables":
             myflags = option_flags.get("htables", "")
             _outSink = LX.language.htables.Serializer(sys.stdout, flags=myflags)
+        elif option_format == "lbase":
+            myflags = option_flags.get("lbase", "")
+            _outSink = LX.language.lbase.Serializer(sys.stdout, flags=myflags)
         else:
             raise RuntimeError, "unknown output format: "+str(option_format)
-        version = "$Id: cwm.py,v 1.123 2003-02-11 04:43:13 timbl Exp $"
+        version = "$Id: cwm.py,v 1.124 2003-02-14 00:55:50 sandro Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -502,7 +507,7 @@ Mode flags affect inference extedning to the web:
 
 #            _store.reset(_metaURI+"#_experience")     # Absolutely need this for remembering URIs loaded
             history = None
-        lxkb = LX.KB()      # set up a parallel store for LX-based operations
+        lxkb = LX.kb.KB()      # set up a parallel store for LX-based operations
 
 	if diag.tracking:
 	    proof = FormulaReason(workingContext)
@@ -674,7 +679,7 @@ Mode flags affect inference extedning to the web:
                 _newContext = _tmpstore.intern((FORMULA, _newURI+ "#_formula"))
                 _tmpstore.loadURI(_uri)
 
-                targetkb = LX.KB()
+                targetkb = LX.kb.KB()
                 LX.engine.llynInterface.toLX(_tmpstore, _newContext, kb=targetkb, kbMode=1)
                 print targetkb
 
@@ -752,6 +757,9 @@ def getParser(format, inputURI, formulaURI, flags):
     elif format == "n3":
         touch(_store)
         return notation3.SinkParser(_store, inputURI, formulaURI=formulaURI, why=r)
+    elif format == "lbase":
+        touch(lxkb)
+        return LX.language.lbase.Parser(lxkb)
     else:
         raise RuntimeError, "unknown input format: "+str(format)
 
