@@ -46,7 +46,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.10 2001-01-15 21:17:28 timbl Exp $"
+        version = "$Id: xml2rdf.py,v 1.11 2001-01-16 01:26:54 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -154,12 +154,19 @@ class RDFXMLParser(xmllib.XMLParser):
                         (RESOURCE, c),
                         (RESOURCE, self._context) ))
                 elif ln == "parseType":
+                    pass  #later - object-related
+                elif ln == "value":
+                    pass  #later
+                elif ln == "resource":
                     pass  #later
                 else:
-                    properties.append((uri, value))
+                    if not ns:
+                        print "#@@@@@@@@@@@@ No namespace on property attribute", ln
+                        raise self.syntaxError 
+                    properties.append((uri, value))# If no uri, syntax error @@
 #                    self.sink.makeComment("xml2rdf: Ignored attribute "+uri)
             else:  # Property attribute propAttr #6.10
-                properties.append((uri, value))
+                properties.append((uri, value)) 
 #                print "@@@@@@ <%s> <%s>" % properties[-1]
 
         if self._subject == None:
