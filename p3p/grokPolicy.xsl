@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<!-- $Id: grokPolicy.xsl,v 1.2 2001-12-05 22:18:16 connolly Exp $-->
+<!-- $Id: grokPolicy.xsl,v 1.3 2004-01-31 00:59:00 dom Exp $-->
 
 <xsl:transform
   xmlns:xsl  ="http://www.w3.org/1999/XSL/Transform"  version="1.0"
   xmlns:rdf  ="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:p3p  ="http://www.w3.org/2001/09/P3Pv1"
-  xmlns:p3pr ="http://www.w3.org/2001/09/P3Pv1#"
+  xmlns:p3p  ="http://www.w3.org/2002/01/P3Pv1"
+  xmlns:p3pr ="http://www.w3.org/2002/01/P3Pv1"
   xmlns:p3dr ="http://www.w3.org/TR/P3P/base#"
   xmlns:ont  ="http://www.daml.org/2001/03/daml+oil#"
   >
