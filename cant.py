@@ -43,7 +43,7 @@ References:
  Not to mention,  published this month by coincidence:
   Kelly, Brian, [Whitehead Institute]  "Graph cannonicalization", Dr Dobb's Journal, May 2003.
  
- $Id: cant.py,v 1.12 2004-10-28 17:41:59 timbl Exp $
+ $Id: cant.py,v 1.13 2004-11-09 01:08:28 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -54,7 +54,10 @@ W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.h
 import os
 import sys
 import urllib
-import uripath  # http://www.w3.org/2000/10/swap/
+try:
+    from swap import uripath  # http://www.w3.org/2000/10/swap/
+except ImportError:
+    import uripath
 from sys import stderr, exit
 import uripath
 

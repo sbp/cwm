@@ -17,7 +17,7 @@ Uris are relative to present working directory.
 
 For motivation and explanation, see  <http://www.w3.org/DesignIssues/Diff>
 
-$Id: delta.py,v 1.1 2004-11-08 20:11:36 timbl Exp $
+$Id: delta.py,v 1.2 2004-11-09 01:08:28 syosi Exp $
 http://www.w3.org/2000/10/swap/diff.py
 """
 
@@ -32,19 +32,34 @@ import sys
 
 
 # http://www.w3.org/2000/10/swap/
-import llyn, diag
-from myStore import loadMany
-from diag import verbosity, setVerbosity, progress
-import notation3    	# N3 parsers and generators
+try:
+    from swap import llyn, diag
+    from swap.myStore import loadMany
+    from swap.diag import verbosity, setVerbosity, progress
+    from swap import notation3    	# N3 parsers and generators
 
 
-from RDFSink import FORMULA, LITERAL, ANONYMOUS, Logic_NS
-import uripath
-from uripath import base
-from myStore import  Namespace
-import myStore
-from notation3 import RDF_NS_URI
-from llyn import Formula, CONTEXT, PRED, SUBJ, OBJ
+    from swap.RDFSink import FORMULA, LITERAL, ANONYMOUS, Logic_NS
+    from swap import uripath
+    from swap.uripath import base
+    from swap.myStore import  Namespace
+    from swap import myStore
+    from swap.notation3 import RDF_NS_URI
+    from swap.llyn import Formula, CONTEXT, PRED, SUBJ, OBJ
+except ImportError:
+    import llyn, diag
+    from myStore import loadMany
+    from diag import verbosity, setVerbosity, progress
+    import notation3    	# N3 parsers and generators
+
+
+    from RDFSink import FORMULA, LITERAL, ANONYMOUS, Logic_NS
+    import uripath
+    from uripath import base
+    from myStore import  Namespace
+    import myStore
+    from notation3 import RDF_NS_URI
+    from llyn import Formula, CONTEXT, PRED, SUBJ, OBJ
 
 #daml = Namespace("http://www.daml.org/2001/03/daml+oil#")
 OWL = Namespace("http://www.w3.org/2002/07/owl#")
@@ -474,7 +489,7 @@ def main():
 	usage()
 	sys.exit(2)
     graph = loadFiles(testFiles)
-    version = "$Id: delta.py,v 1.1 2004-11-08 20:11:36 timbl Exp $"[1:-1]
+    version = "$Id: delta.py,v 1.2 2004-11-09 01:08:28 syosi Exp $"[1:-1]
     if diffFiles == []:
 	nailFormula(graph, assumptions)
 	if verbose: print "# Smush by " + version

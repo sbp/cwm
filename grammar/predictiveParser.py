@@ -24,16 +24,16 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/check-grammar.py
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.6 2004-11-04 22:54:58 timbl Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.7 2004-11-09 01:08:28 syosi Exp $"
 
 # SWAP
-import webAccess
-import uripath
-import llyn
-from myStore import load, Namespace
-from term import Literal
-import diag
-from diag import progress, chatty_flag
+from swap import webAccess
+from swap import uripath
+from swap import llyn
+from swap.myStore import load, Namespace
+from swap.term import Literal
+from swap import diag
+from swap.diag import progress, chatty_flag
 #diag.chatty_flag=0
 
 # Standard python
