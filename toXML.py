@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.23 2004-10-28 18:47:43 syosi Exp $
+$Id: toXML.py,v 1.24 2004-11-08 20:08:26 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -259,6 +259,10 @@ z  - Allow relative URIs for namespaces
                     return
                 
 	    elif subj[0] == LITERAL:
+		raise ValueError(
+		"""Bad subject of statement: %s.
+		RDF/XML cannot serialize a graph in which a subject is a literal.""" % subj[1])
+		# See http://lists.w3.org/Archives/Public/public-cwm-bugs/2004Aug/0014.html
 		v = subj[1]
 		attrs = []  # Literal
 		if type(v) is type((1,1)):
