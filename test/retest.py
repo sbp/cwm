@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.31 2004-11-19 01:58:39 syosi Exp $
+ $Id: retest.py,v 1.32 2004-12-02 17:16:39 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -440,7 +440,11 @@ I should have.
 	assert case and description and inputDocument
 #	cleanup = """sed -e 's/\$[I]d.*\$//g' -e "s;%s;%s;g" -e '/@prefix run/d' -e '/^#/d' -e '/^ *$/d'""" % (
 #			WD, REFWD)
-	execute("""python %s --grammar=../grammar/n3-selectors.n3  --as=http://www.w3.org/2000/10/swap/grammar/n3#document --parse=%s  > ,temp/%s 2>/dev/null""" %
+        try:
+            execute("""python %s --grammar=../grammar/n3-selectors.n3  --as=http://www.w3.org/2000/10/swap/grammar/n3#document --parse=%s  > ,temp/%s 2>/dev/null""" %
+	    ('../grammar/predictiveParser.py', inputDocument, case))
+        except RuntimeError:
+            problem("""Error running ``python %s --grammar=../grammar/n3-selectors.n3  --as=http://www.w3.org/2000/10/swap/grammar/n3#document --parse=%s  > ,temp/%s 2>/dev/null''""" %
 	    ('../grammar/predictiveParser.py', inputDocument, case))
 
 	passes = passes + 1
@@ -456,12 +460,12 @@ I should have.
 #	cleanup = """sed -e 's/\$[I]d.*\$//g' -e "s;%s;%s;g" -e '/@prefix run/d' -e '/^#/d' -e '/^ *$/d'""" % (
 #			WD, REFWD)
         try:
-            execute("""python %s ../grammar/n3-selectors.n3  http://www.w3.org/2000/10/swap/grammar/n3#document %s  > ,temp/%s 2>/dev/null""" %
+            execute("""python %s --grammar=../grammar/n3-selectors.n3  --as=http://www.w3.org/2000/10/swap/grammar/n3#document --parse=%s    > ,temp/%s 2>/dev/null""" %
                 ('../grammar/predictiveParser.py', inputDocument, case))
         except:
             pass
         else:
-            raise RuntimeError("""There was no error executing ``python %s ../grammar/n3-selectors.n3  http://www.w3.org/2000/10/swap/grammar/n3#document %s  > ,temp/%s''
+            problem("""There was no error executing ``python %s --grammar=../grammar/n3-selectors.n3  --as=http://www.w3.org/2000/10/swap/grammar/n3#document --parse=%s    > ,temp/%s''
             There should have been one.""" %
                 ('../grammar/predictiveParser.py', inputDocument, case))
 
