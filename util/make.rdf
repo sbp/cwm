@@ -15,7 +15,7 @@
     <rdf:Description rdf:about="http://www.w3.org/2000/10/swap/util/make#">
         <dc:description>This is a small RDF Schema describing the general structure found in Makefile documents</dc:description>
         <dc:title>Makefile RDF Schema</dc:title>
-        <s:comment>$Id: make.rdf,v 1.3 2003-05-13 19:40:46 ryanlee Exp $</s:comment>
+        <s:comment>$Id: make.rdf,v 1.4 2003-05-13 19:42:06 ryanlee Exp $</s:comment>
     </rdf:Description>
 
     <rdf:Property rdf:about="http://www.w3.org/2000/10/swap/util/make#dependsOn">
@@ -49,6 +49,6 @@
         <s:isDefinedBy rdf:resource="http://www.w3.org/2000/10/swap/util/make#"/>
         <s:label>To Extension</s:label>
         <s:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <s:seeAlso rdf:resource="http://www.w3.org/2000/10/swap/util/make#toExt"/>
+        <s:seeAlso rdf:resource="http://www.w3.org/2000/10/swap/util/make#fromExt"/>
     </rdf:Property>
 </rdf:RDF>
