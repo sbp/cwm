@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.16 2003-01-10 17:13:13 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.17 2003-01-16 05:04:15 timbl Exp $"
 
 import uripath
 import time
@@ -228,8 +228,8 @@ class RDFSink:
 	if uri==None: return FORMULA, self.genId()
 	else: return (FORMULA, uri)
 
-    def newBlankNode(self, context, why=None):
-	return self.newExistential(context, why=why)
+    def newBlankNode(self, context, uri=None, why=None):
+	return self.newExistential(context, uri, why=why)
 	
     def newUniversal(self, context, uri=None, why=None):
 	if uri==None: subj = ANONYMOUS, self.genId()  # ANONYMOUS means "arbitrary symbol"

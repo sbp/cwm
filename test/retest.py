@@ -23,7 +23,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.4 2003-01-16 02:46:40 eric Exp $
+ $Id: retest.py,v 1.5 2003-01-16 05:04:16 timbl Exp $
 """
 from os import system
 import os
@@ -62,7 +62,7 @@ def diff(case):
     if len(buf) > 0:
 	print "######### Differences from reference output:\n" + buf
 	return 1
-    return 0
+    return result
 
 def main():
     testFiles = []
