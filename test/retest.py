@@ -18,9 +18,10 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.8 2003-03-22 20:12:56 timbl Exp $
+ $Id: retest.py,v 1.9 2003-03-22 20:14:07 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
+
 """
 from os import system
 import os
