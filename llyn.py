@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.113 2004-07-16 17:44:31 syosi Exp $
+$Id: llyn.py,v 1.114 2004-07-22 18:04:44 syosi Exp $
 
 
 RDF Store and Query engine
@@ -88,7 +88,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.113 $"
+cvsRevision = "$Revision: 1.114 $"
 
 
 # Magic resources we know about
@@ -451,7 +451,10 @@ class IndexedFormula(Formula):
             if diag.chatty_flag > 70:
                 progress("End formula -- @@ already canonical:"+`F`)
             return F.canonical
-	
+
+	F.existentialDict = {}
+	for existentialVariable in F.existentials():
+            F.existentialDict[existentialVariable] = 1
         fl = F.statements
         l = len(fl), len(F.universals()), len(F.existentials())   # The number of statements
         possibles = store._formulaeOfLength.get(l, None)  # Formulae of same length

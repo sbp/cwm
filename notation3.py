@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.159 2004-07-13 14:52:41 syosi Exp $
+$Id: notation3.py,v 1.160 2004-07-22 18:04:44 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1184,7 +1184,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.159 2004-07-13 14:52:41 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.160 2004-07-22 18:04:44 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1220,27 +1220,30 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
 				    %(N3_first, N3_rest), triple)
             return
         
-        if ("a" in self._flags and aIsPossible and
+        if ("a" in self._flags and
             triple[PRED] == (SYMBOL, N3_forSome_URI) and
             triple[CONTEXT] == triple[SUBJ]) : # and   # We assume the output is flat @@@ true, we should not
-#            canItbeAnExistential([],triple2[SUBJ],triple2[OBJ])[1] == 0):
-            #print triple
-	    ty, value = triple[OBJ]
-	    i = len(value)
-	    while i > 0 and value[i-1] not in _notNameChars+"_": i = i - 1
-	    str2 = value[i:]
-	    if self._anodeName.get(str2, None) != None:
-		j = 1
-		while 1:
-		    str3 = str2 + `j`
-		    if self._anodeName.get(str3, None) == None: break
-		    j = j +1
-		str2 = str3
-	    if str2[0] in "0123456789": str2 = "a"+str2
-	    if diag.chatty_flag > 60: progress("Anode %s  means %s" % (str2, value)) 
-	    self._anodeName[str2] = value
-	    self._anodeId[value] = str2
-            return
+            try:
+                aIsPossible = aIsPossible()
+            except TypeError:
+                aIsPossible = 1
+            if aIsPossible:
+                ty, value = triple[OBJ]
+                i = len(value)
+                while i > 0 and value[i-1] not in _notNameChars+"_": i = i - 1
+                str2 = value[i:]
+                if self._anodeName.get(str2, None) != None:
+                    j = 1
+                    while 1:
+                        str3 = str2 + `j`
+                        if self._anodeName.get(str3, None) == None: break
+                        j = j +1
+                    str2 = str3
+                if str2[0] in "0123456789": str2 = "a"+str2
+                if diag.chatty_flag > 60: progress("Anode %s  means %s" % (str2, value)) 
+                self._anodeName[str2] = value
+                self._anodeId[value] = str2
+                return
 
         self._makeSubjPred(triple[CONTEXT], triple[SUBJ], triple[PRED])        
         self._write(self.representationOf(triple[CONTEXT], triple[OBJ]))
