@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.103 2002-02-22 05:18:55 timbl Exp $
+$Id: notation3.py,v 1.104 2002-03-08 02:39:07 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -110,7 +110,8 @@ N3CommentCharacter = "#"     # For unix script #! compatabilty
 
 class SinkParser:
     def __init__(self, sink, thisDoc, baseURI="", bindings = {},
-                 genPrefix = "", varPrefix = "", metaURI=None):
+                 genPrefix = "", varPrefix = "", metaURI=None,
+                 formulaURI = None):
 	""" note: namespace names should *not* end in #;
 	the # will get added during qname processing """
         self._sink = sink
@@ -129,7 +130,10 @@ class SinkParser:
         if not self._genPrefix: self._genPrefix = self._thisDoc + "#_g"
         if not self._varPrefix: self._varPrefix = self._thisDoc + "#_v"
 
-        self._formula = FORMULA, thisDoc + "#_formula" # Formula node is what the document parses to
+        if formulaURI == None:
+            self._formula = FORMULA, thisDoc + "#_formula" # Formula node is what the document parses to
+        else:
+            self._formula = FORMULA, formulaURI # Formula node is what the document parses to
         self._context = self._formula
         
         if metaURI:
@@ -1238,7 +1242,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.103 2002-02-22 05:18:55 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.104 2002-03-08 02:39:07 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
