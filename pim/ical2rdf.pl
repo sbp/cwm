@@ -28,12 +28,12 @@
 # were released under...
 #   http://dev.w3.org/cvsweb/2001/palmagent/
 #   
-# $Id: ical2rdf.pl,v 1.2 2002-07-17 20:59:40 connolly Exp $
+# $Id: ical2rdf.pl,v 1.3 2002-07-18 05:16:32 connolly Exp $
 # see change log at end of file.
 
 use strict;
 
-my($ICal_ns) = 'http://www.w3.org/2000/10/swap/ical#';
+my($ICal_ns) = 'http://www.w3.org/2000/10/swap/pim/ical#';
 my($X_ns) = 'http://www.w3.org/2000/01/foo-X@@#'; #@@ get this from command-line? or from PRODID?
 
 my(@stack);
@@ -291,7 +291,10 @@ sub testCamelCase{
 # @@TODO: params
 
 # $Log: ical2rdf.pl,v $
-# Revision 1.2  2002-07-17 20:59:40  connolly
+# Revision 1.3  2002-07-18 05:16:32  connolly
+# oops! got ical URI wrong! thx daml validator
+#
+# Revision 1.2  2002/07/17 20:59:40  connolly
 # using ical:value in stead of rdf:value
 #
 # Revision 1.1  2002/07/17 20:34:55  connolly
