@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: SqlDB.py,v 1.5 2002-08-18 16:51:45 eric Exp $
+$Id: SqlDB.py,v 1.6 2002-08-18 18:24:17 eric Exp $
 
 """
 
@@ -439,7 +439,6 @@ class SqlDBAlgae(RdfDBAlgae):
             for var in self.orderedVars:
                 varInfo = self.vars[var][0]
                 queryPiece, field, table, var, pk, dummy, fieldz = varInfo
-                var = answerRow[iSelect]
                 valueHash = {}
                 if (field):
                     str = answerRow[iSelect]
