@@ -1,6 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
-$Id: cwm.py,v 1.31 2001-03-30 16:37:28 connolly Exp $
+
+$Id: cwm.py,v 1.32 2001-04-05 21:33:55 timbl Exp $
 
 Closed World Machine
 
@@ -8,7 +9,8 @@ Closed World Machine
 
 This is an engine which knows a certian amount of stuff and can manipulate it.
 It is a query engine, not an inference engine: that is, it will apply rules
-but won't figure out which ones to apply to prove something.
+but won't figure out which ones to apply to prove something.  It is not
+optimized particularly.
 
 
 http://www.w3.org/DesignIssues/Notation3
@@ -45,10 +47,14 @@ Agenda:
  - Validation:  validate domain and range constraints against closuer of classes and
    mutually disjoint classes.
 - represent URIs bound to same equivalence closuse object?
-- says(expr1, expr2)      >=  dixitInterAlia
-- indirectlyImplies(expr1, expr2)   
-- startsWith(x,y)
-- URIof(x, str)
+BULTINS WE NEED
+    - says(expr1, expr2)      >=  dixitInterAlia
+    - indirectlyImplies(expr1, expr2)   
+    - startsWith(x,y)
+    - URIof(x, str)
+    - usesNamespace(x,y)   # find transitive closure for validation
+    - delegation of query to remote database (cwm or rdvms)
+
 - Translation;  Try to represent the space (or a context) using a subset of namespaces
 
 - Other forms of context - explanation of derivation by rule or merging of contexts
@@ -77,6 +83,12 @@ Done
   - graph match -DONE
   - recursive dump of nested bags - DONE
  - semi-reification - reifying only subexpressions - DONE
+
+
+NOTES
+
+This is slow - Parka [guiFrontend PIQ] for example is faster but is propritary (patent pending). Jim Hendler owsns the
+research version. Written in C. Of te order of 30k lines
 """
 
 
@@ -420,7 +432,7 @@ class RDFStore(notation3.RDFSink) :
               self.engine.intern(tuple[PRED]),
               self.engine.intern(tuple[SUBJ]),
               self.engine.intern(tuple[OBJ]) )
-	self.storeQuad(q)
+        self.storeQuad(q)
                     
     def makeComment(self, str):
         pass        # Can't store comments
@@ -757,7 +769,7 @@ class RDFStore(notation3.RDFSink) :
                 return  # arcs as subject done
 
         if not _anon and subj.occursAs[CONTEXT] != [] and subj is not context:
-            sink.startBagNamed(subj.asPair())
+            sink.startBagNamed(context.asPair(), subj.asPair())
             self.dumpNestedStatements(subj, sink)  # dump contents of anonymous bag
             sink.endBagNamed(subj.asPair())       # Subject is now set up
 
@@ -794,7 +806,7 @@ class RDFStore(notation3.RDFSink) :
                     if t.triple[CONTEXT] is context:
                         self.dumpStatement(sink, t)
                 if _se > 0:
-                    sink.startBagNamed(obj.asPair()) # @@@@@@@@@  missing "="
+                    sink.startBagNamed(context.asPair(),obj.asPair()) # @@@@@@@@@  missing "="
                     self.dumpNestedStatements(obj, sink)  # dump contents of anonymous bag
                     sink.endBagObject(pre.asPair(), sub.asPair())
                     
@@ -1568,7 +1580,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, _outURI)
-        version = "$Id: cwm.py,v 1.31 2001-03-30 16:37:28 connolly Exp $"
+        version = "$Id: cwm.py,v 1.32 2001-04-05 21:33:55 timbl Exp $"
 	_outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
 	_outSink.makeComment("    using base " + _baseURI)
 
