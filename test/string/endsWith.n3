@@ -1,15 +1,16 @@
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
 @prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#>.
 @prefix rcs: <http://www.w3.org/2001/03swell/rcs#>.
+@prefix doc:  <http://www.w3.org/2000/10/swap/pim/doc#> .
 
-<> dc:description """Test endswith""";
-  rcs:id "$Id: endsWith.n3,v 1.1 2002-05-21 00:20:32 timbl Exp $";
-  dc:creator [ 
+
+<>   rcs:id "$Id: endsWith.n3,v 1.2 2004-03-06 20:39:43 timbl Exp $";
+
+  doc:creator [ 
 	contact:fullName "Tim berners-Lee";
 	contact:homePage <http://www.w3.org/People/Berners-Lee/>;
 	contact:mailbox <mailto:timbl@w3.org>
-	];
-  dc:rights "copyright (c) 2001 W3C (MIT, Keio, INRIA)".
+	].
 
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.

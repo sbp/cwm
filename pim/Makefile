@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.8 2004-02-03 22:55:33 timbl Exp $
+# $Id: Makefile,v 1.9 2004-03-06 20:39:40 timbl Exp $
 
 PERL=perl
 PYTHON=python
@@ -80,7 +80,7 @@ $(SLIFE):
 	mkdir $(SLIFE)
 
 $(SLIFE)/PhotoMeta.n3 : $(SLIFE)
-	jhead -n3 $(IPHOTO)/????/??/??/*.JPG > $@
+	jhead -n3 $(IPHOTO)/????/??/??/*.{JPG,jpg} > $@
 
 $(SLIFE)/PhotoCalendar.cal3: $(SLIFE)/PhotoMeta.n3 PhotoEvent.n3
 	$(PYTHON) $(CWM) $(SLIFE)/PhotoMeta.n3 --filter=PhotoEvent.n3 --ugly > $@
