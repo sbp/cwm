@@ -14,8 +14,8 @@ http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.11 2004-01-28 23:52:16 connolly Exp $'
-__version__ = '$Revision: 1.11 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.12 2004-05-16 20:37:21 connolly Exp $'
+__version__ = '$Revision: 1.12 $'
 __all__ = ["evaluateObject"]
 
 from math import sin, acos, asin, atan, atan2, cos, cosh, sinh, tan, tanh
@@ -60,7 +60,10 @@ class BI_cos(LightBuiltIn, Function, ReverseFunction):
         return cos(numeric(subj_py))
 
     def evaluateSubject(self, x):
-        return acos(numeric(x))
+	try:
+            return acos(numeric(x))
+        except ValueError:
+            return None
 
 class BI_cosh(LightBuiltIn, Function):
     def evaluateObject(self, subj_py):
@@ -90,7 +93,10 @@ class BI_sin(LightBuiltIn, Function, ReverseFunction):
         return sin(numeric(subj_py))
 
     def evaluateSubject(self, x):
-        return asin(numeric(x))
+        try:
+            return asin(numeric(x))
+        except:
+            return None
 
 class BI_sinh(LightBuiltIn, Function):
     def evaluateObject(self, subj_py):
