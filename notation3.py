@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.81 2001-06-01 07:50:21 connolly Exp $
+$Id: notation3.py,v 1.82 2001-06-01 07:52:40 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1165,12 +1165,7 @@ class XMLWriter:
 	#@@ throw an exception if the element stack is empty
 	o = self._outFp
         self.flushClose()
-        try:
-            xmldata(o.write, str, self.dataEsc)
-        except:
-            print "@@problem writing", str
-            print "@@to", o
-            x=1/0
+        xmldata(o.write, str, self.dataEsc)
 	self.noWS = 1  # Suppress whitespace - we are in data
 
     def endDocument(self):
@@ -1262,7 +1257,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.81 2001-06-01 07:50:21 connolly Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.82 2001-06-01 07:52:40 connolly Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
