@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.5 2003-04-11 19:51:18 connolly Exp $
+# $Id: Makefile,v 1.6 2003-04-11 20:13:09 sandro Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -32,11 +32,25 @@ SCHEMAS= ../log.n3 ../crypto.n3 ../math.n3 ../os.n3 ../string.n3 ../time.n3
 #	$(XSLT) $(PD)rdf2dot.xsl  $< $@
 
 
-all:	CwmBuiltins.html
+all:	CwmBuiltins.html formats-example1
 	touch all
 
 CwmBuiltins.html : $(SCHEMAS)
 	$(PYTHON) $(CWM) $(SCHEMAS) schema2html.n3 --think --strings > $@
+
+formats-example1:: formats-example1.jpg \
+		formats-example1.svg \
+		formats-example1.png \
+		formats-example1.ps
+
+formats-example1.jpg: formats-example1.dot
+	dot -Tjpg $< > $@
+formats-example1.svg: formats-example1.dot
+	dot -Tsvg $< > $@
+formats-example1.png: formats-example1.dot
+	dot -Tpng $< > $@
+formats-example1.ps: formats-example1.dot
+	dot -Tps $< > $@
 
 
 states.svg: states.graph
