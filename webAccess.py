@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: webAccess.py,v 1.4 2004-03-21 04:24:35 timbl Exp $
+$Id: webAccess.py,v 1.5 2004-06-08 14:09:19 syosi Exp $
 
 Web access functionality building on urllib
 
@@ -8,7 +8,8 @@ Web access functionality building on urllib
 
 import sys
 
-import urllib
+#import urllib
+import urllib2
 import uripath # http://www.w3.org/2000/10/swap/uripath.py
 import diag
 from diag import progress
@@ -21,11 +22,14 @@ HTTP_Content_Type = 'content-type' #@@ belongs elsewhere?
 
 def urlopenForRDF(addr):
     """A version of urllib.urlopen() which asks for RDF by preference
+
+    This is now uses urllib2.urlopen(), in order to get better error handling
     """
-    z = urllib.FancyURLopener()
-    z.addheaders.append(('Accept', 'application/rdf+xml'))
-    z.addheaders.append(('Accept', 'application/n3'))
-    return z.open(addr)
+    z = urllib2.Request(addr)
+    z.add_header('Accept', 'application/rdf+xml q=1')
+    z.add_header('Accept', 'application/n3 q=1')
+    z.add_header('Accept', 'text/plain q=0.1')
+    return urllib2.urlopen(z)
 
 def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
 		flags="", why=None):
