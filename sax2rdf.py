@@ -92,7 +92,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.10 2001-09-24 16:30:29 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.11 2001-09-26 02:46:48 connolly Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -125,7 +125,16 @@ class RDFHandler(xml.sax.ContentHandler):
 
     def uriref(self, str):
         """ Generate uri from uriref in this document
-        """ 
+        """
+
+        # @@move this to uriparse module-to-be?
+        h1 = string.rfind(str, "#")
+        if h1 >= 0:
+            h2 = string.rfind(str[:h1], "#")
+            if h2 >= 0:
+                raise BadSyntax(sys.exc_info(),
+                                "URI with two hashes: %s" % str)
+        
         return urlparse.urljoin(self._thisURI,
                                 str.encode('utf-8')) # fails on non-ascii; do %xx encoding?
 

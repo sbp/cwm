@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.2 2001-09-18 16:15:27 timbl Exp $
+$Id: thing.py,v 1.3 2001-09-26 02:46:48 connolly Exp $
 
 Interning of URIs and strings for stporage in SWAP store
 
@@ -194,6 +194,7 @@ class Resource(Thing):
     
     def __init__(self, uri):
         Thing.__init__(self)
+        assert string.find(uri, "#") < 0
         self.uri = uri
         self.fragments = {}
 

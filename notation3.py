@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.94 2001-09-24 20:01:51 timbl Exp $
+$Id: notation3.py,v 1.95 2001-09-26 02:46:48 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1193,7 +1193,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.94 2001-09-24 20:01:51 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.95 2001-09-26 02:46:48 connolly Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1224,8 +1224,7 @@ t   "this" and "()" special syntax should be suppresed.
                 elif triple[PRED] == RDF_type and triple[OBJ] == N3_Empty:
                     pass  # not how we would have put it but never mind
                 elif triple[PRED] != N3_rest:
-                    print "####@@@@@@ ooops:", triple
-#                    raise RuntimeError, "Should only see first and rest in list mode"
+                    raise RuntimeError ("Should only see first and rest in list mode", triple)
             else: # compact lists
                 self._write(self.representationOf(triple[CONTEXT], triple[OBJ])+" ")
             return
