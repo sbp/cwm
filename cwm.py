@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.60 2001-07-12 06:29:36 connolly Exp $
+$Id: cwm.py,v 1.61 2001-08-23 20:52:04 connolly Exp $
 
 Closed World Machine
 
@@ -352,8 +352,11 @@ class Literal(Thing):
     def representation(self, base=None):
         return '"' + self.string + '"'   # @@@ encode quotes; @@@@ strings containing \n
 
-#    def uriref(self, base=None):      # Unused at present but interesting! 2000/10/14
-#        return  LITERAL_URI_prefix + uri_encode(self.representation())
+    def uriref(self, base=None):
+        # Unused at present but interesting! 2000/10/14
+        # used in test/sameThing.n3 testing 2001/07/19
+        return self.asHashURI() #something of a kludge?
+        #return  LITERAL_URI_prefix + uri_encode(self.representation())
 
 
 class BuiltIn(Fragment):
@@ -526,11 +529,14 @@ class BI_EqualTo(LightBuiltIn,Function, ReverseFunction):
     
 class BI_uri(LightBuiltIn, Function, ReverseFunction):
 
-    def evaluateObject(self, store, context, subj):    
+    def evaluateObject(self, store, context, subj):
         return store.engine.intern((LITERAL, subj.uriref()))
 
-    def evaluateSubject(self, store, context, obj):    
-        return store.engine.intern((RESOURCE, obj.string))
+    def evaluateSubject(self, store, context, obj):
+        if isinstance(obj, Literal):
+            return store.engine.intern((RESOURCE, obj.string))
+        else:
+            raise RuntimeError, `("@@ log:uri object not a literal", obj)`
 
 class BI_racine(LightBuiltIn, Function):
 
@@ -590,10 +596,14 @@ class BI_resolvesTo(HeavyBuiltIn, Function):
 #                if option_format == "rdf" : p = sax2rdf.RDFXMLParser(_store,  _inputURI)
 # @@@ Only handles N3 - should handle anything especially RDF/XML.
         p = notation3.SinkParser(store,  inputURI)
-        p.load(inputURI)
-        del(p)
-        F = store.engine.intern((FORMULA, inputURI+ "#_formula"))
-        return F
+        try:
+            p.load(inputURI)
+        except IOError:
+            return None #@@ is that OK?
+        else:
+            del(p)
+            F = store.engine.intern((FORMULA, inputURI+ "#_formula"))
+            return F
     
     def evaluate2(self, store, subj, obj, variables, bindings):
         F = self.evaluateObject2(store, subj)
@@ -1431,7 +1441,12 @@ class RDFStore(notation3.RDFSink) :
 #        return listOfBindings[0][0][1]  # First result, first variable, value.
 
 
-    def every(self, quad):             # Returns a list of lists of values
+    def every(self, quad):
+        """Returns a list of lists of values.
+        
+        unlike any(), you can feed as many None's as you like.
+        if you're looking for triplesMatching, this is it."""
+        
         variables = []
         q2 = [ quad[0], quad[1], quad[2], quad[3]]  # tuple to list
         for p in ALL4:
@@ -2222,7 +2237,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.60 2001-07-12 06:29:36 connolly Exp $"
+        version = "$Id: cwm.py,v 1.61 2001-08-23 20:52:04 connolly Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -2354,7 +2369,7 @@ Examples:
 
             elif arg[:7] == "-apply=":
                 filterContext = (myEngine.intern((FORMULA, _uri+ "#_formula")))
-                print "# Input rules to apply from ", _uri
+                if chatty > 4: print "# Input rules to apply from ", _uri
                 _store.loadURI(_uri)
                 _store.applyRules(workingContext, filterContext);
 
