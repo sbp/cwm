@@ -11,6 +11,7 @@
      @prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
      @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
      @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+     @prefix log: <http://www.w3.org/2000/10/swap/log#>.
      @prefix usstate: <USRegionState.n3#> .
 
 ############### Added TBL
@@ -28,7 +29,7 @@
                 <http://www.w3.org/1999/02/22-rdf-syntax-ns>,
                 <http://www.w3.org/2000/01/rdf-schema>;
          daml:versionInfo """
-      $Id: USCity.n3,v 1.1 2003-02-03 04:05:37 timbl Exp $
+      $Id: USCity.n3,v 1.2 2003-02-09 02:56:50 timbl Exp $
     """;
          rdfs:comment """
       City and State Ontology for US Cities.
