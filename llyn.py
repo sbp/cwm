@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.121 2004-11-19 01:58:39 syosi Exp $
+$Id: llyn.py,v 1.122 2004-12-03 03:17:29 syosi Exp $
 
 
 RDF Store and Query engine
@@ -70,6 +70,7 @@ from term import BuiltIn, LightBuiltIn, \
     CompoundTerm, List, EmptyList, NonEmptyList, AnonymousNode
 from OrderedSequence import merge
 from formula import Formula, StoredStatement
+import reify
 
 from query import think, applyRules, testIncludes
 import webAccess
@@ -88,7 +89,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.121 $"
+cvsRevision = "$Revision: 1.122 $"
 
 
 # Magic resources we know about
@@ -961,6 +962,23 @@ class BI_n3String(LightBuiltIn, Function):      # Light? well, I suppose so.
         if isinstance(subj, Formula):
             return self.store.intern((LITERAL, subj.n3String()))
 
+class BI_reification(HeavyBuiltIn, Function, ReverseFunction):
+    """
+
+
+
+    """
+    def evalSubj(self, obj, queue, bindings, proof, query):
+        f = obj.store.newFormula()
+        return reify.dereification(obj, f, obj.store)
+
+    def evalObj(self, subj, queue, bindings, proof, query):
+        f = subj.store.newFormula()
+        q = subj.reification(f, {}, why=None)
+        f=f.close()
+        self.store.storeQuad((self.store._experience, self.store.type, f, 3), why=BecauseOfExperience("SomethingOrOther"))
+        return q
+
     
 ################################################################################################
 
@@ -1022,6 +1040,7 @@ class RDFStore(RDFSink) :
         log.internFrag("uri", BI_uri)
         log.internFrag("equalTo", BI_EqualTo)
         log.internFrag("notEqualTo", BI_notEqualTo)
+        log.internFrag("reification", BI_reification)
 
 	self.sameAs = self.symbol(OWL_NS + "sameAs")
 

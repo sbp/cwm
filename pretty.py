@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.17 2004-12-02 20:06:07 syosi Exp $
+$Id: pretty.py,v 1.18 2004-12-03 03:17:29 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.17 $"
+cvsRevision = "$Revision: 1.18 $"
 
 # Magic resources we know about
 
@@ -336,7 +336,9 @@ class Serializer:
 	elif z is not context:
 	    self._inContext[x] = "many"
 	    return
-	    
+        if isinstance(x, NonEmptyList):
+	    for y in x:
+		self._scanObj(context, y)	    
 	if isinstance(x, AnonymousVariable) or (isinstance(x, Fragment) and x.generated()): 
 	    y = self._occurringAs[OBJ].get(x, 0) + 1
 	    self._occurringAs[OBJ][x] = y
@@ -532,6 +534,7 @@ class Serializer:
                     for s in statements:
                         p = s.quad[PRED]
                         if p is not self.store.first and p is not self.store.rest:
+#                            progress("++++%s" % `s`)
                             self.dumpStatement(sink, s.quad, sorting) # Dump the rest outside the ()
                     return
                 else:
@@ -587,7 +590,7 @@ class Serializer:
         self._outputStatement(sink, triple)
 
 	
-def canItbeABNode(formula, symbol):   # @@@@ Really slow -tbl
+def canItbeABNode(formula, symbol):   # @@@@ Really slow -tbl @@@ send me an e-mail with a run of myProfiler proving it. -Yosi
     def returnFunc():
         for quad in formula.statements:
             for s in PRED, SUBJ, OBJ:
