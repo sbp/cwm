@@ -16,8 +16,8 @@ http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.5 2003-09-25 21:05:38 kdubost Exp $'
-__version__ = '$Revision: 1.5 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.6 2003-10-13 21:35:36 connolly Exp $'
+__version__ = '$Revision: 1.6 $'
 
 import sys, string, re, urllib, math
 
@@ -92,9 +92,9 @@ class BI_cosh(LightBuiltIn, Function):
 
 class BI_degrees(LightBuiltIn, Function, ReverseFunction):
     def evaluateObject(self, subj_py):
-		return degrees(numeric(subj_py))
-	def evaluateSubject(self, obj_py): 
-		return radians(numeric(obj_py))
+        return degrees(numeric(subj_py))
+    def evaluateSubject(self, obj_py): 
+        return radians(numeric(obj_py))
 
 class BI_sin(LightBuiltIn, Function):
     def evaluateObject(self, subj_py):
