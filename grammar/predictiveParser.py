@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.12 2004-12-08 19:54:07 syosi Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.13 2004-12-31 19:17:21 timbl Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 try:
@@ -84,6 +84,7 @@ def toYacc(x, tokenRegexps):
 
 	
 def yaccConvert(yacc, top, tokenRegexps):
+    "Convert the grammar to yacc format"
     global already, agenda, errors
     already = []
     agenda = []
@@ -147,6 +148,7 @@ def yaccProduction(yacc, lhs,  tokenRegexps):
 
 literalTerminals = {}
 def doProduction(lhs):
+    "Generate branch tables for one production"
     global branchTable
     if lhs is BNF.void:
 	progress("\nvoid")
@@ -167,7 +169,7 @@ def doProduction(lhs):
 	cc = g.each(subj=lhs, pred=BNF.canStartWith)
 	if cc == []: progress (recordError(
 	    "No record of what token %s can start with" % `lhs`))
-	progress("\tCan start with: %s" % cc) 
+	if chatty_flag: progress("\tCan start with: %s" % cc) 
 	return
     rhs = g.the(pred=BNF.mustBeOneSequence, subj=lhs)
     if rhs == None:
@@ -234,7 +236,7 @@ class PredictiveParser:
 	parser.lineNumber = 1
 	parser.startOfLine = 0	# Offset in buffer
 	parser.keywords = [ "a", "is", "of", "this" ]
-	parser.verb = 1  # Verbosity
+	parser.verb = 0  # Verbosity
 	parser.keywordMode = 0  # In a keyword statement, adding keywords
 	
     def countLines(parser, buffer, here):
@@ -451,7 +453,12 @@ def main():
     sink = g.newFormula()
     p = PredictiveParser(sink=sink, top=document, branchTable= branchTable,
 	    tokenRegexps= tokenRegexps)
+    p.verb = verbose
+    start = clock()
     p.parse(str)
+    taken = clock() - start + 1
+    progress("Loaded %i chars in %fs, ie %f/s." %
+	(len(str), taken, len(str)/taken))
     progress("Parsed <%s> OK" % parseFile)
     sys.exit(0)   # didn't crash
     
