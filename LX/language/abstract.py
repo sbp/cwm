@@ -2,8 +2,8 @@
 
 
 """
-__version__ = "$Revision: 1.1 $"
-# $Id: abstract.py,v 1.1 2002-08-29 11:00:46 sandro Exp $
+__version__ = "$Revision: 1.2 $"
+# $Id: abstract.py,v 1.2 2002-08-29 17:10:38 sandro Exp $
 
 
 import LX
@@ -101,11 +101,16 @@ class Serializer:
             except:
                 # should we do auto-abbreviation???
                 return "'<"+t.value+">'"
+        if isinstance(t, LX.ExiVar):
+            return t.name      #  @@@@ not global enough!
         raise RuntimeError, "No serialization for term: "+`t`
 
     
 # $Log: abstract.py,v $
-# Revision 1.1  2002-08-29 11:00:46  sandro
+# Revision 1.2  2002-08-29 17:10:38  sandro
+# fixed description bug; flatten runs and may even be correct
+#
+# Revision 1.1  2002/08/29 11:00:46  sandro
 # initial version, mostly written or heavily rewritten over the past
 # week (not thoroughly tested)
 #
