@@ -1,6 +1,9 @@
 #! /usr/bin/python
-# Check ambiguity as for predictive parser
-#
+""" Check ambiguity as for predictive parser
+"""
+
+__version__ = "$Id: check-grammar.py,v 1.8 2004-09-07 21:58:03 timbl Exp $"
+
 import llyn
 from myStore import load, Namespace
 from term import Literal
