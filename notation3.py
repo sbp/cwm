@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.20 2000-11-03 22:39:41 timbl Exp $
+$Id: notation3.py,v 1.21 2000-11-03 22:41:12 timbl Exp $
 
 cf
 
