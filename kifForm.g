@@ -1,6 +1,6 @@
 """ kifForm.g -- a Yapps grammar for KIF Forms
 
-$Id: kifForm.g,v 1.1 2001-09-03 20:52:03 connolly Exp $
+$Id: kifForm.g,v 1.2 2001-09-06 19:55:13 connolly Exp $
 
 References
 
@@ -91,8 +91,10 @@ parser KIFParser:
 
     rule quoterm: "\\(\s*quote" listexpr "\\)"
                 | "'" listexpr
+                | "^" listexpr #@@DWC added, per metaknowledge section
 
     rule listexpr: atom | "\\(" listexpr* "\\)"
+		 | "," listexpr #@@DWC added, per metaknowledge section
 
     rule atom: word | charref | string | block
 
@@ -145,6 +147,9 @@ parser KIFParser:
     rule form: sentence
 
 # $Log: kifForm.g,v $
-# Revision 1.1  2001-09-03 20:52:03  connolly
+# Revision 1.2  2001-09-06 19:55:13  connolly
+# started N3 list semantics. got KIFSink working well enough to discuss
+#
+# Revision 1.1  2001/09/03 20:52:03  connolly
 # parses test/dpo/dpo.kif as form
 #

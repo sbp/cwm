@@ -4,7 +4,7 @@
 # Share and Enjoy. Open Source license:
 # Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 # http://www.w3.org/Consortium/Legal/copyright-software-19980720
-# $Id: rdfn3.g,v 1.12 2001-09-01 05:56:28 connolly Exp $
+# $Id: rdfn3.g,v 1.13 2001-09-06 19:55:13 connolly Exp $
 # see log at end
 #
 # REFERENCES
@@ -91,7 +91,9 @@ parser _Parser:
               | phrase<<scp>> {{ return phrase }}
               | clause_sub    {{ return clause_sub }}
 
-    rule list<<scp>> : "\\(" term<<scp>> * "\\)" #@@TODO: facts to build lists...
+    rule list<<scp>> : "\\(" {{ l = self.something(self.docScope(), "list") }}
+	 term<<scp>> *  #@@TODO: facts to build lists...
+	 "\\)" {{ return l }}
 
     rule phrase<<scp>>:
         "\\[" {{ subj = self.something(scp) }}
@@ -211,7 +213,10 @@ def DEBUG(*args):
     sys.stderr.write("\n")
     
 # $Log: rdfn3.g,v $
-# Revision 1.12  2001-09-01 05:56:28  connolly
+# Revision 1.13  2001-09-06 19:55:13  connolly
+# started N3 list semantics. got KIFSink working well enough to discuss
+#
+# Revision 1.12  2001/09/01 05:56:28  connolly
 # the name rule does not need a scope param
 #
 # Revision 1.11  2001/09/01 05:31:17  connolly
