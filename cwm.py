@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.118 2003-01-29 20:59:34 sandro Exp $
+$Id: cwm.py,v 1.119 2003-01-31 15:57:07 sandro Exp $
 
 Closed World Machine
 
@@ -56,8 +56,9 @@ import LX.rdf
 import LX.engine.llynInterface 
 import LX.engine.otter
 import LX.language.htables
+import RDFSink
 
-cvsRevision = "$Revision: 1.118 $"
+cvsRevision = "$Revision: 1.119 $"
 
 
 ######################################################### Tests  
@@ -453,6 +454,15 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         elif option_format == "n3":
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
+        elif option_format == "trace":
+            _outSink = RDFSink.TracingRDFSink(_outURI, base=option_baseURI, flags=option_flags.get("trace",""))
+            if option_pipe:
+                # this is really what a parser wants to dump to
+                _outSink.backing = llyn.RDFStore( _outURI+"#_g", argv=option_with, crypto=option_crypto) 
+            else:
+                # this is really what a store wants to dump to 
+                _outSink.backing = notation3.ToN3(sys.stdout.write, base=option_baseURI,
+                                                  quiet=option_quiet, flags=option_flags["n3"])
         elif option_format == "otter":
             #  hm.  why does TimBL use sys.stdout.write, above?  performance at the
             #  cost of flexibility?
@@ -463,7 +473,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             _outSink = LX.language.htables.Serializer(sys.stdout, flags=myflags)
         else:
             raise RuntimeError, "unknown output format: "+str(option_format)
-        version = "$Id: cwm.py,v 1.118 2003-01-29 20:59:34 sandro Exp $"
+        version = "$Id: cwm.py,v 1.119 2003-01-31 15:57:07 sandro Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
