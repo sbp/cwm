@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.18 2004-07-12 15:31:35 syosi Exp $
+$Id: toXML.py,v 1.19 2004-07-13 14:52:41 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -206,7 +206,7 @@ z  - Allow relative URIs for namespaces
 		    self._nextnodeID += 1
 		    nid = 'b'+`self._nextnodeID`
 		    self._nodeID[obj] = nid
-                    progress("object is now", obj, nid)
+                    #progress("object is now", obj, nid)
 		return
 	    
 	if subj[0] not in (SYMBOL, ANONYMOUS, LITERAL):

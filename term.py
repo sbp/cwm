@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.16 2004-07-12 15:31:35 syosi Exp $
+$Id: term.py,v 1.17 2004-07-13 14:52:41 syosi Exp $
 
 term
 
@@ -728,6 +728,9 @@ class Literal(Term):
 
     def __float__(self):
 	return float(self.string)
+
+    def __decimal__(self):
+        return decimal(self.string)
 
     def occurringIn(self, vars):
 	return []

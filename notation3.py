@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.158 2004-07-06 18:04:19 syosi Exp $
+$Id: notation3.py,v 1.159 2004-07-13 14:52:41 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -85,6 +85,7 @@ N3_forAll_URI = RDFSink.forAllSym
 
 from RDFSink import RDF_type_URI, RDF_NS_URI, DAML_sameAs_URI, parsesTo_URI
 from RDFSink import RDF_spec, List_NS, uniqueURI
+from decimal import decimal
 
 ADDED_HASH = "#"  # Stop where we use this in case we want to remove it!
 # This is the hash on namespace URIs
@@ -98,6 +99,7 @@ LOG_implies_URI = "http://www.w3.org/2000/10/swap/log#implies"
 
 INTEGER_DATATYPE = "http://www.w3.org/2001/XMLSchema#integer"
 FLOAT_DATATYPE = "http://www.w3.org/2001/XMLSchema#double"
+DECIMAL_DATATYPE = "http://www.w3.org/2001/XMLSchema#decimal"
 
 option_noregen = 0   # If set, do not regenerate genids on output
 
@@ -899,10 +901,12 @@ class SinkParser:
 		    raise BadSyntax(self._thisDoc, self.lines, str, i,
 				"Bad number syntax")
 		j = m.end()
-		if m.group(2) != None or  m.group(3) != None: # includes decimal exponent
+		if m.group(3) != None: # includes decimal exponent
 		    res.append(float(str[i:j]))
 #		    res.append(self._store.newLiteral(str[i:j],
 #			self._store.newSymbol(FLOAT_DATATYPE)))
+                elif m.group(2) != None:
+                    res.append(float(str[i:j]))
 		else:
 		    res.append(long(str[i:j]))
 #		    res.append(self._store.newLiteral(str[i:j],
@@ -1180,7 +1184,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.158 2004-07-06 18:04:19 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.159 2004-07-13 14:52:41 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1449,6 +1453,8 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
 		    return str(long(s))
 		if (dt_uri == FLOAT_DATATYPE):
 		    return str(float(s))    # numeric value python-normalized
+		if (dt_uri == DECIMAL_DATATYPE):
+		    return str(decimal(s))
 	    st = stringToN3(s, singleLine= singleLine)
 	    if lang != None: st = st + "@" + lang
 	    if dt != None: return st + "^^" + self.representationOf(context, dt.asPair())

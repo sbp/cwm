@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.25 2004-07-12 15:31:35 syosi Exp $
+$Id: cwm_string.py,v 1.26 2004-07-13 14:52:41 syosi Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -18,6 +18,7 @@ import urllib # for hasContent
 import md5, binascii  # for building md5 URIs
 
 from term import LightBuiltIn, ReverseFunction, Function
+from decimal import decimal
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 
@@ -113,7 +114,7 @@ class BI_concatenation(LightBuiltIn, Function):
         str = ""
         for x in subj_py:
             if not isString(x):
-                if type(x) == type(long()):
+                if type(x) == type(long()) or isinstance(x, decimal):
                     x = make_string(x)
                 else:
                     x = `x`
