@@ -11,7 +11,7 @@ references:
   November 1998
   http://www.ietf.org/rfc/rfc2445.txt
 
-$Id: toIcal.py,v 1.5 2002-09-22 21:53:44 connolly Exp $
+$Id: toIcal.py,v 1.6 2002-12-12 22:58:07 timbl Exp $
 
 NOTE: see earlier work:
   http://www.w3.org/2002/01dc-nj/toICal.py
@@ -95,7 +95,8 @@ class CalWr:
 
             other = ctx.statementsMatching(None, event, None)
             for s in other:
-                if str(s[PRED]) not in ('dtstart', 'dtend', 'uid', 'summary', 'location', 'priority', 'description'):
+                if str(s[PRED]) not in ('dtstart', 'dtend', 'uid', 'summary',
+			'location', 'priority', 'description', 'type'):
                     progress("@@skipping ", s[PRED], " of [", txt, "] = [", \
                              s[OBJ], "]")
             w("END:VEVENT"+CRLF)
@@ -167,7 +168,10 @@ if __name__ == '__main__':
 
 
 # $Log: toIcal.py,v $
-# Revision 1.5  2002-09-22 21:53:44  connolly
+# Revision 1.6  2002-12-12 22:58:07  timbl
+# minor
+#
+# Revision 1.5  2002/09/22 21:53:44  connolly
 # handle location, priority
 #
 # Revision 1.4  2002/08/28 22:00:24  connolly
