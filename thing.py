@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.6 2001-12-02 22:13:13 timbl Exp $
+$Id: thing.py,v 1.7 2001-12-08 02:45:56 timbl Exp $
 
 Interning of URIs and strings for stporage in SWAP store
 
@@ -258,6 +258,9 @@ class Anonymous(Fragment):
         return (ANONYMOUS, self.uriref())
         
 class Formula(Fragment):
+    def __init__(self, resource, fragid):
+        Fragment.__init__(self, resource, fragid)
+        self.descendents = None   # Placeholder for list of closure under subcontext        
 
     def generated(self):
         return 1
