@@ -4,7 +4,7 @@
 # Share and Enjoy. Open Source license:
 # Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 # http://www.w3.org/Consortium/Legal/copyright-software-19980720
-# $Id: rdfn3.g,v 1.6 2001-08-31 21:14:11 connolly Exp $
+# $Id: rdfn3.g,v 1.7 2001-08-31 21:28:39 connolly Exp $
 # see log at end
 #
 # REFERENCES
@@ -76,7 +76,6 @@ parser _Parser:
         ";" predicates0<<ctx,subj>>
         | # empty
 
-    # This is the central rule for recognizing a fact.
     rule predicate<<ctx,subj>>: verb<<ctx>> objects1<<ctx,subj,verb>>
 
     rule verb<<ctx>> :
@@ -205,7 +204,10 @@ def DEBUG(*args):
     sys.stderr.write("\n")
     
 # $Log: rdfn3.g,v $
-# Revision 1.6  2001-08-31 21:14:11  connolly
+# Revision 1.7  2001-08-31 21:28:39  connolly
+# quick release for others to test
+#
+# Revision 1.6  2001/08/31 21:14:11  connolly
 # semantic actions are starting to work;
 # anonymous stuff ( {}, [] ) doesn't seem
 # to be handled correctly yet.
