@@ -8,7 +8,7 @@
 # For example, when data about you and your assietnt in merged,
 # you will end up with an "assistant's email" and the like.
 #
-#  $Id: contact.n3,v 1.1 2000-12-12 20:28:55 timbl Exp $
+#  $Id: contact.n3,v 1.2 2001-01-02 20:24:10 timbl Exp $
 
 @prefix : <#> .
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . # type, Property
@@ -61,7 +61,7 @@ vCard.Business.URL, vCard.Business.Zipcode"""
 :lastName = 		mso:Last_Name .
 :personalSuffix = 	mso:Suffix .
 
-:ConactLocation a Class;
+:ContactLocation a Class;
     rdfs:comment  "A place with address, phone number, fax, etc".
 
 :office a rdfs:Property;
