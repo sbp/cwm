@@ -101,7 +101,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.21 2002-07-31 23:19:26 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.22 2002-08-06 01:36:09 connolly Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -227,8 +227,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         #print "startPrefixMapping with prefix=", prefix, "uri=", `uri`
         prefix = prefix or ""
-        uri = uri.encode('utf-8') # reduce XML's unicode to URI's US-ASCII
-        #print "startPrefixMapping uri encoded as=", `uri`
+        uri = self.uriref(uri)
 
         if self._nsmap:
             b = self._nsmap[-1].copy()

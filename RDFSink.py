@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.8 2002-07-31 23:19:26 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.9 2002-08-06 01:36:08 connolly Exp $"
 
 
 
@@ -141,6 +141,14 @@ class RDFSink:
 	or avoid useing namespaces, which will look ugly
 	"""
 
+        if ':' not in nsPair[1]:
+            # can't raise exceptions inside SAX callback
+            print nsPair
+            import traceback
+            for ln in traceback.format_stack():
+                print ln
+            print "@@@@"
+        
         # If we don't have a prefix for this ns...
         if not self.prefixes.get(nsPair, None):
             if not self.namespaces.get(prefix,None):   # For conventions
