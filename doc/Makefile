@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.9 2003-04-11 20:49:17 timbl Exp $
+# $Id: Makefile,v 1.10 2003-04-11 20:53:48 sandro Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -41,7 +41,7 @@ CwmBuiltins.html : $(SCHEMAS)
 formats-example1:: formats-example1.jpg \
 		formats-example1.svg \
 		formats-example1.png \
-		formats-example1.ps
+		formats-examplex1.ps
 
 formats-example1.jpg: formats-example1.dot
 	dot -Tjpg $< > $@
@@ -49,7 +49,7 @@ formats-example1.svg: formats-example1.dot
 	dot -Tsvg $< > $@
 formats-example1.png: formats-example1.dot
 	dot -Tpng $< > $@
-formats-example1.ps: formats-example1.dot
+formats-examplex1.ps: formats-example1.dot
 	dot -Tps $< | grep -v '^%%' | grep -v '^endpage' > $@
 
 
