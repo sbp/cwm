@@ -16,8 +16,8 @@ http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.7 2003-10-13 21:45:21 connolly Exp $'
-__version__ = '$Revision: 1.7 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.8 2003-10-13 21:56:02 connolly Exp $'
+__version__ = '$Revision: 1.8 $'
 
 from math import sin, acos, asin, atan, atan2, cos, cosh, degrees, radians, sinh, tan, tanh
 
@@ -62,6 +62,7 @@ def isString(x):
 
 def numeric(s):
     if type(s) == types.IntType or type(s) is types.FloatType: return s
+    assert type(s) is type('') or type(s) is type(u'')
     if s.find('.') < 0 and s.find('e') < 0 : return int(s)
     return float(s)
 
