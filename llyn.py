@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.109 2004-07-06 18:04:19 syosi Exp $
+$Id: llyn.py,v 1.110 2004-07-08 17:45:50 syosi Exp $
 
 
 RDF Store and Query engine
@@ -87,7 +87,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.109 $"
+cvsRevision = "$Revision: 1.110 $"
 
 
 # Magic resources we know about
@@ -709,7 +709,7 @@ class BI_uri(LightBuiltIn, Function, ReverseFunction):
             if ':' not in object:
                 progress("Warning: taking log:uri of non-abs: %s" % object)
                 return None
-        except TypeError:
+        except (TypeError, AttributeError):
             return None
         return store.intern((SYMBOL, object))
 

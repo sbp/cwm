@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.45 2004-07-07 15:26:48 syosi Exp $
+# $Id: Makefile,v 1.46 2004-07-08 17:45:50 syosi Exp $
 
 PYTHON=python
 
@@ -13,7 +13,7 @@ DOC=doc/CwmHelp.htm
 
 TESTS = test/Makefile test/regression.n3 test/list/detailed.tests test/ql/detailed.tests test/math/detailed.tests test/norm/detailed.tests test/cwm/detailed.tests test/ntriples/detailed.tests test/delta/detailed.tests test/syntax/detailed.tests test/reify/detailed.tests test/testmeta.n3
 
-TARNAME = cwm-0.7.3+
+TARNAME = cwm-0.7.3-plus
 
 .SUFFIXES: .html .py .g .rdf .n3
 
@@ -62,7 +62,10 @@ cwm.tar.gz:  $(HTMLS) $(SOURCES) $(TESTS) tested filelist
 	rm cwm.tar.gz
 	tar -czf $(TARNAME).tar.gz $(TARNAME)
 	mv $(TARNAME) cwm
-	ln -s $(TARNAME).tar.gz cwm.tar.gz
+	head -n -1 .htaccess > ,htaccess
+	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME) '[L]' >> ,htaccess
+	mv ,htaccess .htaccess
+	cvs add $(TARNAME).tar.gz
 #LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply/*.py *.py
 
 
