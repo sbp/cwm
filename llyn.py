@@ -1,7 +1,8 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.107 2004-06-24 03:17:12 timbl Exp $
+$Id: llyn.py,v 1.108 2004-06-24 20:22:51 syosi Exp $
+
 
 RDF Store and Query engine
 
@@ -86,7 +87,8 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.107 $"
+cvsRevision = "$Revision: 1.108 $"
+
 
 # Magic resources we know about
 
@@ -703,8 +705,12 @@ class BI_uri(LightBuiltIn, Function, ReverseFunction):
 	has a base, which may be irrelevant. Eg see roadmap-test in retest.sh
 	"""
 	store = self.store
-	if ':' not in object:
-	    progress("Warning: taking log:uri of non-abs: %s" % object)
+	try:
+            if ':' not in object:
+                progress("Warning: taking log:uri of non-abs: %s" % object)
+                return None
+        except TypeError:
+            return None
         return store.intern((SYMBOL, object))
 
 
