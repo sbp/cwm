@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.47 2001-01-18 03:07:10 timbl Exp $
+$Id: notation3.py,v 1.48 2001-01-19 03:56:17 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -57,6 +57,7 @@ DAML_equivalentTo_URI = "http://www.daml.org/2000/10/daml-ont#equivalentTo"
 DAML_NS = "http://www.daml.org/2000/10/daml-ont#"
 Logic_NS = "http://www.w3.org/2000/10/swap/log.n3#"
 
+RDF_spec = "http://www.w3.org/TR/REC-rdf-syntax/"
 
 ADDED_HASH = "#"  # Stop where we use this in case we want to remove it!
 # This is the hash on namespace URIs
@@ -729,24 +730,25 @@ class ToRDF(RDFSink):
 	if self._subj != subj:
 	    if self._subj:
 		self._wr.endElement()
-#	    if pred == (RESOURCE, RDF_type_URI): # Special case starting with this
-#                
+	    self._subj = subj
+	    if pred == (RESOURCE, RDF_type_URI) and obj[0] != LITERAL: # Special case starting with this
+                self._wr.startElement(obj[1], [("about", subjn),], self.prefixes)
+                return
 	    self._wr.startElement(RDF_NS_URI+'Description',
 				 [("about", subjn),], self.prefixes)
-	    self._subj = subj
-
 
 	if obj[0] != LITERAL: 
 	    objn = relativeURI(self._thisDoc, obj[1])
 	    self._wr.emptyElement(pred[1], [('resource', objn)], self.prefixes)
 	    return
-	for ch in obj[1]:  # Is literal representable as an attribute value?
-            if ch in self._valChars: continue
-            else: break # No match
-        else:
-            if len(obj[1]) < 40:    # , say
-                self._wr.emptyElement(pred[1], [('value', obj[1])], self.prefixes)
-                return
+# Actually this shorthand notatoin is not RDF, it was my misunderstanding! rats...
+#	for ch in obj[1]:  # Is literal representable as an attribute value?
+#            if ch in self._valChars: continue
+#            else: break # No match
+#        else:
+#            if len(obj[1]) < 40:    # , say
+#                self._wr.emptyElement(pred[1], [('value', obj[1])], self.prefixes)
+#                return
         self._wr.startElement(pred[1], [], self.prefixes)
         self._wr.data(obj[1])
         self._wr.endElement()
@@ -1029,7 +1031,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.47 2001-01-18 03:07:10 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.48 2001-01-19 03:56:17 timbl Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
