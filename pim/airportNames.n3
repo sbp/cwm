@@ -3,7 +3,7 @@
 <> dc:description """map navigant (sabre?) airport names to IATA-based
 daml.org names; relate to opencyc:fromLocation and opencyc:toLocation""",
 "@@TODO: constraint the premise of the mapping rule a bit?",
-"$Id: airportNames.n3,v 1.1 2002-06-12 20:36:15 connolly Exp $".
+"$Id: airportNames.n3,v 1.2 2002-07-16 15:34:46 connolly Exp $".
 
 @prefix k: <http://opencyc.sourceforge.net/daml/cyc.daml#> .
 
@@ -21,6 +21,8 @@ a:SFO k:nameString "SAN FRANCISCO".
 a:CDG k:nameString "PARIS DE GAULLE".
 a:FCO k:nameString "ROME FIUMICINO".
 a:AHO k:nameString "ALGHERO".
+a:PIT k:nameString "PITTSBURGH".
+a:YMX k:nameString "MONTREAL DORVALQC".
 
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
