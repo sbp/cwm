@@ -19,9 +19,9 @@
     dc:language "en";
     dc:subject "Biology";
 
-    a owl:Ontology;
-    owl:imports rdfs:, owl:;
-    owl:versionInfo "$Id: biology.n3,v 1.3 2003-07-11 18:16:16 sandro Exp $";
+    a f:Ontology;
+    f:imports rdfs:, f:;
+    f:versionInfo "$Id: biology.n3,v 1.4 2003-07-11 18:20:02 sandro Exp $";
 
     rdfs:seeAlso <http://www.wikipedia.org/wiki/Binomial_nomenclature>
 .
