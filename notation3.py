@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.93 2001-09-24 16:30:29 timbl Exp $
+$Id: notation3.py,v 1.94 2001-09-24 20:01:51 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1193,7 +1193,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.93 2001-09-24 16:30:29 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.94 2001-09-24 20:01:51 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1449,7 +1449,9 @@ t   "this" and "()" special syntax should be suppresed.
         if type == LITERAL: return stringToN3(value)
 
         j = string.rfind(value, "#")
-        if j>=0 and "p" not in self._flags:   # Suppress use of prefixes?
+        if (j>=0
+            and "p" not in self._flags   # Suppress use of prefixes?
+            and value[j+1:].find(".") <0 ): # Can't use prefix is localname includes "."
             prefix = self.prefixes.get((RESOURCE, value[:j+1]), None) # @@ #CONVENTION
             if prefix != None : return prefix + ":" + value[j+1:]
         
