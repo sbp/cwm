@@ -28,7 +28,7 @@ References:
   A quick look at iCalendar
   http://www.w3.org/2000/01/foo
 
-$Id: toIcal.py,v 2.4 2004-01-29 21:09:16 timbl Exp $
+$Id: toIcal.py,v 2.5 2004-01-29 21:28:13 timbl Exp $
 
 NOTE: see earlier work:
   http://www.w3.org/2002/01dc-nj/toICal.py
@@ -537,7 +537,7 @@ class CalWr:
             if outtype == E_PARAM:
                 v = ";" + pref + "=" + val 
             elif outtype == E_PROP:
-                v = pref + ":" + val + "\n"
+                v = pref + ":" + val + CRLF
             w(self.wrapString(v, 75)) #@@magic number. move to top. does it come from the RFC?
         #enddef egWrite
 
@@ -725,7 +725,10 @@ if __name__ == '__main__':
 
 
 # $Log: toIcal.py,v $
-# Revision 2.4  2004-01-29 21:09:16  timbl
+# Revision 2.5  2004-01-29 21:28:13  timbl
+# Changed ONE newline to a CRLF, suspect many more should be changed. iCal needs both
+#
+# Revision 2.4  2004/01/29 21:09:16  timbl
 # Added DTSTART and UID to events. iCal needs DTSTART it seems. Fixed VALUE=URI format.
 #
 # Revision 2.3  2004/01/29 19:41:57  timbl
