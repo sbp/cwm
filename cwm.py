@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.33 2001-05-08 19:47:43 timbl Exp $
+$Id: cwm.py,v 1.34 2001-05-08 19:52:59 connolly Exp $
 
 Closed World Machine
 
@@ -1729,7 +1729,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, _outURI)
-        version = "$Id: cwm.py,v 1.33 2001-05-08 19:47:43 timbl Exp $"
+        version = "$Id: cwm.py,v 1.34 2001-05-08 19:52:59 connolly Exp $"
 	_outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
 	_outSink.makeComment("    using base " + _baseURI)
 
