@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.10 2004-05-20 21:56:36 connolly Exp $
+# $Id: Makefile,v 1.11 2004-06-08 21:28:28 connolly Exp $
 
 W=../../../..
 PYTHON=python
@@ -19,7 +19,7 @@ CAL=$W/2002/12/cal
 # W3C mailing list search results in RDF
 #http://lists.w3.org/Archives/Public/www-rdf-interest/2003Jul/0206.html
 
-bugstatus: N3-Bugs.ics
+bugstatus: N3-Bugs.ics bugStatus.html
 
 CWM=PYTHONPATH=$(SWAP) $(PYTHON) $(SWAP)/cwm.py
 
