@@ -1,7 +1,7 @@
 """Provides the KB class.
 """
-__version__ = "$Revision: 1.22 $"
-# $Id: kb.py,v 1.22 2003-09-08 17:31:07 sandro Exp $
+__version__ = "$Revision: 1.23 $"
+# $Id: kb.py,v 1.23 2003-09-10 20:12:56 sandro Exp $
 
 import re
 
@@ -55,6 +55,7 @@ class KB(list, pluggable.Store):
         self.nodes = { }
         self.nodesAreCurrent = 1
         self.nicknames = { }
+        self.firstOrder = 0
 
     def clear(self):
         self.__init__()
@@ -159,7 +160,10 @@ class KB(list, pluggable.Store):
         self.nodesAreCurrent = 0
         if (p):
             s = formula
-            self.append(LX.logic.RDF(s,p,o))
+            if self.firstOrder:
+                self.append(LX.logic.RDF(s,p,o))
+            else:
+                self.append(p(s,o))
             self.addSupportingTheory(s)
             self.addSupportingTheory(p)
             self.addSupportingTheory(o)
@@ -423,7 +427,10 @@ if __name__ == "__main__":
     doctest.testmod(sys.modules[__name__])
  
 # $Log: kb.py,v $
-# Revision 1.22  2003-09-08 17:31:07  sandro
+# Revision 1.23  2003-09-10 20:12:56  sandro
+# store in either RDF(s,p,o) or p(s,o)
+#
+# Revision 1.22  2003/09/08 17:31:07  sandro
 # handle case where no namespace-prefix is declared
 #
 # Revision 1.21  2003/09/06 04:49:24  sandro
