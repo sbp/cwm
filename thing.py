@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.11 2002-03-12 20:57:16 timbl Exp $
+$Id: thing.py,v 1.12 2002-03-20 16:59:26 connolly Exp $
 
 Interning of URIs and strings for stporage in SWAP store
 
@@ -292,6 +292,9 @@ class Literal(Thing):
         Thing.__init__(self, store)
         self.string = string    #  n3 notation EXcluding the "  "
 
+    def __str__(self):
+        return self.string
+    
     def __repr__(self):
         return '"' + self.string[0:8] + '"'
 #        return self.string
