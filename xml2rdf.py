@@ -43,7 +43,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.3 2000-11-28 20:36:21 timbl Exp $")
+        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.4 2000-12-01 23:09:15 timbl Exp $")
 
 
     def load(self, uri, _baseURI=""):
@@ -129,7 +129,13 @@ class RDFXMLParser(xmllib.XMLParser):
                     self._subject = None
                 else: raise ooops # can't do about each prefix yet
             if name == "bagid":
+                c = self._context
                 self._context = self.uriref("#" + value)
+                if 0: self.sink.makeStatement((  # Note lexical nesting
+                    (RESOURCE, c),                                 
+                    (RESOURCE, notation3.N3_subExpression_URI),
+                    (RESOURCE, c),
+                    (RESOURCE, self._context) ))
 
         if self._subject == None:
             self._subject = self._genPrefix + `self._nextId`  #
