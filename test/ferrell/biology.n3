@@ -1,4 +1,4 @@
-@prefix : <#> .
+@prefix : <http://www.w3.org/2000/10/swap/test/ferrell/biology#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix f: <http://www.w3.org/2000/10/swap/test/ferrell/ferrell#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -21,7 +21,7 @@
 
     a owl:Ontology;
     owl:imports rdfs:, owl:;
-    owl:versionInfo "$Id: biology.n3,v 1.2 2003-07-11 18:01:35 sandro Exp $";
+    owl:versionInfo "$Id: biology.n3,v 1.3 2003-07-11 18:16:16 sandro Exp $";
 
     rdfs:seeAlso <http://www.wikipedia.org/wiki/Binomial_nomenclature>
 .
@@ -32,6 +32,7 @@
 :Dog f:equivalentClass :CanisFamiliaris.
 :Human f:equivalentClass :HomoSapiens.
 :RedWolf f:equivalentClass :CanisRufus.
+:Dingo f:equivalentClass :CanisFamiliarisDingo.
 
 # Some binomial names
 
