@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.95 2003-09-14 20:20:23 timbl Exp $
+$Id: llyn.py,v 1.96 2003-09-24 19:43:57 kdubost Exp $
 
 RDF Store and Query engine
 
@@ -161,7 +161,7 @@ from thing import indentString
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.95 $"
+cvsRevision = "$Revision: 1.96 $"
 
 # Magic resources we know about
 
@@ -1147,11 +1147,13 @@ class RDFStore(RDFSink) :
         import cwm_os      # OS builtins
         import cwm_time    # time and date builtins
         import cwm_math    # Mathematics
+        import cwm_trigo   # Trignometry
         import cwm_times    # time and date builtins
         import cwm_maths   # Mathematics, perl/string style
 	import cwm_list	   # List handling operations
         cwm_string.register(self)
         cwm_math.register(self)
+        cwm_trigo.register(self)
         cwm_maths.register(self)
         cwm_os.register(self)
         cwm_time.register(self)
