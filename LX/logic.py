@@ -8,8 +8,8 @@ Also handly functions for handling these things.  They're not object
 methods because the OO hierarchy is sometimes too dynamic here.
 
 """
-__version__ = "$Revision: 1.7 $"
-# $Id: logic.py,v 1.7 2003-08-25 21:10:27 sandro Exp $
+__version__ = "$Revision: 1.8 $"
+# $Id: logic.py,v 1.8 2003-08-28 11:40:50 sandro Exp $
 
 import LX.expr
 
@@ -223,7 +223,7 @@ for (key, value) in constantsForDTVs:
     valuesForConstants[value] = key
 
 
-def ConstantForDatatypeValue(dtv, dtURI=None):
+def ConstantForDatatypeValue(dtvPassed, dtURI=None):
     """
     Basically we'd like to handle python types and RDF/XSD types
     in the same place.  Hrm.
@@ -231,13 +231,16 @@ def ConstantForDatatypeValue(dtv, dtURI=None):
     if dtURI is None:
         dtURI = "::native"
 
-    dtv = (dtv, dtURI)
+    dtv = (dtvPassed, dtURI)
     try:
         return constantsForDTVs[dtv]
     except KeyError:
         tt = Constant(suggestedName=("lit"+str(dtv[0])))
         constantsForDTVs[dtv] = tt
         valuesForConstants[tt] = dtv
+        # this doesnt handle non-URIs right at all, and what
+        # about plain literals?
+        tt.data = (dtvPassed, ConstantForURI(dtURI))
         return tt
 
     
@@ -268,7 +271,11 @@ def _test():
 if __name__ == "__main__": _test()
 
 # $Log: logic.py,v $
-# Revision 1.7  2003-08-25 21:10:27  sandro
+# Revision 1.8  2003-08-28 11:40:50  sandro
+# let Constants know their data, if they have any.  Still not complete
+# literal handling.  Used by owl-systems/display.py right now.
+#
+# Revision 1.7  2003/08/25 21:10:27  sandro
 # slightly nicer printing
 #
 # Revision 1.6  2003/08/22 20:49:41  sandro
