@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.131 2003-01-21 16:10:36 timbl Exp $
+$Id: notation3.py,v 1.132 2003-02-01 05:50:02 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -62,7 +62,7 @@ import urllib
 import re
 import thing
 
-from diag import verbosity, setVerbosity
+from diag import verbosity, setVerbosity, progress
 
 from uripath import refTo, join
 
@@ -1012,7 +1012,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.131 2003-01-21 16:10:36 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.132 2003-02-01 05:50:02 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

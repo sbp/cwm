@@ -12,10 +12,11 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.20 2003-01-31 15:57:07 sandro Exp $"
+__version__ = "$Id: RDFSink.py,v 1.21 2003-02-01 05:49:57 timbl Exp $"
 
 import uripath
 import time
+from diag import progress
 
 # The statement is stored as a quad - affectionately known as a triple ;-)
 # offsets when a statement is stored as a Python tuple (c, p, s, o)
