@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: crawl.py,v 1.1 2003-07-30 19:37:20 timbl Exp $
+$Id: crawl.py,v 1.2 2003-07-30 19:43:22 timbl Exp $
 
 Crawler"""
 
@@ -15,7 +15,7 @@ import sys
 from thing import load
 from uripath import join, base
 
-cvsRevision = "$Revision: 1.1 $"
+cvsRevision = "$Revision: 1.2 $"
 
 document = {}
 already = []
@@ -35,8 +35,7 @@ def getDoc(r):
 	
 def crawl(uriref, level=0):
 
-    uri = join(base(), uriref)
-    print " " * level, "Loading ", uriref, uri, base()
+    print " " * level, "Loading ", uri, 
     f = load(join(base(), uri))
     this = thing.symbol(uri)
     thisd = getDoc(this)
@@ -48,7 +47,8 @@ def crawl(uriref, level=0):
 		if r not in thisd.mentions:
 		    thisd.mentions.append(r)
 		    print  " " * level, "Mentions", r.uriref()
-		    
+		    if r not in agenda and r not in already:
+			agenda.append(r)
 		    
 	    
 
@@ -56,14 +56,20 @@ def crawl(uriref, level=0):
 def doCommand():
     """Command line RDF/N3 crawler
         
- <command> <options> <steps> [--with <more args> ]
+ crawl <uriref>
 
 options:
  
 See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 """
-    uri = sys.argv[1]
-    crawl(uri)
+    uriref = sys.argv[1]
+    uri = join(base(), uriref)
+    r = thing.symbol(r)
+    crawl(r)
+    while agenda != []:
+	r = agenda.pop()
+	already.append(r)
+	crawl(r)
 
 ############################################################ Main program
     

@@ -1,6 +1,6 @@
 #  Test of interactions of qualifiers with log:includes
 #
-#  $Id: quantifiers-c3.n3,v 1.1 2002-05-05 03:21:58 timbl Exp $
+#  $Id: quantifiers-c3.n3,v 1.2 2003-07-30 19:43:23 timbl Exp $
 #
 # Usage: cwm quantifiers.n3 -think -purge
 #  Should give 18 successes and no failures.
@@ -19,8 +19,6 @@
 
 #{{ this log:forAll :foo. :foo :bar :baz } log:notIncludes {this log:forAll :foo.  :foo :bar :baz }}
 #  log:implies { :testc3n a :FAILURE }.
-
-log:implies a log:Chaff.  # Purge input rules
 
 # ENDS
 
