@@ -25,6 +25,7 @@ from rdflib.Namespace import Namespace
 from rdflib.constants import TYPE
 from rdflib.TripleStore import TripleStore
 import OwlAxiomReasoner
+import time
 
 #import random
 
@@ -116,6 +117,7 @@ def run(store, test, name, input, entailed, expected):
         print (" [special time limit: %ds]" % localMaxSeconds),
     
     try:
+        start = time.time()
         result = OwlAxiomReasoner.checkConsistency(
                      input,
                      entailedDocument=entailed,
@@ -123,13 +125,14 @@ def run(store, test, name, input, entailed, expected):
                      requiredDatatypes=dtlist,
                      maxSeconds=localMaxSeconds,
                      axiomTag=axiomTag.get(str(test), ""))
-        
+        end = time.time()
     except OwlAxiomReasoner.UnsupportedDatatype, dt:
         print "skipped; uses unsupported datatype", dt
         return
 
     if result == expected:
-        print "PASSED"
+        dur = end-start
+        print "PASSED %ss" % dur
     else:
         if result == "Unknown":
             print "(...unknown...)"
@@ -254,7 +257,7 @@ class MyArgHandler(ArgHandler.ArgHandler):
  
 if __name__ == "__main__":
     a = MyArgHandler(program="surnia",
-                     version="$Id: surnia.py,v 1.10 2003-08-08 18:53:31 sandro Exp $",
+                     version="$Id: surnia.py,v 1.11 2003-08-08 19:20:08 sandro Exp $",
                      uri="http://www.w3.org/2003/07/surnia")
 
     a.run()
