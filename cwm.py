@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.102 2002-08-07 14:32:20 timbl Exp $
+$Id: cwm.py,v 1.103 2002-08-08 02:03:35 timbl Exp $
 
 Closed World Machine
 
@@ -46,7 +46,7 @@ import uripath
 # from llyn import RDFStore  # A store with query functiuonality
 import llyn
 
-cvsRevision = "$Revision: 1.102 $"
+cvsRevision = "$Revision: 1.103 $"
 
 
 ######################################################### Tests  
@@ -413,7 +413,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.102 2002-08-07 14:32:20 timbl Exp $"
+        version = "$Id: cwm.py,v 1.103 2002-08-08 02:03:35 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -427,6 +427,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _metaURI = join(option_baseURI, "RUN/") + `time.time()`  # Reserrved URI @@
             _store = llyn.RDFStore( _outURI+"#_g", metaURI=_metaURI, argv=option_with, crypto=option_crypto)
+	    thing.setStore(_store)
             workingContextURI = _outURI+ "#0_work"
             workingContext = _store.intern((FORMULA, workingContextURI))   #@@@ Hack - use metadata
 #  Metadata context - storing information about what we are doing
