@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.3 2003-09-02 00:13:42 timbl Exp $
+$Id: formula.py,v 1.4 2003-09-07 04:14:12 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -54,7 +54,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.3 $"
+cvsRevision = "$Revision: 1.4 $"
 
 # Magic resources we know about
 
@@ -291,7 +291,7 @@ class Formula(Fragment, CompoundTerm):
 	y.loadFormulaWithSubsitution(self, bindings, why=why)
 	return y.canonicalize()
 
-    def loadFormulaWithSubsitution(self, old, bindings, why=None):
+    def loadFormulaWithSubsitution(self, old, bindings={}, why=None):
 	"""Load information from another formula, subsituting as we go"""
         total = 0
 	for v in old.universals():
@@ -442,14 +442,12 @@ class Formula(Fragment, CompoundTerm):
         return self.store.reopen(self)
 
 
-    def includes(f, g, _variables=[], smartIn=[], bindings=[]):
+    def includes(f, g, _variables=[],  bindings=[]):
 	"""Does this formula include the information in the other?
 	
-	smartIn gives a list of formulae for which builtin functions should operate
-	   in the consideration of what "includes" means.
 	bindings is for use within a query.
 	"""
-	return  f.store.testIncludes(f, g, _variables=_variables, smartIn=smartIn, bindings=bindings)
+	return  f.store.testIncludes(f, g, _variables=_variables,  bindings=bindings)
 
     def generated(self):
 	"""Yes, any identifier you see for this is arbitrary."""
@@ -622,9 +620,9 @@ def compareTerm(self, other):
 		s = s.rest
 		o = o.rest
         else:
-            return 1
+            return -1
     if isinstance(other, List):
-        return -1
+        return 1
 
     if isinstance(self, Formula):
         if isinstance(other, Formula):
