@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: cwm.py,v 1.9 2000-12-07 21:35:48 timbl Exp $
+$Id: cwm.py,v 1.10 2000-12-08 20:21:16 timbl Exp $
 
 Closed World Machine
 
@@ -516,7 +516,6 @@ class RDFStore(notation3.RDFSink) :
                 elif pred is subExpression :
                     _isSubExp = 1
 
-        if _asObj > 2: return 0, _isSubExp         # No - occurs as object too much
         _op = _asObj + _asPred
         _anon = (_op < 2) and _isExistential
         return ( _anon, _asObj+_asPred, _isSubExp)  
