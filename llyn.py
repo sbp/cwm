@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.57 2003-01-13 04:21:52 timbl Exp $
+$Id: llyn.py,v 1.58 2003-01-14 03:03:55 eric Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.57 $"
+cvsRevision = "$Revision: 1.58 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -2677,7 +2677,14 @@ class Query:
 
         rs = ResultSet()
         qp = rs.buildQuerySetsFromCwm(items, query.variables, query.existentials)
-        a = SqlDBAlgae("http://localhost/SqlDB/", "AclSqlObjects")
+        (user, password, host, database) = re.match("^sql://(?:([^@:]+)(?::([^@]+))?)@?([^/]+)/(.+)$",
+                                                    items[0].service.uri).groups()
+        HostDB2SchemeMapping = { "sql://root@localhost/w3c" : "AclSqlObjectsg" }
+        if (HostDB2SchemeMapping.has_key(items[0].service.uri)):
+            cachedDetails = HostDB2SchemeMapping.get(items[0].service.uri)
+        else:
+            cachedDetails = None
+        a = SqlDBAlgae("http://localhost/SqlDB/", cachedDetails, user, password, host, database)
         messages = []
         nextResults, nextStatements = a._processRow([], [], qp, rs, messages, {})
         rs.results = nextResults
