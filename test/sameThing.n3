@@ -3,7 +3,7 @@
 @prefix rcs: <http://www.w3.org/2001/03swell/rcs#>.
 
 <> dc:description """substituion of equals for equals in triples, plus some rules for unambiguous/unique properties (@@that probably belong elsewhere)""";
-  rcs:id "$Id: sameThing.n3,v 1.4 2001-07-28 19:39:57 connolly Exp $";
+  rcs:id "$Id: sameThing.n3,v 1.5 2001-09-19 19:14:28 timbl Exp $";
   dc:creator [ 
 	contact:fullName "Dan Connolly";
 	contact:homePage <http://www.w3.org/People/Connolly/>;
@@ -23,9 +23,9 @@ this log:forAll :x, :y, :z, :p, :q.
 
 { :x = :y } log:implies { :y = :x }. # symmetric
 { :x = [ = :z] } log:implies { :x = :z }. # transitive
-{ :x :p :y. :x = :z. } log:implies { :z :p :y }.
-{ :x :p :y. :p = :q. } log:implies { :x :q :y }.
-{ :x :p :y. :y = :z. } log:implies { :x :p :z }.
+{ :x :p :y. :x = :z. :p log:notEqualTo log:forAll, log:forSome} log:implies { :z :p :y }.
+{ :x :p :y. :p = :q. :p log:notEqualTo log:forAll, log:forSome} log:implies { :x :q :y }.
+{ :x :p :y. :y = :z. :p log:notEqualTo log:forAll, log:forSome} log:implies { :x :p :z }.
 
 {  :p a ont:UniqueProperty. } log:implies
  { { :x :p :y. :x :p :z. } log:implies  { :y = :z } }.

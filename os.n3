@@ -1,6 +1,6 @@
 #   n3 definition of some operating system interface functions
 #
-# $Id: os.n3,v 1.1 2001-09-18 16:30:27 timbl Exp $
+# $Id: os.n3,v 1.2 2001-09-19 19:14:28 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -13,7 +13,7 @@
 
 os:environ a rdf:Property;
     rdfs:label "environment value";
-    rdfs:description """
+    rdfs:comment """
 The os:environ property of a string is the value corresponding to
 the string when looked up in the curent environment.  This is
 not, of course, something of global significance: it is only
