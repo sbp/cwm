@@ -1,10 +1,16 @@
-# $Id: Makefile,v 1.4 2001-09-01 05:31:17 connolly Exp $
+# $Id: Makefile,v 1.5 2001-09-03 17:22:00 connolly Exp $
 
 PYTHON=python2
 
 YAPPS=yapps2.py
 
 TESTIN=test/sameDan.n3
+
+.SUFFIXES: .g .py
+
+.g.py:
+	$(PYTHON) $(YAPPS) $< $@
+
 
 all: test doc
 
