@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.86 2001-08-09 21:35:42 timbl Exp $
+$Id: notation3.py,v 1.87 2001-08-23 19:56:08 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -670,7 +670,7 @@ class SinkParser:
     def qname(self, str, i, res):
 	"""
 	xyz:def -> ('xyz', 'def')
-	def -> ('', 'def')                   @@@@
+	# not any more: def -> ('', 'def')
 	:def -> ('', 'def')    
 	"""
 
@@ -706,11 +706,7 @@ class SinkParser:
 	    return i
 
 	else:
-	    if ln:
-		res.append(('', ln))
-		return i
-	    else:
-		return -1
+            return -1
 	    
     def object(self, str, i, res):
 	j = self.subject(str, i, res)
@@ -1288,7 +1284,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.86 2001-08-09 21:35:42 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.87 2001-08-23 19:56:08 connolly Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
