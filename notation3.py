@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.24 2000-11-09 17:04:27 timbl Exp $
+$Id: notation3.py,v 1.25 2000-11-10 23:04:17 timbl Exp $
 
 cf
 
@@ -44,6 +44,8 @@ TBL: more cool things:
 Validation:  validate domain and range constraints against closuer of classes and
    mutually disjoint classes.
 
+- represent URIs bound to same equivalence closuse object?
+
 Translation;  Try to represent the space (or a context) using a subset of namespaces
 
 """
@@ -56,6 +58,8 @@ import re
 
 RDF_type_URI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 DAML_equivalentTo_URI = "http://www.daml.org/2000/10/daml-ont#equivalentTo"
+N3_forSome_URI = "http://www.w3.org/2000/10/swap/logic#forSome"
+N3_forAll_URI = "http://www.w3.org/2000/10/swap/logic#forAll"
 
 # The statement is stored as a quad - affectionately known as a triple ;-)
 
@@ -116,7 +120,7 @@ class RDFSink:
     def makeStatement(self, tuple):  # Quad of (type, value) pairs
         pass
 
-    def startDoc(self):
+ef startDoc(self):
         print "sink: start.\n"
 
     def endDoc(self):
@@ -316,6 +320,10 @@ class SinkParser:
 	    if j>=0:
                 subj = ANONYMOUS , self._genPrefix + `self._nextId`
                 self._nextId = self._nextId + 1  # intern
+                if quantifiers: self.makeStatement(((RESOURCE, self.contextURI),
+                                    (RESOURCE, N3_forSome_URI),
+                                    (RESOURCE, self.contextURI),
+                                    subj)) # @@@ Note this is anonymous node
                 i = self.property_list(str, j, subj)
                 if i<0: raise BadSyntax(str, j, "property_list expected")
                 j = self.tok(']', str, i)
@@ -923,7 +931,7 @@ class SinkToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Start notation3 generation\n")
-        self._write("#  $Id: notation3.py,v 1.24 2000-11-09 17:04:27 timbl Exp $\n\n")
+        self._write("#  $Id: notation3.py,v 1.25 2000-11-10 23:04:17 timbl Exp $\n\n")
         self._subj = None
         self._nextId = 0
 
@@ -1453,16 +1461,6 @@ class RDFStore(RDFSink) :
                 
 
 
-            
-class RDFTriple:
-    
-    def __init__(self, triple):
-        self.triple = triple
-        triple[SUBJ].occursAs[SUBJ].append(self)   # Resource index
-        triple[PRED].occursAs[PRED].append(self)   # Resource index
-        triple[OBJ].occursAs[OBJ].append(self)     # Resource index
-        triple[CONTEXT].occursAs[CONTEXT].append(self) #
-
 
 ############################################################## Query engine
 
@@ -1471,7 +1469,12 @@ class RDFTriple:
     
 
 INFINITY = 1000000000           # @@ larger than any number occurences
-def match (unmatched, action, param, bindings = [], newBindings = [] ):
+
+def match (unmatched,       # Tuple of tuples we are trying to match
+           action,
+           param,
+           bindings = [],    # Bindings discovered so far
+           newBindings = [] ):  # Bindings JUST discovered - not followed though on
 
         """ Apply action(bindings, param) to succussful matches
     bindings      collected matches alreday found
