@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.166 2004-12-31 19:14:33 timbl Exp $
+$Id: cwm.py,v 1.167 2005-01-10 19:15:22 syosi Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.166 $"
+cvsRevision = "$Revision: 1.167 $"
 
 
 
@@ -328,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.166 2004-12-31 19:14:33 timbl Exp $"
+        version = "$Id: cwm.py,v 1.167 2005-01-10 19:15:22 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -342,7 +342,7 @@ rdf/xml files. Note that this requires rdflib.
 
         if option_pipe:
             _store = _outSink
-	    workingContext = _outSink
+	    workingContext = _outSink #.newFormula()
         else:
 	    if "u" in option_flags["think"]:
 		_store = llyn.RDFStore(argv=option_with, crypto=option_crypto)

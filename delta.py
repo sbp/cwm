@@ -17,14 +17,21 @@ Uris are relative to present working directory.
 
 For motivation and explanation, see  <http://www.w3.org/DesignIssues/Diff>
 
-$Id: delta.py,v 1.3 2005-01-03 19:32:29 connolly Exp $
+<<<<<<< delta.py
+$Id: delta.py,v 1.4 2005-01-10 19:15:22 syosi Exp $
+=======
+$Id: delta.py,v 1.4 2005-01-10 19:15:22 syosi Exp $
+>>>>>>> 1.2.4.1
 http://www.w3.org/2000/10/swap/diff.py
 """
 
 
 
 import string, getopt
-from sets import Set    # Python2.3 and on
+try:
+    Set = set               # Python2.4 and on
+except NameError:
+    from sets import Set    # Python2.3 and on
 import string
 import sys
 
@@ -489,7 +496,7 @@ def main():
 	usage()
 	sys.exit(2)
     graph = loadFiles(testFiles)
-    version = "$Id: delta.py,v 1.3 2005-01-03 19:32:29 connolly Exp $"[1:-1]
+    version = "$Id: delta.py,v 1.4 2005-01-10 19:15:22 syosi Exp $"[1:-1]
     if diffFiles == []:
 	nailFormula(graph, assumptions)
 	if verbose: print "# Smush by " + version

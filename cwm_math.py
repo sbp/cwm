@@ -15,8 +15,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.20 2004-12-18 22:19:22 connolly Exp $'
-__version__ = '$Revision: 1.20 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.21 2005-01-10 19:15:22 syosi Exp $'
+__version__ = '$Revision: 1.21 $'
 
 import sys, string, re, urllib
 
@@ -81,12 +81,10 @@ class BI_rounded(LightBuiltIn, Function):
 
 class BI_sum(LightBuiltIn, Function):
     def evaluateObject(self,  subj_py):
-        try:
-            t = 0
-            for x in subj_py: t += numeric(x)
-            return t
-        except ValueError:
-            return None
+        t = 0
+        for x in subj_py: t += numeric(x)
+        return t
+
 
 class BI_sumOf(LightBuiltIn, ReverseFunction):
     def evaluateSubject(self, obj_py): 

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.22 2004-12-21 05:36:48 syosi Exp $
+$Id: pretty.py,v 1.23 2005-01-10 19:15:22 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.22 $"
+cvsRevision = "$Revision: 1.23 $"
 
 # Magic resources we know about
 
@@ -251,13 +251,13 @@ class Serializer:
     def dumpVariables(self, context, sink, sorting=1, pretty=0, dataOnly=0):
 	"""Dump the forAlls and the forSomes at the top of a formula"""
 	if sorting:
-	    uv = context.universals()[:]
+	    uv = list(context.universals())
 	    uv.sort(Term.compareAnyTerm)
-	    ev = context.existentials()[:]
+	    ev = list(context.existentials())
 	    ev.sort(Term.compareAnyTerm)
 	else:
-	    uv = context.universals()
-	    ev = context.existentials()
+	    uv = list(context.universals())
+	    ev = list(context.existentials())
 	if not dataOnly:
 	    for v in uv:
 		self._outputStatement(sink, (context, self.store.forAll, context, v))
@@ -275,7 +275,7 @@ class Serializer:
         """ Dump one formula only by order of subject except forSome's first for n3=a mode"""
         
 	context = self.context
-	uu = context.universals()[:]
+	uu = context.universals().copy()
 	sink = self.sink
 	self._scan(context)
         sink.startDoc()
@@ -383,7 +383,9 @@ class Serializer:
 		
     def _breakloops(self, context):
         _done = {}
-        for x in self._occurringAs[SUBJ]:
+        _todo = list(self._occurringAs[SUBJ])
+        _todo.sort(Term.compareAnyTerm)
+        for x in _todo:
             if x in _done:
                 continue
             if not (isinstance(x, AnonymousVariable) and not ((isinstance(x, Fragment) and x.generated()))):
@@ -432,8 +434,8 @@ class Serializer:
 ##        except KeyError:
 ##            pass
 #	progress("&&&&&&&&& ", `self`,  self._occurringAs)
-#        _isExistential = x in context.existentials()
-        _isExistential = context.existentialDict.get(x,0)
+        _isExistential = x in context.existentials()
+#        _isExistential = context.existentialDict.get(x,0)
 #        return (0, 2)
         _loop = context.any(subj=x, obj=x)  # does'nt count as incomming
 	_asPred = self._occurringAs[PRED].get(x, 0)

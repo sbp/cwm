@@ -1,6 +1,6 @@
 """Triple Maker
 
-$Id: triple_maker.py,v 1.6 2004-12-20 02:32:51 syosi Exp $
+$Id: triple_maker.py,v 1.7 2005-01-10 19:15:22 syosi Exp $
 Explanation of the API
 
 the functions are addNode(),addNode(), addNode() endStatement() to add a triple
@@ -238,6 +238,13 @@ class TripleMaker:
         a = formula.newSymbol(sym)
         formula.declareUniversal(a)
         self.addNode(a)
+
+    def bind(self, prefix, uri):
+        if prefix == "":
+            self.store.setDefaultNamespace(uri)
+        else:
+            self.store.bind(prefix, uri)
+
     
         
         
