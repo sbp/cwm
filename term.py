@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.11 2004-06-21 16:53:34 syosi Exp $
+$Id: term.py,v 1.12 2004-06-23 21:04:24 syosi Exp $
 
 term
 
@@ -587,7 +587,7 @@ class EmptyList(List):
     def __repr__(self):
 	return "()"
 	
-    def newList(value):
+    def newList(self, value):
         x = self
         l = len(value)
         while l > 0:

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.105 2004-06-21 16:53:34 syosi Exp $
+$Id: llyn.py,v 1.106 2004-06-23 21:04:24 syosi Exp $
 
 RDF Store and Query engine
 
@@ -86,7 +86,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.105 $"
+cvsRevision = "$Revision: 1.106 $"
 
 # Magic resources we know about
 
@@ -1268,7 +1268,7 @@ class RDFStore(RDFSink) :
         return result
 
     def newList(self, value):
-	return nil.newList(value)
+	return self.nil.newList(value)
 
 #    def deleteFormula(self,F):
 #        if diag.chatty_flag > 30: progress("Deleting formula %s %ic" %

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.152 2004-06-21 18:33:39 syosi Exp $
+$Id: cwm.py,v 1.153 2004-06-23 21:04:24 syosi Exp $
 
 Closed World Machine
 
@@ -52,7 +52,7 @@ import sys
 import llyn
 import RDFSink
 
-cvsRevision = "$Revision: 1.152 $"
+cvsRevision = "$Revision: 1.153 $"
 
 
 
@@ -309,7 +309,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.152 2004-06-21 18:33:39 syosi Exp $"
+        version = "$Id: cwm.py,v 1.153 2004-06-23 21:04:24 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -526,11 +526,13 @@ rdf/xml files. Note that this requires rdflib.
                 
                 
             elif arg == "-reify":
-                raise NotImplementedError
+                import reify
+                workingContext = reify.reify(workingContext)
                 
 
             elif arg == "-dereify":
-                raise NotImplementedError                
+                import reify
+                workingContext = reify.dereify(workingContext)                
                 
 
             elif arg == "-size":

@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.36 2004-01-28 22:54:58 timbl Exp $
+$Id: thing.py,v 1.37 2004-06-23 21:04:24 syosi Exp $
 
 OBSOLETE
  This module was too much of a mixture. See
@@ -519,7 +519,7 @@ class EmptyList(List):
     def __repr__(self):
 	return "()"
 	
-    def newList(value):
+    def newList(self, value):
         x = self
         l = len(value)
         while l > 0:
