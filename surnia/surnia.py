@@ -63,6 +63,7 @@ fudge = 2.5
 maxSecondsTable = {
     'http://www.w3.org/2002/03owlt/AllDifferent/Manifest001#test': (9 * fudge),
     'http://www.w3.org/2002/03owlt/FunctionalProperty/Manifest004#test': (72 * fudge),
+    'http://www.w3.org/2002/03owlt/InverseFunctionalProperty/Manifest004#test': (72 * fudge),
     }
 maxSeconds = 1
 
@@ -221,7 +222,7 @@ class MyArgHandler(ArgHandler.ArgHandler):
  
 if __name__ == "__main__":
     a = MyArgHandler(program="surnia",
-                     version="$Id: surnia.py,v 1.2 2003-07-30 05:27:47 sandro Exp $",
+                     version="$Id: surnia.py,v 1.3 2003-07-30 05:52:35 sandro Exp $",
                      uri="http://www.w3.org/2003/07/surnia")
 
     a.run()
