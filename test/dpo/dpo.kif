@@ -8,7 +8,7 @@
      http\:\/\/www\.w3\.org\/2000\/01\/rdf\-schema)
   (PropertyValue http\:\/\/www\.daml\.org\/2001\/03\/daml\+oil\#versionInfo
      http\:\/\/www\.daml\.org\/2001\/03\/daml\+oil
-     "$Id: dpo.kif,v 1.1 2001-06-07 19:21:53 connolly Exp $")
+     "$Id: dpo.kif,v 1.2 2001-06-07 20:03:01 connolly Exp $")
   (PropertyValue http\:\/\/www\.w3\.org\/1999\/02\/22\-rdf\-syntax\-ns\#type
      http\:\/\/www\.daml\.org\/2001\/03\/daml\+oil\#first
      http\:\/\/www\.w3\.org\/1999\/02\/22\-rdf\-syntax\-ns\#Property)
