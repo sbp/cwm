@@ -17,7 +17,7 @@
 
     a owl:Ontology;
     owl:imports rdfs:, owl:;
-    owl:versionInfo "$Id: biology.n3,v 1.2 2003-06-04 20:08:10 sandro Exp $";
+    owl:versionInfo "$Id: biology.n3,v 1.3 2003-06-04 20:47:52 sandro Exp $";
 
     rdfs:seeAlso <http://www.wikipedia.org/wiki/Binomial_nomenclature>
 .
@@ -27,6 +27,7 @@
 
 :Dog owl:sameClassAs :CanisFamiliaris.
 :Human owl:sameClassAs :HomoSapiens.
+:RedWolf owl:sameClassAs :CanisRufus.
 
 # Some binomial names
 
@@ -53,10 +54,10 @@
 	       endangered species""";
   rdfs:seeAlso <http://druidry.org/obod/endangered/redwolf.html>.
 
-
 :HomoSapiens a owl:Class.
 
 # Some class relationships
 
 :CanisFamiliaris owl:disjoint :HomoSapiens.
+:CanisFamiliaris owl:disjoint :CanisRufus.
 
