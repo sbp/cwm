@@ -8,7 +8,7 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.8 2003-02-09 03:03:50 timbl Exp $
+$Id: fin.py,v 1.9 2003-02-14 11:56:47 timbl Exp $
 """
 import llyn
 
@@ -231,15 +231,16 @@ def doCommand(year, inputURI="/dev/stdin"):
 #		    print "@@@@@ INTERNAL", "%s  %40s  %10s month %i" %(date, payee, `amount`, month)
     
 
-	print '<html xmlsns="http://www.w3.org/@@@@xhtml">'
+	print '<html xmlns="http://www.w3.org/1999/xhtml">'
 	print """<head>
 	    <title>Annual Summary by month</title>
 	    <link rel="Stylesheet" href="report.css">
 	</head>
 	<body>
+	    <img src="sand-dollar.gif" alt="dollar" align="right"/>
 	"""
 	
-        version = "$Id: fin.py,v 1.8 2003-02-09 03:03:50 timbl Exp $"
+        version = "$Id: fin.py,v 1.9 2003-02-14 11:56:47 timbl Exp $"
 #	if not option_quiet:
 #	_outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
