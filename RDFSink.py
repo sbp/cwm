@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.4 2002-02-21 04:55:40 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.5 2002-02-22 05:18:54 timbl Exp $"
 
 
 
@@ -67,6 +67,7 @@ class RDFSink:
         self.prefixes = { }     # Convention only - human friendly to
                                 # track these.
         self.namespaces = {}    # reverse mapping of prefixes
+        self.defaultNamespace = None
 
     def startDoc(self):
         print "\nsink: start."
@@ -98,6 +99,9 @@ class RDFSink:
                 #if chatty: print "# RDFSink: Bound %s to %s" % (prefix, nsPair[1])
             else:
                 self.bind(prefix+"g1", nsPair) # Recurive
+
+    def setDefaultNamespace(self, nsPair):
+        self.defaultNamespace = nsPair
         
 
     #@@DWC: not sure what these are for.
