@@ -50,7 +50,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.15 2001-05-09 15:06:35 connolly Exp $"
+        version = "$Id: xml2rdf.py,v 1.16 2001-05-11 21:41:07 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -255,7 +255,7 @@ class RDFXMLParser(xmllib.XMLParser):
                 x = string.find(name, " ")
                 if x>=0: name=name[x+1:]    # Strip any namespace on attributes!!! @@@@
                 if name == "ID":
-                    print "# Warning: id=%s on <%s...> ignored" %  (value,) # Meaning?
+                    print "# Warning: ID=%s on statement ignored" %  (value) # I consider these a bug
                 elif name == "parseType":
                     if value == "Literal":
                         self._state = STATE_LITERAL # That's an XML subtree not a string
