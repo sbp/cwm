@@ -2,7 +2,7 @@
 """ Check ambiguity as for predictive parser
 """
 
-__version__ = "$Id: check-grammar.py,v 1.9 2004-11-02 00:42:43 timbl Exp $"
+__version__ = "$Id: check-grammar.py,v 1.10 2004-11-02 02:40:52 timbl Exp $"
 
 import llyn
 from myStore import load, Namespace
@@ -230,7 +230,7 @@ class PredictiveParser:
 
     def around(parser, str, this):
 	"The line around the given point"
-	sol = str.rfind("\n", this)
+	sol = str.rfind("\n", 0, this)
 	if sol <= 0: sol = 0
 	eol = str.find("\n", this)
 	if eol <= 0: eol = len(str)
