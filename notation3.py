@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.61 2001-04-10 00:40:44 timbl Exp $
+$Id: notation3.py,v 1.62 2001-04-11 13:19:06 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -923,8 +923,8 @@ def relativeURI(base, uri):
     # i point to end of shortest one or first difference
     if uri[i] =="#": return uri[i:]  # fragment of base
     while i>0 and uri[i-1] != '/' : i=i-1  # scan for slash
-    if i == 0: return uri  # No way.
-    if string.find(base, "//", i)>0: return uri # An unshared "//"
+    if i < 3: return uri  # No way.
+    if string.find(base, "//", i-2)>0: return uri # An unshared "//"
     n = string.count(base, "/", i)
     return ("../" * n) + uri[i:]
             
@@ -1129,7 +1129,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.61 2001-04-10 00:40:44 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.62 2001-04-11 13:19:06 connolly Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
