@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.165 2004-11-19 01:58:39 syosi Exp $
+$Id: cwm.py,v 1.166 2004-12-31 19:14:33 timbl Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.165 $"
+cvsRevision = "$Revision: 1.166 $"
 
 
 
@@ -328,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.165 2004-11-19 01:58:39 syosi Exp $"
+        version = "$Id: cwm.py,v 1.166 2004-12-31 19:14:33 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -365,8 +365,8 @@ rdf/xml files. Note that this requires rdflib.
 				remember = 0,
 				referer = "",
 				why = becauseCwm)
-	    workingContext.reopen()
-	    workingContext.stayOpen = 1 # Never canonicalize this. Never share it.
+		workingContext.reopen()
+	workingContext.stayOpen = 1 # Never canonicalize this. Never share it.
 	
 	if diag.tracking:
 	    proof = FormulaReason(workingContext)
@@ -622,12 +622,14 @@ rdf/xml files. Note that this requires rdflib.
 
         # Squirt it out if not piped
 
-        if not option_pipe:
+	workingContext.stayOpen = 0  # End its use as an always-open knoweldge base
+        if option_pipe:
+	    workingContext.endDoc()
+        else:
             if hasattr(_outSink, "serializeKB"):
                 raise NotImplementedError
             else:
                 if verbosity()>5: progress("Begining output.")
-		workingContext.stayOpen = 0  # End its use as an always-open knoweldge base
 		workingContext = workingContext.close()
 		assert workingContext.canonical != None
 

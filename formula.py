@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.15 2004-10-28 17:41:59 timbl Exp $
+$Id: formula.py,v 1.16 2004-12-31 19:14:34 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -57,7 +57,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.15 $"
+cvsRevision = "$Revision: 1.16 $"
 
 # Magic resources we know about
 
@@ -97,6 +97,7 @@ class Formula(AnonymousNode, CompoundTerm):
 	self.statements = []
 	self._existentialVariables = []
 	self._universalVariables = []
+	self.stayOpen = 0   # If set, works as a knowledegbase, never canonicalized.
 
     def __repr__(self):
 	if self.statements == []:
