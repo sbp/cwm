@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.122 2003-02-09 03:03:47 timbl Exp $
+$Id: cwm.py,v 1.123 2003-02-11 04:43:13 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.engine.otter
 import LX.language.htables
 import RDFSink
 
-cvsRevision = "$Revision: 1.122 $"
+cvsRevision = "$Revision: 1.123 $"
 
 
 ######################################################### Tests  
@@ -483,7 +483,7 @@ Mode flags affect inference extedning to the web:
             _outSink = LX.language.htables.Serializer(sys.stdout, flags=myflags)
         else:
             raise RuntimeError, "unknown output format: "+str(option_format)
-        version = "$Id: cwm.py,v 1.122 2003-02-09 03:03:47 timbl Exp $"
+        version = "$Id: cwm.py,v 1.123 2003-02-11 04:43:13 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -738,10 +738,16 @@ def getParser(format, inputURI, formulaURI, flags):
     if format == "rdf" :
         touch(_store)
 	if "l" in flags["rdf"]:
-	    return rdflib2rdf.RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
-					flags=flags[format], why=r)
+	    from rdflib2rdf import RDFXMLParser
 	else:
-	    return sax2rdf.RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
+	    rdfParserName = os.environ.get("CWM_RDF_PARSER", "sax2rdf")
+	    if rdfParserName == "rdflib2rdf":
+		from rdflib2rdf import RDFXMLParser
+	    elif rdfParserName == "sax2rdf":
+		from sax2rdf import RDFXMLParser
+	    else:
+		raise RuntimeError("Unknown RDF parser: " + rdfParserName)
+	return RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
 					flags=flags[format], why=r)
     elif format == "n3":
         touch(_store)
