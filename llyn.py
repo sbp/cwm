@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.80 2003-06-24 13:44:47 timbl Exp $
+$Id: llyn.py,v 1.81 2003-07-08 20:33:22 connolly Exp $
 
 RDF Store and Query engine
 
@@ -158,7 +158,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.80 $"
+cvsRevision = "$Revision: 1.81 $"
 
 # Magic resources we know about
 
@@ -1005,7 +1005,7 @@ class BI_semanticsOrError(BI_semantics):
             if verbosity() > 10: progress(`store._experience`+`store.semanticsOrError`+": Already found error for "+`subj`+" was: "+ `x`)
             return x
         try:
-            return BI_semantics.evalObj(self, subj, queue, bindings, proof)
+            return BI_semantics.evalObj(self, subj, queue, bindings, proof, query)
         except (IOError, SyntaxError, DocumentAccessError, xml.sax._exceptions.SAXParseException):
             message = sys.exc_info()[1].__str__()
             result = store.intern((LITERAL, message))
