@@ -1,6 +1,6 @@
 # Schema for CWM's mathematical built-ins, SBP 2001-12
 #
-# $Id: math.n3,v 1.9 2003-10-20 17:31:54 timbl Exp $
+# $Id: math.n3,v 1.10 2004-03-01 03:32:46 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -145,7 +145,7 @@ math:quotient a rdf:Property;
 is calculated by dividing the first number of the pair by the second.
 """.
 
-math:intgerQuotient a rdf:Property;
+math:integerQuotient a rdf:Property;
 	rdfs:label "integerQuotient";
 	rdfs:range math:Value;
 	rdfs:comment
