@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: diff.py,v 1.3 2003-08-25 14:54:52 timbl Exp $
+$Id: diff.py,v 1.4 2003-09-14 20:20:22 timbl Exp $
 
 Find differences between two webs
 
@@ -121,7 +121,7 @@ def smush(f, meta=None):
 	    unique.append(p)
 	if meta.contains(subj=p, pred=rdf.type, obj=owl.UnambiguousProperty):
 	    unambiguous.append(p)
-    equavalent = [daml.equivalentTo]
+    equavalent = [daml.sameAs]
 
     # Make an list of equivalent nodes:
     pairs = []

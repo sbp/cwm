@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.143 2003-09-07 04:14:09 timbl Exp $
+$Id: cwm.py,v 1.144 2003-09-14 20:20:20 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.143 $"
+cvsRevision = "$Revision: 1.144 $"
 
 
 
@@ -147,7 +147,7 @@ the closure under the operation of looking up:
  i   any owl:imports documents
  r   any doc:rules documents
  
- e   Smush together any nodes which are = (owl:equivalentTo)
+ e   Smush together any nodes which are = (owl:sameAs)
 
 See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 """
@@ -318,7 +318,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.143 2003-09-07 04:14:09 timbl Exp $"
+        version = "$Id: cwm.py,v 1.144 2003-09-14 20:20:20 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)

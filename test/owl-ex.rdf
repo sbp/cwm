@@ -12,7 +12,7 @@ The following message was in this daml-ex.rdf, dunno what it refers to - tbl
   >
 
 <Ontology about="">
-  <versionInfo>$Id: owl-ex.rdf,v 1.1 2003-08-14 00:00:21 timbl Exp $</versionInfo>
+  <versionInfo>$Id: owl-ex.rdf,v 1.2 2003-09-14 20:20:26 timbl Exp $</versionInfo>
   <comment>An example ontology</comment>
   <imports resource="http://www.daml.org/2000/10/daml-ont"/>
 </Ontology>
@@ -71,7 +71,7 @@ The following message was in this daml-ex.rdf, dunno what it refers to - tbl
 <TransitiveProperty ID="descendant"/>
 
 <Property ID="mom">
-  <equivalentTo resource="#mother"/>
+  <sameAs resource="#mother"/>
 </Property>
 
 <Property ID="occupation">

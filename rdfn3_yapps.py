@@ -4,7 +4,7 @@
 # Share and Enjoy. Open Source license:
 # Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 # http://www.w3.org/Consortium/Legal/copyright-software-19980720
-# $Id: rdfn3_yapps.py,v 1.5 2002-08-16 22:30:48 timbl Exp $
+# $Id: rdfn3_yapps.py,v 1.6 2003-09-14 20:20:24 timbl Exp $
 # see log at end
 #
 # REFERENCES
@@ -290,7 +290,7 @@ class Parser(_Parser):
         return RDF['type']
     
     def termEq(self):
-        return DAML['equivalentTo']
+        return DAML['sameAs']
 
     def strlit(self, str, delim):
         return StringLiteral(str[1:-1]) #@@BROKEN un-escaping
@@ -357,7 +357,21 @@ def DEBUG(*args):
     sys.stderr.write("\n")
     
 # $Log: rdfn3_yapps.py,v $
-# Revision 1.5  2002-08-16 22:30:48  timbl
+# Revision 1.6  2003-09-14 20:20:24  timbl
+# Merged runSmart branh, which now passes tests.
+# The main change is that query.n3 mapps the rules before executing them,
+# and then exeutes them in an order which takes account of the
+# interdependencies between rules.  Cyclic subsystems of rules are
+# isoplated, and then the rules and those subsystems formed into a DAG
+# and executed in a topological ordering.  This is not a full rete
+# system yet.
+# The regression test file infor and program retest.py have changed
+# a little, working toward resuse of tests between applications.
+#
+# Revision 1.5.2.1  2003/09/12 14:56:21  timbl
+# Checking in for safety, list/append.n3 still loops, don't use for real work
+#
+# Revision 1.5  2002/08/16 22:30:48  timbl
 # Add two tests for  quick variable ?x syntax. Passes text/retest.sh.
 #
 # Revision 1.18  2002/08/15 23:20:36  connolly

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.4 2003-09-07 04:14:12 timbl Exp $
+$Id: formula.py,v 1.5 2003-09-14 20:20:22 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -40,7 +40,7 @@ import notation3    # N3 parsers and generators, and RDF generator
 # import sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
 
 import diag  # problems importing the tracking flag, must be explicit it seems diag.tracking
-from diag import progress, progressIndent, verbosity, tracking
+from diag import progress, verbosity, tracking
 from term import BuiltIn, LightBuiltIn, \
     HeavyBuiltIn, Function, ReverseFunction, \
     Literal, Symbol, Fragment, FragmentNil, Anonymous, Term, CompoundTerm, List, EmptyList, NonEmptyList
@@ -54,7 +54,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.4 $"
+cvsRevision = "$Revision: 1.5 $"
 
 # Magic resources we know about
 
@@ -292,7 +292,8 @@ class Formula(Fragment, CompoundTerm):
 	return y.canonicalize()
 
     def loadFormulaWithSubsitution(self, old, bindings={}, why=None):
-	"""Load information from another formula, subsituting as we go"""
+	"""Load information from another formula, subsituting as we go
+	returns number of statements added (roughly)"""
         total = 0
 	for v in old.universals():
 	    self.declareUniversal(bindings.get(v, v))
@@ -301,7 +302,7 @@ class Formula(Fragment, CompoundTerm):
 	bindings2 = bindings.copy()
 	bindings2[old] = self
         for s in old.statements[:] :   # Copy list!
-	    self.add(subj=s[SUBJ].substitution(bindings2),
+	    total += self.add(subj=s[SUBJ].substitution(bindings2),
 		    pred=s[PRED].substitution(bindings2),
 		    obj=s[OBJ].substitution(bindings2),
 		    why=why)

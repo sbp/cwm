@@ -16,8 +16,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_maths.py,v 1.3 2003-08-25 14:54:52 timbl Exp $'
-__version__ = '$Revision: 1.3 $'
+__cvsid__ = '$Id: cwm_maths.py,v 1.4 2003-09-14 20:20:22 timbl Exp $'
+__version__ = '$Revision: 1.4 $'
 
 import sys, string, re, urllib
 
@@ -27,7 +27,7 @@ from term import LightBuiltIn, Function, ReverseFunction
 #DAML_LISTS = notation3.DAML_LISTS
 
 #RDF_type_URI = notation3.RDF_type_URI
-#DAML_equivalentTo_URI = notation3.DAML_equivalentTo_URI
+#DAML_sameAs_URI = notation3.DAML_sameAs_URI
 
 MATHS_NS_URI = 'http://www.w3.org/2000/10/swap/maths#'
 
