@@ -11,7 +11,7 @@ references:
   November 1998
   http://www.ietf.org/rfc/rfc2445.txt
 
-$Id: toIcal.py,v 1.3 2002-07-23 23:09:31 connolly Exp $
+$Id: toIcal.py,v 1.4 2002-08-28 22:00:24 connolly Exp $
 
 NOTE: see earlier work:
   http://www.w3.org/2002/01dc-nj/toICal.py
@@ -157,15 +157,18 @@ def progress(*args):
         sys.stderr.write(str(i))
     sys.stderr.write("\n")
 
-import thing
-thing.chatty_flag=30 # thing interface?
+import diag
+diag.setVerbosity(0)
 
 if __name__ == '__main__':
     main(sys.argv)
 
 
 # $Log: toIcal.py,v $
-# Revision 1.3  2002-07-23 23:09:31  connolly
+# Revision 1.4  2002-08-28 22:00:24  connolly
+# updated to diag interface
+#
+# Revision 1.3  2002/07/23 23:09:31  connolly
 # grumble... evo is case-sensitive where the RFC says not to be
 #
 # Revision 1.2  2002/07/23 21:44:16  connolly
