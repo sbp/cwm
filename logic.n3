@@ -3,7 +3,9 @@
 # THIS IS AN OLD OUT OF DATE ONTOLOGY.
 # PLEASE USE http://www.w3.org/2000/10/swap/log.n3
 # these raise the level above ontology
-# $Id: logic.n3,v 1.5 2001-03-31 22:50:05 timbl Exp $
+# $Id: logic.n3,v 1.6 2001-03-31 22:53:37 timbl Exp $
+
+<#log.n3> <http://www.w3.org/2000/10/swap/pim/doc.n3#obsoletes> <> .
 
 bind rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns> . # Unused
 bind rdfs: <http://www.w3.org/2000/01/rdf-schema> .	 # unused
