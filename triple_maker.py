@@ -1,5 +1,6 @@
 """Triple Maker
 
+$Id: triple_maker.py,v 1.5 2004-12-16 20:59:27 syosi Exp $
 Explanation of the API
 
 the functions are addNode(),addNode(), addNode() endStatement() to add a triple
