@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.13 2004-06-24 03:17:12 timbl Exp $
+$Id: why.py,v 1.14 2004-07-21 20:55:41 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves- we could make
@@ -79,7 +79,7 @@ class Reason:
 	"""Describe this reason to an RDF store
 	Returns the value of this object as interned in the store.
 	"""
-	raise RuntimeErrot("What, no explain method for this class?")
+	raise RuntimeError("What, no explain method for this class?")
 	
 
 	
@@ -197,6 +197,8 @@ dontAsk = Because("Generating explanation")
 
 class BecauseOfRule(Reason):
     def __init__(self, rule, bindings, evidence, because=None):
+        #print rule
+        #raise Error
 	Reason.__init__(self)
 	self._bindings = bindings
 	self._rule = rule
@@ -211,7 +213,7 @@ class BecauseOfRule(Reason):
 	"""
 	me = self.meIn(ko)
 	ko.add(subj=me, pred=rdf.type, obj=reason.Inference, why=dontAsk) 
-	for var, val in self._bindings:
+	for var, val in self._bindings.items():
 	    b = ko.newBlankNode(why= dontAsk)
 	    ko.add(subj=me, pred=reason.binding, obj=b, why= dontAsk)
 	    ko.add(subj=b, pred=reason.variable, obj=var.reification(ko, why= dontAsk),why= dontAsk)

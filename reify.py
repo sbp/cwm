@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.5 2004-07-16 17:44:31 syosi Exp $
+$Id: reify.py,v 1.6 2004-07-21 20:55:41 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -49,7 +49,21 @@ def flatten(formula):
             except ValueError:
                 pass
         invalid_triples.extend(new_invalid_triples)
+    still_needed_existentials = {}
+    for a in formula.existentials():
+        for triple in valid_triples:
+            for part in SUBJ, PRED, OBJ:
+                if triple[part].doesNodeAppear(a):
+                    still_needed_existentials[a] = 1
+                    break
+            else:
+                continue
+            break
+        else:
+            print a
     returnFormula = formula.newFormula()
+    for a in still_needed_existentials.keys():
+        returnFormula.declareExistential(a)
     tempformula = formula.newFormula()
     for var in formula.universals():
         tempformula.declareUniversal(var)
