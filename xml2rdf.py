@@ -40,7 +40,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.1 2000-11-27 21:06:14 timbl Exp $")
+        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.2 2000-11-27 21:07:14 timbl Exp $")
 
 
     def load(self, uri, _baseURI=""):
