@@ -24,7 +24,7 @@ Download the source for a version with unexpanded entities.
  
   <daml:Ontology about="">
     <daml:versionInfo>
-      $Id: City.daml,v 1.1 2003-02-02 19:50:34 timbl Exp $
+      $Id: City.daml,v 1.2 2003-02-03 04:05:37 timbl Exp $
     </daml:versionInfo>
     <rdfs:comment>
       City Ontology.  Use as a top level ontology for describing cities.
