@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.132 2003-02-01 05:50:02 timbl Exp $
+$Id: notation3.py,v 1.133 2003-02-02 16:09:09 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -409,10 +409,10 @@ class SinkParser:
 	    j = self.node(str, j+1, res)
 	    if j<0: raise BadSyntax(self._thisDoc, self.lines, str, j, "EOF found in middle of path syntax")
 	    pred = res.pop()
-	    if ch == "!":
-		self.makeStatement((self._context, pred, subj, obj)) 
-	    else:
+	    if ch == "^": # Reverse traverse
 		self.makeStatement((self._context, pred, obj, subj)) 
+	    else:
+		self.makeStatement((self._context, pred, subj, obj)) 
 	    res.append(obj)
 	return j
 
@@ -1012,7 +1012,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.132 2003-02-01 05:50:02 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.133 2003-02-02 16:09:09 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: SqlDB.py,v 1.16 2003-01-20 04:54:50 eric Exp $
+$Id: SqlDB.py,v 1.17 2003-02-02 16:09:09 timbl Exp $
 
 """
 
@@ -500,6 +500,7 @@ class SqlDBAlgae(RdfDBAlgae):
 
     def _lookupPredicate(self, predicate):
         m = self.predicateRE.match(predicate)
+	assert m, "Oops    predicate=%s doesn't match %s" %(predicate, self.predicateRE.pattern)
         table = m.group("table")
         field = m.group("field")
         try:

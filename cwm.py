@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.120 2003-02-01 05:49:57 timbl Exp $
+$Id: cwm.py,v 1.121 2003-02-02 16:09:06 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.engine.otter
 import LX.language.htables
 import RDFSink
 
-cvsRevision = "$Revision: 1.120 $"
+cvsRevision = "$Revision: 1.121 $"
 
 
 ######################################################### Tests  
@@ -304,8 +304,11 @@ Examples:
 
 See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 
-Mode flags:
- r   Do remote queries when you discover they are posisble.
+Mode flags affect inference extedning to the web:
+ e   Errors loading schemas of definitive documents are fatal
+ m   Schemas and definitive documents laoded are merged into the meta knowledge
+     (otherwise they are consulted independently)
+ r   Needed to enable any remote stuff.
  s   Read the schema for any predicate in a query.
 
 """
@@ -480,7 +483,7 @@ Mode flags:
             _outSink = LX.language.htables.Serializer(sys.stdout, flags=myflags)
         else:
             raise RuntimeError, "unknown output format: "+str(option_format)
-        version = "$Id: cwm.py,v 1.120 2003-02-01 05:49:57 timbl Exp $"
+        version = "$Id: cwm.py,v 1.121 2003-02-02 16:09:06 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -648,7 +651,7 @@ Mode flags:
                     print "# Done running Otter [ Inferences NOT incorporated back into cwm ]"
                 elif option_engine=="llyn":
                     need(_store); touch(_store)
-                    _store.think(workingContext)
+                    _store.think(workingContext, mode=option_flags["think"])
                 else:
                     raise RuntimeError, "unknown engine: "+str(option_engine)
 
