@@ -1,12 +1,12 @@
 /*
 
-$Id: cwmdemostyle.css,v 1.1 2003-04-29 04:03:48 sandro Exp $
+$Id: cwmdemostyle.css,v 1.2 2003-04-29 04:25:10 sandro Exp $
 
 */
 
 BODY {
    font-family: sans-serif; 
-   font-size: 6px;
+   font-size: 0.8em;
 
 }
 
