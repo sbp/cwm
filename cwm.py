@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.84 2002-02-14 23:56:09 connolly Exp $
+$Id: cwm.py,v 1.85 2002-02-21 04:29:29 timbl Exp $
 
 Closed World Machine
 
@@ -411,7 +411,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.84 2002-02-14 23:56:09 connolly Exp $"
+        version = "$Id: cwm.py,v 1.85 2002-02-21 04:29:29 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -427,7 +427,7 @@ Examples:
             workingContext = _store.intern((FORMULA, _outURI+ "#_formula"))   #@@@ Hack - use metadata
 #  Metadata context - storing information about what we are doing
 
-            _store.reset(_metaURI)     # Absolutely need this for remembering URIs loaded
+            _store.reset(_metaURI+"#_experience")     # Absolutely need this for remembering URIs loaded
             history = None
 	
 
