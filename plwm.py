@@ -9,9 +9,10 @@
      default parser is Notation3 ?   I think it's the language,
      which means (1) you need a parser which can handle it, and
      (2) you need to tell the parser that's the language.
-     
+
+     (testing cvs)
 """
-revision = '$Id: plwm.py,v 1.5 2003-04-25 19:55:53 sandro Exp $'
+revision = '$Id: plwm.py,v 1.6 2003-04-28 19:17:52 sandro Exp $'
 
 import sys
 import ArgHandler
@@ -247,7 +248,7 @@ if __name__ == "__main__":
     # should pass some extra help text...
     a = MyArgHandler(host=host,
                      program="plwm",
-                     version="$Id: plwm.py,v 1.5 2003-04-25 19:55:53 sandro Exp $",
+                     version="$Id: plwm.py,v 1.6 2003-04-28 19:17:52 sandro Exp $",
                      uri="http://www.w3.org/2000/10/swap/doc/cwm")
 
     hotswap.prepend("wrap_n3")
@@ -267,7 +268,10 @@ if __name__ == "__main__":
     pump.pump(store, ser)
     
 # $Log: plwm.py,v $
-# Revision 1.5  2003-04-25 19:55:53  sandro
+# Revision 1.6  2003-04-28 19:17:52  sandro
+# testing cvs!
+#
+# Revision 1.5  2003/04/25 19:55:53  sandro
 # moved interface class defns out of plwm into pluggable
 # implemented wrappers around llyn and notation3
 # implemented simple Host class to handle jailing
