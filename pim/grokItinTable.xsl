@@ -10,7 +10,7 @@
 
 <!-- 
 
-$Id: grokItinTable.xsl,v 1.1 2002-09-09 22:53:02 connolly Exp $
+$Id: grokItinTable.xsl,v 1.2 2002-09-22 21:56:43 connolly Exp $
 
 USAGE:
 
@@ -92,12 +92,16 @@ USAGE:
       <t:departureTime><xsl:value-of select="$depTime"/></t:departureTime>
       <t:arrivalTime><xsl:value-of select="$arTime"/></t:arrivalTime>
 
-      <k:fromLocation r:parseType="Resource">
-        <k:nameString><xsl:value-of select="$depAptName"/></k:nameString>
+      <k:fromLocation>
+        <k:Airport-Physical>
+          <k:nameString><xsl:value-of select="$depAptName"/></k:nameString>
+        </k:Airport-Physical>
       </k:fromLocation>
 
-      <k:toLocation r:parseType="Resource">
-        <k:nameString><xsl:value-of select="$arAptName"/></k:nameString>
+      <k:toLocation>
+        <k:Airport-Physical>
+          <k:nameString><xsl:value-of select="$arAptName"/></k:nameString>
+        </k:Airport-Physical>
       </k:toLocation>
 
       <t:carrier r:parseType="Resource">
