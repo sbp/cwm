@@ -1,5 +1,9 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.46 2003-01-10 17:13:16 timbl Exp $
+#
+# THIS FILE IS NOW OBSOLETE: see retest.py and regression.n3 instead
+#
+#
+# $Id: retest.sh,v 1.47 2003-01-29 05:24:31 sandro Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -237,7 +241,10 @@ echo "Loopback parser tests:"
 ./n3-xml-test.sh `cat tests-work.txt`
 
 # $Log: retest.sh,v $
-# Revision 1.46  2003-01-10 17:13:16  timbl
+# Revision 1.47  2003-01-29 05:24:31  sandro
+# changed to reflect real tests being in retest.py and regression.n3 now
+#
+# Revision 1.46  2003/01/10 17:13:16  timbl
 # Works without proof stuff, working on proof stuff....
 #
 # Revision 1.45  2002/12/30 15:00:35  timbl
