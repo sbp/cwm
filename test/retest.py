@@ -23,7 +23,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.3 2003-01-13 04:21:53 timbl Exp $
+ $Id: retest.py,v 1.4 2003-01-16 02:46:40 eric Exp $
 """
 from os import system
 import os
@@ -95,7 +95,9 @@ def main():
 	    proofs = 1
 
     assert system("mkdir -p ,temp") == 0
+    assert system("mkdir -p ,temp/dbork") == 0
     assert system("mkdir -p ,diffs") == 0
+    assert system("mkdir -p ,diffs/dbork") == 0
     if proofs: assert system("mkdir -p ,proofs") == 0
     
     tests=0
