@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.6 2003-04-11 20:13:09 sandro Exp $
+# $Id: Makefile,v 1.7 2003-04-11 20:30:05 timbl Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -69,6 +69,12 @@ tutorial.ps: $(TUTFILES)
 PS2PDF=ps2pdf # ghostscript? acroread?
 tutorial.pdf: tutorial.ps
 	$(PS2PDF) tutorial.ps
+
+cwm-help.txt : ../cwm.py ../notation3.py
+	cwm --help > cwm-help.txt
+
+CwmHelp.html : CwmHelp-template.html cwm-help.txt
+	sed -e '/<pre>/rcwm-help.txt' < CwmHelp-template.html > CwmHelp.html
 
 
 clean:
