@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: SqlDB.py,v 1.17 2003-02-02 16:09:09 timbl Exp $
+$Id: SqlDB.py,v 1.18 2003-02-20 21:06:27 eric Exp $
 
 """
 
@@ -563,7 +563,7 @@ class SqlDBAlgae(RdfDBAlgae):
                 comma = ''
             else:
                 comma = ','
-            if (self.labels[1] == None):
+            if (self.labels[i] == None):
                 asStr = ''
             else:
                 asStr = " AS "+self.labels[i]
