@@ -44,7 +44,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.6 2000-12-11 19:26:48 timbl Exp $")
+        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.7 2001-01-05 13:37:50 timbl Exp $")
 
 
     def load(self, uri, _baseURI=""):
@@ -78,7 +78,7 @@ class RDFXMLParser(xmllib.XMLParser):
         data = self.testdata
         if data:
             self.testdata = ""
-            print '# flushed data:', `data`
+#            print '# flushed data:', `data`
 
     def handle_cdata(self, data):
         self.flush()
@@ -165,7 +165,7 @@ class RDFXMLParser(xmllib.XMLParser):
                 if c == None: raise roof
                 if self._subject == None:raise roof
                 self.sink.makeStatement((  (RESOURCE, c),
-                                      (RESOURCE, RDFNS+"Type"),
+                                      (RESOURCE, RDFNS+"type"),
                                       (RESOURCE, self._subject),
                                       (RESOURCE, tagURI) ))
                 self._state = STATE_DESCRIPTION

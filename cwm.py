@@ -1,6 +1,6 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
-$Id: cwm.py,v 1.13 2001-01-04 02:54:21 timbl Exp $
+$Id: cwm.py,v 1.14 2001-01-05 13:37:50 timbl Exp $
 
 Closed World Machine
 
@@ -28,6 +28,7 @@ Agenda:
  - logic API as requested DC 2000/12/10
  - sucking in the schema (http library?); to know about r1 see r2
  - schema validation - done partly but no "no schema for xx predicate".
+ -   syntax for "all she wrote" - schema is complete and definitive
  - metaindexes - "to know more about x please see r" - described by
  - general python URI access with catalog!
  - equivalence handling inc. equivalence of equivalence?
@@ -39,6 +40,7 @@ Agenda:
  - Validation:  validate domain and range constraints against closuer of classes and
    mutually disjoint classes.
 - represent URIs bound to same equivalence closuse object?
+
 
 - Translation;  Try to represent the space (or a context) using a subset of namespaces
 
