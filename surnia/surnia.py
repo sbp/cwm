@@ -216,7 +216,10 @@ class MyArgHandler(ArgHandler.ArgHandler):
         print "Loading %s..." % testURI,
         store.load(testURI)
         print "  Done."
-        runTests(store)
+        try:
+            runTests(store)
+        except KeyboardInterrupt, k:
+            print "KeyboardInterrupt"
 
     def handle__maxSeconds(self, timeLimit=1):
         """Time limit for each run of the underlying reasoner.
@@ -240,7 +243,7 @@ class MyArgHandler(ArgHandler.ArgHandler):
  
 if __name__ == "__main__":
     a = MyArgHandler(program="surnia",
-                     version="$Id: surnia.py,v 1.5 2003-07-31 04:35:09 sandro Exp $",
+                     version="$Id: surnia.py,v 1.6 2003-07-31 12:47:26 sandro Exp $",
                      uri="http://www.w3.org/2003/07/surnia")
 
     a.run()
