@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.154 2004-06-24 03:17:11 timbl Exp $
+$Id: cwm.py,v 1.155 2004-06-30 20:04:57 timbl Exp $
 
 Closed World Machine
 
@@ -42,7 +42,7 @@ import notation3    	# N3 parsers and generators
 import toXML 		#  RDF generator
 
 from why import BecauseOfCommandLine
-from query import think, applyRules, testIncludes
+from query import think, applyRules, applyQueries, testIncludes
 from update import patch
 
 import uripath
@@ -52,7 +52,7 @@ import sys
 import llyn
 import RDFSink
 
-cvsRevision = "$Revision: 1.154 $"
+cvsRevision = "$Revision: 1.155 $"
 
 
 
@@ -309,7 +309,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.154 2004-06-24 03:17:11 timbl Exp $"
+        version = "$Id: cwm.py,v 1.155 2004-06-30 20:04:57 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -442,6 +442,13 @@ rdf/xml files. Note that this requires rdflib.
 		workingContext.reopen()
                 applyRules(workingContext, filterContext);
 
+            elif arg[:7] == "-apply=":
+		workingContext = workingContext.canonicalize()
+                
+                filterContext = _store.load(_uri)
+		workingContext.reopen()
+                applyRules(workingContext, filterContext);
+
             elif arg[:7] == "-patch=":
 		workingContext = workingContext.canonicalize()
                 
@@ -460,6 +467,19 @@ rdf/xml files. Note that this requires rdflib.
 		_newContext = _store.newFormula()
 		if diag.tracking: proof = FormulaReason(_newContext)
                 applyRules(workingContext, filterContext, _newContext)
+		workingContext.close()
+                workingContext = _newContext
+
+            elif _lhs == "-query":
+		workingContext = workingContext.canonicalize()
+		if tracking: 
+		    r = BecauseOfCommandLine(sys.argv[0]) # @@ add user, host, pid, date time? Privacy!
+		else:
+		    r = None
+		filterContext = _store.load(_uri, why=r)
+		_newContext = _store.newFormula()
+		if diag.tracking: proof = FormulaReason(_newContext)
+                applyQueries(workingContext, filterContext, _newContext)
 		workingContext.close()
                 workingContext = _newContext
 
