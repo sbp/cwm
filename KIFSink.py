@@ -1,9 +1,9 @@
 """KIFSink.n3 -- a KIF sink for cwm
 
 """
-__version__="$Id: KIFSink.py,v 1.1 2001-09-06 20:13:05 connolly Exp $"
+__version__="$Id: KIFSink.py,v 1.2 2001-09-11 18:30:02 connolly Exp $"
 
-from string import rfind
+from string import rfind, split
 
 import notation3 #@@ better name for the KB parse/sink interface?
 
@@ -29,6 +29,10 @@ class Sink(notation3.RDFSink):
         self._scope = None # current scope
         self._depth = None # scope depth
 
+    def makeComment(self, text):
+        for l in split(text, "\n"):
+            self._write(";; %s\n" % l)
+        
     def makeStatement(self, cpso):
         c, p, s, o = cpso
 
