@@ -127,13 +127,19 @@ different types of engine.</p>
 <p></p>
 
 <p>N3 grammar close the loop: Connect N3 grammar to syntax tests by
-generating parser directly from the grammar.  (<em>July 2004 this is done
-without the grammar annotation necessary to actually generate triples in the
-store</em>).</p>
+generating parser directly from the grammar. .   Closing the loop on the
+syntax. We have a definition of the N3 syntax in N3. This is only a form of
+documentation until we have automatically generated a parser and/or a test
+suite from that syntax definition. A straightforward job - We have a syntax
+validator based on the BNF in RDF already. The interesting bit is the
+ontology for annotating the BNF grammar with RDF production rules, because it
+could then be reused to annotating foreign and legacy grammars to enable
+automatic extraction of RDF from them. (Apart from the niceness of having
+something defined it itself of course.)  (<em>July 2004 this is done without
+the grammar annotation necessary to actually generate triples in the
+store</em>)</p>
 
-<p>RDF Output - Use Collections</p>
-
-<p>RDF Output: On lists</p>
+<p>RDF Output - Use Collections for lists.  </p>
 
 <p>N3 syntax - test set syntax (,) (&lt;a&gt;,) (&lt;a&gt;, &lt;b&gt;)</p>
 
@@ -234,7 +240,7 @@ handy for things like demo servers and IRC bots.</p>
 <div class="noprint">
 <hr />
 
-<p>$Id: plans.html,v 1.8 2004-09-03 19:20:45 timbl Exp $</p>
+<p>$Id: plans.html,v 1.9 2004-09-03 19:22:32 timbl Exp $</p>
 </div>
 </body>
 </html>
