@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.4 2002-08-06 01:36:09 connolly Exp $
+$Id: toXML.py,v 1.5 2002-12-03 21:09:58 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -159,7 +159,7 @@ class ToRDF(RDFSink.RDFStructuredOutput):
             self._nextId = 0
             self._docOpen = 1
 
-    def makeStatement(self,  tuple):
+    def makeStatement(self,  tuple, why=None):
         self.flushStart()
         context, pred, subj, obj = tuple # Context is ignored
 	predn = refTo(self._base, pred[1])

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: fin.py,v 1.3 2002-11-26 18:42:00 timbl Exp $
+$Id: fin.py,v 1.4 2002-12-03 21:09:58 timbl Exp $
 
 Financial
 
@@ -230,7 +230,7 @@ def doCommand():
 	satis = tax.Category, qu.Cat  # Satisfactory classes
 	classified =  kb.each(pred=rdf_type, obj=qu_Classified)
 	unclassified = kb.each(pred=rdf_type, obj=qu_Unclassified)
-	for t in classified: assert t not in unclassified, "Can't be classified and unclassified!"
+	for t in classified: assert t not in unclassified, "Can't be classified and unclassified!"+`t`
 	for s in classified + unclassified:
 	    t_ok, c_ok = 0, 0
 	    date = kb.any(subj=s, pred=qu_date).__str__()
@@ -272,7 +272,7 @@ def doCommand():
 	<body>
 	"""
 	
-        version = "$Id: fin.py,v 1.3 2002-11-26 18:42:00 timbl Exp $"
+        version = "$Id: fin.py,v 1.4 2002-12-03 21:09:58 timbl Exp $"
 	if not option_quiet:
             _outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.109 2002-10-08 20:59:07 timbl Exp $
+$Id: cwm.py,v 1.110 2002-12-03 21:09:57 timbl Exp $
 
 Closed World Machine
 
@@ -49,7 +49,7 @@ import LX
 import LX.rdf
 import LX.engine.llynInterface 
 
-cvsRevision = "$Revision: 1.109 $"
+cvsRevision = "$Revision: 1.110 $"
 
 
 ######################################################### Tests  
@@ -269,6 +269,7 @@ def doCommand():
 --filter=foo  Read rules from foo, apply to store, REPLACING store with conclusions
 --rules       Apply rules in store to store, adding conclusions to store
 --think       as -rules but continue until no more rule matches (or forever!)
+--why         Replace the store with an explanation of its contents
 --flatten     turn formulas into triples using LX vocabulary
 --unflatten   turn described-as-true LX sentences into formulas
 --think=foo   as -apply=foo but continue until no more rule matches (or forever!)
@@ -426,7 +427,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
-        version = "$Id: cwm.py,v 1.109 2002-10-08 20:59:07 timbl Exp $"
+        version = "$Id: cwm.py,v 1.110 2002-12-03 21:09:57 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -485,15 +486,6 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 del(p)
                 if not option_pipe:
                     inputContext = _store.intern((FORMULA, _inputURI+ "#_formula"))
-#                    _step  = _step + 1
-#                    s = _metaURI + `_step`  #@@ leading 0s to make them sort?
-                    #if doMeta and history:
-                    #   _store.storeQuad((_store._experience, META_mergedWith, s, history))
-                    #   _store.storeQuad((_store._experience, META_source, s, inputContext))
-                    #   _store.storeQuad((_store._experience, META_run, s, run))
-                    #   history = s
-                    #else:
-#                    history = inputContext
                 _gotInput = 1
 
             elif arg == "-help":
@@ -553,14 +545,11 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 workingContext = _newContext
                 workingContextURI = _newURI
 
-
-                #                if doMeta:
-                #                    _step  = _step + 1
-                #                    s = _metaURI + `_step`  #@@ leading 0s to make them sort?
-                #                    _store.storeQuad(_store._experience, META_basis, s, history)
-                #                    _store.storeQuad(_store._experience, META_filter, s, inputContext)
-                #                    _store.storeQuad(_store._experience, META_run, s, run)
-                #                    history = s
+            elif arg == "-why":
+                need(_store); touch(_store)
+		_newContext = workingContext.explanation()
+                workingContext = _newContext
+                workingContextURI = workingContext.uri()
 
             elif arg == "-purge":
                 need(_store); touch(_store)
