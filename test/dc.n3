@@ -6,7 +6,7 @@
 #  This is not any definitive output of the Dublin Core!
 # It is just a test/demo schema.
 #
-#  $Id: dc.n3,v 1.1 2000-12-09 15:53:24 timbl Exp $
+#  $Id: dc.n3,v 1.2 2001-03-28 22:19:18 sandro Exp $
 
 @prefix : <#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -60,7 +60,7 @@
                Typically, the name of a Publisher should be used to
                indicate the entity.""".
 
-Contributor  a rdfs:Property;
+:Contributor  a rdfs:Property;
 
   rdfs:label  "An entity responsible for making contributions to the
                content of the resource.";
