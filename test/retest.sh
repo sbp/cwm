@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.30 2002-03-17 04:24:12 timbl Exp $
+# $Id: retest.sh,v 1.31 2002-03-26 05:57:41 connolly Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -138,7 +138,10 @@ cwm_test argv-2.n3 "os:argv argument other values"  os/argv.n3 --think --with bo
 
 
 # $Log: retest.sh,v $
-# Revision 1.30  2002-03-17 04:24:12  timbl
+# Revision 1.31  2002-03-26 05:57:41  connolly
+# fixed newlines. grumble
+#
+# Revision 1.30  2002/03/17 04:24:12  timbl
 # catch up
 #
 # Revision 1.29  2002/03/12 20:57:17  timbl
