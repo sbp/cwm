@@ -1,21 +1,17 @@
 #!/usr/bin/env python
 # borrowing liberally from Eikeon's setup.py for rdflib
 # an attempt at a setup.py installer for Cwm/SWAP
-# version: $Id: setup.py,v 1.3 2004-07-16 17:44:31 syosi Exp $
+# version: $Id: setup.py,v 1.4 2004-08-02 20:55:48 syosi Exp $
 # by Dan Brickley <danbri@w3.org>
 #
-# STATUS: not working yet
+# STATUS: this file now works
+# much of what danbri typed I honestly do not know what it is trying to do. I suspect the answer is
+# ``not much''
+#
+# DO NOT run this file directly! Use make dist_tarball instead.
 # 
 # notes:
 # http://esw.w3.org/t/view/ESW/CwmTips
-
-# current output / error:
-#	sudo ./setup.py install
-#	swap dir: /usr/lib/python2.2/site-packages/swap
-#	running install
-#	running build
-#	running build_py
-#	error: package directory 'swap/swap/cwm' does not exist
 
 
 from distutils.sysconfig import get_python_lib
