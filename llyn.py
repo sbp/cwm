@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.78 2003-04-18 19:43:57 sandro Exp $
+$Id: llyn.py,v 1.79 2003-06-03 17:31:50 connolly Exp $
 
 RDF Store and Query engine
 
@@ -158,7 +158,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.78 $"
+cvsRevision = "$Revision: 1.79 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -1254,8 +1254,10 @@ class RDFStore(RDFSink) :
         import cwm_os      # OS builtins
         import cwm_time    # time and date builtins
         import cwm_math    # Mathematics
+        import cwm_maths   # Mathematics, perl/string style
         cwm_string.register(self)
         cwm_math.register(self)
+        cwm_maths.register(self)
         cwm_os.register(self)
         cwm_time.register(self)
         if crypto:
@@ -2203,9 +2205,12 @@ class RDFStore(RDFSink) :
 
     def purgeSymbol(self, context, subj=None):
 	"""Purge all triples in which a symbol occurs.
-	Defaults to all removing occurrences of log:implies, eg rules.
+	Defaults to all removing occurrences of log:implies, and log:forAll, eg rules.
 	"""
-	if subj == None: subj = self.implies
+	if subj == None:
+            self.purgeSymbol(context, self.implies)
+            self.purgeSymbol(context, self.forAll)
+            return
 	total = 0
 	for t in context.statementsMatching(subj=subj)[:]:
 		    self.removeStatement(t)    # SLOW
