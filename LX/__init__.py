@@ -3,8 +3,8 @@ an emphasis on going beyind RDF and handling more expressive logic
 languages (FOL), and various inference engines and syntaxes.
 
 """
-__version__ = "$Revision: 1.11 $"
-# $Id: __init__.py,v 1.11 2003-09-04 03:14:01 sandro Exp $
+__version__ = "$Revision: 1.12 $"
+# $Id: __init__.py,v 1.12 2003-09-17 18:01:30 sandro Exp $
 
 # Needed by test.py, and probably random python utils.
 __all__ = [
@@ -13,16 +13,20 @@ __all__ = [
     "kb",
     "expr",
     "logic",
-#    "fol",
     "rdf",
     "namespace",
-#    "uri",
-#    "defaultns",
-#    "ns",
+    "loader",
+    "nodepath",
+    "sniff",
+    "ladder",
+    "describer",
     ] 
 
 # $Log: __init__.py,v $
-# Revision 1.11  2003-09-04 03:14:01  sandro
+# Revision 1.12  2003-09-17 18:01:30  sandro
+# more complete module list
+#
+# Revision 1.11  2003/09/04 03:14:01  sandro
 # remove reference to ns.py
 #
 # Revision 1.10  2003/08/26 11:15:55  sandro
