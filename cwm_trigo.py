@@ -12,11 +12,12 @@ cf. http://www.w3.org/2000/10/swap/cwm.py
 See http://ilrt.org/discovery/chatlogs/rdfig/2003-09-23.html#T22-37-54
 http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 
+
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.4 2003-09-25 20:59:56 kdubost Exp $'
-__version__ = '$Revision: 1.4 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.5 2003-09-25 21:05:38 kdubost Exp $'
+__version__ = '$Revision: 1.5 $'
 
 import sys, string, re, urllib, math
 
