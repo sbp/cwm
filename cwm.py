@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.96 2002-06-07 20:07:17 timbl Exp $
+$Id: cwm.py,v 1.97 2002-07-06 12:52:02 timbl Exp $
 
 Closed World Machine
 
@@ -42,7 +42,8 @@ import md5, binascii  # for building md5 URIs
 urlparse.uses_fragment.append("md5") #@@kludge/patch
 urlparse.uses_relative.append("md5") #@@kludge/patch
 
-import notation3    # N3 parsers and generators, and RDF generator
+import notation3    	# N3 parsers and generators
+import toXML 		#  RDF generator
 
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE, SYMBOL, Logic_NS
 
@@ -51,7 +52,7 @@ import llyn
 
 from thing import progress
 
-cvsRevision = "$Revision: 1.96 $"
+cvsRevision = "$Revision: 1.97 $"
 
 
 ######################################################### Tests  
@@ -372,7 +373,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             elif arg == "-help":
                 print doCommand.__doc__
                 print notation3.ToN3.flagDocumentation
-                print notation3.ToRDF.flagDocumentation
+                print toXML.ToRDF.flagDocumentation
                 return
             elif arg == "-revision":
                 progress( "cwm=",cvsRevision, "llyn=", llyn.cvsRevision)
@@ -404,11 +405,11 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 #  Fix the output sink
         
         if option_format == "rdf":
-            _outSink = notation3.ToRDF(sys.stdout, _outURI, base=option_baseURI, flags=option_rdf_flags)
+            _outSink = toXML.ToRDF(sys.stdout, _outURI, base=option_baseURI, flags=option_rdf_flags)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.96 2002-06-07 20:07:17 timbl Exp $"
+        version = "$Id: cwm.py,v 1.97 2002-07-06 12:52:02 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
