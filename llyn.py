@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.20 2002-03-13 04:10:33 timbl Exp $
+$Id: llyn.py,v 1.21 2002-03-13 05:10:58 connolly Exp $
 
 RDF Store and Query engine
 
@@ -137,7 +137,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.20 $"
+cvsRevision = "$Revision: 1.21 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -393,6 +393,8 @@ class StoredStatement:
         if self is other: return 0
         s = self.quad[OBJ]
         o = other.quad[OBJ]
+        sc = self.quad[CONTEXT]
+        oc = other.quad[CONTEXT]
         if s is sc:
             if o is oc: return 0
             else: return -1  # @this is smaller than other formulae
