@@ -130,6 +130,9 @@ def run(store, test, name, input, entailed, expected, resultStore):
         elif str(er) == "http://www.w3.org/2000/01/rdf-schema":
             tag = "RDFS"
         elif str(er) == "http://www.w3.org/2000/10/rdf-tests/rdfcore/datatypes":
+            if expected == "Consistent":
+                print "skipped; our datatype theories are not complete so we can't check for consistency"
+                return
             tag = "RDFDT"
         else:
             print "skipped; uses unsupported entailmentRules", er
@@ -385,7 +388,7 @@ class MyArgHandler(ArgHandler.ArgHandler):
  
 if __name__ == "__main__":
     a = MyArgHandler(program="surnia",
-                     version="$Id: surnia.py,v 1.15 2003-11-07 06:52:00 sandro Exp $",
+                     version="$Id: surnia.py,v 1.16 2003-11-07 15:14:26 sandro Exp $",
                      uri="http://www.w3.org/2003/07/surnia")
 
     a.run()
