@@ -1,7 +1,7 @@
-# <> a <http://www.w3.org/2000/10/swap/logic.n3#N3Document> .
+# <> a <http://www.w3.org/2000/10/swap/log#N3Document> .
 # An example used in http://www.w3.org/DesignIssues/CG.html
 #  and referred to in that document
-# $Id: bus.n3,v 1.1 2001-01-09 18:15:14 timbl Exp $
+# $Id: bus.n3,v 1.2 2001-05-21 03:11:59 timbl Exp $
 
 @prefix : <#> .  # (say- no realistic for sweb but for CG caomparison)
 

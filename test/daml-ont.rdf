@@ -1,9 +1,9 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xmlns="http://www.daml.org/2000/10/daml-ont#">
+  xmlns:rdfs="http://www.w3.org/2001/03/rdf-schema#"
+  xmlns="http://www.daml.org/2001/03/daml-ont#">
 
 <rdf:Description about="">
-  <versionInfo>$Id: daml-ont.rdf,v 1.1 2000-11-28 20:36:21 timbl Exp $</versionInfo>
+  <versionInfo>$Id: daml-ont.rdf,v 1.2 2001-05-21 03:11:59 timbl Exp $</versionInfo>
   <imports resource="http://www.w3.org/2000/01/rdf-schema"/>
 </rdf:Description>
 

@@ -1,4 +1,4 @@
-@prefix log:  <http://www.w3.org/2000/10/swap/log.n3#> .
+@prefix log:  <http://www.w3.org/2000/10/swap/log#> .
 
 @prefix : <#>.
 
@@ -32,5 +32,5 @@ as follows:
     existentials.remove(pair[0]) # Can't match anything anymore, need exact match
 ValueError: list.remove(x): x not in list
 
-$Id: enum.n3,v 1.1 2001-05-10 14:45:51 connolly Exp $
+$Id: enum.n3,v 1.2 2001-05-21 03:12:00 timbl Exp $
 """.
