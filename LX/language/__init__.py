@@ -2,8 +2,8 @@
 
 
 """
-__version__ = "$Revision: 1.4 $"
-# $Id: __init__.py,v 1.4 2003-02-14 17:21:59 sandro Exp $
+__version__ = "$Revision: 1.5 $"
+# $Id: __init__.py,v 1.5 2003-07-18 04:37:18 sandro Exp $
 
 __all__ = ["otter", "abstract", "htables", "lbase", "n3x"]
 
@@ -20,6 +20,8 @@ parsers = {
     "n3x":    { "module": "LX.language.n3",
               },
     "lbase":  { "module": "LX.language.lbase",
+              },
+    "kifax":  { "module": "LX.language.kifax",
               },
     }
 
@@ -44,7 +46,10 @@ def getParser(language=None, sink=None, flags=""):
         raise RuntimeError, "No such parser: \"%s\"\nWe have: %s" % (language, ", ".join(parsers.keys()))
     
 # $Log: __init__.py,v $
-# Revision 1.4  2003-02-14 17:21:59  sandro
+# Revision 1.5  2003-07-18 04:37:18  sandro
+# added kifax parser
+#
+# Revision 1.4  2003/02/14 17:21:59  sandro
 # Switched to import-as-needed for LX languages and engines
 #
 # Revision 1.3  2003/01/29 20:59:33  sandro
