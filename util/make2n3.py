@@ -5,7 +5,7 @@ import string
 import os
 import re
 
-version = "$Id: make2n3.py,v 1.2 2002-05-17 02:51:07 timbl Exp $"[1:-1]
+version = "$Id: make2n3.py,v 1.3 2002-05-21 00:21:47 timbl Exp $"[1:-1]
 
 def macroSubstitute(line, dict):
     return line  #@@@@@@
@@ -101,7 +101,7 @@ def convert(path):
 
 	m = rule.match(line)
 	if m:
-	    subj = "[make:source ext:%s; make:destination ext:%s]" %(
+	    subj = """[make:fromExt "%s"; make:toExt "%s"]""" %(
 			m.group(1), m.group(2))
 	    if comment != "": print comment
 	    continue
@@ -151,7 +151,7 @@ Syntax:    make2n3  <file>
 
     where <file> can be omitted and if so defaults to Makefile.
     This program was http://www.w3.org/2000/10/swap/util/make2p3.py
-    $Id: make2n3.py,v 1.2 2002-05-17 02:51:07 timbl Exp $
+    $Id: make2n3.py,v 1.3 2002-05-21 00:21:47 timbl Exp $
 """
         else:
             print """Bad option argument."""
