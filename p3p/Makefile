@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2004-08-04 20:27:02 connolly Exp $
+# $Id: Makefile,v 1.4 2004-08-04 21:06:00 connolly Exp $
 
 W=../../../..
 SWAP=..
@@ -23,7 +23,7 @@ P3PBASE=http://www.w3.org/TR/P3P/base
 all: forShoppers.rdf forShoppers.n3 anonShop.n3
 
 anonShop.n3: forShoppers.rdf p3pbase.rdf p3pAArules.n3
-	$(PYTHON) ../cwm.py --chatty=20 --rdf p3pbase.rdf --n3 p3pAArules.n3 --think >$@
+	$(PYTHON) ../cwm.py --chatty=20 --rdf p3pbase.rdf --n3 p3pAArules.n3 --think --data >$@
 
 forShoppers.n3: forShoppers.rdf
 
