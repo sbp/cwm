@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.54 2001-02-12 18:38:31 timbl Exp $
+$Id: notation3.py,v 1.55 2001-04-03 22:37:36 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -217,7 +217,7 @@ class SinkParser:
 
 
     #@@I18N
-    _namechars = string.lowercase + string.uppercase + string.digits + '_'
+    _namechars = string.lowercase + string.uppercase + string.digits + '_-'
 
     def tok(self, tok, str, i):
         """tokenizer strips whitespace and comment"""
@@ -1062,7 +1062,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.54 2001-02-12 18:38:31 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.55 2001-04-03 22:37:36 connolly Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1507,23 +1507,19 @@ def convert(form, env):
 
     serviceDomain = 'w3.org' #@@ should compute this from env['SCRIPT_NAME']
          # or whatever; cf. CGI spec
-    thisMessage = 'mid:t%s-r%f@%s' % (time.time(), random.random(), serviceDomain)
 
     data = form['data'].value
 
-    if form.has_key('genspace'):
-	genspace = form['genspace'].value
-    else: genspace = thisMessage + '#_'
-
     if form.has_key('baseURI'):	baseURI = form['baseURI'].value
     elif env.has_key('HTTP_REFERER'): baseURI = env['HTTP_REFERER']
-    else: baseURI = None
+    else: baseURI = 'mid:' #@@
 
     # output is buffered so that we only send
     # 200 OK if all went well
     buf = StringIO.StringIO()
 
-    xlate = ToRDFParser(buf, baseURI, thisMessage, genspace)
+    gen = ToRDF(buf, baseURI)
+    xlate = SinkParser(gen, baseURI, baseURI)
     xlate.startDoc()
     xlate.feed(data)
     xlate.endDoc()
