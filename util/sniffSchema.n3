@@ -3,7 +3,7 @@
 <> dc:description """
 Sniff a schema from some RDF data.
 """,
-"$Id: sniffSchema.n3,v 1.3 2002-07-18 05:12:52 connolly Exp $";
+"$Id: sniffSchema.n3,v 1.4 2002-07-18 05:22:00 connolly Exp $";
 dc:relation <sniffSchema.rdf>, <sniffSchema.n3>.
 
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -20,10 +20,10 @@ this log:forAll :P, :C, :X, :T.
 # declare the properties I'm using...
 # thanks to the DAML validator for keeping me honest.
 #  http://www.daml.org/validator/
-ss:label a s:Property; s:label "label?".
-ss:intersectsDomainOf a s:Property; s:label "intersects domain of".
-ss:domainIntersects a s:Property; s:label "domain intersects".
-ss:rangeIntersects a s:Property; s:label "range intersects".
+ss:label a r:Property; s:label "label?".
+ss:intersectsDomainOf a r:Property; s:label "intersects domain of".
+ss:domainIntersects a r:Property; s:label "domain intersects".
+ss:rangeIntersects a r:Property; s:label "range intersects".
 
 { [] :P []. } log:implies { :P a r:Property }.
 { [] a :C } log:implies { :C a s:Class }.
