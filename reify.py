@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.11 2005-01-21 20:54:04 syosi Exp $
+$Id: reify.py,v 1.12 2005-01-26 18:01:00 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -507,7 +507,9 @@ def dereification(x, f, sink, bnodes={}, xList=[]):
     y = f.the(subj=x, pred=rei["items"])
     if y != None:
         if isinstance(y, N3Set):
-            return sink.store.newSet([dereification(z, f, sink, bnodes, xList) for z in y])
+            yy = [z for z in y]
+            yy.sort(Term.compareAnyTerm)
+            return sink.store.newSet([dereification(z, f, sink, bnodes, xList) for z in yy])
         return sink.newList([dereification(z, f, sink, bnodes, xList) for z in y])
     
     y = f.the(subj=x, pred=rei["statements"])
