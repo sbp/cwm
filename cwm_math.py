@@ -13,8 +13,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.4 2002-03-30 22:08:18 timbl Exp $'
-__version__ = '$Revision: 1.4 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.5 2002-06-19 21:51:17 connolly Exp $'
+__version__ = '$Revision: 1.5 $'
 
 import sys, string, re, urllib
 import thing, notation3
@@ -34,6 +34,11 @@ def tidy(x):
     s = str(x)
     if s[-2:] == '.0': s=s[:-2]
     return s
+
+
+def isString(x):
+    # in 2.2, evidently we can test for isinstance(types.StringTypes)
+    return type(x) is type('') or type(x) is type(u'')
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -56,7 +61,7 @@ class BI_sum(LightBuiltIn, Function):
     def evaluateObject(self, store, context, subj, subj_py): 
         t = 0
         for x in subj_py:
-            if type(x) is not type(""): return None
+            if not isString(x): return None
             t += float(x)
         return store.intern((LITERAL, tidy(t)))
 
