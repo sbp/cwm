@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: crawl.py,v 1.2 2003-07-30 19:43:22 timbl Exp $
+$Id: crawl.py,v 1.3 2003-07-30 20:01:28 timbl Exp $
 
 Crawler"""
 
@@ -9,13 +9,14 @@ Crawler"""
 import llyn
 from thing import Fragment
 import thing
+import diag
 
 import sys
 
 from thing import load
 from uripath import join, base
 
-cvsRevision = "$Revision: 1.2 $"
+cvsRevision = "$Revision: 1.3 $"
 
 document = {}
 already = []
@@ -33,11 +34,11 @@ def getDoc(r):
     document[r] = d
     return d
 	
-def crawl(uriref, level=0):
+def crawl(this, level=0):
 
-    print " " * level, "Loading ", uri, 
-    f = load(join(base(), uri))
-    this = thing.symbol(uri)
+    uri = this.uriref()
+    print " " * level, "Loading ", uri
+    f = load(uri)
     thisd = getDoc(this)
     for s in f.statements:
 	for p in 1,2,3:
@@ -64,7 +65,8 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 """
     uriref = sys.argv[1]
     uri = join(base(), uriref)
-    r = thing.symbol(r)
+    r = thing.symbol(uri)
+    diag.setVerbosity(25)
     crawl(r)
     while agenda != []:
 	r = agenda.pop()

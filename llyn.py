@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.84 2003-07-30 19:36:21 timbl Exp $
+$Id: llyn.py,v 1.85 2003-07-30 20:01:28 timbl Exp $
 
 RDF Store and Query engine
 
@@ -158,7 +158,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.84 $"
+cvsRevision = "$Revision: 1.85 $"
 
 # Magic resources we know about
 
@@ -1987,7 +1987,7 @@ class RDFStore(RDFSink) :
         for s in context.statements:
 	    for p in SUBJ, PRED, OBJ:
 		x = s[p]
-		if isinstance(Formula, x) or x in uu:
+		if isinstance(x, Formula) or x in uu:
 		    break
 	    else:
 		self._outputStatement(sink, s.quad)
