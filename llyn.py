@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.96 2003-09-24 19:43:57 kdubost Exp $
+$Id: llyn.py,v 1.97 2003-10-20 17:31:54 timbl Exp $
 
 RDF Store and Query engine
 
@@ -161,7 +161,7 @@ from thing import indentString
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.96 $"
+cvsRevision = "$Revision: 1.97 $"
 
 # Magic resources we know about
 
@@ -1351,6 +1351,8 @@ class RDFStore(RDFSink) :
         elif type(x) is types.IntType:
             return self.newLiteral(`x`, self.integer)
         elif type(x) is types.FloatType:
+	    if `x` == "NaN":  # We can get these form eg 2.math:asin
+		return None
             return self.newLiteral(`x`, self.float)
         elif type(x) == type([]):
 	    return self.store.nil.newList(x)

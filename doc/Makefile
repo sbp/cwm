@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.18 2003-04-15 23:29:56 sandro Exp $
+# $Id: Makefile,v 1.19 2003-10-20 17:31:55 timbl Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -15,7 +15,7 @@ ROADMAP=$(W)/2001/04/roadmap
 PYTHON=python
 CWM=$(W)/2000/10/swap/cwm.py
 
-SCHEMAS= ../log.n3 ../crypto.n3 ../math.n3 ../os.n3 ../string.n3 ../time.n3 
+SCHEMAS= ../log.n3 ../crypto.n3 ../list.n3 ../math.n3 ../os.n3 ../string.n3 ../time.n3 
 
 .SUFFIXES: .svg .dot .graph .n3
 
@@ -94,7 +94,7 @@ tutorial-book.pdf: $(TUTFILES) $(TUTFIGS) tutorial-bookstyle
 	$(HTMLDOC) --batch tutorial-bookstyle -f $@ $(TUTFILES)
 
 cwm-help.txt : ../cwm.py ../notation3.py
-	cwm --help | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' > cwm-help.txt
+	$(PYTHON) $(CWM) --help | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' > cwm-help.txt
 
 CwmHelp.html : CwmHelp-template.html cwm-help.txt
 	sed -e '/<pre>/rcwm-help.txt' < CwmHelp-template.html > CwmHelp.html

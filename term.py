@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.4 2003-09-07 04:14:13 timbl Exp $
+$Id: term.py,v 1.5 2003-10-20 17:31:55 timbl Exp $
 
 term
 
@@ -505,11 +505,18 @@ class Literal(Term):
     """
 
 
-    def __init__(self, store, string, dt=None, lang=None):
+    def __init__(self, store, str, dt=None, lang=None):
         Term.__init__(self, store)
-        self.string = string    #  n3 notation EXcluding the "  "
+        self.string = str    #  n3 notation EXcluding the "  "
 	self.datatype = dt
 	self.lang=lang
+#	self._value = None
+#	if dt == FLOAT_DATATYPE:
+#	    self._value = float(str)
+#	elif dt == INTEGER_DATATYPE:
+#	    self._value = int(str)
+#	elif dt == None:
+#	    self._value = str
 
     def __str__(self):
         return self.string
@@ -583,27 +590,28 @@ class Literal(Term):
 	return 0
 	
 
-class Integer(Literal):
-    def __init__(self, store, str):
-        Term.__init__(self, store)
-	self.datatype = store.integer
-	self.lang=None
-	self._value = int(str)
-
-    def __int__(self):
-	return self._value
-
-    def __str__(self):
-        return str(self._value)
-
-    def __repr__(self):
-        return str(self._value)
-
-    def representation(self, base=None):
-	return str(self._value)
-
-    def value(self):
-	return self._value
+#class Integer(Literal):
+#	"""Unused"""
+#    def __init__(self, store, str):
+#        Term.__init__(self, store)
+#	self.datatype = store.integer
+#	self.lang=None
+#	self._value = int(str)
+#
+#    def __int__(self):
+#	return self._value
+#
+#    def __str__(self):
+#        return str(self._value)
+#
+#    def __repr__(self):
+#        return str(self._value)
+#
+#    def representation(self, base=None):
+#	return str(self._value)
+#
+#    def value(self):
+#	return self._value
 
 def uri_encode(str):
         """ untested - this must be in a standard library somewhere

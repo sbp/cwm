@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.5 2003-09-14 20:20:24 timbl Exp $
+$Id: pretty.py,v 1.6 2003-10-20 17:31:55 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -27,7 +27,7 @@ from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
-cvsRevision = "$Revision: 1.5 $"
+cvsRevision = "$Revision: 1.6 $"
 
 # Magic resources we know about
 
@@ -152,11 +152,9 @@ class Serializer:
 	sink = self.sink
 	lists = []
 	for s in context.statements:
-#	    progress("&&&& cehck ", `s`)
 
 	    for x in s.predicate(), s.subject(), s.object():
 		if isinstance(x, NonEmptyList):
-#		    progress("&&&&", x)
 		    self._listsWithinLists(x, lists)
 		    
 	for l in lists:
