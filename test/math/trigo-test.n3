@@ -1,5 +1,5 @@
 # Author: karl
-#  $Id: trigo-test.n3,v 1.5 2003-10-20 17:31:56 timbl Exp $
+#  $Id: trigo-test.n3,v 1.6 2004-06-09 22:10:20 timbl Exp $
 
 @prefix : <#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -15,11 +15,11 @@
 # test sine, cosine, arcsine, arcosine
 
 
-0 a TestValue.
-0.23 a TestValue.
--0.707 a TestValue.
-1.23 a TestValue.
-3.1415926535897931 a Pi, TestValue.
+0 a TestValue, NonPiTestValue.
+0.23 a TestValue, NonPiTestValue.
+-0.707 a TestValue, NonPiTestValue.
+1.23 a TestValue, NonPiTestValue.
+3.14159265358979323846 a TestValue.
 
 
 
@@ -27,7 +27,7 @@
 { 0 math:asin ?x } => { ?x :valueOf "asin(0) = 0" } .
 { 1 math:acos ?x } => { ?x :valueOf "acos(1) = 0" } .
 
-{ ?x a TestValue; math:sin ?y} => {?x SIN ?y}.
+{ ?x a NonPiTestValue; math:sin ?y} => {?x SIN ?y}.
 { ?x a TestValue; is math:sin of ?y} => {?x ASIN ?y}.
 
 { ?x a TestValue; math:cos ?y} => {?x COS ?y}.
