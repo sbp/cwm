@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.88 2001-08-30 21:21:00 connolly Exp $
+$Id: notation3.py,v 1.89 2001-09-07 01:53:17 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1284,7 +1284,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.88 2001-08-30 21:21:00 connolly Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.89 2001-09-07 01:53:17 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

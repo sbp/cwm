@@ -50,7 +50,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.17 2001-05-19 03:44:14 timbl Exp $"
+        version = "$Id: xml2rdf.py,v 1.18 2001-09-07 01:53:17 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 

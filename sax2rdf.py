@@ -93,7 +93,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.7 2001-08-31 02:02:10 connolly Exp $"
+        version = "$Id: sax2rdf.py,v 1.8 2001-09-07 01:53:17 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
