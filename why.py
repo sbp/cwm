@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.14 2004-07-21 20:55:41 syosi Exp $
+$Id: why.py,v 1.15 2005-01-27 20:06:43 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves- we could make
@@ -251,6 +251,8 @@ def explainStatement(s, ko):
 	statementReason = statementFormulaReason.reasonForStatement.get(s, None)
 	if statementReason == None:
 	    progress("Ooops, formula has no reason for statement,", s)
+	    progress("formula is: %s" % `f.statements`)
+	    progress("hash table is: %s" % `statementFormulaReason.reasonForStatement`)
 	    raise RuntimeError("see above")
 	    return None
 	ri = statementReason.explain(ko)

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.177 2005-01-25 02:40:39 syosi Exp $
+$Id: notation3.py,v 1.178 2005-01-27 20:06:43 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -560,12 +560,6 @@ class SinkParser:
                         else:
                             raise BadSyntax(self._thisDoc, self.lines, str, i, "expected: ','")
                     else: first_run = False
-
-                    i = self.skipSpace(str, i)
-                    if i<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "needed '$}', found end.")                    
-                    if str[i:i+2] == '$}':
-                        j = i+2
-                        break
                     
                     item = []
                     j = self.item(str,i, item) #@@@@@ should be path, was object
@@ -1267,7 +1261,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.177 2005-01-25 02:40:39 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.178 2005-01-27 20:06:43 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
