@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.89 2002-03-08 03:53:38 timbl Exp $
+$Id: cwm.py,v 1.90 2002-03-08 04:05:05 timbl Exp $
 
 Closed World Machine
 
@@ -51,7 +51,7 @@ import llyn
 
 from thing import progress
 
-cvsRevision = "$Revision: 1.89 $"
+cvsRevision = "$Revision: 1.90 $"
 
 
 ######################################################### Tests  
@@ -299,6 +299,8 @@ Examples:
   cwm foo.n3 bar.n3 --think         Combine data and find all deductions
   cwm foo.n3 --flat --n3=spart
 
+See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
+
 """
         
 #        import urllib
@@ -421,7 +423,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.89 2002-03-08 03:53:38 timbl Exp $"
+        version = "$Id: cwm.py,v 1.90 2002-03-08 04:05:05 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -546,8 +548,8 @@ Examples:
 
             elif _lhs == "-filter":
                 filterContext = _store.intern((FORMULA, _uri+ "#_formula"))
-                _newURI = urlparse.urljoin(_baseURI, "_w_"+`self._genid`)  # Intermediate
-                self._genid = self._genid + 1
+                _newURI = urlparse.urljoin(_baseURI, "_w_"+`_genid`)  # Intermediate
+                _genid = _genid + 1
                 _newContext = _store.intern((FORMULA, _newURI+ "#_formula"))
 #                _store.moveContext(workingContext, _newContext)
 #                print "# Input filter ", _uri
