@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.66 2001-08-30 21:21:00 connolly Exp $
+$Id: cwm.py,v 1.67 2001-08-31 20:53:11 timbl Exp $
 
 Closed World Machine
 
@@ -575,7 +575,9 @@ class BI_concat(LightBuiltIn, ReverseFunction):
     def evaluateSubject(self, store, context, obj, obj_py):
         progress("##### list input to concat:"+`obj_py`)
         str = ""
-        for x in obj_py: str = str + x 
+        for x in obj_py:
+            if type(x) != type(''): return None # Can't
+            str = str + x 
         return store._fromPython(str)
 
 
@@ -1914,16 +1916,18 @@ class RDFStore(notation3.RDFSink) :
         i = len(queue) - 1
         while i >= 0:  # A valid index into q
             state, short, consts, vars, boundLists, quad = queue[i]
+            changed = 0
             for var, val in newBindings:
                 for p in vars + boundLists:  # any variables, even list IDs, can be bound
                     if quad[p] is var:
                         state = 99
+                        changed = 1
                         quad = _lookupQuad([(var,val)], quad)  # Quicker to do above but how in python?
                         break     # Done all 4
                 if (quad[OBJ] is var  # No vars now in daml:first
                     and (PRED in boundLists or quad[PRED] is self.nil)): # and this is a list with no vars in daml:rest   @@@@??? 
                     self._noteBoundList(quad[SUBJ], queue)  # The list is now bound, so propagate this up
-            if state == 99:   # Has fewer variables now .. this is progress
+            if changed:   # Has fewer variables now .. this is progress
                 queue[i:i+1] = []  # Take it out from where it was and 
                 queue.append((state, short, consts, vars, boundLists, quad)) # put it on the top
             i = i - 1
@@ -2670,7 +2674,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.66 2001-08-30 21:21:00 connolly Exp $"
+        version = "$Id: cwm.py,v 1.67 2001-08-31 20:53:11 timbl Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
