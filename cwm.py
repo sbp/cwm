@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.94 2002-06-07 13:48:31 timbl Exp $
+$Id: cwm.py,v 1.95 2002-06-07 19:52:25 timbl Exp $
 
 Closed World Machine
 
@@ -51,7 +51,7 @@ import llyn
 
 from thing import progress
 
-cvsRevision = "$Revision: 1.94 $"
+cvsRevision = "$Revision: 1.95 $"
 
 
 ######################################################### Tests  
@@ -301,6 +301,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         option_test = 0     # Do simple self-test
         option_reify = 0    # Flag: reify on output  (process?)
         option_flat = 0    # Flag: reify on output  (process?)
+	option_crypto = 0  # Flag: make cryptographic algorithms available
         option_outURI = None
         option_outputStyle = "-best"
         _gotInput = 0     #  Do we not need to take input from stdin?
@@ -352,6 +353,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 option_n3_flags = _rhs
             elif arg == "-quiet": option_quiet = 1
             elif arg == "-pipe": option_pipe = 1
+            elif arg == "-crypto": option_crypto = 1
             elif arg == "-bySubject": option_outputStyle = arg
             elif arg == "-no": option_outputStyle = "-no"
             elif arg == "-strings": option_outputStyle = "-no"
@@ -405,7 +407,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.94 2002-06-07 13:48:31 timbl Exp $"
+        version = "$Id: cwm.py,v 1.95 2002-06-07 19:52:25 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -418,7 +420,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             workingContextURI = None
         else:
             _metaURI = urlparse.urljoin(option_baseURI, "RUN/") + `time.time()`  # Reserrved URI @@
-            _store = llyn.RDFStore( _outURI+"#_gs", metaURI=_metaURI, argv=option_with)
+            _store = llyn.RDFStore( _outURI+"#_gs", metaURI=_metaURI, argv=option_with, crypto=option_crypto)
             workingContextURI = _outURI+ "#0_work"
             workingContext = _store.intern((FORMULA, workingContextURI))   #@@@ Hack - use metadata
 #  Metadata context - storing information about what we are doing
