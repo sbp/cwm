@@ -24,7 +24,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/check-grammar.py
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.2 2004-11-04 18:44:31 timbl Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.3 2004-11-04 20:11:27 syosi Exp $"
 
 # SWAP
 import webAccess
@@ -250,17 +250,19 @@ class PredictiveParser:
 	    return "0", i #  Numeric
 	j = i+1
 	if ch == "@":
+            if i!=0 and whiteSpace.match(str[i-1]).end() == 0:
+                return ch, i
 	    while str[j] not in notNameChars: j = j + 1
 	    if str[i+1:j] == "keywords" : parser.keywords = [] # Special
 	    return str[i:j], i # keyword
 	if ch == '"':  #"
-	    if str[i+1:i+3] == '""':  # Triple quoted
-		m = tripleQuotedString.match(str,i+3)
-	    else:
-		m = quotedString.match(str,i+1)
-	    if m == None: return '""', -1  # Error
-	    parser.lineNumber += str[i: m.end()].count("\n")
-	    i = m.end()
+#	    if str[i+1:i+3] == '""':  # Triple quoted
+#		m = tripleQuotedString.match(str,i+3)
+#	    else:
+#		m = quotedString.match(str,i+1)
+#	    if m == None: return '""', -1  # Error
+#	    parser.lineNumber += str[i: m.end()].count("\n")
+#	    i = m.end()
 	    return '"', i #"
    
 	while str[j] not in notQNameChars: j = j+1
