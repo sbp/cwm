@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: cwm.py,v 1.2 2000-11-19 23:32:42 timbl Exp $
+$Id: cwm.py,v 1.3 2000-11-19 23:35:43 timbl Exp $
 
 Closed World Machine
 
