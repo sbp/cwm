@@ -1,4 +1,4 @@
-#! /bin/python
+#! /usr/bin/python
 """CAnonicalize N-Triples
 
 Options:
@@ -43,7 +43,7 @@ References:
  Not to mention,  published this month by coincidence:
   Kelly, Brian, [Whitehead Institute]  "Graph cannonicalization", Dr Dobb's Journal, May 2003.
  
- $Id: cant.py,v 1.10 2004-03-21 04:24:31 timbl Exp $
+ $Id: cant.py,v 1.11 2004-06-21 16:53:34 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -74,7 +74,7 @@ datatypeString = langString + '(?:\^\^' + uriref + r')?'
 #literal = langString + "|" + datatypeString
 object =  r'(' + nodeID + "|" + datatypeString + "|" + uriref + r')'
 ws = r'[ \t]*'
-com = ws + r'(#.*)?' 
+com = ws + r'(#.*)?[\r\n]*' 
 comment = re.compile("^"+com+"$")
 statement = re.compile( ws + object + ws + object + ws + object  + com) # 
 
@@ -95,13 +95,16 @@ def loadFiles(testFiles):
 	inStream = urllib.urlopen(uri)
 	while 1:
 	    line = inStream.readline()
-	    if line == "": break
+	    if line == "" : break	    
 #	    if verbose: stderr.write("%s\n" % line)
 	    m = comment.match(line)
 	    if m != None: continue
 	    m = statement.match(line)
 	    if m == None:
 		stderr.write("Syntax error: "+line+"\n")
+		if verbose:
+                    [stderr.write('%2x ' % ord(c)) for c in line]
+                    stderr.write('\n')
 		exit(-1)
 	    triple = m.group(1), m.group(2), m.group(3)
 	    if verbose: stderr.write( "Triple: %s  %s  %s.\n" % (triple[0], triple[1], triple[2]))

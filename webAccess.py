@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: webAccess.py,v 1.6 2004-06-08 17:03:58 syosi Exp $
+$Id: webAccess.py,v 1.7 2004-06-21 16:53:34 syosi Exp $
 
 Web access functionality building on urllib
 
@@ -100,8 +100,16 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
 	F = store.newFormula()
     if guess == 'application/rdf+xml':
 	if diag.chatty_flag > 49: progress("Parsing as RDF")
-	import sax2rdf, xml.sax._exceptions
-	p = sax2rdf.RDFXMLParser(store, F,  thisDoc=asIfFrom, flags=flags)
+#	import sax2rdf, xml.sax._exceptions
+#	p = sax2rdf.RDFXMLParser(store, F,  thisDoc=asIfFrom, flags=flags)
+        import os
+        if flags == 'rdflib' or int(os.environ.get("CWM_RDFLIB", 0)):
+            parser = 'rdflib'
+            flags = ''
+        else:
+            parser = 'sax2rdf'
+        import rdfxml
+        p = rdfxml.rdfxmlparser(store, F,  thisDoc=asIfFrom, flags=flags, parser=parser)
 	p.feed(buffer)
 	F = p.close()
     else:

@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.10 2004-05-12 01:27:08 timbl Exp $
+$Id: term.py,v 1.11 2004-06-21 16:53:34 syosi Exp $
 
 term
 
@@ -706,7 +706,7 @@ class Literal(Term):
 	if self.datatype is self.store.integer: return int(self.string)
 	if self.datatype is self.store.float: return float(self.string)
 	raise ValueError("Attempt to run built-in on unknown datatype %s of value %s." 
-			% (`x.datatype`, x.string))
+			% (`self.datatype`, self.string))
 
     def uriref(self):
         # Unused at present but interesting! 2000/10/14

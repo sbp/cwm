@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.150 2004-06-08 15:16:45 syosi Exp $
+$Id: cwm.py,v 1.151 2004-06-21 16:53:34 syosi Exp $
 
 Closed World Machine
 
@@ -57,7 +57,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.150 $"
+cvsRevision = "$Revision: 1.151 $"
 
 
 
@@ -154,7 +154,6 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         
         import time
         import sys
-        global sax2rdf
         import myStore
 
         # These would just be attributes if this were an object
@@ -281,11 +280,6 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 _gotInput = _gotInput + 1  # input filename
             
 
-        # This is conditional as it is not available on all platforms,
-        # needs C and Python to compile xpat.
-        if option_need_rdf_sometime:
-            import sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
-
         # Between passes, prepare for processing
         setVerbosity(0)
 
@@ -321,7 +315,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.150 2004-06-08 15:16:45 syosi Exp $"
+        version = "$Id: cwm.py,v 1.151 2004-06-21 16:53:34 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
