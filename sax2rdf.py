@@ -38,6 +38,7 @@
 import urlparse  # Comes with python 1.6, lacks file<->url mapping
 import urllib   # Opening resources in load()
 import string
+import sys
 
 import xml.sax # PyXML stuff
                #   http://sourceforge.net/projects/pyxml
@@ -91,7 +92,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.9 2001-09-19 18:47:57 connolly Exp $"
+        version = "$Id: sax2rdf.py,v 1.10 2001-09-24 16:30:29 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -378,10 +379,10 @@ class RDFHandler(xml.sax.ContentHandler):
             self._stack[-1][0] = STATE_NOVALUE  # When we return, cannot have literal now
 
         elif self._state == STATE_NOVALUE:
-            print "\n@@ Expected no value, found ", name, qname, attrs, "\n Stack: ",self._stack
-            raise ValueError # Found tag, expected empty
+            raise BadSyntax(sys.exc_info(), """Expected no value, found name=%s; qname=%s, attrs=%s
+            in nested context: %s""" %(name, qname, attrs,self._stack))
         else:
-            raise RuntimeError # Unknown state
+            raise RuntimeError, "Unknown state in RDF parser" # Unknown state
 
 # aboutEachprefix { <#> forall r . { r startsWith ppp } l:implies ( zzz } ) 
 # aboutEach { <#> forall r . { ppp rdf:li r } l:implies ( zzz } )
@@ -452,6 +453,13 @@ class RDFXMLParser(RDFHandler):
         self.flush()
         self.sink.endDoc()
 
+class BadSyntax(SyntaxError):
+    def __init__(self, info, message):
+	self._info = info
+	self._message = message
+
+    def __str__(self):
+	return self._message
 
 
 def test(args = None):

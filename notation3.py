@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.92 2001-09-21 20:44:06 timbl Exp $
+$Id: notation3.py,v 1.93 2001-09-24 16:30:29 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1130,6 +1130,7 @@ class ToN3(RDFSink.RDFSink):
     flagDocumentation = """Flags for N3 output are as follows:-
         
 a   Anonymous nodes should be output using the _: convention (p flag or not).
+l   List syntax suppression. Don't use (..)
 p   Prefix suppression - don't use them, always URIs in <> instead of qnames.
 q   Quiet - don't make comments about the environment in which processing was done.
 r   Relative URI suppression. Always use absolute URIs.
@@ -1167,6 +1168,7 @@ t   "this" and "()" special syntax should be suppresed.
 	self.noLists = noLists  # Suppress generation of lists?
 	self._anonymousNodes = [] # For "a" flag
 
+        if "l" in self._flags: self.noLists = 1
 	
 	#@@I18N
     _namechars = string.lowercase + string.uppercase + string.digits + '_-'
@@ -1191,7 +1193,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.92 2001-09-21 20:44:06 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.93 2001-09-24 16:30:29 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1223,7 +1225,7 @@ t   "this" and "()" special syntax should be suppresed.
                     pass  # not how we would have put it but never mind
                 elif triple[PRED] != N3_rest:
                     print "####@@@@@@ ooops:", triple
-                    raise intenalError # Should only see first and rest in list mode
+#                    raise RuntimeError, "Should only see first and rest in list mode"
             else: # compact lists
                 self._write(self.representationOf(triple[CONTEXT], triple[OBJ])+" ")
             return
@@ -1433,7 +1435,7 @@ t   "this" and "()" special syntax should be suppresed.
                 i = len(value)
                 while i > 0 and value[i-1] in _namechars: i = i - 1
                 str = value[i:]
-            return "_:" + str
+            return "_:a" + str    # Must start with alpha as per NTriples spec.
 
         if ((type == VARIABLE or type == ANONYMOUS)
             and not option_noregen ):
