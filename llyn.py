@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.73 2003-03-11 21:44:35 eric Exp $
+$Id: llyn.py,v 1.74 2003-03-11 23:07:41 connolly Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.73 $"
+cvsRevision = "$Revision: 1.74 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -959,7 +959,7 @@ class BI_semantics(HeavyBuiltIn, Function):
             if verbosity() > 10: progress("Already read and parsed "+`doc`+" to "+ `F`)
             return F
 
-        if verbosity() > 10: progress("Reading and parsing " + `doc`)
+        if verbosity() > 10: progress("Reading and parsing " + doc.uriref())
         inputURI = doc.uriref()
         F = self.store.load(inputURI)
         if verbosity()>10: progress("    semantics: %s" % (F))
@@ -2759,8 +2759,8 @@ class Query:
 	Currently  this only goes to an SQL store, but should later use RDFQL/DAMLQL etc
 	in remote HTTP/SOAP call."""
 	
-        import SqlDB
-        from SqlDB import ResultSet, SqlDBAlgae, ShowStatement
+        import dbork.SqlDB
+        from dbork.SqlDB import ResultSet, SqlDBAlgae, ShowStatement
 
         # SqlDB stores results in a ResultSet.
         rs = ResultSet()
