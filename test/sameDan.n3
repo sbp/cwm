@@ -4,7 +4,7 @@
 
 <> dc:description """rules for determining when two terms denote
 the same thing.""";
-  rcs:id "$Id: sameDan.n3,v 1.1 2001-07-19 16:56:00 connolly Exp $";
+  rcs:id "$Id: sameDan.n3,v 1.2 2001-07-20 15:55:39 connolly Exp $";
   dc:creator [ 
 	contact:fullName "Dan Connolly";
 	contact:homePage <http://www.w3.org/People/Connolly/>;
@@ -19,6 +19,7 @@ the same thing.""";
 @prefix : <#>.
 
 contact:mailbox a ont:UnambiguousProperty.
+contact:homePageAddress a ont:UnambiguousProperty.
 
 [ contact:mailbox <mailto:connolly@w3.org> ] :hairColor :red.
 [ contact:mailbox <mailto:connolly@w3.org> ] :birthPlace :KC.
