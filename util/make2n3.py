@@ -5,7 +5,7 @@ import string
 import os
 import re
 
-version = "$Id: make2n3.py,v 1.4 2002-06-22 11:53:41 timbl Exp $"[1:-1]
+version = "$Id: make2n3.py,v 1.5 2002-10-08 20:59:09 timbl Exp $"[1:-1]
 
 import  notation3  # from http://www.w3.org/2000/10/swap/notation3.py
 
@@ -162,7 +162,6 @@ def do(path):
 recursive = 0
 nochange = 1
 verbose = 0
-global verbose
 doall = 0
 files = []
 
@@ -175,7 +174,7 @@ Syntax:    make2n3  <file>
 
     where <file> can be omitted and if so defaults to Makefile.
     This program was http://www.w3.org/2000/10/swap/util/make2p3.py
-    $Id: make2n3.py,v 1.4 2002-06-22 11:53:41 timbl Exp $
+    $Id: make2n3.py,v 1.5 2002-10-08 20:59:09 timbl Exp $
     
     -v  verbose
 """

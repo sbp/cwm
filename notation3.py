@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.118 2002-08-16 22:30:48 timbl Exp $
+$Id: notation3.py,v 1.119 2002-10-08 20:59:08 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -119,9 +119,6 @@ class SinkParser:
 	
     	self._bindings = bindings
 	self._thisDoc = thisDoc
-#	self._context = SYMBOL , self._thisDoc    # For storing with triples @@@@ use stack
-#        self._contextStack = []      # For nested conjunctions { ... }
-#        self._nextId = 0
         self.lines = 0              # for error handling
         self._genPrefix = genPrefix
 	self.keywords = ['a', 'this', 'bind', 'has', 'is', 'of' ]
@@ -157,19 +154,25 @@ class SinkParser:
         return self._formula
     
     def load(self, uri, baseURI=""):
+	"""Parses a document of the given URI and returns its top level formula"""
         if uri:
             _inputURI = uripath.join(baseURI, uri) # Make abs from relative
             self._sink.makeComment("Taking input from " + _inputURI)
-            netStream = urllib.urlopen(_inputURI)
-            self.startDoc()
-            self.feed(netStream.read())     # @ May be big - buffered in memory!
-            self.endDoc()
+            stream = urllib.urlopen(_inputURI)
         else:
             self._sink.makeComment("Taking input from standard input")
             _inputURI = uripath.join(baseURI, "STDIN") # Make abs from relative
-            self.startDoc()
-            self.feed(sys.stdin.read())     # May be big - buffered in memory!
-            self.endDoc()
+            stream = sys.stdin     # May be big - buffered in memory!
+	return self.loadBuf(stream.read())    # self._formula
+
+    def loadStream(self, stream):
+	return loadBuf(stream.read())   # Not ideal
+
+    def loadBuf(self, buf):
+	"""Parses a buffer and returns its top level formula"""
+	self.startDoc()
+	self.feed(buf)
+	return self.endDoc()    # self._formula
 
 
     def feed(self, str):
@@ -267,7 +270,9 @@ class SinkParser:
         self._sink.startDoc()
 
     def endDoc(self):
+	"""Signal end fo document and stop parsing. returns formula"""
         self._sink.endDoc(self._formula)
+	return self._formula
 
     def makeStatement(self, quadruple):
 #        print "# Parser output: ", `triple`
@@ -965,7 +970,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.118 2002-08-16 22:30:48 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.119 2002-10-08 20:59:08 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -976,6 +981,7 @@ t   "this" and "()" special syntax should be suppresed.
 	self._endStatement()
 	self._write("\n")
 	if not self._quiet: self._write("#ENDS\n")
+	return  # No formula returned - this is not a store
 
     def makeComment(self, str):
         for line in string.split(str, "\n"):
