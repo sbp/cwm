@@ -48,7 +48,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.12 2001-02-05 01:13:25 timbl Exp $"
+        version = "$Id: xml2rdf.py,v 1.13 2001-02-12 18:38:31 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -66,11 +66,11 @@ class RDFXMLParser(xmllib.XMLParser):
 
     def handle_xml(self, encoding, standalone):
         self.flush()
-        print 'xml: encoding =',encoding,'standalone =',standalone
+        #self.sink.makeComment('xml parse: encoding ='+`encoding`+'standalone ='+`standalone`)
 
     def handle_doctype(self, tag, pubid, syslit, data):
         self.flush()
-        print 'DOCTYPE:',tag, `data`
+        #self.sink.makeComment('DOCTYPE:' +tag + `data`)
 
     def handle_data(self, data):
         if self._state == STATE_VALUE:
