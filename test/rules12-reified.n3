@@ -2,10 +2,10 @@
 # Input from  file:/devel/WWW/2000/10/swap/test/rules12.n3
 
 #  Notation3 generation by
-#  $Id: rules12-reified.n3,v 1.1 2000-11-28 22:46:59 timbl Exp $
+#  $Id: rules12-reified.n3,v 1.2 2001-05-09 18:40:25 timbl Exp $
 
      @prefix log: <http://www.w3.org/2000/10/swap/log.n3#> .
-     @prefix daml: <http://www.daml.org/2000/10/daml-ont#> .
+     @prefix daml: <http://www.daml.org/2001/03/daml-ont#> .
      @prefix mech: <file:/devel/WWW/2000/10/swap/test/s1.n3#> .
      @prefix : <file:/devel/WWW/2000/10/swap/test/STDOUT> .
      @prefix n3: <http://www.w3.org/2000/10/swap/model.n3#> .
