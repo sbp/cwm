@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2001-05-09 20:32:52 connolly Exp $
+# $Id: Makefile,v 1.4 2001-05-10 01:37:13 connolly Exp $
 
 W=../../../..
 # Dan Connolly's process diagram stuff
@@ -34,8 +34,8 @@ infoset.rdf: infoset.n3 infoset-labels.n3 style.n3 $(PD)rdf2dot.xsl
 	$(PYTHON) $(CWM) infoset.n3 infoset-labels.n3 style.n3 -think -purge -bySubject -rdf >$@
 
 
-infoset-diagram.rdf: infoset.n3 infoset-labels.n3 style-arcprop.n3 $(PD)rdf2dot.xsl
-	$(PYTHON) $(CWM) infoset.n3 infoset-labels.n3 style-arcprop.n3 -think -purge -bySubject -base=bogus: -rdf >$@
+infoset-diagram.rdf: infoset-daml.n3 infoset-labels.n3 style-arcprop.n3 $(PD)rdf2dot.xsl
+	$(PYTHON) $(CWM) infoset-daml.n3 infoset-labels.n3 style-arcprop.n3 -think -purge -bySubject -base=bogus: -rdf >$@
 
 
 #swws.dot: swws.rdf
