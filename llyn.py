@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.125 2005-01-10 19:15:22 syosi Exp $
+$Id: llyn.py,v 1.126 2005-01-11 18:43:29 syosi Exp $
 
 
 RDF Store and Query engine
@@ -69,7 +69,7 @@ from diag import progress, verbosity
 from term import BuiltIn, LightBuiltIn, \
     HeavyBuiltIn, Function, ReverseFunction, \
     Literal, Symbol, Fragment, FragmentNil, Term,\
-    CompoundTerm, List, EmptyList, NonEmptyList, AnonymousNode
+    CompoundTerm, List, EmptyList, NonEmptyList, AnonymousNode, N3Set
 from OrderedSequence import merge
 from formula import Formula, StoredStatement
 import reify
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.125 $"
+cvsRevision = "$Revision: 1.126 $"
 
 
 # Magic resources we know about
@@ -1120,6 +1120,11 @@ class RDFStore(RDFSink) :
 
     def newSymbol(self, uri):
 	return self.intern(RDFSink.newSymbol(self, uri))
+
+    def newSet(self, iterator=[]):
+        new_set = N3Set(iterator)
+        Term.__init__(new_set, self)
+        return new_set
 
     def newBlankNode(self, context, uri=None, why=None):
 	"""Create or reuse, in the default store, a new unnamed node within the given
