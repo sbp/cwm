@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.43 2002-10-08 20:59:09 timbl Exp $
+# $Id: retest.sh,v 1.44 2002-12-08 05:27:24 timbl Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -202,6 +202,10 @@ cwm_test flatten-Falsehood.n3 " " flatten-Falsehood.n3 --flatten
 
 cwm_test flatten-means.n3 " " flatten-means.n3 --flatten
 
+# echo "Test proof generation"
+
+cwm_test reason-t5.n3 "Proof for one simple rule" reason/t5.n3 --think --why
+  
 # echo  "Test applications"
 
 echo "Passed $passes out of $tests geneneral regresssion tests."
@@ -209,7 +213,10 @@ echo "Loopback parser tests:"
 ./n3-xml-test.sh `cat tests-work.txt`
 
 # $Log: retest.sh,v $
-# Revision 1.43  2002-10-08 20:59:09  timbl
+# Revision 1.44  2002-12-08 05:27:24  timbl
+# mmref
+#
+# Revision 1.43  2002/10/08 20:59:09  timbl
 # minor api changes probably
 #
 # Revision 1.42  2002/10/02 20:40:56  sandro
