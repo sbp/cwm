@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.35 2004-01-29 15:15:39 connolly Exp $
+# $Id: Makefile,v 1.36 2004-01-29 23:22:22 timbl Exp $
 
 PYTHON=python
 
@@ -81,7 +81,7 @@ log.rdf: log.n3
 
 #######
 
-GET=GET
+GET=curl
 
 # cf
 # W3C mailing list search results in RDF

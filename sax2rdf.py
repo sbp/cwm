@@ -38,13 +38,13 @@
 
 """
 
-import urllib   # Opening resources in load()
 import string
 import sys
 
 import uripath
 from why import BecauseOfData
 import diag
+from webAccess import urlopenForRDF   # http://www.w3.org/2000/10/swap/
 
 import xml.sax # PyXML stuff
                #   http://sourceforge.net/projects/pyxml
@@ -122,7 +122,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.38 2004-01-28 23:55:23 connolly Exp $"
+        version = "$Id: sax2rdf.py,v 1.39 2004-01-29 23:22:23 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -591,7 +591,7 @@ class RDFXMLParser(RDFHandler):
 	"""Parse a document identified bythe URI, return the top level formula"""
         if uri:
             _inputURI = uripath.join(baseURI, uri) # Make abs from relative
-            f = urllib.urlopen(_inputURI)
+            f = urlopenForRDF(_inputURI)
         else:
             _inputURI = uripath.join(baseURI, "STDIN") # Make abs from relative
             f = sys.stdin

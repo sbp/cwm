@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.144 2003-09-14 20:20:20 timbl Exp $
+$Id: cwm.py,v 1.145 2004-01-29 23:22:22 timbl Exp $
 
 Closed World Machine
 
@@ -35,6 +35,7 @@ import diag
 from why import FormulaReason
 from diag import verbosity, setVerbosity, progress, tracking, setTracking
 from uripath import join
+from webAccess import urlopenForRDF   # http://www.w3.org/2000/10/swap/
 
 # import re
 # import StringIO
@@ -58,7 +59,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.144 $"
+cvsRevision = "$Revision: 1.145 $"
 
 
 
@@ -318,7 +319,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.144 2003-09-14 20:20:20 timbl Exp $"
+        version = "$Id: cwm.py,v 1.145 2004-01-29 23:22:22 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
