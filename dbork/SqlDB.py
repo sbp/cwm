@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: SqlDB.py,v 1.20 2003-02-21 23:27:16 eric Exp $
+$Id: SqlDB.py,v 1.21 2003-02-24 22:19:15 eric Exp $
 
 """
 
@@ -45,7 +45,7 @@ def NTriplesAtom(s, rowBindings, interner):
     if (s._URI()):
         subj = interner.intern((SYMBOL, s._URI()))
     elif (s._literal()):
-        subj = interner.intern((SYMBOL, s._literal()))
+        subj = interner.intern((LITERAL, s._literal()))
     else:
         try:
             subj = rowBindings[s.symbol()]
