@@ -1,6 +1,6 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
-$Id: cwm.py,v 1.29 2001-02-28 20:45:26 timbl Exp $
+$Id: cwm.py,v 1.30 2001-03-22 16:41:03 timbl Exp $
 
 Closed World Machine
 
@@ -621,7 +621,8 @@ class RDFStore(notation3.RDFSink) :
 #                    _isExistential = 1
 
         _op = _asObj + _asPred
-        _anon = (_op < 2) and _isExistential
+#        _anon = (_op < 2) and _isExistential
+        _anon = (_asObj < 2) and _asPred == 0 and _isExistential
         _isSubExp = _isExistential and (x.occursAs[CONTEXT] != [] and x is not context) # subExpression removal
 
         if 0: print "Topology <%s in <%sanon=%i ob=%i,pr=%i se=%i exl=%i"%(
@@ -712,9 +713,10 @@ class RDFStore(notation3.RDFSink) :
 #        if not _isSubject and not _se: return       # Waste no more time
 #        if not _isSubject: return       # Waste no more time
         
-        if 0: sink.makeComment("...%s incoming=%i, se=%i, asSubj=%i" % (
-            `subj`[-8:], _incoming, _se, _isSubject))
+        if 0: sink.makeComment("DEBUG: %s incoming=%i, se=%i, anon=%i" % (
+            `subj`[-8:], _incoming, _se, _anon))
         if _anon and  _incoming == 1: return           # Forget it - will be dealt with in recursion
+
     
         if _anon and _incoming == 0:    # Will be root anonymous node - {} or []
 #            print " #@@@@@@ Subject", `subj`[-10:], " se=",_se
@@ -724,6 +726,8 @@ class RDFStore(notation3.RDFSink) :
                 sink.endBagSubject(subj.asPair())       # Subject is now set up
                 # continue to do arcs
 
+            elif subj is context:
+                pass
             else:     #  Could have alternative syntax here
 
                 for s in statements:  # Find at least one we will print
@@ -1557,7 +1561,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, _outURI)
-        version = "$Id: cwm.py,v 1.29 2001-02-28 20:45:26 timbl Exp $"
+        version = "$Id: cwm.py,v 1.30 2001-03-22 16:41:03 timbl Exp $"
 	_outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
 	_outSink.makeComment("    using base " + _baseURI)
 
