@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.16 2002-03-08 02:39:07 timbl Exp $
+$Id: llyn.py,v 1.17 2002-03-08 03:53:39 timbl Exp $
 
 RDF Store and Query engine
 
@@ -134,6 +134,8 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE
 RESOURCE = RDFSink.SYMBOL # @@misnomer
 
 LITERAL_URI_prefix = "data:application/n3;"
+
+cvsRevision = "$Revision: 1.17 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -1422,16 +1424,16 @@ class RDFStore(RDFSink.RDFSink) :
 #  Note when we move things, then the store may shrink as they may
 # move on top of existing entries and we don't allow duplicates.
 #
-    def moveContext(self, old, new, bindings=None):
-        if thing.verbosity() > 0: progress("Move context - SLOW")
-        self.reopen(new)    # If cannonical, uncannonicalize #@@ error prone if any references
-        if bindings == None:
-            bindings = [(old, new)]
-        for s in old.occursAs[CONTEXT][:] :   # Copy list!
-            q = s.quad
-            self.removeStatement(s)  # SLOW!
-            del(s)
-            self.storeQuad(_lookupQuad(bindings, q))
+#    def moveContext(self, old, new, bindings=None):
+#        if thing.verbosity() > 0: progress("Move context - SLOW")
+#        self.reopen(new)    # If cannonical, uncannonicalize #@@ error prone if any references
+#        if bindings == None:
+#            bindings = [(old, new)]
+#        for s in old.occursAs[CONTEXT][:] :   # Copy list!
+#            q = s.quad
+#            self.removeStatement(s)  # SLOW!
+#            del(s)
+#            self.storeQuad(_lookupQuad(bindings, q))
 
     def copyContextRecursive(self, old, new, bindings):
         total = 0

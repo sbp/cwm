@@ -100,7 +100,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.18 2002-03-08 02:39:08 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.19 2002-03-08 03:53:40 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
