@@ -28,7 +28,7 @@ References:
   A quick look at iCalendar
   http://www.w3.org/2000/01/foo
 
-$Id: toIcal.py,v 2.9 2004-02-02 19:38:56 timbl Exp $
+$Id: toIcal.py,v 2.10 2004-02-03 22:55:33 timbl Exp $
 
 NOTE: see earlier work:
   http://www.w3.org/2002/01dc-nj/toICal.py
@@ -385,6 +385,7 @@ class CalWr:
         self.exportGeneral(E_PROP, sts, event, ICAL.location, "LOCATION")
         self.exportGeneral(E_PROP, sts, event, ICAL.priority, "PRIORITY")
         self.exportGeneral(E_PROP, sts, event, ICAL.status, "STATUS")
+        self.refProp(sts, event, "url")
         self.recurProp(sts, "rrule", event)
 
         self.exportXFields(sts, event)
@@ -731,7 +732,10 @@ if __name__ == '__main__':
 
 
 # $Log: toIcal.py,v $
-# Revision 2.9  2004-02-02 19:38:56  timbl
+# Revision 2.10  2004-02-03 22:55:33  timbl
+# mmm
+#
+# Revision 2.9  2004/02/02 19:38:56  timbl
 # re-fix after spurious clash
 #
 # Revision 2.8  2004/02/02 16:46:50  connolly

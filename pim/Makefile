@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.7 2003-04-14 21:20:51 connolly Exp $
+# $Id: Makefile,v 1.8 2004-02-03 22:55:33 timbl Exp $
 
 PERL=perl
 PYTHON=python
@@ -10,6 +10,13 @@ PD=$(W)/2001/02pd
 SWAP=..
 PIMTEST=$(SWAP)/test/pim
 CWM=$(SWAP)/cwm.py
+
+# iLife import/export
+#
+ICAL=$(HOME)/Library/Calendars
+ITUNES=$(HOME)/Music/iTunes/iTunes\ Music
+IPHOTO=$(HOME)/Pictures/iPhoto\ Library
+SLIFE=$(HOME)/Documents/SemLife
 
 include $(UMLP)/XSLTPROC.mak
 
@@ -64,6 +71,22 @@ travelPdaRulesFig.png: travelPdaRulesFig.dot
 calIntFig.svg: calIntFig.dot
 calIntFig.ps: calIntFig.dot
 calIntFig.png: calIntFig.dot
+
+# Semantic Web Life
+
+slife: $(SLIFE)/PhotoMeta.n3 $(ICAL)/Photos.ics
+
+$(SLIFE):
+	mkdir $(SLIFE)
+
+$(SLIFE)/PhotoMeta.n3 : $(SLIFE)
+	jhead -n3 $(IPHOTO)/????/??/??/*.JPG > $@
+
+$(SLIFE)/PhotoCalendar.cal3: $(SLIFE)/PhotoMeta.n3 PhotoEvent.n3
+	$(PYTHON) $(CWM) $(SLIFE)/PhotoMeta.n3 --filter=PhotoEvent.n3 --ugly > $@
+
+$(ICAL)/Photos.ics: $(SLIFE)/PhotoCalendar.cal3 toIcal.py
+	PYTHONPATH=.. $(PYTHON) toIcal.py $(SLIFE)/PhotoCalendar.cal3 > $@
 
 clean:
 	$(RM) $(PIMTEST)/testCal.rdf $(PIMTEST)/testTasks.rdf ,chi.rdf ical.n3 ical.rdf
