@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.26 2003-02-19 17:10:53 connolly Exp $
+# $Id: Makefile,v 1.27 2003-03-18 18:25:28 timbl Exp $
 
 PYTHON=python
 
@@ -33,7 +33,6 @@ HTMLS= check.html RDFSink.html cwm.html cwm_crypto.html cwm_math.html cwm_os.htm
 
 .n3.rdf:
 	$(PYTHON) cwm.py $<  --rdf > $@
-	cvs commit -m "Automatic: see Makefile" $@
 
 .py.html:
 	pydoc -w `echo $< | sed -e 's/\.py//'`
@@ -45,8 +44,8 @@ tested : package
 	echo "Test worked, now can release"
 	touch tested
 
-release : test
-	cvs commit -m "Passes regression test"
+release : tested
+	cvs commit -m "Passes regression test. (make release)"
 	touch release
 
 package: math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf LICENSE.rdf cwm.tar.Z $(HTMLS)
