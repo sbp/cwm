@@ -12,7 +12,7 @@
 
      (testing cvs)
 """
-revision = '$Id: plwm.py,v 1.6 2003-04-28 19:17:52 sandro Exp $'
+revision = '$Id: plwm.py,v 1.7 2003-08-01 15:42:51 sandro Exp $'
 
 import sys
 import ArgHandler
@@ -51,7 +51,7 @@ class Host:
         # we don't need to keep track of a current Store, current Parser,
         # or any of that, because hotswap does it for us, while letting them
         # be swapped.
-        pass
+        self.pluginManager = hotswap.PluginManager()
     
     def trace(self, message, subsystem=None):
         # look at who caller is, too
@@ -72,10 +72,13 @@ class Host:
     def load(self, source):
         " or is load() an option on a store/kb?    Hrmph. "
         parser = hotswap.get(pluggable.Parser)
-        store = hotswap.get(pluggable.Store)
-        parser.setSink(store)
+        #  parser should ask host.pluginManager for "store"
+        #store = hotswap.get(pluggable.Store)
+        #parser.setSink(store)
         stream = self.open(source)
         parser.parse(stream, host=self)
+
+    
         
 
 ################################################################
@@ -248,7 +251,7 @@ if __name__ == "__main__":
     # should pass some extra help text...
     a = MyArgHandler(host=host,
                      program="plwm",
-                     version="$Id: plwm.py,v 1.6 2003-04-28 19:17:52 sandro Exp $",
+                     version="$Id: plwm.py,v 1.7 2003-08-01 15:42:51 sandro Exp $",
                      uri="http://www.w3.org/2000/10/swap/doc/cwm")
 
     hotswap.prepend("wrap_n3")
@@ -268,7 +271,10 @@ if __name__ == "__main__":
     pump.pump(store, ser)
     
 # $Log: plwm.py,v $
-# Revision 1.6  2003-04-28 19:17:52  sandro
+# Revision 1.7  2003-08-01 15:42:51  sandro
+# ?
+#
+# Revision 1.6  2003/04/28 19:17:52  sandro
 # testing cvs!
 #
 # Revision 1.5  2003/04/25 19:55:53  sandro
