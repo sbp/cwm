@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.64 2001-04-20 02:31:14 connolly Exp $
+$Id: notation3.py,v 1.65 2001-04-21 02:57:34 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -799,9 +799,6 @@ class ToRDF(RDFSink):
 	    if self._subj:
 		self._wr.endElement()
 	    self._subj = subj
-	    if pred == (RESOURCE, RDF_type_URI) and obj[0] != LITERAL: # Special case starting with this
-                self._wr.startElement(obj[1], [(RDF_NS_URI+" about", subjn),], self.prefixes)
-                return
 	    self._wr.startElement(RDF_NS_URI+'Description',
 				 [(RDF_NS_URI+" about", subjn),], self.prefixes)
 
@@ -1124,7 +1121,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.64 2001-04-20 02:31:14 connolly Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.65 2001-04-21 02:57:34 connolly Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
