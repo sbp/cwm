@@ -5,7 +5,7 @@
 # http://www.oreilly.com/catalog/pythonwin32/chapter/ch12.html
 
 # Derived from
-# $Id: lookout.py,v 1.2 2000-12-14 19:26:54 timbl Exp $
+# $Id: lookout.py,v 1.3 2000-12-14 19:50:19 timbl Exp $
 # <http://www.w3.org/Tools/1998/07contactlog/contactlog.py>
 #
 # This code sort of works, at least to demonstrate python/Outlook
@@ -98,7 +98,7 @@ _test_data = \
 def main():
 	oapp = outlookToN3()
 
-	_version = "$Id: lookout.py,v 1.2 2000-12-14 19:26:54 timbl Exp $"[1:-1]
+	_version = "$Id: lookout.py,v 1.3 2000-12-14 19:50:19 timbl Exp $"[1:-1]
 	print "# Outlook data extractde by"
 	print "#   ", _version
 	print
@@ -172,13 +172,14 @@ class outlookToN3(outlook.Application):
 		for k in range(len(gkeys)):
 			key = gkeys[k]
 			_w = (key in pkeys)		# Is this writable?
-			if not _w : print "              # Read only:"
-			if key == "End":
-				pass  # Breakpoint me! @@ ;-)
-			x = item.__getattr__(key)
-			if x != "":
-				print "%-32s  %s" % (key, _toString(x)),
-				if k < len(keys)-1: print ";\n    ",
+			if not _w : pass # print "              # Read only:", key
+			else:
+				if key == "End":
+					pass  # Breakpoint me! @@ ;-)
+				x = item.__getattr__(key)
+				if x != "":
+					print "%-32s  %s" % (key, _toString(x)),
+					if k < len(gkeys)-1: print ";\n    ",
 		print " . ]"
 		
 	def incomingCall(self, name, num, isotime):
