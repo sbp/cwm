@@ -13,14 +13,16 @@ TODO: option for loading names from web
 TODO: add in details for "strict" for "ns"
 
 """
-__version__ = "$Revision: 1.12 $"
-# $Id: namespace.py,v 1.12 2003-09-06 04:49:00 sandro Exp $
+__version__ = "$Revision: 1.13 $"
+# $Id: namespace.py,v 1.13 2003-09-08 17:30:44 sandro Exp $
 
 import LX.logic
 
 class TermHasNoURI(RuntimeError):
     pass
 class NoShortNameDeclared(RuntimeError):
+    pass
+class NotInNamespace(RuntimeError):
     pass
 
 class NamespaceCluster:
@@ -124,7 +126,10 @@ if __name__ == "__main__":
 
 
 # $Log: namespace.py,v $
-# Revision 1.12  2003-09-06 04:49:00  sandro
+# Revision 1.13  2003-09-08 17:30:44  sandro
+# added missing exception class
+#
+# Revision 1.12  2003/09/06 04:49:00  sandro
 # made inverse lookup use its own errors
 #
 # Revision 1.11  2003/09/05 04:38:49  sandro
