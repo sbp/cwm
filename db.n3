@@ -6,12 +6,12 @@
 <> dc:title "Database terms for the Sematic Web";
    dc:creator [ con:mailbox <mailto:timbl@w3.org>],
               [con:mailbox <mailto:connolly@w3.org>];
-    rdfs:comment """
+   dc:description """
 Note that table documents are namespace documents: when you
 define a prefix to correspond to the table document's URI with a hash on,
 then the table document automatically an RDF schema for the namespace. 
 """,
- "$Id: db.n3,v 1.6 2002-03-07 01:33:15 connolly Exp $".
+ "$Id: db.n3,v 1.7 2002-03-07 02:27:10 connolly Exp $".
 
 #@prefix string: <http://www.w3.org/2000/10/swap/string#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
