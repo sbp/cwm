@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.3 2001-09-26 02:46:48 connolly Exp $
+$Id: thing.py,v 1.4 2001-11-01 14:44:49 timbl Exp $
 
 Interning of URIs and strings for stporage in SWAP store
 
@@ -68,7 +68,7 @@ ANONYMOUS = notation3.ANONYMOUS     # existentially qualified unlabelled resourc
 VARIABLE = notation3.VARIABLE
 
 
-chatty = 0   # verbosity debug flag
+
 doMeta = 0  # wait until we have written the code! :-)
 
 INFINITY = 1000000000           # @@ larger than any number occurences
@@ -402,4 +402,12 @@ class ReverseFunction:
 def progress(str):
     sys.stderr.write(  str + "\n")
 
-chatty = 0   # verbosity debug flag
+global chatty_flag   # verbosity debug flag
+
+def setVerbosity(x):
+    global chatty_flag
+    chatty_flag = x
+
+def verbosity():
+    global chatty_flag
+    return chatty_flag

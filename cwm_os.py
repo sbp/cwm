@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: cwm_os.py,v 1.1 2001-09-16 22:54:29 timbl Exp $
+$Id: cwm_os.py,v 1.2 2001-11-01 14:44:49 timbl Exp $
 
 Operating systems built-ins for cwm
 http://www.w3.org/2000/10/swap/string.py
@@ -11,6 +11,8 @@ See cwm.py and the os module in python
 """
 
 from thing import *
+import thing
+
 import os
 
 OS_NS_URI = "http://www.w3.org/2000/10/swap/os#"
@@ -29,7 +31,7 @@ OS_NS_URI = "http://www.w3.org/2000/10/swap/os#"
 # Not fatal if not defined
 class BI_environ(LightBuiltIn, Function):
     def evaluateObject(self, store, context, subj, subj_py):
-        if chatty > 80: progress("os:environ input:"+`subj_py`+ " has value "+os.environ[subj_py])
+        if thing.verbosity() > 80: progress("os:environ input:"+`subj_py`+ " has value "+os.environ[subj_py])
         if type(subj_py) == type(''):
             return store._fromPython(os.environ.get(subj_py, None))
 

@@ -40,6 +40,8 @@ import urllib   # Opening resources in load()
 import string
 import sys
 
+import thing
+
 import xml.sax # PyXML stuff
                #   http://sourceforge.net/projects/pyxml
                # Connolly uses the debian python2-xml 0.6.5-2 package
@@ -70,7 +72,7 @@ RDF_NS_URI = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" # As per the spec
 RDF_Specification = "http://www.w3.org/TR/REC-rdf-syntax/" # Must come in useful :-)
 DAML_ONT_NS = "http://www.daml.org/2000/10/daml-ont#"  # DAML early version
 DPO_NS = "http://www.daml.org/2001/03/daml+oil#"  # DAML plus oil
-chatty = 0
+
 
 RDF_IS = RESOURCE, RDF_NS_URI + "is"   # Used with quoting
 
@@ -93,7 +95,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.12 2001-09-27 21:32:37 connolly Exp $"
+        version = "$Id: sax2rdf.py,v 1.13 2001-11-01 14:44:49 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -260,7 +262,7 @@ class RDFHandler(xml.sax.ContentHandler):
         
         tagURI = ((name[0] or "") + name[1]).encode('utf-8')
 
-        if chatty:
+        if thing.verbosity():
             if not attrs:
                 print '# State =', self._state, 'start tag: <' + tagURI + '>'
             else:
