@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.21 2004-08-06 13:30:47 syosi Exp $
+$Id: toXML.py,v 1.22 2004-10-18 19:38:04 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -450,7 +450,7 @@ class XMLWriter:
 	    else:
 		break
 	while i<len(uriref):
-            if not isXMLChar(uriref[i], NCNameStartChar):
+            if (not isXMLChar(uriref[i], NCNameStartChar)) or uriref[i-1] == ':':
                 i = i+1
             else:
                 break
@@ -462,6 +462,7 @@ class XMLWriter:
                 return self.figurePrefix(uriref, rawAttrs, prefixes)
             raise RuntimeError("this graph cannot be serialized in RDF/XML")
 	ln = uriref[i:]
+	#progress(ln)
 	ns = uriref[:i]
 	self.counter.countNamespace(ns)
 #        print "@@@ ns=",`ns`, "@@@ prefixes =", `prefixes`

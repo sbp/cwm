@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # borrowing liberally from Eikeon's setup.py for rdflib
 # an attempt at a setup.py installer for Cwm/SWAP
-# version: $Id: setup.py,v 1.7 2004-08-08 01:44:49 syosi Exp $
+# version: $Id: setup.py,v 1.8 2004-10-18 19:38:04 syosi Exp $
 # by Dan Brickley <danbri@w3.org>
 #
 # STATUS: this file now works
@@ -34,7 +34,7 @@ if exists(swap_dir):
 # Install SWAP
 from distutils.core import setup
 #from swap import __version__
-__version__='0.8.0-plus'
+__version__='0.8.1'
 setup(
     name = 'cwm',
     version = __version__,
@@ -46,6 +46,7 @@ setup(
     url = "http://www.w3.org/2000/10/swap/",
     package_dir = {'swap': 'swap'},
     packages = ['swap'],
+    py_modules = ['cwm'],
     scripts = ['cwm.py'],
    )
     # todo, figure out which other modules are in public APIs
