@@ -33,7 +33,7 @@ earlier dev notes, links, ...
  http://rdfig.xmlhack.com/2002/02/27/2002-02-27.html#1014821419.001175
 """
 
-__version__ = "$Id: dbview.py,v 1.3 2002-02-28 15:14:00 connolly Exp $" #@@consult python style guide
+__version__ = "$Id: dbview.py,v 1.4 2002-03-05 00:36:32 connolly Exp $" #@@consult python style guide
 
 
 from string import join
@@ -100,7 +100,8 @@ def testDBView(fp, host, port, user, passwd):
           ('email', 'given', 'family', 'city', 'state', 'country', 'URL', 'last'),
           ('users', 'techplenary2002'),
           'users.id=techplenary2002.id')
-
+    sink.endDoc()
+    
 def test():
     import sys
     from string import atoi
