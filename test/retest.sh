@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.38 2002-08-07 14:32:21 timbl Exp $
+# $Id: retest.sh,v 1.39 2002-08-16 21:24:01 timbl Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -41,6 +41,9 @@ cwm_test anon-prop-1.n3 "Parse and regen anonymous property" anon-prop.n3
 cwm_test daml-ont.n3 "Convert some RDF/XML into RDF/N3" daml-pref.n3 -rdf daml-ont.rdf -n3
 
 cwm_test strquot.n3 "N3 string quoting" -n3 strquot.n3
+
+cwm_test path1.n3 "Path syntax, simple" syntax/path1.n3
+cwm_test path2.n3 "Path syntax, more"   syntax/path2.n3
 
 cwm_test lstring-out.n3 "N3 string nested triple quoting" --n3 syntax/lstring.n3
 
@@ -158,7 +161,10 @@ echo "Loopback parser tests:"
 ./n3-xml-test.sh `cat tests-work.txt`
 
 # $Log: retest.sh,v $
-# Revision 1.38  2002-08-07 14:32:21  timbl
+# Revision 1.39  2002-08-16 21:24:01  timbl
+# Path parsing now tested too, simply.
+#
+# Revision 1.38  2002/08/07 14:32:21  timbl
 # uripath changes. passes 51 general tests and 25 loopback tests
 #
 # Revision 1.37  2002/07/01 20:46:53  timbl

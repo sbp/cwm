@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.37 2002-08-08 02:03:35 timbl Exp $
+$Id: llyn.py,v 1.38 2002-08-16 21:24:00 timbl Exp $
 
 RDF Store and Query engine
 
@@ -150,7 +150,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.37 $"
+cvsRevision = "$Revision: 1.38 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -1037,7 +1037,7 @@ class RDFStore(RDFSink.RDFSink) :
             else :      # This has a fragment and a resource
                 resid = urirefString[:hash]
                 if string.find(resid, "#") >= 0:
-                    raise URISyntaxError # Hash in document ID - can be from parsing XML as N3!
+                    raise URISyntaxError("Hash in document ID - can be from parsing XML as N3! -"+resid)
                 r = self.internURI(resid)
                 if typ == SYMBOL:
                     if urirefString == N3_nil[1]:  # Hack - easier if we have a different classs
