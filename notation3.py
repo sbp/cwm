@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.156 2004-06-30 18:06:19 syosi Exp $
+$Id: notation3.py,v 1.157 2004-06-30 20:27:54 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -541,6 +541,8 @@ class SinkParser:
 	    j=i+1
             oldParentContext = self._parentContext
 	    self._parentContext = self._context
+            parentAnonymousNodes = self._anonymousNodes
+            self._anonymousNodes = {}
             if subj is None: subj = self._store.newFormula()
             self._context = subj
             
@@ -555,6 +557,7 @@ class SinkParser:
                 j = self.directiveOrStatement(str,i)
                 if j<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "expected statement or '}'")
 
+            self._anonymousNodes = parentAnonymousNodes
             self._context = self._parentContext
 	    self._parentContext = oldParentContext
             res.append(subj.close())   # Must not actually use the formula until it has been closed
@@ -1177,7 +1180,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.156 2004-06-30 18:06:19 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.157 2004-06-30 20:27:54 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
