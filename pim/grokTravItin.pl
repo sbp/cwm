@@ -9,7 +9,7 @@
 #  http://www.w3.org/2001/07dc-bos/grokNavItin.pl
 #  Id: grokNavItin.pl,v 1.8 2002/06/04 01:45:38 connolly Exp
 #
-# $Id: grokTravItin.pl,v 1.12 2003-04-14 21:20:51 connolly Exp $
+# $Id: grokTravItin.pl,v 1.13 2003-05-08 22:50:50 connolly Exp $
 # see changelog at end
 #
 
@@ -398,6 +398,8 @@ SNA JOHN WAYNE INTL
 MIA MIAMI INTERNTNL
 ZRH ZURICH
 BUD BUDAPEST
+CMH COLUMBUS OH
+IAD WASHINGTON DULLES
 EODATA
 
     # SNA confirmed via http://www.ocair.com/
@@ -414,7 +416,10 @@ EODATA
 
 
 # $Log: grokTravItin.pl,v $
-# Revision 1.12  2003-04-14 21:20:51  connolly
+# Revision 1.13  2003-05-08 22:50:50  connolly
+# added CMH, IAD
+#
+# Revision 1.12  2003/04/14 21:20:51  connolly
 # ical section done
 #
 # Revision 1.11  2003/03/12 15:01:02  connolly
