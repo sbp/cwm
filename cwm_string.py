@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.26 2004-07-13 14:52:41 syosi Exp $
+$Id: cwm_string.py,v 1.27 2004-07-16 17:44:31 syosi Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -167,7 +167,7 @@ class BI_search(LightBuiltIn, Function):
 
         if m:
             if verbosity() > 80: progress("search matched:"+m.group(1))
-            return [store._fromPython(x) for x in m.groups()]
+            return m.groups()
         if verbosity() > 80: progress("search didn't match")
 
 

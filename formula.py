@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.11 2004-07-06 18:04:19 syosi Exp $
+$Id: formula.py,v 1.12 2004-07-16 17:44:31 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -57,7 +57,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.11 $"
+cvsRevision = "$Revision: 1.12 $"
 
 # Magic resources we know about
 
@@ -579,6 +579,9 @@ class Formula(AnonymousNode, CompoundTerm):
         sink.add(F, rei["statements"], StatementClass)
 	    
 	return F
+
+    def flatten(self, sink, why=None):
+        return self.reification(sink, {}, why=why)
 
     def doesNodeAppear(self, symbol):
         """Does that particular node appear anywhere in this formula

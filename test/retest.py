@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.18 2004-06-24 20:22:51 syosi Exp $
+ $Id: retest.py,v 1.19 2004-07-16 17:44:31 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -33,11 +33,11 @@ import urllib
 
 # From PYTHONPATH equivalent to http://www.w3.org/2000/10/swap
 
-import llyn
-from myStore import load, loadMany, Namespace
-from uripath import refTo, base
-import diag
-from diag import progress
+from swap import llyn
+from swap.myStore import load, loadMany, Namespace
+from swap.uripath import refTo, base
+from swap import diag
+from swap.diag import progress
 
 
 rdf = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
