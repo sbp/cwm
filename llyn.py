@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.86 2003-08-14 00:00:18 timbl Exp $
+$Id: llyn.py,v 1.87 2003-08-21 22:03:06 connolly Exp $
 
 RDF Store and Query engine
 
@@ -156,7 +156,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.86 $"
+cvsRevision = "$Revision: 1.87 $"
 
 # Magic resources we know about
 
@@ -1867,7 +1867,7 @@ class RDFStore(RDFSink) :
 	    if r == None: return
             f = r.fragments.get(urirefString[hash+1:], None)
             if f == None: return
-	raise RuntimeError("Ooops! Attempt to create new identifier hits on one already used: %s"%(urirefString))
+	raise ValueError("Ooops! Attempt to create new identifier hits on one already used: %s"%(urirefString))
 	return
 
 
