@@ -29,7 +29,7 @@ LITERAL = notation3.LITERAL
 RDF_NS_URI = notation3.RDF_NS_URI # As per the spec
 RDF_Specification = "http://www.w3.org/TR/REC-rdf-syntax/" # Must come in useful :-)
 DAML_ONT_NS = "http://www.daml.org/2000/10/daml-ont#"  # DAML early version
-DPO_NS = "http://www.daml.org/2000/12/daml+oil#"  # DAML plus oil
+DPO_NS = "http://www.daml.org/2001/03/daml+oil#"  # DAML plus oil
 chatty = 0
 
 RDF_IS = RESOURCE, RDF_NS_URI + "is"   # Used with quoting
@@ -50,7 +50,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.14 2001-04-21 22:14:02 timbl Exp $"
+        version = "$Id: xml2rdf.py,v 1.15 2001-05-09 15:06:35 connolly Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
