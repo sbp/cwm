@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.8 2001-09-06 19:55:07 connolly Exp $
+# $Id: Makefile,v 1.9 2001-10-15 18:03:26 timbl Exp $
 
 PYTHON=python2
 
@@ -37,4 +37,9 @@ kifForm.html: kifExpr.g gram2html.py
 
 SemEnglish.html: SemEnglish.g gram2html.py
 	$(PYTHON) gram2html.py SemEnglish.g "SemEnglish Grammar (from Seth)" >$@
+
+log.rdf: log.n3
+	cwm log.n3 -rdf > log.rdf
+
+
 
