@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.50 2002-12-07 23:43:28 timbl Exp $
+$Id: llyn.py,v 1.51 2002-12-08 05:30:35 timbl Exp $
 
 RDF Store and Query engine
 
@@ -156,7 +156,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.50 $"
+cvsRevision = "$Revision: 1.51 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -804,8 +804,8 @@ def loadToStore(store, uri=None, contentType=None, formulaURI=None, remember=1):
     #    @@ Get sensible net errors and produce dignostics
 
         guess = ct
-        if verbosity() > 29: progress("Content-type: " + ct + " for "+addr)
-        if ct.find('xml') < 0 and ct.find('rdf') < 0 :   # Rats - nothing to go on
+        if verbosity() > 29: progress("Content-type: " + `ct` + " for "+addr)
+        if ct == None or (ct.find('xml') < 0 and ct.find('rdf') < 0) :   # Rats - nothing to go on
             buffer = netStream.read(500)
             netStream.close()
             netStream = urllib.urlopen(addr)
@@ -2972,4 +2972,11 @@ def x2s(x):
 def isString(x):
     # in 2.2, evidently we can test for isinstance(types.StringTypes)
     return type(x) is type('') or type(x) is type(u'')
+
+#####################  Register this module
+
+from thing import setStoreClass
+setStoreClass(RDFStore)
+
+#ends
 

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.20 2002-12-07 23:43:28 timbl Exp $
+# $Id: Makefile,v 1.21 2002-12-08 05:30:30 timbl Exp $
 
 PYTHON=python
 
@@ -6,7 +6,7 @@ YAPPS=yapps2.py
 
 TESTIN=test/sameDan.n3
 
-HTMLS=RDFSink.html cwm.html cwm_crypto.html cwm_math.html cwm_os.html cwm_string.html cwm_time.html diag.html llyn.html notation3.html sax2rdf.html tab2n3.html thing.html toXML.html uripath.html xml2infoset.html why.html
+HTMLS= check.html RDFSink.html cwm.html cwm_crypto.html cwm_math.html cwm_os.html cwm_string.html cwm_time.html diag.html llyn.html notation3.html sax2rdf.html tab2n3.html thing.html toXML.html uripath.html xml2infoset.html why.html
 
 #xml2rdf.html
 #de-cr.html
