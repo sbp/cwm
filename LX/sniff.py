@@ -1,8 +1,8 @@
 """
 
 """
-__version__ = "$Revision: 1.4 $"
-# $Id: sniff.py,v 1.4 2003-08-22 20:49:41 sandro Exp $
+__version__ = "$Revision: 1.5 $"
+# $Id: sniff.py,v 1.5 2003-09-17 16:09:08 sandro Exp $
 
 import re
 import cStringIO
@@ -91,6 +91,9 @@ def sniffLanguage(stream, baseURI=ianaBase):
         stream.fp.seek(0)
     except IOError:
         makeSeekable(stream)
+    except AttributeError:
+        makeSeekable(stream)
+        
 
     lang = sniffer(stream, lang)
     stream.fp.seek(0)
@@ -182,7 +185,10 @@ class sniffXMLHandler(xml.sax.handler.ContentHandler):
     
 
 # $Log: sniff.py,v $
-# Revision 1.4  2003-08-22 20:49:41  sandro
+# Revision 1.5  2003-09-17 16:09:08  sandro
+# handle a change to python 2.3 silently
+#
+# Revision 1.4  2003/08/22 20:49:41  sandro
 # midway on getting load() and parser abstraction to work better
 #
 # Revision 1.3  2003/01/29 06:09:18  sandro
