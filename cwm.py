@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.45 2001-05-21 02:37:13 timbl Exp $
+$Id: cwm.py,v 1.46 2001-05-21 14:35:47 connolly Exp $
 
 Closed World Machine
 
@@ -542,13 +542,20 @@ class RDFStore(notation3.RDFSink) :
             del self.namespaces[oldp]
         self.prefixes[mpPair] = ""
         self.namespaces[""] = mpPair
-        
+
+
+    def dumpPrefixes(self, sink):
+        prefixes = self.namespaces.keys()   #  bind in same way as input did FYI
+        prefixes.sort()
+        for pfx in prefixes:
+            sink.bind(pfx, self.namespaces[pfx])
+
+
 # Output methods:
 
     def dumpChronological(self, context, sink):
         sink.startDoc()
-        for c in self.prefixes.items():   #  bind in same way as input did FYI
-            sink.bind(c[1], c[0])
+        self.sumpPrefixes(sink)
 #        print "# There are %i statements in %s" % (len(context.occursAs[CONTEXT]), `context` )
         for s in context.occursAs[CONTEXT]:
             self._outputStatement(sink, s)
@@ -569,8 +576,7 @@ class RDFStore(notation3.RDFSink) :
 
         self.selectDefaultPrefix(context)        
         sink.startDoc()
-        for c in self.prefixes.items() :   #  bind in same way as input did FYI
-            sink.bind(c[1], c[0])
+        self.dumpPrefixes(sink)
 
         for r in self.engine.resources.values() :  # First the bare resource
             for s in r.occursAs[SUBJ] :
@@ -728,8 +734,7 @@ class RDFStore(notation3.RDFSink) :
         """
         self.selectDefaultPrefix(context)        
         sink.startDoc()
-        for c in self.prefixes.items() :   #  bind in same way as input did FYI
-            sink.bind(c[1], c[0])
+        self.dumpPrefixes(sink)
         self.dumpNestedStatements(context, sink)
         sink.endDoc()
 
@@ -1774,7 +1779,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI, base=option_baseURI, flags=option_rdf_flags)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI, quiet=option_quiet)
-        version = "$Id: cwm.py,v 1.45 2001-05-21 02:37:13 timbl Exp $"
+        version = "$Id: cwm.py,v 1.46 2001-05-21 14:35:47 connolly Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
