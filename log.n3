@@ -4,11 +4,11 @@
 # and Web Ontology's ontological level, to allow rules to be expressed
 # and inference done.
 # 
-# $Id: log.n3,v 1.16 2002-05-11 04:52:59 timbl Exp $
+# $Id: log.n3,v 1.17 2002-07-18 05:02:20 connolly Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix doc: <http://www.w3.org/2000/01/pim/doc#>.
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix : <#>.
 
