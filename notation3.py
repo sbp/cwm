@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.23 2000-11-09 16:58:44 timbl Exp $
+$Id: notation3.py,v 1.24 2000-11-09 17:04:27 timbl Exp $
 
 cf
 
@@ -923,7 +923,7 @@ class SinkToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Start notation3 generation\n")
-        self._write("#  $Id: notation3.py,v 1.23 2000-11-09 16:58:44 timbl Exp $\n\n")
+        self._write("#  $Id: notation3.py,v 1.24 2000-11-09 17:04:27 timbl Exp $\n\n")
         self._subj = None
         self._nextId = 0
 
