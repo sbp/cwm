@@ -1,3 +1,4 @@
+<!-- @@@ WARNING THIS ATTRIBUES ATE SCREWED UP IN this daml-ex.rdf -->
 <rdf:RDF
   xmlns:rdf ="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns     ="http://www.daml.org/2000/10/daml-ont#"
@@ -5,7 +6,7 @@
   >
 
 <Ontology about="">
-  <versionInfo>$Id: daml-ex.rdf,v 1.1 2000-12-08 20:28:44 timbl Exp $</versionInfo>
+  <versionInfo>$Id: daml-ex.rdf,v 1.2 2001-01-17 22:21:38 timbl Exp $</versionInfo>
   <comment>An example ontology</comment>
   <imports resource="http://www.daml.org/2000/10/daml-ont"/>
 </Ontology>
