@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.66 2004-11-10 00:50:21 syosi Exp $
+# $Id: Makefile,v 1.67 2004-11-10 17:44:43 syosi Exp $
 
 
 PYTHON=python
@@ -77,7 +77,7 @@ cwm.tar.gz:  $(HTMLS) $(SOURCES) $(TESTS) $(TARBALL_STUFF) tested filelist
 	tar -czf $(TARNAME).tar.gz $(TARNAME)
 	mv $(TARNAME) ,cwm-tarball-test
 	head -n -1 .htaccess > ,htaccess
-	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME) '[L]' >> ,htaccess
+	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME).tar.gz '[L]' >> ,htaccess
 	mv ,htaccess .htaccess
 	cvs add $(TARNAME).tar.gz
 #LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply/*.py *.py
@@ -103,8 +103,8 @@ setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(GRAMMAR) $(TARBALL_STUFF) tested f
 	cd ,cwm-$(VERSION)-test && tar -xzf ../cwm-$(VERSION).tar.gz
 	cd ,cwm-$(VERSION)-test/cwm-$(VERSION)/test && mkdir ,test
 	cd ,cwm-$(VERSION)-test/cwm-$(VERSION)/test && $(MAKE)
-	head -n 1 .htaccess > ,htaccess
-	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME) '[L]' >> ,htaccess
+	if which head; then head -n 1 .htaccess > ,htaccess; fi
+	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME).tar.gz '[L]' >> ,htaccess
 	mv ,htaccess .htaccess
 	cvs add $(TARNAME).tar.gz	
 
