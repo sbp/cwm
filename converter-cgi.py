@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: converter-cgi.py,v 1.1 2001-10-15 19:02:52 timbl Exp $
+$Id: converter-cgi.py,v 1.2 2004-11-09 20:00:21 timbl Exp $
 
 convert-cgi
 
@@ -33,12 +33,6 @@ urlparse.uses_fragment.append("md5") #@@kludge/patch
 urlparse.uses_relative.append("md5") #@@kludge/patch
 
 import notation3    # N3 parsers and generators, and RDF generator
-
-#from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE
-
-# from llyn import RDFStore  # A store with query functiuonality
-
-
 
               
             

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.14 2004-10-28 17:41:59 timbl Exp $
+$Id: pretty.py,v 1.15 2004-11-09 19:58:26 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -25,9 +25,8 @@ from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4
 from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_NS
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
-from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
-cvsRevision = "$Revision: 1.14 $"
+cvsRevision = "$Revision: 1.15 $"
 
 # Magic resources we know about
 
