@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.97 2003-10-20 17:31:54 timbl Exp $
+$Id: llyn.py,v 1.98 2004-01-28 22:54:58 timbl Exp $
 
 RDF Store and Query engine
 
@@ -144,7 +144,7 @@ from term import BuiltIn, LightBuiltIn, \
     HeavyBuiltIn, Function, ReverseFunction, \
     Literal, Symbol, Fragment, FragmentNil, Anonymous, Term,\
     CompoundTerm, List, EmptyList, NonEmptyList
-from term import merge
+from OrderedSequence import merge
 from formula import Formula, StoredStatement, compareTerm
 
 from query import think, applyRules, testIncludes
@@ -157,11 +157,11 @@ from RDFSink import RDF_NS_URI
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 from pretty import Serializer
-from thing import indentString
+from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.97 $"
+cvsRevision = "$Revision: 1.98 $"
 
 # Magic resources we know about
 

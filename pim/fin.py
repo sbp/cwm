@@ -8,7 +8,7 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.11 2003-09-05 16:42:14 timbl Exp $
+$Id: fin.py,v 1.12 2004-01-28 22:54:58 timbl Exp $
 """
 import llyn
 
@@ -235,10 +235,12 @@ def doCommand(year, inputURI="/dev/stdin"):
 	    <link rel="Stylesheet" href="report.css">
 	</head>
 	<body>
-	    <img src="sand-dollar.gif" alt="dollar" align="right"/>
 	"""
+#	    <img src="sand-dollar.gif" alt="dollar" align="right"/>
 	
-        version = "$Id: fin.py,v 1.11 2003-09-05 16:42:14 timbl Exp $"
+
+
+        version = "$Id: fin.py,v 1.12 2004-01-28 22:54:58 timbl Exp $"
 #	if not option_quiet:
 #	_outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 

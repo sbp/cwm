@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: myStore.py,v 1.1 2003-08-25 14:54:53 timbl Exp $
+$Id: myStore.py,v 1.2 2004-01-28 22:54:58 timbl Exp $
 
 Process-global store
 
@@ -41,6 +41,8 @@ def _checkStore(s=None):
     global store, storeClass
     if s != None: return s
     if store != None: return store
+    if storeClass == None:
+	import llyn   # default 
     assert storeClass!= None, "Some storage module must register with myStore.py before you can use it"
     store = storeClass() # Make new one
     return store
