@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.119 2002-10-08 20:59:08 timbl Exp $
+$Id: notation3.py,v 1.120 2002-11-24 03:12:02 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -962,7 +962,11 @@ t   "this" and "()" special syntax should be suppresed.
         if "d" in self._flags or "p" in self._flags: return  # Ignore the prefix system completely
         self._endStatement()
         self.defaultNamespace = nsPair
-        self._write(" @prefix : <%s> ." % (refTo(self.base, nsPair[1])) )
+	if self.base:  # Sometimes there is none, and nowadays refTo is intolerant
+	    x = refTo(self.base, nsPair[1])
+	else:
+	    x = nsPair[1]
+        self._write(" @prefix : <%s> ." % x )
         self._newline()
        
 
@@ -970,7 +974,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.119 2002-10-08 20:59:08 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.120 2002-11-24 03:12:02 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
