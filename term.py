@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.15 2004-07-06 18:04:19 syosi Exp $
+$Id: term.py,v 1.16 2004-07-12 15:31:35 syosi Exp $
 
 term
 
@@ -32,6 +32,7 @@ import md5, binascii  # for building md5 URIs
 
 from uripath import refTo
 from RDFSink import runNamespace
+from decimal import decimal  # for xsd:decimal
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 
@@ -658,19 +659,20 @@ class FragmentNil(EmptyList, Fragment):
 #
 #		L I T E R A L S
 
-typeMap = { "integer": long,
-                "nonPositiveInteger": long,
-                    "negativeInteger": long,
-                "long": int,
-                    "int": int,
-                        "short": int,
-                            "byte": int,
-                "nonNegativeInteger": long,
-                    "unsignedLong": int,
-                        "unsignedInt": int,
-                            "unsignedShort": int,
-                                "unsignedByte": int,
-                    "positiveInteger": long,
+typeMap = { "decimal": decimal,
+                "integer": long,
+                    "nonPositiveInteger": long,
+                        "negativeInteger": long,
+                    "long": int,
+                        "int": int,
+                            "short": int,
+                                "byte": int,
+                    "nonNegativeInteger": long,
+                        "unsignedLong": int,
+                            "unsignedInt": int,
+                                "unsignedShort": int,
+                                    "unsignedByte": int,
+                        "positiveInteger": long,
             "boolean": int,
             "double": float,
             "float": float,
@@ -700,7 +702,7 @@ typeMap = { "integer": long,
                         "NMTOKEN": str,
                             "NMTOKENS": str}
 ##
-## We don't support decimal, base64Binary, or hexBinary
+## We don't support base64Binary or hexBinary
 ##
 class Literal(Term):
     """ A Literal is a representation of an RDF literal
