@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.78 2001-09-26 02:46:48 connolly Exp $
+$Id: cwm.py,v 1.79 2001-09-27 19:45:28 connolly Exp $
 
 Closed World Machine
 
@@ -708,10 +708,6 @@ class RDFStore(RDFSink.RDFSink) :
 
     def endDoc(self):
         pass
-
-class URISyntaxError(ValueError):
-    """A parameter is passed to a routine that requires a URI reference"""
-    pass
 
 ##########################################################################
 #
@@ -2030,6 +2026,11 @@ def _lookup(bindings, value):
     return value
 
 
+class URISyntaxError(ValueError):
+    """A parameter is passed to a routine that requires a URI reference"""
+    pass
+
+
 #   DIAGNOSTIC STRING OUTPUT
 #
 def bindingsToString(bindings):
@@ -2509,7 +2510,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.78 2001-09-26 02:46:48 connolly Exp $"
+        version = "$Id: cwm.py,v 1.79 2001-09-27 19:45:28 connolly Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
