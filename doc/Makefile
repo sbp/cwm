@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.20 2004-02-04 17:57:06 timbl Exp $
+# $Id: Makefile,v 1.21 2004-03-08 15:20:17 timbl Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -93,7 +93,7 @@ tutorial-book.pdf: $(TUTFILES) $(TUTFIGS) tutorial-bookstyle
 	echo htmldoc doesn't have a noprint thingy. Lose.
 	$(HTMLDOC) --batch tutorial-bookstyle -f $@ $(TUTFILES)
 
-cwm-help.txt : ../cwm.py ../notation3.py
+cwm-help.txt : ../cwm.py ../notation3.py ../sax2rdf.py ../toXML.py
 	$(PYTHON) $(CWM) --help | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' > cwm-help.txt
 
 CwmHelp.html : CwmHelp-template.html cwm-help.txt

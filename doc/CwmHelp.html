@@ -116,10 +116,13 @@ t   "this" and "()" special syntax should be suppresed.
 u   Use \u for unicode escaping in URIs instead of utf-8 %XX
 
 
-        Flags to control RDF/XML output (after --rdf=) areas follows:
+Flags to control RDF/XML output (after --rdf=) areas follows:
         
-        c  - Don't use elements as class names
-        d  - Don't use default namespace
+b  - Don't use nodeids for Bnodes
+c  - Don't use elements as class names
+d  - Default namespace supressed.
+r  - Relative URI suppression. Always use absolute URIs.
+z  - Allow relative URIs for namespaces
 
 
 
@@ -142,7 +145,7 @@ u   Use \u for unicode escaping in URIs instead of utf-8 %XX
 <div class="noprint">
 <hr />
 
-<p>$Id: CwmHelp.html,v 1.8 2004-03-06 20:39:39 timbl Exp $</p>
+<p>$Id: CwmHelp.html,v 1.9 2004-03-08 15:20:17 timbl Exp $</p>
 </div>
 </body>
 </html>
