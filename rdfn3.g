@@ -4,7 +4,7 @@
 # Share and Enjoy. Open Source license:
 # Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 # http://www.w3.org/Consortium/Legal/copyright-software-19980720
-# $Id: rdfn3.g,v 1.3 2001-08-31 18:55:47 connolly Exp $
+# $Id: rdfn3.g,v 1.4 2001-08-31 19:06:20 connolly Exp $
 # see log at end
 #
 # REFERENCES
@@ -37,11 +37,11 @@ parser RDFN3Parser:
     token RB:       r'\]'
     token LC:       r'\{'
     token RC:       r'\}'
+    token END:      r'\Z'
 
-    rule document: ( directive | statement ) *
+    rule document: ( directive | statement ) * END
 
     rule directive : PREFIX QNAME URIREF STOP
-
 
     # foos0 is mnemonic for 0 or more foos
     # foos1      "          1 or more foos
@@ -82,7 +82,10 @@ parser RDFN3Parser:
                          | # empty
 
 # $Log: rdfn3.g,v $
-# Revision 1.3  2001-08-31 18:55:47  connolly
+# Revision 1.4  2001-08-31 19:06:20  connolly
+# added END/eof token
+#
+# Revision 1.3  2001/08/31 18:55:47  connolly
 # cosmetic/naming tweaks
 #
 # Revision 1.2  2001/08/31 18:46:59  connolly
