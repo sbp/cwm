@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.43 2001-01-05 22:54:53 timbl Exp $
+$Id: notation3.py,v 1.44 2001-01-11 04:25:55 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -84,12 +84,17 @@ DAML_equivalentTo = ( RESOURCE, DAML_equivalentTo_URI )
 N3_forSome_URI = Logic_NS + "forSome"
 N3_subExpression_URI = Logic_NS + "subExpression"
 N3_forAll_URI = Logic_NS + "forAll"
+
+DPO_NS = "http://www.daml.org/2000/12/daml+oil#"  # DAML plus oil
+
+List_NS = DPO_NS     # We have to pick just one all te time
+
 # For lists:
-N3_first = (RESOURCE, Logic_NS + "first")
-N3_rest = (RESOURCE, Logic_NS + "rest")
-N3_null = (RESOURCE, Logic_NS + "null")
-N3_List = (RESOURCE, Logic_NS + "List")
-N3_Empty = (RESOURCE, Logic_NS + "Empty")
+N3_first = (RESOURCE, List_NS + "first")
+N3_rest = (RESOURCE, List_NS + "rest")
+N3_nil = (RESOURCE, List_NS + "nil")
+N3_List = (RESOURCE, List_NS + "List")
+N3_Empty = (RESOURCE, List_NS + "Empty")
 
 
 chatty = 0   # verbosity flag
@@ -415,9 +420,9 @@ class SinkParser:
                     self.makeStatement((self._context, N3_first, this, item[0] ))           # obj
 
                 if not tail:
-                    res.append(N3_null)
+                    res.append(N3_nil)
                     return j
-                self.makeStatement((self._context, N3_rest, tail, N3_null ))           # obj
+                self.makeStatement((self._context, N3_rest, tail, N3_nil ))           # obj
                 res.append(head)
                 return j
 
@@ -997,7 +1002,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.43 2001-01-05 22:54:53 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.44 2001-01-11 04:25:55 timbl Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1192,7 +1197,7 @@ class ToN3(RDFSink):
         """
 
 #        print "# Representation of ", `pair`
-        if pair == N3_null and not self.noLists:
+        if pair == N3_nil and not self.noLists:
             return"()"
         type, value = pair
         if ((type == VARIABLE or type == ANONYMOUS)
