@@ -9,7 +9,7 @@
 #  http://www.w3.org/2001/07dc-bos/grokNavItin.pl
 #  Id: grokNavItin.pl,v 1.8 2002/06/04 01:45:38 connolly Exp
 #
-# $Id: grokTravItin.pl,v 1.11 2003-03-12 15:01:02 connolly Exp $
+# $Id: grokTravItin.pl,v 1.12 2003-04-14 21:20:51 connolly Exp $
 # see changelog at end
 #
 
@@ -396,6 +396,8 @@ YYZ TORONTO ON
 MAN MANCHESTER UK
 SNA JOHN WAYNE INTL
 MIA MIAMI INTERNTNL
+ZRH ZURICH
+BUD BUDAPEST
 EODATA
 
     # SNA confirmed via http://www.ocair.com/
@@ -412,7 +414,10 @@ EODATA
 
 
 # $Log: grokTravItin.pl,v $
-# Revision 1.11  2003-03-12 15:01:02  connolly
+# Revision 1.12  2003-04-14 21:20:51  connolly
+# ical section done
+#
+# Revision 1.11  2003/03/12 15:01:02  connolly
 # added MIA
 #
 # Revision 1.10  2003/02/26 23:45:51  connolly
