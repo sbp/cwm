@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.33 2002-05-15 00:38:13 timbl Exp $
+# $Id: retest.sh,v 1.34 2002-05-21 00:13:30 timbl Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -109,6 +109,8 @@ cwm_test bi-t10.n3 "log:resolvesTo and log:includes" includes/t10.n3 -think
 
 cwm_test bi-t11.n3 "log:resolvesTo and log:includes - schema checking" includes/t11.n3 -think
 
+cwm_test endsWith-out.n3 "string:endsWith" string/endsWith.n3 -rules
+
 cwm_test bi-quant.n3 "log:includes handling of univ./exist. quantifiers" includes/quantifiers.n3 -think
 
 cwm_test bi-concat.n3 "Test string concatetnation built-in" includes/concat.n3 -think
@@ -139,10 +141,13 @@ cwm_test argv-1.n3 "os:argv argument values"  os/argv.n3 --think --with foo bar 
 
 cwm_test argv-2.n3 "os:argv argument other values"  os/argv.n3 --think --with boof
 
+# echo  "Test applications"
+
+
 
 # $Log: retest.sh,v $
-# Revision 1.33  2002-05-15 00:38:13  timbl
-# lstring.n3
+# Revision 1.34  2002-05-21 00:13:30  timbl
+# Add string:endsWith
 #
 # Revision 1.32  2002/03/30 22:06:24  timbl
 # Add test for n3ExprFor
