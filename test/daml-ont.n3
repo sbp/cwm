@@ -3,14 +3,14 @@
 # Input from  http://www.daml.org/2000/10/daml-ont
 
 #  Notation3 generation by
-#  $Id: daml-ont.n3,v 1.1 2000-11-28 20:36:21 timbl Exp $
+#  $Id: daml-ont.n3,v 1.2 2001-01-02 21:18:02 timbl Exp $
 
-     @prefix : <http://www.daml.org/2000/10/daml-ont> .
+     @prefix : <http://www.daml.org/2000/10/daml-ont#> .
      @prefix ont: <http://www.daml.org/2000/10/daml-ont#> .
-     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema> .
+     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
      @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     
-    <file:/dev/swap/test/STDOUT> ont:versionInfo "$Id: daml-ont.n3,v 1.1 2000-11-28 20:36:21 timbl Exp $";
+    <file:/dev/swap/test/STDOUT> ont:versionInfo "$Id: daml-ont.n3,v 1.2 2001-01-02 21:18:02 timbl Exp $";
          ont:imports <http://www.w3.org/2000/01/rdf-schema>;
          a ont:Ontology .
     
