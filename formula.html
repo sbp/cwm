@@ -12,7 +12,7 @@ TT { font-family: lucidatypewriter, lucida console, courier }
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/devel/WWW/2000/10/swap/formula.py">/devel/WWW/2000/10/swap/formula.py</a></font></td></tr></table>
     <p><tt><br>
-$Id: formula.html,v 1.1 2003-08-30 18:04:11 timbl Exp $<br>
+$Id: formula.html,v 1.2 2003-09-02 00:13:42 timbl Exp $<br>
 &nbsp;<br>
 <a href="#Formula">Formula</a><br>
 See:&nbsp;&nbsp;<a href="http://www.w3.org/DesignIssues/Notation3">http://www.w3.org/DesignIssues/Notation3</a><br>
@@ -171,6 +171,8 @@ we&nbsp;may&nbsp;move&nbsp;to&nbsp;an&nbsp;internal&nbsp;storage&nbsp;rather&nbs
 smartIn&nbsp;gives&nbsp;a&nbsp;list&nbsp;of&nbsp;formulae&nbsp;for&nbsp;which&nbsp;builtin&nbsp;functions&nbsp;should&nbsp;operate<br>
 &nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;consideration&nbsp;of&nbsp;what&nbsp;"includes"&nbsp;means.<br>
 bindings&nbsp;is&nbsp;for&nbsp;use&nbsp;within&nbsp;a&nbsp;query.</tt></dd></dl>
+
+<dl><dt><a name="Formula-loadFormulaWithSubsitution"><strong>loadFormulaWithSubsitution</strong></a>(self, old, bindings, why<font color="#909090">=None</font>)</dt><dd><tt>Load&nbsp;information&nbsp;from&nbsp;another&nbsp;formula,&nbsp;subsituting&nbsp;as&nbsp;we&nbsp;go</tt></dd></dl>
 
 <dl><dt><a name="Formula-n3String"><strong>n3String</strong></a>(self, flags<font color="#909090">=''</font>)</dt><dd><tt>Dump&nbsp;the&nbsp;formula&nbsp;to&nbsp;an&nbsp;absolute&nbsp;string&nbsp;in&nbsp;N3</tt></dd></dl>
 
@@ -413,7 +415,7 @@ This&nbsp;is&nbsp;not&nbsp;done&nbsp;yet</tt></dd></dl>
 <strong>__file__</strong> = './formula.pyc'<br>
 <strong>__name__</strong> = 'formula'<br>
 <strong>becauseSubexpression</strong> = &lt;why.BecauseSubexpression instance&gt;<br>
-<strong>cvsRevision</strong> = '$Revision: 1.1 $'<br>
+<strong>cvsRevision</strong> = '$Revision: 1.2 $'<br>
 <strong>forAllSym</strong> = 'http://www.w3.org/2000/10/swap/log#forAll'<br>
 <strong>forSomeSym</strong> = 'http://www.w3.org/2000/10/swap/log#forSome'<br>
 <strong>generators</strong> = _Feature((2, 2, 0, 'alpha', 1), (2, 3, 0, 'final', 0), 4096)<br>

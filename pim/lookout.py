@@ -208,7 +208,7 @@ def main():
 	    Chose -- calendar and/or --contacts folder to dump into N3
 	    If you also chose --all, you get every single field from each entry
 	    You may need to export PYTHONPATH=.. if you do this in the swap CVS tree.
-	    $Id: lookout.py,v 1.9 2002-06-14 21:02:16 timbl Exp $
+	    $Id: lookout.py,v 1.10 2003-09-02 00:13:43 timbl Exp $
 	"""
 		    return
 		else:
@@ -224,13 +224,13 @@ def main():
 
 	oapp = outlookToN3()
 
-	_version = "$Id: lookout.py,v 1.9 2002-06-14 21:02:16 timbl Exp $"[1:-1]
+	_version = "$Id: lookout.py,v 1.10 2003-09-02 00:13:43 timbl Exp $"[1:-1]
 
 	print "# Outlook data extracted by"
 	print "#   ", _version
 	print "#"
-	print "@prefix", PREFIX, "<http://www.w3.org/2000/10/swap/pim/mso.n3#>."
-	print "@prefix util: <http://www.w3.org/2000/10/swap/util.n3#>."
+	print "@prefix", PREFIX, "<http://www.w3.org/2000/10/swap/pim/mso#>."
+	print "@prefix util: <http://www.w3.org/2000/10/swap/util#>."
 	print
 	if option_calendar:
 		print "# Calendar:"
