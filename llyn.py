@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.65 2003-02-01 05:50:01 timbl Exp $
+$Id: llyn.py,v 1.66 2003-02-01 06:51:26 connolly Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.65 $"
+cvsRevision = "$Revision: 1.66 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -892,14 +892,14 @@ class BI_semantics(HeavyBuiltIn, Function):
     
 class BI_semanticsOrError(BI_semantics):
     """ Either get and parse to semantics or return an error message on any error """
-    def evalObj(self, subj,  queue, bindings, proof):
+    def evalObj(self, subj, queue, bindings, proof):
         store = subj.store
         x = store.any((store._experience, store.semanticsOrError, subj, None))
         if x != None:
             if verbosity() > 10: progress(`store._experience`+`store.semanticsOrError`+": Already found error for "+`subj`+" was: "+ `x`)
             return x
         try:
-            return BI_semantics.evalObj(self, subj)
+            return BI_semantics.evalObj(self, subj, queue, bindings, proof)
         except (IOError, SyntaxError, DocumentAccessError):
             message = sys.exc_info()[1].__str__()
             result = store.intern((LITERAL, message))
