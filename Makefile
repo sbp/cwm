@@ -1,6 +1,6 @@
-# $Id: Makefile,v 1.9 2001-10-15 18:03:26 timbl Exp $
+# $Id: Makefile,v 1.10 2002-01-12 23:37:36 connolly Exp $
 
-PYTHON=python2
+PYTHON=python
 
 YAPPS=yapps2.py
 
