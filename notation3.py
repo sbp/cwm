@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.107 2002-03-22 21:36:00 timbl Exp $
+$Id: notation3.py,v 1.108 2002-05-15 00:38:10 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1247,7 +1247,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.107 2002-03-22 21:36:00 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.108 2002-05-15 00:38:10 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1548,7 +1548,7 @@ def stringToN3(str):
         j = i + m.start()
         res = res + str[i:j]
         ch = m.group(0)
-        if ch == '"' and delim == '"""':
+        if ch == '"' and delim == '"""' and str[j:j+3] != '"""':
             res = res + ch
         else:
             k = string.find('\a\b\f\r\t\v\n\\"', ch)
