@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.16 2004-12-02 17:16:38 syosi Exp $
+$Id: pretty.py,v 1.17 2004-12-02 20:06:07 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.16 $"
+cvsRevision = "$Revision: 1.17 $"
 
 # Magic resources we know about
 
@@ -177,6 +177,7 @@ class Serializer:
 		self._listsWithinLists(i, lists)
 
     def dumpLists(self):
+        listList = {}
 	context = self.context
 	sink = self.sink
 	lists = []
@@ -189,14 +190,17 @@ class Serializer:
 	for l in lists:
 	    list = l
 	    while not isinstance(list, EmptyList):
-		self._outputStatement(sink, (context, self.store.forSome, context, list))
+                if list not in listList:
+                    self._outputStatement(sink, (context, self.store.forSome, context, list))
+                    listList[list] = 1
 		list = list.rest
-
+        listList = {}
 	for l in lists:
 	    list = l
-	    while not isinstance(list, EmptyList):
+	    while (not isinstance(list, EmptyList)) and list not in listList:
 		self._outputStatement(sink, (context, self.store.first, list, list.first))
 		self._outputStatement(sink, (context, self.store.rest,  list, list.rest))
+		listList[list] = 1
 		list = list.rest
 
 
