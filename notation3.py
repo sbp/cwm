@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.150 2004-01-29 18:03:20 timbl Exp $
+$Id: notation3.py,v 1.151 2004-01-30 17:27:52 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -76,6 +76,7 @@ from RDFSink import Logic_NS
 import diag
 
 from why import BecauseOfData, FormulaReason
+from webAccess import urlopenForRDF
 
 N3_forSome_URI = RDFSink.forSomeSym
 N3_forAll_URI = RDFSink.forAllSym
@@ -201,7 +202,7 @@ class SinkParser:
             _inputURI = uripath.join(baseURI, uri) # Make abs from relative
 	    inputResource = self._sink.newSymbol(_inputURI)
             self._sink.makeComment("Taking input from " + _inputURI)
-            stream = urllib.urlopen(_inputURI)
+            stream = urlopenForRDF(_inputURI)
 	    if diag.tracking: self._reason2 = BecauseOfData(inputResource, because=self._reason) 
         else:
             self._sink.makeComment("Taking input from standard input")
@@ -1150,7 +1151,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.150 2004-01-29 18:03:20 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.151 2004-01-30 17:27:52 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
