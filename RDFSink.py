@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.17 2003-01-16 05:04:15 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.18 2003-01-21 16:10:35 timbl Exp $"
 
 import uripath
 import time
@@ -212,6 +212,7 @@ class RDFSink:
 	    ns =  self._genPrefix
 	    hash = ns.find("#")
 	    self.bind("run", ns[:hash+1])
+	self.checkNewId(subj)  # For a store, just in case, check really unique
         return subj
 
     def setGenPrefix(self, genPrefix):
@@ -231,8 +232,17 @@ class RDFSink:
     def newBlankNode(self, context, uri=None, why=None):
 	return self.newExistential(context, uri, why=why)
 	
+    def checkNewId(self, uri):
+	"""The store can override this to raise an exception if the
+	id is not in fact new. This is useful because it is usfeul
+	to generate IDs with useful diagnostic ways but this lays them
+	open to possibly clashing in pathalogical cases."""
+	return
+	
+
     def newUniversal(self, context, uri=None, why=None):
-	if uri==None: subj = ANONYMOUS, self.genId()  # ANONYMOUS means "arbitrary symbol"
+	if uri==None:
+	    subj = ANONYMOUS, self.genId()  # ANONYMOUS means "arbitrary symbol"
 	else: subj=(SYMBOL, uri)
         self.makeStatement((context,
                             (SYMBOL, forAllSym), #pred
