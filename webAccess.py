@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: webAccess.py,v 1.10 2004-07-23 18:54:17 syosi Exp $
+$Id: webAccess.py,v 1.11 2004-07-29 16:16:11 syosi Exp $
 
 
 Web access functionality building on urllib
@@ -53,8 +53,8 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
     of the store. However, it is natural to call it as a method on the store.
     And a proliferation of APIs confuses.
     """
-    if referer is None:
-        raise RuntimeError("We are trying to force things to include a referer header")
+#    if referer is None:
+#        raise RuntimeError("We are trying to force things to include a referer header")
     try:
 	baseURI = uripath.base()
 	if uri != None:
@@ -121,7 +121,7 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
             parser = 'rdflib'
             flags = ''
         else:
-            parser = 'sax2rdf'
+            parser = os.environ.get("CWM_RDF_PARSER", "sax2rdf")
         import rdfxml
         p = rdfxml.rdfxmlparser(store, F,  thisDoc=asIfFrom, flags=flags, parser=parser)
 	p.feed(buffer)

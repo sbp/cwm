@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.19 2004-07-16 17:44:31 syosi Exp $
+ $Id: retest.py,v 1.20 2004-07-29 16:16:11 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -198,7 +198,7 @@ def main():
 
     if verbose: progress("Test files:", testFiles)
     
-    kb = loadMany(testFiles)
+    kb = loadMany(testFiles, referer="")
     testData = []
     RDFTestData  = []
 #    for fn in testFiles:
