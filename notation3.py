@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.117 2002-08-16 21:24:01 timbl Exp $
+$Id: notation3.py,v 1.118 2002-08-16 22:30:48 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -332,18 +332,18 @@ class SinkParser:
 
 	    
 	if str[i:i+2] == "<=":
-	    res.append(('<-', LOG_implies))
+	    res.append(('<-', self._sink.newSymbol(Logic_NS+"implies")))
 	    return i+2
 
 	if str[i:i+1] == "=":
 	    if str[i+1:i+2] == ">":
-		res.append(('->', LOG_implies))
+		res.append(('->', self._sink.newSymbol(Logic_NS+"implies")))
 		return i+2
 	    res.append(('->', DAML_equivalentTo))
 	    return i+1
 
 	if str[i:i+2] == ":=":
-	    res.append(('->', LOG_becomes))   # patch file relates two formulae, uses this
+	    res.append(('->', Logic_NS+"becomes"))   # patch file relates two formulae, uses this
 	    return i+2
 
 	j = self.prop(str, i, r)
@@ -658,8 +658,8 @@ class SinkParser:
 	if self._parentContext == None:
 	    raise BadSyntax(self._thisDoc, self.lines, str, j,
 			    "Can't use ?xxx syntax for variable in outermost level: %s" % str[j-1:i])
-	var = self.sink.newUniversal(str[j:i], self._parentContext)
-        res.append( str[j:i])
+	var = self._sink.newUniversal(self._parentContext, self. _thisDoc +"#"+str[j:i])
+        res.append(var)
 #        print "Variable found: <<%s>>" % str[j:i]
         return i
 
@@ -965,7 +965,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.117 2002-08-16 21:24:01 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.118 2002-08-16 22:30:48 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

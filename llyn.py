@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.38 2002-08-16 21:24:00 timbl Exp $
+$Id: llyn.py,v 1.39 2002-08-16 22:30:47 timbl Exp $
 
 RDF Store and Query engine
 
@@ -150,7 +150,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.38 $"
+cvsRevision = "$Revision: 1.39 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -1202,6 +1202,7 @@ class RDFStore(RDFSink.RDFSink) :
             return RDFSink.RDFSink.bind(self, prefix, nsPair) # Otherwise, do as usual.
     
     def makeStatement(self, tuple):
+	"""Add a qud to the store, each part of the quad being in pair form."""
         q = ( self.intern(tuple[CONTEXT]),
               self.intern(tuple[PRED]),
               self.intern(tuple[SUBJ]),
