@@ -8,11 +8,10 @@ Also handly functions for handling these things.  They're not object
 methods because the OO hierarchy is sometimes too dynamic here.
 
 """
-__version__ = "$Revision: 1.4 $"
-# $Id: logic.py,v 1.4 2003-08-01 15:27:21 sandro Exp $
+__version__ = "$Revision: 1.5 $"
+# $Id: logic.py,v 1.5 2003-08-20 09:26:48 sandro Exp $
 
 import LX.expr
-
 
 ################################################################
 
@@ -29,6 +28,8 @@ class Proposition(LX.expr.AtomicExpr):
     """A boolean constant, but it's a very different thing from
     a term constant in FOL."""
     pass
+
+constantsForURIs = { }
 
 class Constant(LX.expr.AtomicExpr):
     """
@@ -173,7 +174,17 @@ def getOpenVariables(expr, unusedButQuantified=None):
 # or do as   Constant(uri=None, value=None)     using __new__
 # for object re-use?
 
-constantsForURIs = { }
+#  So, why do it this way?
+#
+#  Alternative 1: have constant<->URI map be per-kb
+#      Cons: then you can't use the same constant between KBs!
+#
+#  Alternative 2: have a Constant-With-URI be a special kind
+#      of LX.logic.Constant...   Um.  That might be fine.  Hrm.
+#      Still need some kind of lookup function and at least the
+#      constantsForURIs table, assuming we want re-use, which I
+#      know we do....
+
 
 def ConstantForURI(uri):
     try:
@@ -181,11 +192,21 @@ def ConstantForURI(uri):
     except KeyError:
         tt = Constant(uri)
         constantsForURIs[uri] = tt
+        tt.uri = uri
         # kb.interpret(tt, LX.uri.Describedthing(uri))
         #     # t[0] = constants.setdefault(t[1], LX.fol.Constant(t[1]))
         return tt
 
-
+def gatherURIs(expr, set):
+    if expr.isAtomic():
+        try:
+            set[expr.uri] = 1
+        except AttributeError:
+            pass
+    else:
+        for term in expr.all:
+            gatherURIs(term, set)
+        
 constantsForDTVs = {
     ("0", "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"):
     ConstantForURI("foo:zero")
@@ -240,7 +261,10 @@ def _test():
 if __name__ == "__main__": _test()
 
 # $Log: logic.py,v $
-# Revision 1.4  2003-08-01 15:27:21  sandro
+# Revision 1.5  2003-08-20 09:26:48  sandro
+# update --flatten code path to work again, using newer URI strategy
+#
+# Revision 1.4  2003/08/01 15:27:21  sandro
 # kind of vaguely working datatype support (for xsd unsigned ints)
 #
 # Revision 1.3  2003/07/31 18:25:15  sandro
