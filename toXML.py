@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.6 2002-12-25 20:01:32 timbl Exp $
+$Id: toXML.py,v 1.7 2003-01-10 17:13:16 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -363,9 +363,8 @@ class XMLWriter:
             lan = at[i+1:]
             prefix = prefixes.get(ans,":::")
             if prefix == ":::":
-                print ("#@@@@@ tag %s: atr %s has no prefiex :-(" %
+                raise RuntimeError("#@@@@@ tag %s: atr %s has no prefix :-( in prefix table:\n%s" %
                        (uriref, at, `prefixes`))
-                raise NoPrefixForAttributeError
             attrs.append(( prefix+":"+lan, val))    
 
 	self.newline(3-len(self._elts))    # Newlines separate higher levels
