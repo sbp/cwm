@@ -153,7 +153,7 @@ _test_data = \
 def main():
 	oapp = outlookToN3()
 
-	_version = "$Id: lookout.py,v 1.6 2001-06-13 23:58:48 timbl Exp $"[1:-1]
+	_version = "$Id: lookout.py,v 1.7 2001-09-07 02:11:20 timbl Exp $"[1:-1]
 
 	print "# Outlook data extractded by"
 	print "#   ", _version
