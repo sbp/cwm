@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # borrowing liberally from Eikeon's setup.py for rdflib
 # an attempt at a setup.py installer for Cwm/SWAP
-# version: $Id: setup.py,v 1.8 2004-10-18 19:38:04 syosi Exp $
+# version: $Id: setup.py,v 1.9 2004-10-19 15:23:47 syosi Exp $
 # by Dan Brickley <danbri@w3.org>
 #
 # STATUS: this file now works
@@ -24,10 +24,10 @@ swap_dir = join(lib_dir, "swap")
 print "swap dir: "+swap_dir
 
 
-if exists(swap_dir):
-    backup = "%s-%s" % (swap_dir, int(time()))
-    print "Renaming previously installed rdflib to: \n  %s" % backup
-    rename(swap_dir, backup)
+#if exists(swap_dir):
+#    backup = "%s-%s" % (swap_dir, int(time()))
+#    print "Renaming previously installed swap to: \n  %s" % backup
+#    rename(swap_dir, backup)
 
 
 
