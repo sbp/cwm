@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.159 2004-07-29 16:16:11 syosi Exp $
+$Id: cwm.py,v 1.160 2004-08-03 18:56:57 syosi Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.159 $"
+cvsRevision = "$Revision: 1.160 $"
 
 
 
@@ -243,6 +243,8 @@ rdf/xml files. Note that this requires rdflib.
                 option_flags["think"] = _rhs
             elif _lhs == "-closure":
 		pass
+	    elif _lhs == "-solve":
+                sys.argv[argnum+1:argnum+1] = ['-think', '-filter=' + _rhs]
             elif _lhs == "-language":
                 option_format = _rhs
                 if option_first_format == None: option_first_format = option_format
@@ -326,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.159 2004-07-29 16:16:11 syosi Exp $"
+        version = "$Id: cwm.py,v 1.160 2004-08-03 18:56:57 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -532,6 +534,8 @@ rdf/xml files. Note that this requires rdflib.
 		workingContext.reopen()
                 think(workingContext, filterContext, mode=option_flags["think"]);
 
+            elif arg[:7] == "-solve=":
+                pass
             elif _lhs == "-engine":
                 option_engine = _rhs
                 
