@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.12 2003-04-11 22:59:46 sandro Exp $
+# $Id: Makefile,v 1.13 2003-04-11 23:23:35 sandro Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -32,7 +32,7 @@ SCHEMAS= ../log.n3 ../crypto.n3 ../math.n3 ../os.n3 ../string.n3 ../time.n3
 #	$(XSLT) $(PD)rdf2dot.xsl  $< $@
 
 
-all:	CwmBuiltins.html formats-example1
+all:	CwmBuiltins.html formats-example1 CwmHelp.html
 	touch all
 
 CwmBuiltins.html : $(SCHEMAS)
@@ -71,7 +71,7 @@ tutorial.pdf: tutorial.ps
 	$(PS2PDF) tutorial.ps
 
 cwm-help.txt : ../cwm.py ../notation3.py
-	cwm --help > cwm-help.txt
+	cwm --help | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' > cwm-help.txt
 
 CwmHelp.html : CwmHelp-template.html cwm-help.txt
 	sed -e '/<pre>/rcwm-help.txt' < CwmHelp-template.html > CwmHelp.html
