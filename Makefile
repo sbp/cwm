@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.25 2003-02-15 03:54:18 timbl Exp $
+# $Id: Makefile,v 1.26 2003-02-19 17:10:53 connolly Exp $
 
 PYTHON=python
 
@@ -41,7 +41,7 @@ HTMLS= check.html RDFSink.html cwm.html cwm_crypto.html cwm_math.html cwm_os.htm
 #all: yappstest yappsdoc math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf
 
 tested : package
-	(cd test; python retest.py -n -c -f regression.n3)
+	(cd test; PYTHONPATH=.. $(PYTHON) retest.py -n -c -f regression.n3)
 	echo "Test worked, now can release"
 	touch tested
 
@@ -54,9 +54,8 @@ package: math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf LICENSE.r
 # Can't make dependencies on *.py :-(
 
 # cwm.py notation3.py llyn.py  RDFSink.py toXML.py
-cwm.tar.Z::
-	tar -cf cwm.tar *.py $(HTMLS) LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply.*.py *.py
-	compress -f cwm.tar
+cwm.tgz:
+	tar -czf cwm.tgz *.py $(HTMLS) LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply.*.py *.py
 
 yappstest: rdfn3_yapps.py rdfn3_yappstest.py
 	$(PYTHON) rdfn3_yappstest.py <$(TESTIN) >,xxx.kif
