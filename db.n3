@@ -1,6 +1,6 @@
 # Schema for database concepts
 #
-# $Id: db.n3,v 1.3 2002-03-06 22:51:55 timbl Exp $
+# $Id: db.n3,v 1.4 2002-03-06 23:06:08 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -98,7 +98,7 @@ are followed.
 """.
 
 db:primaryKey rdfs:subPropertyOf db:column;
-    a daml:uniqueProperty;    # You can only have one primary key in a table
+    a daml:UniqueProperty;    # You can only have one primary key in a table
     rdfs:domain daml:UnambiguousProperty; # No two rows can have same value of a key
     rdfs:comment"""
 The fact that a table has primary key means that a row document exists
