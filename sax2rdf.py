@@ -104,7 +104,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.27 2002-12-25 20:01:32 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.28 2002-12-27 21:49:07 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -323,10 +323,8 @@ class RDFHandler(xml.sax.ContentHandler):
                             if self._predicate is self.merge: # magic :-(
 				self._stack[-1][3] = self._subject  # St C P S retrofit subject of outer level!
 				self._delayedStatement = 1 # flag
-				progress("@@@ set up 1")
                             else:
 				self._delayedStatement = c, self._predicate, s, self._subject
-#                                self.sink.makeStatement(( c, self._predicate, s, self._subject))
                             self._context = self._subject
                             self._subject = None
                             self._state = STATE_NO_SUBJECT  # Inside quote, there is no subject

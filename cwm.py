@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.112 2002-12-25 20:01:31 timbl Exp $
+$Id: cwm.py,v 1.113 2002-12-27 21:49:05 timbl Exp $
 
 Closed World Machine
 
@@ -52,7 +52,7 @@ import LX
 import LX.rdf
 import LX.engine.llynInterface 
 
-cvsRevision = "$Revision: 1.112 $"
+cvsRevision = "$Revision: 1.113 $"
 
 
 ######################################################### Tests  
@@ -434,7 +434,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
-        version = "$Id: cwm.py,v 1.112 2002-12-25 20:01:31 timbl Exp $"
+        version = "$Id: cwm.py,v 1.113 2002-12-27 21:49:05 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -568,6 +568,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 
             elif arg == "-rules":
                 need(_store); touch(_store)
+		workingContext.reopen()
                 _store.applyRules(workingContext, workingContext)
 
             elif arg[:7] == "-think=":
@@ -681,7 +682,8 @@ def need(object):
         if hasattr(lxkb, "touched"):
             if object is _store:
                 #print "# copying lxkb to _store"
-                _store.deleteFormula(workingContext)
+		workingContext.reopen()
+                _store.deleteFormula(workingContext)   ##@@@@ very slow
                 LX.engine.llynInterface.addLXKB(_store, workingContext, lxkb)
                 del(lxkb.touched)
             else:

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.124 2002-12-25 20:01:32 timbl Exp $
+$Id: notation3.py,v 1.125 2002-12-27 21:49:07 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -892,6 +892,7 @@ class ToN3(RDFSink.RDFSink):
         
 a   Anonymous nodes should be output using the _: convention (p flag or not).
 d   Don't use default namespace (empty prefix)
+i   Use identifiers from store - don't regen on output
 l   List syntax suppression. Don't use (..)
 p   Prefix suppression - don't use them, always URIs in <> instead of qnames.
 q   Quiet - don't make comments about the environment in which processing was done.
@@ -980,7 +981,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.124 2002-12-25 20:01:32 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.125 2002-12-27 21:49:07 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1222,7 +1223,7 @@ t   "this" and "()" special syntax should be suppresed.
             return "_:a" + str    # Must start with alpha as per NTriples spec.
 
         if ((type == ANONYMOUS)
-            and not option_noregen ):
+            and not option_noregen and "i" not in self._flags ):
                 x = self.regen.get(value, None)
                 if x == None:
 		    x = self.genId()
