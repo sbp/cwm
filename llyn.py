@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.41 2002-08-29 21:52:55 sandro Exp $
+$Id: llyn.py,v 1.42 2002-10-02 20:40:52 sandro Exp $
 
 RDF Store and Query engine
 
@@ -152,7 +152,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.41 $"
+cvsRevision = "$Revision: 1.42 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -915,6 +915,7 @@ class RDFStore(RDFSink.RDFSink) :
         self.forSome = self.internURI(RDFSink.forSomeSym)
         self.forAll  = self.internURI(RDFSink.forAllSym)
         self.implies = self.internURI(Logic_NS + "implies")
+        self.means = self.internURI(Logic_NS + "means")
         self.asserts = self.internURI(Logic_NS + "asserts")
         
 # Register Light Builtins:
@@ -965,6 +966,7 @@ class RDFStore(RDFSink.RDFSink) :
 # Constants:
 
         self.Truth = self.internURI(Logic_NS + "Truth")
+        self.Falsehood = self.internURI(Logic_NS + "Falsehood")
         self.type = self.internURI(RDF_type_URI)
         self.Chaff = self.internURI(Logic_NS + "Chaff")
 
@@ -1790,8 +1792,13 @@ class RDFStore(RDFSink.RDFSink) :
             elif s[PRED] is self.implies:
                 this = LX.Conditional(self.toLX(s[SUBJ], maxDepth-1, vars=vars),
                                       self.toLX(s[OBJ], maxDepth-1, vars=vars))
+            elif s[PRED] is self.means:
+                this = LX.Biconditional(self.toLX(s[SUBJ], maxDepth-1, vars=vars),
+                                      self.toLX(s[OBJ], maxDepth-1, vars=vars))
             elif s[PRED] is self.type and s[OBJ] is self.Truth:
                 this = self.toLX(s[SUBJ], maxDepth-1, vars=vars)
+            elif s[PRED] is self.type and s[OBJ] is self.Falsehood:
+                this = LX.Negation(self.toLX(s[SUBJ], maxDepth-1, vars=vars))
             else:
                 this = LX.Triple(self.toLX(s[SUBJ], maxDepth-1, vars=vars),
                                  self.toLX(s[PRED], maxDepth-1, vars=vars),
