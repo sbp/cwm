@@ -13,7 +13,7 @@ import string
 import os
 import re
 
-version = "$Id: fink2n3.py,v 1.2 2002-06-03 14:48:53 timbl Exp $"[1:-1]
+version = "$Id: fink2n3.py,v 1.3 2002-06-03 18:38:11 timbl Exp $"[1:-1]
 macros = { "N": "Package", "n":"Package",  "v":"Version", "r": "Revision" }
 
 comment = re.compile(r'^(.*?)#.*$')
@@ -36,7 +36,7 @@ def expand(str, dict):
 	x = str.find("%")
 	if x < 0: break
 	try:
-	    str = str[:x] + dict[macros[str[x+1]]] + str[x+2:]
+	    str = str[:x] + dict[macros[str[x+1]]].strip() + str[x+2:]
 	except KeyError:
 	    print "@@@@@ dict is", dict
 	    print "@@@@@ macros are", macros
@@ -185,8 +185,7 @@ def convert(path):
 		    print """     %s [con:name "%s"; con:mailbox <mailto:%s>];"""%(
 			    property, m.group(1), m.group(2))
 		    continue
-		print "    " + property + " "+ss(value) + ';'
-		raise RuntimeError("Malformed maintainer contact "+value)
+		print """     %s [con:name %s];"""% (property, ss(value))
 		continue
 
 	    print "    " + property + " "+ss(value) + ';'
@@ -251,7 +250,7 @@ Syntax:    make2n3  [-r] <file>
 
     where <file> can be omitted and if so defaults to /sw/fink/dists .
     This program was http://www.w3.org/2000/10/swap/util/fink2p3.py
-    $Id: fink2n3.py,v 1.2 2002-06-03 14:48:53 timbl Exp $
+    $Id: fink2n3.py,v 1.3 2002-06-03 18:38:11 timbl Exp $
 """
         else:
             print """Bad option argument."""
