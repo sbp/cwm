@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.21 2004-12-20 19:35:14 syosi Exp $
+$Id: pretty.py,v 1.22 2004-12-21 05:36:48 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.21 $"
+cvsRevision = "$Revision: 1.22 $"
 
 # Magic resources we know about
 
@@ -399,10 +399,13 @@ class Serializer:
                 if a is not None:
                     #print a
                     y = a[0][SUBJ]
-                    if _done.get(y, None) is x:
-                        self._inLoop[x] = 1
+                    beenHere = _done.get(y, None)
+                    if beenHere is x:
+                        self._inLoop[y] = 1
                         a = None
-                    if not (isinstance(y, AnonymousVariable) and not ((isinstance(y, Fragment) and y.generated()))):
+                    elif beenHere is not None:
+                        a = None
+                    elif not (isinstance(y, AnonymousVariable) and not ((isinstance(y, Fragment) and y.generated()))):
                         _done[y] = True
                         a = None
                     else:
