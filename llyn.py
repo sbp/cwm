@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.9 2001-12-31 04:33:22 timbl Exp $
+$Id: llyn.py,v 1.10 2002-01-04 16:16:10 timbl Exp $
 
 RDF Store and Query engine
 
@@ -496,7 +496,7 @@ class RDFStore(RDFSink.RDFSink) :
     """ Absorbs RDF stream and saves in triple store
     """
 
-    def __init__(self, genPrefix=None, metaURI=None):
+    def __init__(self, genPrefix=None, metaURI=None, argv=None):
         RDFSink.RDFSink.__init__(self)
 
         self.resources = {}    # Hash table of URIs for interning things
@@ -505,6 +505,7 @@ class RDFStore(RDFSink.RDFSink) :
 
         self.size = 0
         self._nextId = 0
+        self.argv = argv     # List of command line arguments for N3 scripts
         if genPrefix: self._genPrefix = genPrefix
         else: self._genPrefix = "#_gs"
 
