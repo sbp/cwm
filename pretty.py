@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.28 2005-01-21 20:54:04 syosi Exp $
+$Id: pretty.py,v 1.29 2005-01-24 18:59:23 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.28 $"
+cvsRevision = "$Revision: 1.29 $"
 
 # Magic resources we know about
 
@@ -497,7 +497,6 @@ class Serializer:
         if verbosity() > 98:
             progress( "Topology %s in %s is: anon=%i obj=%i, pred=%i loop=%s ex=%i "%(
             `x`, `context`,  _anon, _asObj, _asPred, _loop, _isExistential))
-
 ##        self._topology_returns[x] = ( _anon, _asObj+_asPred )
         return ( _anon, _asObj+_asPred )  
 

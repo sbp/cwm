@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.130 2005-01-18 19:29:02 syosi Exp $
+$Id: llyn.py,v 1.131 2005-01-24 18:59:23 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.130 $"
+cvsRevision = "$Revision: 1.131 $"
 
 
 # Magic resources we know about
@@ -662,6 +662,7 @@ class IndexedFormula(Formula):
 
     def _noteNewSet(self, bnode, set, newBindings):
         newBindings[bnode] = set
+        if diag.chatty_flag > 80: progress("...New set newBindings %s"%(`newBindings`))
         self._existentialVariables.discard(bnode)
 
     def substituteEqualsInPlace(self, redirections):
