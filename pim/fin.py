@@ -8,26 +8,20 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.15 2004-08-08 01:44:50 syosi Exp $
+$Id: fin.py,v 1.16 2004-09-08 21:04:39 timbl Exp $
 """
-import llyn
+from swap import llyn, diag, notation3, RDFSink, uripath, myStore
 
-from diag import verbosity, setVerbosity, progress
+from swap.diag import verbosity, setVerbosity, progress
+from swap.uripath import join
+from swap.notation3 import RDF_NS_URI
+from swap.myStore import store, load, loadMany,  Namespace
+import swap.llyn
 
+#import uripath
 
-import notation3    	# N3 parsers and generators
-# import toXML 		#  RDF generator
-
-from RDFSink import FORMULA, LITERAL, ANONYMOUS, Logic_NS
-import uripath
 import string
 import sys
-from uripath import join
-from notation3 import RDF_NS_URI
-import llyn
-from myStore import store, load, loadMany
-from myStore import  Namespace
-from diag import progress
 
 qu = Namespace("http://www.w3.org/2000/10/swap/pim/qif#")
 tax = Namespace("http://www.w3.org/2000/10/swap/pim/tax.n3#")
@@ -37,7 +31,6 @@ cat_ns = Namespace("categories.n3#")
 
 monthName= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-import uripath
 
 rdf_type = rdf.type
 cat = cat_ns
@@ -231,7 +224,7 @@ def doCommand(year, inputURI="/dev/stdin"):
 	
 
 
-        version = "$Id: fin.py,v 1.15 2004-08-08 01:44:50 syosi Exp $"
+        version = "$Id: fin.py,v 1.16 2004-09-08 21:04:39 timbl Exp $"
 #	if not option_quiet:
 #	_outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
