@@ -21,17 +21,17 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.21 2004-08-06 18:56:15 syosi Exp $
+ $Id: retest.py,v 1.22 2004-08-06 19:11:52 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
 """
-from os import system, popen3
+from os import system
 import os
 import sys
 import urllib
 
-# From PYTHONPATH equivalent to http://www.w3.org/2000/10
+# From PYTHONPATH equivalent to http://www.w3.org/2000/10/swap
 
 from swap import llyn
 from swap.myStore import load, loadMany, Namespace
@@ -199,7 +199,7 @@ def main():
 
     if verbose: progress("Test files:", testFiles)
     
-    kb = loadMany(testFiles, referer="")
+    kb = loadMany(testFiles)
     testData = []
     RDFTestData  = []
     perfData = []

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.160 2004-08-03 18:56:57 syosi Exp $
+$Id: cwm.py,v 1.161 2004-08-06 19:11:52 syosi Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.160 $"
+cvsRevision = "$Revision: 1.161 $"
 
 
 
@@ -243,8 +243,6 @@ rdf/xml files. Note that this requires rdflib.
                 option_flags["think"] = _rhs
             elif _lhs == "-closure":
 		pass
-	    elif _lhs == "-solve":
-                sys.argv[argnum+1:argnum+1] = ['-think', '-filter=' + _rhs]
             elif _lhs == "-language":
                 option_format = _rhs
                 if option_first_format == None: option_first_format = option_format
@@ -328,7 +326,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.160 2004-08-03 18:56:57 syosi Exp $"
+        version = "$Id: cwm.py,v 1.161 2004-08-06 19:11:52 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -362,7 +360,6 @@ rdf/xml files. Note that this requires rdflib.
 			    contentType = ContentType,
 			    flags = option_flags[option_first_format],
 			    remember = 0,
-                            referer = "",
 			    why = becauseCwm)
 	    workingContext.reopen()
 
@@ -457,21 +454,21 @@ rdf/xml files. Note that this requires rdflib.
             elif arg[:7] == "-apply=":
 		workingContext = workingContext.canonicalize()
                 
-                filterContext = _store.load(_uri, referer="")
+                filterContext = _store.load(_uri)
 		workingContext.reopen()
                 applyRules(workingContext, filterContext);
 
             elif arg[:7] == "-apply=":
 		workingContext = workingContext.canonicalize()
                 
-                filterContext = _store.load(_uri, referer="")
+                filterContext = _store.load(_uri)
 		workingContext.reopen()
                 applyRules(workingContext, filterContext);
 
             elif arg[:7] == "-patch=":
 		workingContext = workingContext.canonicalize()
                 
-                filterContext = _store.load(_uri, referer="")
+                filterContext = _store.load(_uri)
 		workingContext.reopen()
                 patch(workingContext, filterContext);
 
@@ -482,7 +479,7 @@ rdf/xml files. Note that this requires rdflib.
 		else:
 		    r = None
                 
-                filterContext = _store.load(_uri, why=r, referer="")
+                filterContext = _store.load(_uri, why=r)
 		_newContext = _store.newFormula()
 		if diag.tracking: proof = FormulaReason(_newContext)
                 applyRules(workingContext, filterContext, _newContext)
@@ -495,7 +492,7 @@ rdf/xml files. Note that this requires rdflib.
 		    r = BecauseOfCommandLine(sys.argv[0]) # @@ add user, host, pid, date time? Privacy!
 		else:
 		    r = None
-		filterContext = _store.load(_uri, why=r, referer="")
+		filterContext = _store.load(_uri, why=r)
 		_newContext = _store.newFormula()
 		if diag.tracking: proof = FormulaReason(_newContext)
                 applyQueries(workingContext, filterContext, _newContext)
@@ -529,13 +526,11 @@ rdf/xml files. Note that this requires rdflib.
 
             elif arg[:7] == "-think=":
                 
-                filterContext = _store.load(_uri, referer="")
+                filterContext = _store.load(_uri)
                 if verbosity() > 4: progress( "Input rules to --think from " + _uri)
 		workingContext.reopen()
                 think(workingContext, filterContext, mode=option_flags["think"]);
 
-            elif arg[:7] == "-solve=":
-                pass
             elif _lhs == "-engine":
                 option_engine = _rhs
                 

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.161 2004-07-30 15:23:25 syosi Exp $
+$Id: notation3.py,v 1.162 2004-08-06 19:11:52 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -567,38 +567,7 @@ class SinkParser:
 
         if ch == "(":
 	    j=i+1
-##            ######################################
-##            #The below code should be hit with a sledgehammer multiple times.
-##            #It is creating firsts and nexts, only to have the formula _slowly_
-##            #go through them and recreate the list. This will change
-##            previous = None  # remember value to return
-##            while 1:
-##                i = self.skipSpace(str, j)
-##                if i<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "needed ')', found end.")                    
-##                if str[i:i+1] == ')':
-##		    j = i+1
-##		    break
-##
-##                item = []
-##                j = self.item(str,i, item) #@@@@@ should be path, was object
-##                if j<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "expected item in list or ')'")
-##                this = self._context.newBlankNode(uri=self.here(i), why=self._reason2)
-##		if previous:
-##		    self.makeStatement((self._context, N3_rest, previous, this ))
-##		else:
-##		    head = this
-##		self.makeStatement((self._context, N3_first, this, item[0]))
-##                previous = this
-##                previousvalue = item[0]
-##
-##            if not previous:
-##                res.append(N3_nil)
-##                return j
-##	    self.makeStatement((self._context, N3_rest, previous, N3_nil ))
-##	    res.append(head)
-##	    #There is a far better way to do the above. See below
-##	    ##########################################
-            List = []
+            previous = None  # remember value to return
             while 1:
                 i = self.skipSpace(str, j)
                 if i<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "needed ')', found end.")                    
@@ -609,8 +578,20 @@ class SinkParser:
                 item = []
                 j = self.item(str,i, item) #@@@@@ should be path, was object
                 if j<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "expected item in list or ')'")
-                List.append(self._store.intern(item[0]))
-            res.append(self._store.newList(List))
+                this = self._context.newBlankNode(uri=self.here(i), why=self._reason2)
+		if previous:
+		    self.makeStatement((self._context, N3_rest, previous, this ))
+		else:
+		    head = this
+		self.makeStatement((self._context, N3_first, this, item[0]))
+                previous = this
+                previousvalue = item[0]
+
+            if not previous:
+                res.append(N3_nil)
+                return j
+	    self.makeStatement((self._context, N3_rest, previous, N3_nil ))
+	    res.append(head)
             return j
 
         j = self.tok('this', str, i)   # This context
@@ -1203,7 +1184,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.161 2004-07-30 15:23:25 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.162 2004-08-06 19:11:52 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
