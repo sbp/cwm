@@ -25,7 +25,7 @@ class ArgHandler:
                  print "Hello, World!"
 
          if __name__ == "__main__":
-             a = MyArgHandler(revision="$Id: ArgHandler.py,v 1.6 2003-04-02 20:55:20 sandro Exp $")
+             a = MyArgHandler(revision="$Id: ArgHandler.py,v 1.7 2003-04-03 04:51:49 sandro Exp $")
              a.run()
 
      Special hack to support things like --filter=f where
@@ -105,20 +105,27 @@ class ArgHandler:
         conventions.)"""
         print self.version
 
+    def handleNoArgs(self):
+        raise Error, "no options or parameters specified."
+
     def run(self):
+
         self.current_argument_index = 1
+
         try:
-           while 1:
-              try:
-                 arg = self.peekThis()
-              except IndexError:
-                 return 0
-              self.handleArg(arg)
-              self.advance()
+            if len(self.argv) == 1:
+                self.handleNoArgs()
+            while 1:
+                try:
+                    arg = self.peekThis()
+                except IndexError:
+                    return 0
+                self.handleArg(arg)
+                self.advance()
         except Error, e:
-           print e
-           print "Try --help for more information."
-           return 1
+            print e
+            print "Try --help for more information."
+            return 1
            
     def handleArg(self, arg):
        option = None
@@ -303,7 +310,10 @@ if __name__ == "__main__":
     doctest.testmod(sys.modules[__name__])
 
 # $Log: ArgHandler.py,v $
-# Revision 1.6  2003-04-02 20:55:20  sandro
+# Revision 1.7  2003-04-03 04:51:49  sandro
+# fairly stable in skeletal state
+#
+# Revision 1.6  2003/04/02 20:55:20  sandro
 # remove a debugging print
 #
 # Revision 1.5  2003/04/02 20:42:56  sandro
