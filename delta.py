@@ -17,7 +17,7 @@ Uris are relative to present working directory.
 
 For motivation and explanation, see  <http://www.w3.org/DesignIssues/Diff>
 
-$Id: delta.py,v 1.2 2004-11-09 01:08:28 syosi Exp $
+$Id: delta.py,v 1.3 2005-01-03 19:32:29 connolly Exp $
 http://www.w3.org/2000/10/swap/diff.py
 """
 
@@ -391,7 +391,7 @@ def differences(f, g, assumptions):
 #	    raise RuntimeError("Can't match %s" % x)
 
 	if len(matches) > 1:
-	    raise RuntimeError("More than 1 match for %s: 6s" % (`x`, `matches`))
+	    raise RuntimeError("More than 1 match for %s: %s" % (`x`, `matches`))
 	for q in matches:  # pick only one  @@ python function?
 	    z = q
 	    break
@@ -489,7 +489,7 @@ def main():
 	usage()
 	sys.exit(2)
     graph = loadFiles(testFiles)
-    version = "$Id: delta.py,v 1.2 2004-11-09 01:08:28 syosi Exp $"[1:-1]
+    version = "$Id: delta.py,v 1.3 2005-01-03 19:32:29 connolly Exp $"[1:-1]
     if diffFiles == []:
 	nailFormula(graph, assumptions)
 	if verbose: print "# Smush by " + version
