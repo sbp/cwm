@@ -15,13 +15,13 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.17 2004-07-13 14:52:41 syosi Exp $'
-__version__ = '$Revision: 1.17 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.18 2004-10-19 20:23:08 syosi Exp $'
+__version__ = '$Revision: 1.18 $'
 
 import sys, string, re, urllib
 
 from term import LightBuiltIn, Function, ReverseFunction
-from decimal import decimal
+from decimal import Decimal
 import types
 
 # from RDFSink import DAML_LISTS, RDF_type_URI, DAML_sameAs_URI
@@ -67,9 +67,9 @@ def numeric(s):
     if type(s) == types.IntType or \
        type(s) == types.LongType or \
        type(s) is types.FloatType or \
-       isinstance(s,decimal): return s
+       isinstance(s,Decimal): return s
     if s.find('.') < 0 and s.find('e') < 0 : return long(s)
-    return decimal(s)
+    return Decimal(s)
 
 class BI_absoluteValue(LightBuiltIn, Function):
     def evaluateObject(self, subj_py):

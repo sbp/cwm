@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.164 2004-10-18 19:38:04 syosi Exp $
+$Id: notation3.py,v 1.165 2004-10-19 20:23:08 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -85,7 +85,7 @@ N3_forAll_URI = RDFSink.forAllSym
 
 from RDFSink import RDF_type_URI, RDF_NS_URI, DAML_sameAs_URI, parsesTo_URI
 from RDFSink import RDF_spec, List_NS, uniqueURI
-from decimal import decimal
+from decimal import Decimal
 
 ADDED_HASH = "#"  # Stop where we use this in case we want to remove it!
 # This is the hash on namespace URIs
@@ -1204,7 +1204,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.164 2004-10-18 19:38:04 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.165 2004-10-19 20:23:08 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1477,7 +1477,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
 		if (dt_uri == FLOAT_DATATYPE):
 		    return str(float(s))    # numeric value python-normalized
 		if (dt_uri == DECIMAL_DATATYPE):
-		    return str(decimal(s))
+		    return str(Decimal(s))
 	    st = stringToN3(s, singleLine= singleLine, flags=self._flags)
 	    if lang != None: st = st + "@" + lang
 	    if dt != None: return st + "^^" + self.representationOf(context, dt.asPair())
