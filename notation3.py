@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.139 2003-06-24 13:44:48 timbl Exp $
+$Id: notation3.py,v 1.140 2003-07-29 02:55:36 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -127,7 +127,7 @@ langcode = re.compile(r'[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?')
 
 
 class SinkParser:
-    def __init__(self, sink, thisDoc, baseURI=None, bindings = {},
+    def __init__(self, sink, thisDoc, baseURI=None,
                  genPrefix = "", metaURI=None,
                  formulaURI = None, why=None):
 	""" note: namespace names should *not* end in #;
@@ -138,7 +138,7 @@ class SinkParser:
         self._sink = sink
 	if genPrefix: sink.setGenPrefix(genPrefix) # pass it on
 	
-    	self._bindings = bindings
+    	self._bindings = {}
 	self._thisDoc = thisDoc
         self.lines = 0              # for error handling
 	self.startOfLine = 0	    # For calculating character number
@@ -325,7 +325,7 @@ class SinkParser:
         self._sink.startDoc()
 
     def endDoc(self):
-	"""Signal end fo document and stop parsing. returns formula"""
+	"""Signal end of document and stop parsing. returns formula"""
         self._sink.endDoc(self._formula)
 	return self._formula
 
@@ -660,7 +660,6 @@ class SinkParser:
 		except KeyError:
                     if pfx == "_":   # Magic prefix added 2001/05/30, can be overridden
                         res.append(self.anonymousNode(ln))
-			# progress("@@@@@@@ uri_ref2 res", res)
                         return j
 		    raise BadSyntax(self._thisDoc, self.lines, str, i, "Prefix %s not bound" % (pfx))
             res.append(self._sink.newSymbol(ns + ln)) # @@@ "#" CONVENTION
@@ -1071,7 +1070,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.139 2003-06-24 13:44:48 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.140 2003-07-29 02:55:36 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

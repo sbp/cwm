@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.132 2003-07-18 20:33:02 timbl Exp $
+$Id: cwm.py,v 1.133 2003-07-29 02:55:35 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.132 $"
+cvsRevision = "$Revision: 1.133 $"
 
 
 ######################################################### Tests  
@@ -312,8 +312,8 @@ Examples:
 
 Mode flags affect inference extedning to the web:
  r   Needed to enable any remote stuff.
- a   When reading schema, also load rules pointed to by schema.
- e   Errors loading schemas of definitive documents are fatal
+ a   When reading schema, also load rules pointed to by schema (requires r, s)
+ E   Errors loading schemas of definitive documents are ignored
  m   Schemas and definitive documents laoded are merged into the meta knowledge
      (otherwise they are consulted independently)
  s   Read the schema for any predicate in a query.
@@ -501,7 +501,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.132 2003-07-18 20:33:02 timbl Exp $"
+        version = "$Id: cwm.py,v 1.133 2003-07-29 02:55:35 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -645,8 +645,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 		
             elif arg == "-purge-rules":
                 need(_store); touch(_store)
-                _store.purgeSymbol(workingContext, _store.implies)
-                _store.purgeSymbol(workingContext, _store.forAll)
+                _store.purgeExceptData(workingContext)
 
             elif arg == "-rules":
                 need(_store); touch(_store)
