@@ -4,7 +4,7 @@ gram2html -- convert Yapps grammar to HTML
 Share and Enjoy. Open Source license:
 Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 http://www.w3.org/Consortium/Legal/copyright-software-19980720
-$Id: gram2html.py,v 1.2 2002-07-17 19:33:48 connolly Exp $
+$Id: gram2html.py,v 1.3 2002-08-15 23:24:17 connolly Exp $
 see log at end
 
 REFERENCES
@@ -13,7 +13,7 @@ REFERENCES
   Sat, 18 Aug 2001 16:54:32 GMT
   Last modified 13:21 Sun 26 Nov 2000 , Amit Patel 
 
-$Id: gram2html.py,v 1.2 2002-07-17 19:33:48 connolly Exp $
+$Id: gram2html.py,v 1.3 2002-08-15 23:24:17 connolly Exp $
 """
 
 from string import find
@@ -146,6 +146,11 @@ def generate(title, inputfilename, outputfilename=''):
     xwr.startElement('a', [('href', inputfilename)])
     xwr.data(inputfilename)
     xwr.endElement() #a
+    xwr.data(', a ')
+    xwr.startElement('a', [('href', 'http://theory.stanford.edu/~amitp/Yapps/')])
+    xwr.data('YAPPS')
+    xwr.endElement() #a
+    xwr.data(' grammar')
     xwr.endElement() #address
     
     toHTML(t, xwr)
@@ -161,7 +166,10 @@ if __name__ == '__main__':
     main(sys.argv)
 
 # $Log: gram2html.py,v $
-# Revision 1.2  2002-07-17 19:33:48  connolly
+# Revision 1.3  2002-08-15 23:24:17  connolly
+# updated grammar, cited YAPPS
+#
+# Revision 1.2  2002/07/17 19:33:48  connolly
 # published HTML version of relaxNG grammar
 #
 # Revision 1.1  2001/09/01 05:31:17  connolly
