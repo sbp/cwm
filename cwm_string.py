@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.16 2003-06-03 17:34:56 connolly Exp $
+$Id: cwm_string.py,v 1.17 2003-06-18 03:21:35 connolly Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -176,7 +176,7 @@ def register(store):
     str.internFrag("scrape", BI_scrape)
     str.internFrag("format", BI_format)
     str.internFrag("matches", BI_matches)
-    str.internFrag("notMatches", BI_matches)
+    str.internFrag("notMatches", BI_notMatches)
     str.internFrag("contains", BI_Contains)
     str.internFrag("containsIgnoringCase", BI_ContainsIgnoringCase)
     str.internFrag("doesNotContain", BI_DoesNotContain)
