@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.4 2001-11-01 14:44:49 timbl Exp $
+$Id: thing.py,v 1.5 2001-11-01 15:25:49 timbl Exp $
 
 Interning of URIs and strings for stporage in SWAP store
 
@@ -399,8 +399,12 @@ class ReverseFunction:
     
 # Use this with diagnostics so that it can be changed as necessary
 # For example, sometimes want on stdout maybe or in a scroll window....
-def progress(str):
-    sys.stderr.write(  str + "\n")
+def progress(*args):
+    import sys
+    for a in args:
+        sys.stderr.write("%s " % (a,))
+    sys.stderr.write("\n")
+#        sys.stderr.write(  str + "\n")
 
 global chatty_flag   # verbosity debug flag
 
