@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.18 2005-01-10 19:15:22 syosi Exp $
+$Id: webAccess.py,v 1.19 2005-01-19 20:14:37 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -157,9 +157,14 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
 	p = notation3.SinkParser(store, F,  thisDoc=asIfFrom,flags=flags, why=why)
 #        from grammar import yosiParser
 #        p = yosiParser.SinkParser(store, F,  thisDoc=asIfFrom,flags=flags, why=why)
+#        from n3p import n3p_tm
+#        import triple_maker
+#        tm = triple_maker.TripleMaker(F)
+#        p = n3p_tm.n3p_tm(asIfFrom, tm)
 	p.startDoc()
 	p.feed(buffer)
 	p.endDoc()
+        
     if not openFormula:
 	F = F.close()
     return F 

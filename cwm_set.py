@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_set.py,v 1.1 2005-01-18 19:29:02 syosi Exp $
+$Id: cwm_set.py,v 1.2 2005-01-19 20:14:37 syosi Exp $
 
 set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -107,7 +107,7 @@ class BI_difference(LightBuiltIn, Function):
     def evaluateObject(self, subj):
         if len(subj) != 2:
             raise ValueError('A symmetric difference of more than two things makes no sense')
-        difference = Set.difference
+        difference = N3Set.difference
         return difference(subj[0], subj[1])
 
 class BI_oneOf(LightBuiltIn, ReverseFunction):
