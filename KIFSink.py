@@ -1,9 +1,10 @@
 """KIFSink.n3 -- a KIF sink for cwm
 
 """
-__version__="$Id: KIFSink.py,v 1.2 2001-09-11 18:30:02 connolly Exp $"
+__version__="$Id: KIFSink.py,v 1.3 2001-09-11 18:58:57 connolly Exp $"
 
 from string import rfind, split
+import re
 
 import notation3 #@@ better name for the KB parse/sink interface?
 
@@ -136,9 +137,15 @@ class Sink(notation3.RDFSink):
             pfx = self.prefixes.get((pair[0], ns), None)
             #print "split <%s> before <%s>. pfx: %s" % (i, ln, pfx)
             if pfx is not None:
-                return "%s__%s" % (pfx, ln) #hmm... kludge?
-        return i
+                return "%s:%s" % (pfx, ln) # ala common lisp package syntax
+        return uri2word(i)
 
+def uri2word(i):
+    return re.sub(r'[^a-zA-Z0-9]', escchar, i)
+
+def escchar(matchobj):
+    return "\\%s" % matchobj.group(0)
+    
 def _moreVarNames(outermap, uris, level):
     """Build a mapping from URIs to (n, l) pairs
     where n is a KIF variable name and l is the depth of
