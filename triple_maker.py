@@ -1,6 +1,6 @@
 """Triple Maker
 
-$Id: triple_maker.py,v 1.7 2005-01-10 19:15:22 syosi Exp $
+$Id: triple_maker.py,v 1.8 2005-01-13 00:20:27 syosi Exp $
 Explanation of the API
 
 the functions are addNode(),addNode(), addNode() endStatement() to add a triple
@@ -68,7 +68,7 @@ class TripleMaker:
         self._triples = [[None, None, None]]
         self.lists = []
         self._modes = [FORMULA]
-        self.bNodes = []
+        self.bNodes = {}
         self._predIsOfs = [NO]
         self._pathModes = [False]
         self.store.startDoc()
@@ -76,7 +76,6 @@ class TripleMaker:
     def end(self):
         assert len(self.formulas) == 1
         assert len(self.lists) == 0
-        assert len(self.bNodes) == 0
         self.store.endDoc(self.formulas[0])
         return self.formulas[0]
 
@@ -194,11 +193,11 @@ class TripleMaker:
         function to call
 
         """
-        if Id not in bNodes:
+        if Id not in self.bNodes:
             a = self.formulas[-1].newBlankNode()
-            bNodes[Id] = a
+            self.bNodes[Id] = a
         else:
-            a = bNodes[Id]
+            a = self.bNodes[Id]
         self.addNode(a)
         
     

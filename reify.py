@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.9 2004-12-08 19:54:06 syosi Exp $
+$Id: reify.py,v 1.10 2005-01-13 00:20:27 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -514,7 +514,7 @@ def dereification(x, f, sink, bnodes={}, xList=[]):
 	
 	uset = f.the(subj=x, pred=rei["universals"])
 	xList.append(uset)
-	ulist = f.the(subj=uset, pred=f.newSymbol(owlOneOf))
+	ulist = uset #f.the(subj=uset, pred=f.newSymbol(owlOneOf))
 	xList.append(ulist)
 	from diag import progress
 	if diag.chatty_flag > 54:
@@ -524,7 +524,7 @@ def dereification(x, f, sink, bnodes={}, xList=[]):
 
 	uset = f.the(subj=x, pred=rei["existentials"])
 	xList.append(uset)
-	ulist = f.the(subj=uset, pred=f.newSymbol(owlOneOf))
+	ulist = uset #f.the(subj=uset, pred=f.newSymbol(owlOneOf))
 	xList.append(ulist)
 	if diag.chatty_flag > 54:
             progress("existentials %s =  %s"%(ulist, ulist.value()))
@@ -532,7 +532,7 @@ def dereification(x, f, sink, bnodes={}, xList=[]):
             if diag.chatty_flag > 54:
                 progress("Variable is ", v)
 	    z.declareExistential(f.newSymbol(v.value()))
-	yy = f.the(subj=y, pred=f.newSymbol(owlOneOf))
+	yy = y #f.the(subj=y, pred=f.newSymbol(owlOneOf))
 	xList.append(yy)
 	if diag.chatty_flag > 54:
             progress("Statements:  set=%s, list=%s = %s" %(y,yy, yy.value()))

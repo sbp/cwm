@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.127 2005-01-11 20:17:31 syosi Exp $
+$Id: llyn.py,v 1.128 2005-01-13 00:20:27 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.127 $"
+cvsRevision = "$Revision: 1.128 $"
 
 
 # Magic resources we know about
@@ -332,6 +332,13 @@ class IndexedFormula(Formula):
 		    self._noteNewList(subj, list, newBindings)
 		    self.substituteEqualsInPlace(newBindings)
 		    return 1
+
+	if pred is store.owlOneOf:
+            if isinstance(obj, List) and subj in self._existentialVariables:
+                new_set = store.newSet(obj)
+                self._noteNewSet(subj, new_set, newBindings)
+                self.substituteEqualsInPlace(newBindings)
+                return 1
 
 	if "e" in self._closureMode:
 	    if pred is store.sameAs:
@@ -643,7 +650,19 @@ class IndexedFormula(Formula):
 		self.removeStatement(ff[0])
 		list2 = list.prepend(first)
 		self._noteNewList(L2, list2, newBindings)
+	possibleSets = self.statementsMatching(pred=self.store.owlOneOf, obj=bnode)
+	if possibleSets:
+            new_set = self.store.newSet(list)
+	for s in possibleSets[:]:
+            s2 = s[SUBJ]
+            if s2 in self._existentialVariables:
+                self.removeStatement(s)
+                self._noteNewSet(s2, new_set, newBindings)
 	return
+
+    def _noteNewSet(self, bnode, set, newBindings):
+        newBindings[bnode] = set
+        self._existentialVariables.discard(bnode)
 
     def substituteEqualsInPlace(self, redirections):
 	"""Slow ... does not use indexes"""
