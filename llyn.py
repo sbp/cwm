@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.99 2004-01-28 23:57:08 connolly Exp $
+$Id: llyn.py,v 1.100 2004-01-29 18:03:20 timbl Exp $
 
 RDF Store and Query engine
 
@@ -162,7 +162,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.99 $"
+cvsRevision = "$Revision: 1.100 $"
 
 # Magic resources we know about
 
@@ -1333,12 +1333,12 @@ class RDFStore(RDFSink) :
 
     def internURI(self, str, why=None):
         warn("use symbol()", DeprecationWarning, stacklevel=3)
-        return self.intern((SYMBOL,str), why=None)
+        return self.intern((SYMBOL,str), why)
 
-    def symbol(self, str):
-	"""Intern a URI for a symbol, returning a symbol object"""
+    def symbol(self, str, why=None):
+	"""Intern a URI for a symvol, returning a symbol object"""
+        return self.intern((SYMBOL,str), why)
 
-        return self.intern((SYMBOL, str), why=None)
     
     def _fromPython(self, x, queue=None):
 	"""Takem a python string, seq etc and represent as a llyn object"""

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.5 2003-09-14 20:20:22 timbl Exp $
+$Id: formula.py,v 1.6 2004-01-29 18:03:20 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -31,7 +31,7 @@ import sys
 import time
 import uripath
 
-from term import merge
+from OrderedSequence import merge
 
 import urllib # for log:content
 import md5, binascii  # for building md5 URIs
@@ -54,7 +54,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.5 $"
+cvsRevision = "$Revision: 1.6 $"
 
 # Magic resources we know about
 

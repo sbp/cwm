@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.13 2004-01-28 22:54:58 timbl Exp $
+$Id: toXML.py,v 1.14 2004-01-29 18:03:21 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -162,12 +162,17 @@ class ToRDF(RDFSink.RDFStructuredOutput):
             ps = self.prefixes.values()
             ps.sort()    # Cannonicalize output somewhat
             if self.defaultNamespace and "d" not in self._flags:
-                ats.append(('xmlns',self.defaultNamespace))
+		if "z" in self._flags:
+		    ats.append(('xmlns',
+			refTo(self._base,self.defaultNamespace)))
+		else:
+		    ats.append(('xmlns',self.defaultNamespace))
             for pfx in ps:
-#                if pfx:
-                    ats.append(('xmlns:'+pfx, self.namespaces[pfx]))
-#                else:
-#                    ats.append(('xmlns', self.namespaces[pfx]))
+		nsvalue = self.namespaces[pfx]
+		if "z" in self._flags:
+		    nsvalue = refTo(self._base, nsvalue)
+		ats.append(('xmlns:'+pfx, nsvalue))
+
             self._xwr.startElement(RDF_NS_URI+'RDF', ats, self.prefixes)
             self._subj = None
             self._nextId = 0
