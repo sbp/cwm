@@ -12,10 +12,12 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.28 2003-09-14 20:20:20 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.29 2004-01-28 23:28:24 connolly Exp $"
 
 import uripath
 import time
+from warnings import warn
+
 from diag import progress
 
 # The statement is stored as a quad - affectionately known as a triple ;-)
@@ -172,19 +174,16 @@ class RDFSink:
     def bind(self, prefix, uri):
 	"""Pass on a binding hint for later use in output
 
-	This really is just a hint. The parser calls bind to pass on the prefix which
-	it came across, as this is a useful hint for a human readable prefix for output
-	of the same namespace. Otherwise, output processors will have to invent
-	or avoid useing namespaces, which will look ugly
+	This really is just a hint. The parser calls bind to pass on
+	the prefix which it came across, as this is a useful hint for
+	a human readable prefix for output of the same
+	namespace. Otherwise, output processors will have to invent or
+	avoid useing namespaces, which will look ugly
 	"""
-	assert type(uri) is type("")
+
         if ':' not in uri:
-            # can't raise exceptions inside SAX callback
-            print "URI must be absolute", uri
-            import traceback
-            for ln in traceback.format_stack():
-                print ln
-            print "@@@@"
+            # @@ should raise an exception, but sax callbacks crash.
+            warn("@@URI must be absolute: %s" % uri)
         
         # If we don't have a prefix for this ns...
         if self.prefixes.get(uri, None) == None:
@@ -199,12 +198,13 @@ class RDFSink:
     def setDefaultNamespace(self, uri):
 	"""Pass on a binding hint for later use in output
 
-	This really is just a hint. The parser calls this to pass on the default namespace which
-	it came across, as this is a useful hint for a human readable prefix for output
-	of the same namespace. Otherwise, output processors will have to invent
-	or avoid useing namespaces, which will look ugly.
+	This really is just a hint. The parser calls this to pass on
+	the default namespace which it came across, as this is a
+	useful hint for a human readable prefix for output of the same
+	namespace. Otherwise, output processors will have to invent or
+	avoid useing namespaces, which will look ugly.
 	"""
-	assert type(uri) is type("")
+
         self.defaultNamespace = uri
   
     def makeComment(self, str):
