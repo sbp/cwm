@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.134 2003-03-28 14:11:20 timbl Exp $
+$Id: notation3.py,v 1.135 2003-03-29 03:41:43 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -811,13 +811,11 @@ class SinkParser:
 				    "Bad language code syntax on string literal, after @")
 		    i = m.end()
 		    lang = str[j+1:i]
-		    progress("j, i", j, i)
 		    j = i
 		if str[j:j+2] == "^^":
 		    res2 = []
 		    j = self.uri_ref2(str, j+2, res2) # Read datatype URI
 		    dt = res2[0]
-		    progress("Datatype to ", j, `res`)
                 res.append(self._sink.newLiteral(s, dt, lang))
 		return j
 	    else:
@@ -1056,7 +1054,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.134 2003-03-28 14:11:20 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.135 2003-03-29 03:41:43 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
