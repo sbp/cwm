@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.166 2004-10-28 17:41:59 timbl Exp $
+$Id: notation3.py,v 1.167 2004-11-23 18:51:32 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1205,7 +1205,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.166 2004-10-28 17:41:59 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.167 2004-11-23 18:51:32 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1507,7 +1507,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
 #            and value[j+1:].find(".") <0 ): # Can't use prefix if localname includes "."
 #            print "|%s|%s|"%(self.defaultNamespace, value[:j+1])
 	    for ch in value[j+1:]:  #  Examples: "."   ";"  we can't have in qname
-		if ch in _notQNameChars:
+		if ch in _notNameChars:
 		    if verbosity() > 0:
 			progress("Cannot have character %i in local name." % ord(ch))
 		    break
