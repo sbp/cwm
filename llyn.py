@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.77 2003-04-08 16:12:44 timbl Exp $
+$Id: llyn.py,v 1.78 2003-04-18 19:43:57 sandro Exp $
 
 RDF Store and Query engine
 
@@ -158,7 +158,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.77 $"
+cvsRevision = "$Revision: 1.78 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -1450,7 +1450,7 @@ class RDFStore(RDFSink) :
 	if isinstance(what, Term): return what # Already interned.  @@Could mask bugs
 	if type(what) is not types.TupleType:
 #	    progress("llyn1450 @@@ interning ", `what`)
-	    if isinstance(what, types.StringTypes):
+	    if isinstance(what, tuple(types.StringTypes)):
 		return self.newLiteral(what, dt, lang)
 	    progress("llyn1450 @@@ interning non-string", `what`)
 	    if type(what) is types.IntType:
@@ -1464,7 +1464,7 @@ class RDFStore(RDFSink) :
         if typ == LITERAL:
 	    return self.newLiteral(urirefString, dt, lang)
         else:
-	    assert isinstance(urirefString, types.StringTypes)
+	    assert isinstance(urirefString, tuple(types.StringTypes))
 	    if isinstance(urirefString, types.UnicodeType):
 		urirefString = notation3.hexify(urirefString.encode('utf-8'))
 #            assert type(urirefString) is type("") # caller %xx-ifies unicode
@@ -1973,7 +1973,7 @@ class RDFStore(RDFSink) :
 
     def _fromPython(self, x, queue):
 	"""Takem a python string, seq etc and represent as a llyn object"""
-        if isinstance(x, types.StringTypes):
+        if isinstance(x, tuple(types.StringTypes)):
             return self.intern((LITERAL, x))
         elif type(x) is types.IntType:
             return self.newLiteral(`x`, self.integer)
@@ -3278,6 +3278,7 @@ def x2s(x):
 
 def isString(x):
     # in 2.2, evidently we can test for isinstance(types.StringTypes)
+    #    --- but on some releases, we need to say tuple(types.StringTypes)
     return type(x) is type('') or type(x) is type(u'')
 
 #####################  Register this module
