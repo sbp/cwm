@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.2 2001-09-26 02:46:48 connolly Exp $"
+__version__ = "$Id: RDFSink.py,v 1.3 2001-11-15 22:11:23 timbl Exp $"
 
 
 
@@ -112,7 +112,7 @@ class RDFSink:
     def startAnonymousNode(self, subj):
         pass
     
-    def endAnonymousNode(self):    # Remove default subject
+    def endAnonymousNode(self, endAnonymousNode):    # Remove default subject, restore to subj
         pass
 
     def startBagSubject(self, context):
