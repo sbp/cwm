@@ -106,7 +106,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.25 2002-11-26 18:42:00 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.26 2002-12-07 01:16:19 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:
@@ -465,12 +465,13 @@ class RDFXMLParser(RDFHandler):
 
 """
 
-    def __init__(self, sink, thisURI, formulaURI=None, flags=""):
+    def __init__(self, sink, thisURI, formulaURI=None, flags="", why=None):
         RDFHandler.__init__(self, sink, thisURI, formulaURI=formulaURI, flags=flags)
         p = xml.sax.make_parser()
         p.setFeature(feature_namespaces, 1)
         p.setContentHandler(self)
         self._p = p
+	self.reason = why
 
     def feed(self, data):
         self._p.feed(data)

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.110 2002-12-03 21:09:57 timbl Exp $
+$Id: cwm.py,v 1.111 2002-12-07 01:16:18 timbl Exp $
 
 Closed World Machine
 
@@ -40,8 +40,12 @@ from uripath import join
 import notation3    	# N3 parsers and generators
 import toXML 		#  RDF generator
 
+from why import BecauseOfCommandLine
+
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL, Logic_NS
+from why import explanation
 import uripath
+import sys
 
 # from llyn import RDFStore  # A store with query functiuonality
 import llyn
@@ -49,7 +53,7 @@ import LX
 import LX.rdf
 import LX.engine.llynInterface 
 
-cvsRevision = "$Revision: 1.110 $"
+cvsRevision = "$Revision: 1.111 $"
 
 
 ######################################################### Tests  
@@ -427,7 +431,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
-        version = "$Id: cwm.py,v 1.110 2002-12-03 21:09:57 timbl Exp $"
+        version = "$Id: cwm.py,v 1.111 2002-12-07 01:16:18 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -442,7 +446,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             _store = llyn.RDFStore( _outURI+"#_g", argv=option_with, crypto=option_crypto)
 	    thing.setStore(_store)
             workingContextURI = _outURI+ "#0_work"
-            workingContext = _store.intern((FORMULA, workingContextURI))   #@@@ Hack - use metadata
+            workingContext = _store.newFormula(workingContextURI)   #@@@ Hack - use metadata
             #  Metadata context - storing information about what we are doing
 
 #            _store.reset(_metaURI+"#_experience")     # Absolutely need this for remembering URIs loaded
@@ -485,7 +489,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 p.load(_inputURI)
                 del(p)
                 if not option_pipe:
-                    inputContext = _store.intern((FORMULA, _inputURI+ "#_formula"))
+                    inputContext = _store.newFormula( _inputURI+ "#_formula")
                 _gotInput = 1
 
             elif arg == "-help":
@@ -547,9 +551,9 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 
             elif arg == "-why":
                 need(_store); touch(_store)
-		_newContext = workingContext.explanation()
+		_newContext = explanation(workingContext)
                 workingContext = _newContext
-                workingContextURI = workingContext.uri()
+                workingContextURI = workingContext.uriref()
 
             elif arg == "-purge":
                 need(_store); touch(_store)
@@ -639,13 +643,14 @@ def getParser(format, inputURI, formulaURI, flags):
     """Return something which can load from a URI in the given format, while
     writing to the given store.
     """
+    r = BecauseOfCommandLine(sys.argv[0]) # @@ add user, host, pid, date time? Privacy!
     if format == "rdf" :
         touch(_store)
         return sax2rdf.RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
-                                    flags=flags[format])
+                                    flags=flags[format], why=r)
     elif format == "n3":
         touch(_store)
-        return notation3.SinkParser(_store, inputURI, formulaURI=formulaURI)
+        return notation3.SinkParser(_store, inputURI, formulaURI=formulaURI, why=r)
     else:
         raise RuntimeError, "unknown input format: "+str(format)
 
