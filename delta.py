@@ -17,7 +17,7 @@ Uris are relative to present working directory.
 
 For motivation and explanation, see  <http://www.w3.org/DesignIssues/Diff>
 
-$Id: diff.py,v 1.13 2004-11-01 03:42:14 timbl Exp $
+$Id: delta.py,v 1.1 2004-11-08 20:11:36 timbl Exp $
 http://www.w3.org/2000/10/swap/diff.py
 """
 
@@ -474,7 +474,7 @@ def main():
 	usage()
 	sys.exit(2)
     graph = loadFiles(testFiles)
-    version = "$Id: diff.py,v 1.13 2004-11-01 03:42:14 timbl Exp $"[1:-1]
+    version = "$Id: delta.py,v 1.1 2004-11-08 20:11:36 timbl Exp $"[1:-1]
     if diffFiles == []:
 	nailFormula(graph, assumptions)
 	if verbose: print "# Smush by " + version
