@@ -4,7 +4,7 @@
 <!-- Processed by Id: cwm.py,v 1.129 2003/04/08 16:12:43 timbl Exp -->
 <!--     using base file:/home/connolly/w3ccvs/WWW/2000/10/swap/-->
 <!-- and hand edited since then -->
-<!-- $Id: email.rdf,v 1.6 2004-10-13 23:21:09 connolly Exp $ -->
+<!-- $Id: email.rdf,v 1.7 2005-01-03 19:25:13 connolly Exp $ -->
 
 
 
@@ -19,7 +19,7 @@
     xmlns:str="http://www.w3.org/2000/10/swap/string#">
 
     <r:Description r:about="">
-      <owl:versionInfo>$Id: email.rdf,v 1.6 2004-10-13 23:21:09 connolly Exp $</owl:versionInfo>
+      <owl:versionInfo>$Id: email.rdf,v 1.7 2005-01-03 19:25:13 connolly Exp $</owl:versionInfo>
       <s:seeAlso r:resource="../util/sniffSchema.n3"/>
       <s:seeAlso r:resource="http://www.faqs.org/rfcs/rfc822.html"/>
     </r:Description>
@@ -101,12 +101,12 @@
         <ss:rangeIntersects r:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </r:Property>
 
-    <r:Property r:about="http://www.w3.org/2000/10/swap/pim/email#subject">
+    <owl:FunctionalProperty r:about="http://www.w3.org/2000/10/swap/pim/email#subject">
         <s:label>subject</s:label>
 	<s:domain r:resource="http://www.w3.org/2000/10/swap/pim/email#Message"/>
         <s:comment>domain message. note handling of non-ascii chars</s:comment>
         <s:range r:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-    </r:Property>
+    </owl:FunctionalProperty>
 
     <r:Property r:about="http://www.w3.org/2000/10/swap/pim/email#to">
         <ss:label>to</ss:label>
