@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.82 2001-06-01 07:52:40 connolly Exp $
+$Id: notation3.py,v 1.83 2001-06-25 06:35:50 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1025,8 +1025,9 @@ def relativeURI(base, uri):
     if uri[i:i+1] =="#": return uri[i:]  # fragment of base
     while i>0 and uri[i-1] != '/' : i=i-1  # scan for slash
 
-    if i == 0: return uri  # No way.
-    if string.find(base, "//", i)>0: return uri # An unshared "//"
+    if i < 3: return uri  # No way.
+    if string.find(base, "//", i-2)>0 \
+       or string.find(uri, "//", i-2)>0: return uri # An unshared "//"
     if string.find(base, ":", i)>0: return uri  # An unshared ":"
     n = string.count(base, "/", i)
     return ("../" * n) + uri[i:]
@@ -1257,7 +1258,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.82 2001-06-01 07:52:40 connolly Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.83 2001-06-25 06:35:50 connolly Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
