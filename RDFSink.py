@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.21 2003-02-01 05:49:57 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.22 2003-02-14 00:43:29 sandro Exp $"
 
 import uripath
 import time
@@ -376,5 +376,9 @@ class TracingRDFSink:
     def newSymbol(self, uri):
         printState()
         return self.backing.newSymbol(uri)
+
+    def newLiteral(self, str):
+        printState()
+        return self.backing.newSymbol(str)
 
 # ends
