@@ -15,8 +15,8 @@ http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.2 2003-09-24 19:55:32 kdubost Exp $'
-__version__ = '$Revision: 1.2 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.3 2003-09-24 19:59:51 kdubost Exp $'
+__version__ = '$Revision: 1.3 $'
 
 import sys, string, re, urllib, math
 
@@ -95,7 +95,7 @@ class BI_atan2(LightBuiltIn, Function):
 	"""
     def evaluateObject(self, subj_py): 
         if len(subj_py) == 2:
-	    return atan2(numeric(subj_py[0]) - numeric(subj_py[1]))
+	    return atan2(numeric(subj_py[0]),numeric(subj_py[1]))
 
 class BI_cos(LightBuiltIn, Function):
 	"""
