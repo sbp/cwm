@@ -13,8 +13,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.5 2002-06-19 21:51:17 connolly Exp $'
-__version__ = '$Revision: 1.5 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.6 2002-11-26 18:41:59 timbl Exp $'
+__version__ = '$Revision: 1.6 $'
 
 import sys, string, re, urllib
 import thing, notation3
@@ -56,6 +56,18 @@ def isString(x):
 
 # add, take, multiply, divide
 
+
+class BI_absoluteValue(LightBuiltIn, Function):
+    def evaluateObject(self, store, context, subj, subj_py):
+        if isinstance(subj, Literal):
+            t = abs(float(subj.string))
+            if t is not None: return store.intern((LITERAL, tidy(t)))
+
+class BI_rounded(LightBuiltIn, Function):
+    def evaluateObject(self, store, context, subj, subj_py):
+        if isinstance(subj, Literal):
+            t = round(float(subj.string))
+            if t is not None: return store.intern((LITERAL, tidy(t)))
 
 class BI_sum(LightBuiltIn, Function):
     def evaluateObject(self, store, context, subj, subj_py): 
@@ -199,6 +211,8 @@ def register(store):
     str.internFrag('exponentiationOf', BI_exponentiationOf)
 
     str.internFrag('negation', BI_negation)
+    str.internFrag('absoluteValue', BI_absoluteValue)
+    str.internFrag('rounded', BI_rounded)
 
     str.internFrag('greaterThan', BI_greaterThan)
     str.internFrag('notGreaterThan', BI_notGreaterThan)

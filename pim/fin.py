@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: fin.py,v 1.2 2002-11-24 03:12:03 timbl Exp $
+$Id: fin.py,v 1.3 2002-11-26 18:42:00 timbl Exp $
 
 Financial
 
@@ -272,7 +272,7 @@ def doCommand():
 	<body>
 	"""
 	
-        version = "$Id: fin.py,v 1.2 2002-11-24 03:12:03 timbl Exp $"
+        version = "$Id: fin.py,v 1.3 2002-11-26 18:42:00 timbl Exp $"
 	if not option_quiet:
             _outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
@@ -393,7 +393,7 @@ def doCommand():
 	
 	ko = store.intern(thing.formula())		# New formula  @@@ - yuk API!
 	for c in quCategories + [ qu.UnclassifiedIncome, qu.UnclassifiedOutgoing]:
-	    ko.add(subj=c, pred=qu.total, obj=store.intern(thing.literal(`totals.get(c,0)`)))
+	    ko.add(subj=c, pred=qu.total, obj=store.intern(thing.literal("%7.2f" % totals.get(c,0))))
 	ko.close()
 	
 	fo = open("totals.n3", "w")
@@ -407,6 +407,10 @@ def doCommand():
 	taxCategories = kb.each(pred=rdf_type, obj=tax.Category)
 	printCategories(taxCategories + [ qu.Unclassified], totals, count)
     
+	print "<h2>Tax stuff</h2>"
+	print "<table>"
+	print "<tr><th>-<th>Form line</th><th>amount</th></tr>"
+	print "</table>"
 	    
 #	print "<h2>Personal Categories</h2>"
 #	printCategories(quCategories + [ qu.Unclassified], totals, count)

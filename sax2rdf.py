@@ -106,7 +106,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.24 2002-10-08 20:59:08 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.25 2002-11-26 18:42:00 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:
@@ -164,9 +164,8 @@ class RDFHandler(xml.sax.ContentHandler):
                     if ns != RDF_NS_URI:
                         print ("# Warning -- %s attribute in %s namespace not RDF NS." %
                                name, ln)
-                        ns = RDF_NS_URI  # @@HACK!
+                        ns = RDF_NS_URI  # Allowed as per dajobe: ID, bagID, about, resource, parseType or type
                 uri = (ns + ln).encode('utf-8')
-#               raise NoNS   # @@@ Actually, XML spec says we should get these: parser is wrong
             if ns == RDF_NS_URI or ns == None:   # Opinions vary sometimes none but RDF_NS is common :-(
                 
                 if ln == "ID":

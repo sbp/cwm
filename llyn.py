@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.46 2002-11-24 03:12:01 timbl Exp $
+$Id: llyn.py,v 1.47 2002-11-26 18:41:59 timbl Exp $
 
 RDF Store and Query engine
 
@@ -156,7 +156,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.46 $"
+cvsRevision = "$Revision: 1.47 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -2271,11 +2271,11 @@ class RDFStore(RDFSink) :
 #        for v in clashes:
         for v in vars:
             b2.append((v, store.newInterned(ANONYMOUS))) # Regenerate names to avoid clash
-        if verbosity()>20:
+        if verbosity()>10:
             progress( "Concluding definitively" + bindingsToString(b2) )
         before = self.size
         self.copyContextRecursive(conclusion, targetContext, b2)
-        if verbosity()>20:
+        if verbosity()>30:
             progress( "  Size of store changed from %i to %i"%(before, self.size))
         return self.size - before
 
