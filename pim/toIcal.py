@@ -28,7 +28,7 @@ References:
   A quick look at iCalendar
   http://www.w3.org/2000/01/foo
 
-$Id: toIcal.py,v 2.5 2004-01-29 21:28:13 timbl Exp $
+$Id: toIcal.py,v 2.6 2004-01-31 00:11:06 connolly Exp $
 
 NOTE: see earlier work:
   http://www.w3.org/2002/01dc-nj/toICal.py
@@ -122,6 +122,7 @@ symbolVals = {
        'SUMMARY':       [[IANATOKEN,]],
        'LOCATION':      [[IANATOKEN,]],
        'PRIORITY':      [[IANATOKEN,]],
+       'STATUS':        [[IANATOKEN,]],
        'PRODID':        [[IANATOKEN,]],
        'VERSION':       [[IANATOKEN,]],
        'CALSCALE':      [[IANATOKEN,]],
@@ -317,6 +318,7 @@ class CalWr:
         self.exportGeneral(E_PROP, sts, comp, ICAL.description, "DESCRIPTION")
         self.exportGeneral(E_PROP, sts, comp, ICAL.location, "LOCATION")
         self.exportGeneral(E_PROP, sts, comp, ICAL.priority, "PRIORITY")
+        self.exportGeneral(E_PROP, sts, comp, ICAL.status, "STATUS")
 
 
         # notes on 4.8.4.6 Uniform Resource Locator
@@ -725,7 +727,10 @@ if __name__ == '__main__':
 
 
 # $Log: toIcal.py,v $
-# Revision 2.5  2004-01-29 21:28:13  timbl
+# Revision 2.6  2004-01-31 00:11:06  connolly
+# todo status support; no test; blech
+#
+# Revision 2.5  2004/01/29 21:28:13  timbl
 # Changed ONE newline to a CRLF, suspect many more should be changed. iCal needs both
 #
 # Revision 2.4  2004/01/29 21:09:16  timbl
