@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.24 2003-01-10 17:13:16 timbl Exp $
+$Id: thing.py,v 1.25 2003-01-14 19:51:50 timbl Exp $
 
 Interning of URIs and strings for storage in SWAP store
 
@@ -154,6 +154,10 @@ class Namespace(object):
         """
         return _checkStore().intern((SYMBOL, self._name+lname))
 
+    def sym(self, lname):
+	"""For getting a symbol for an expression, rather than a constant.
+	For, and from, pim/toIcal.py"""
+	return  _checkStore().intern((SYMBOL, self._name + lname))
 
 ########################################  Storage URI Handling
 #
