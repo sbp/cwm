@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.137 2003-04-08 16:12:44 timbl Exp $
+$Id: notation3.py,v 1.138 2003-04-25 19:12:46 sandro Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -213,7 +213,7 @@ class SinkParser:
 	return self.loadBuf(stream.read())    # self._formula
 
     def loadStream(self, stream):
-	return loadBuf(stream.read())   # Not ideal
+	return self.loadBuf(stream.read())   # Not ideal
 
     def loadBuf(self, buf):
 	"""Parses a buffer and returns its top level formula"""
@@ -1071,7 +1071,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.137 2003-04-08 16:12:44 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.138 2003-04-25 19:12:46 sandro Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
