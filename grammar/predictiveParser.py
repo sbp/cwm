@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.11 2004-12-03 03:17:29 syosi Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.12 2004-12-08 19:54:07 syosi Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 try:
@@ -407,7 +407,7 @@ def main():
     progress("Loading " + grammarFile)
     start = clock()
     g = load(grammarFile)
-    taken = clock() - start
+    taken = clock() - start + 1
     progress("Loaded %i statements in %fs, ie %f/s." %
 	(len(g), taken, len(g)/taken))
     

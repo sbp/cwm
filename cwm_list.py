@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.4 2004-01-28 23:52:16 connolly Exp $
+$Id: cwm_list.py,v 1.5 2004-12-08 19:54:06 syosi Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -58,7 +58,20 @@ class BI_in(LightBuiltIn):
     def eval(self, subj, obj, queue, bindings, proof, query):
 	if not isinstance(obj, List): return None
 	return subj in obj
+        
 
+class BI_append(LightBuiltIn, Function):
+    """Takes a list of lists, and appends them together.
+
+
+    """
+    def evalObj(self, subj, queue, bindings, proof, query):
+        if not isinstance(subj, NonEmptyList): return None
+        r = []
+        for x in subj:
+            if not isinstance(x, List): return None
+            r.append([a for a in x])
+        r
 
 #  Register the string built-ins with the store
 
@@ -72,5 +85,6 @@ def register(store):
     ns = store.symbol(ListOperationsNamespace[:-1])
     ns.internFrag("in", BI_in)
     ns.internFrag("last", BI_last)
+    ns.internFrag("append", BI_append)
 # ends
 

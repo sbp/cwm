@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.28 2004-10-19 20:23:08 syosi Exp $
+$Id: cwm_string.py,v 1.29 2004-12-08 19:54:06 syosi Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -170,6 +170,23 @@ class BI_search(LightBuiltIn, Function):
             return m.groups()
         if verbosity() > 80: progress("search didn't match")
 
+class BI_stringToList(LightBuiltIn, Function, ReverseFunction):
+    """You need nothing else. Makes a string a list of characters, and visa versa.
+
+
+    """
+    def evaluateObject(self, subj_py):
+        print "hello, I'm at it"
+        try:
+            return [a for a in subj_py]
+        except TypeError:
+            return None
+        
+    def evaluateSubject(self, obj_py):
+        try:
+            return "".join(obj_py)
+        except TypeError:
+            return None
 
 class BI_format(LightBuiltIn, Function):
     """a built-in for string formatting,
@@ -244,6 +261,7 @@ def register(store):
     str.internFrag("concatenation", BI_concatenation)
     str.internFrag("scrape", BI_scrape)
     str.internFrag("search", BI_search)
+    str.internFrag("stringToList", BI_stringToList)
     str.internFrag("format", BI_format)
     str.internFrag("matches", BI_matches)
     str.internFrag("notMatches", BI_notMatches)

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.122 2004-12-03 03:17:29 syosi Exp $
+$Id: llyn.py,v 1.123 2004-12-08 19:54:06 syosi Exp $
 
 
 RDF Store and Query engine
@@ -89,7 +89,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.122 $"
+cvsRevision = "$Revision: 1.123 $"
 
 
 # Magic resources we know about
@@ -1323,7 +1323,7 @@ class RDFStore(RDFSink) :
                 else: raise RuntimeError, "did not expect other type:"+`typ`
         return result
 
-    def newList(self, value):
+    def newList(self, value, context=None):
 	return self.nil.newList(value)
 
 #    def deleteFormula(self,F):

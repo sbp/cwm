@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.19 2004-12-06 19:56:59 timbl Exp $
+$Id: pretty.py,v 1.20 2004-12-08 19:54:06 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.19 $"
+cvsRevision = "$Revision: 1.20 $"
 
 # Magic resources we know about
 
@@ -345,7 +345,7 @@ class Serializer:
 	    if verbosity() > 98:
                 progress(
                     "scan: %s, a %s, now has %i occurrences as %s" 
-                    %(x, x.__class__,y,"CPSOq"[y]))
+                    %(x, x.__class__,y,"CPSOqqqqq"[y]))
 #	else:
 #	    if x == None: raise RuntimeError("Weird - None in a statement?")
 #	    progress("&&&&&&&&& %s has class %s " %(`z`, `z.__class__`))

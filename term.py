@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.21 2004-10-19 20:23:08 syosi Exp $
+$Id: term.py,v 1.22 2004-12-08 19:54:06 syosi Exp $
 
 term
 
@@ -385,6 +385,9 @@ class AnonymousNode(Node):
 	except KeyError:
 	    b = sink.newBlankNode()
 	    bnodeMap[self] = b
+	q = sink.newSymbol(RDF_type_URI)
+	r = sink.newSymbol(REIFY_NS+"BlankNode")
+	sink.add(subj=b, pred=q, obj=r, why=why)
 	return b
 
     def flatten(self, sink, why=None):
