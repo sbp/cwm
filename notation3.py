@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.91 2001-09-19 19:03:35 timbl Exp $
+$Id: notation3.py,v 1.92 2001-09-21 20:44:06 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -89,7 +89,7 @@ DAML_LISTS = 0    # Don't do these - do the funny compact ones
 RDF_type = ( RESOURCE , RDF_type_URI )
 DAML_equivalentTo = ( RESOURCE, DAML_equivalentTo_URI )
 
-List_NS = DPO_NS     # We have to pick just one all te time
+List_NS = DPO_NS     # We have to pick just one all the time
 
 # For lists:
 N3_first = (RESOURCE, List_NS + "first")
@@ -1191,7 +1191,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.91 2001-09-19 19:03:35 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.92 2001-09-21 20:44:06 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
