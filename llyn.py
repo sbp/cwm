@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.10 2002-01-04 16:16:10 timbl Exp $
+$Id: llyn.py,v 1.11 2002-01-11 04:54:59 connolly Exp $
 
 RDF Store and Query engine
 
@@ -1716,15 +1716,15 @@ class RDFStore(RDFSink.RDFSink) :
 
     def every(self, quad):             # Returns a list of lists of values
         variables = []
-        q2 = [ quad[0], quad[1], quad[2], quad[3]]  # tuple to list
+        q2 = list(quad)
         for p in ALL4:
             if quad[p] == None:
                 v = self.intern((RESOURCE, "internaluseonly:#var"+`p`))
                 variables.append(v)
                 q2[p] = v
-        unmatched = [ ( q2[0], q2[1], q2[2], q2[3])]
+        unmatched = [ tuple(q2) ]
         listOfBindings = []
-        count = match(self, unmatched, variables, [],
+        count = self.match(unmatched, variables, [],
                       action=collectBindings, param=listOfBindings, justOne=0)
         results = []
         for bindings in listOfBindings:
@@ -2202,9 +2202,10 @@ class RDFStore(RDFSink.RDFSink) :
 
 # An action routine for collecting bindings:
 
-    def collectBindings(self, bindings, param):  # Returns number of bindings found and collects them
-        param = param + bindings
-        return len(bindings)
+def collectBindings(bindings, param):
+    """Return number of bindings found and collects them"""
+    param.append(bindings)
+    return len(bindings)
     
 
 def _substitute(bindings, list):
