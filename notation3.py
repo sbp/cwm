@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.144 2003-09-03 22:09:32 timbl Exp $
+$Id: notation3.py,v 1.145 2003-09-05 16:42:13 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -791,7 +791,7 @@ class SinkParser:
 	    if ch in "-+0987654321":
 		m = number_syntax.match(str, i)
 		if m == None:
-		    raise BadSyntax(self._thisDoc, startline, str, i,
+		    raise BadSyntax(self._thisDoc, self.lines, str, i,
 				"Bad number syntax")
 		j = m.end()
 		if m.group(2) != None or  m.group(3) != None: # includes decimal exponent
@@ -1062,7 +1062,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.144 2003-09-03 22:09:32 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.145 2003-09-05 16:42:13 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

@@ -8,7 +8,7 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.10 2003-07-18 20:34:31 timbl Exp $
+$Id: fin.py,v 1.11 2003-09-05 16:42:14 timbl Exp $
 """
 import llyn
 
@@ -238,7 +238,7 @@ def doCommand(year, inputURI="/dev/stdin"):
 	    <img src="sand-dollar.gif" alt="dollar" align="right"/>
 	"""
 	
-        version = "$Id: fin.py,v 1.10 2003-07-18 20:34:31 timbl Exp $"
+        version = "$Id: fin.py,v 1.11 2003-09-05 16:42:14 timbl Exp $"
 #	if not option_quiet:
 #	_outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
@@ -280,21 +280,6 @@ def doCommand(year, inputURI="/dev/stdin"):
      xmlns:l="http://www.w3.org/1999/xlink">
 """)
 #"
-	lineheight = 15 # for text
-	upperBound = abs(income)
-	if abs(outgoings) > upperBound: upperBound = abs(outgoings)
-	
-	dh = 1200  # document hight in pixels
-	scale = (dh - 30) / abs(upperBound)   # Pixels/dollar
-	
-	y = 0
-	while y < dh:   # grid
-	    chart.write("""    <rect stroke="#ddffdd" fill="none" y="%ipx" x="50px" width="600px"
-	    height="0px"/>
-""" %(dh-y))
-#"
-	    y = y + 10000 * scale
-
 	vc = []
 	for c in quCategories + [ qu.UnclassifiedIncome, qu.UnclassifiedOutgoing]:
 	    if totals.get(c, 0) == 0: continue
@@ -306,6 +291,8 @@ def doCommand(year, inputURI="/dev/stdin"):
 	    else:
 		label = str(label)
 	    
+	    if meta.contains(subj=c, pred=rdf.type, obj=qu.LongTerm):
+		continue  # ignore in budget diagram
 	    volatility = meta.the(subj=c, pred=qu.volatility)
 	    if volatility == None:
 		volatility = 50
@@ -315,6 +302,33 @@ def doCommand(year, inputURI="/dev/stdin"):
 	    vc.append((volatility, label, c))
 	vc.sort()
 	
+	total = [0,0]  # in, out
+	for volatility, label, c in vc:
+	    tot = totals.get(c,0)
+	    if tot == 0: continue
+	    if tot < 0 : out = 1
+	    else: out = 0
+	    change = abs(tot)
+	    total[out] = total[out] + change
+	if total[0] > total[1]: largest = total[0]
+	else: largest = total[1]
+
+
+	lineheight = 15 # for text
+	upperBound = abs(income)
+	if abs(outgoings) > upperBound: upperBound = abs(outgoings)
+	
+	dh = 600  # document hight in pixels
+	scale = (dh - 30) / abs(largest*1.05)   # Pixels/dollar
+	
+	y = 0
+	while y < dh:   # grid
+	    chart.write("""    <rect stroke="#ddffdd" fill="none" y="%ipx" x="50px" width="600px"
+	    height="0px"/>
+""" %(dh-y))
+#"
+	    y = y + 10000 * scale
+
 	# for offset, cats, color in [ (100, incomeCategories, "#eeffee" ),
 	#			    (400, spendingCategories, "#ffeeee") ]:
 

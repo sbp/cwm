@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.3 2003-09-02 00:13:42 timbl Exp $
+$Id: pretty.py,v 1.4 2003-09-05 16:42:13 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -27,7 +27,7 @@ from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
-cvsRevision = "$Revision: 1.3 $"
+cvsRevision = "$Revision: 1.4 $"
 
 # Magic resources we know about
 
@@ -291,7 +291,7 @@ class Serializer:
 	    self._occurringAs[OBJ][x] = y
 
     def _scan(self, x, context=None):
-	assert self.context._redirections.get(x, None) == None, "Should not be redirected: "+`x`
+#	assert self.context._redirections.get(x, None) == None, "Should not be redirected: "+`x`
 	if verbosity() > 98: progress("scanning %s in context %s" %(`x`, `context`),
 			x.generated(), self._inContext.get(x, "--"))
 	if isinstance(x, NonEmptyList):
