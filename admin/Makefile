@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.8 2004-03-09 15:01:01 timbl Exp $
+# $Id: Makefile,v 1.9 2004-04-24 10:35:39 connolly Exp $
 
 W=../../../..
 PYTHON=python
@@ -49,11 +49,15 @@ cycle:	update publish
 
 # was: $(GET) -H Accept:\ application/rdf+xm
 
-,n3bugs.rdf: ,n3bugs0.rdf ../util/reqThreadFix.n3
-	$(CWM) ../util/reqThreadFix.n3 --rdf ,n3bugs0.rdf --think --data >$@
+,n3bugs.rdf: ,n3bugs0.rdf ,n3bugs1.rdf ../util/reqThreadFix.n3
+	$(CWM) ../util/reqThreadFix.n3 --rdf ,n3bugs0.rdf ,n3bugs1.rdf \
+		 --think --data >$@
 
 ,n3bugs0.rdf:
 	$(CWM) --rdf 'http://www.w3.org/Search/Mail/Public/advanced_search?keywords=n3bugs&resultsperpage=1000&sortby=date&index-grp=Public%2FFULL&index-type=t&type-index=www-archive' >$@
+
+,n3bugs1.rdf:
+	$(CWM) --rdf 'http://www.w3.org/Search/Mail/Public/advanced_search?keywords=cwm&resultsperpage=1000&sortby=date&index-grp=Public%2FFULL&index-type=t&type-index=public-cwm-bugs' >$@
 
 #ends
 
