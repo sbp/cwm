@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.174 2005-01-11 20:17:31 syosi Exp $
+$Id: notation3.py,v 1.175 2005-01-18 19:29:02 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1234,7 +1234,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.174 2005-01-11 20:17:31 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.175 2005-01-18 19:29:02 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1372,7 +1372,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
         self._pred = None
 
     def endBagSubject(self, subj):    # Remove context
-        self.stack.append(0)
+        #self.stack.append(0)
         self.stack.pop()
         self._endStatement()     # @@@@@@@@ remove in syntax change to implicit
         self._newline()
