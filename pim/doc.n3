@@ -19,7 +19,7 @@
 @prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
 @prefix :    <http://www.w3.org/2000/10/swap/pim/contact#> .
 
-<>  doc:version "$Id: doc.n3,v 1.7 2002-07-18 05:18:55 connolly Exp $";
+<>  doc:version "$Id: doc.n3,v 1.8 2003-06-18 19:14:39 timbl Exp $";
     doc:ipr <../LICENSE.n3>.
 
 
@@ -102,5 +102,14 @@ doc:mayControl a r:Property;
     s:domain    :SocialEntity;
     s:range     doc:Work .
 
+
+# Machine-readable semantics
+#
+#   Eg  <contact>  doc:rules <contact-rules>.
+#
+
+doc:rules a r:Property;
+	s:range :Work;
+	s:domain :Work.
 
 #ENDS
