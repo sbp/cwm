@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.31 2003-04-08 16:12:44 timbl Exp $
+$Id: thing.py,v 1.32 2003-06-24 13:44:48 timbl Exp $
 
 Interning of URIs and strings for storage in SWAP store
 
@@ -503,18 +503,18 @@ class BuiltIn(Fragment):
     def __init__(self, resource, fragid):
         Fragment.__init__(self, resource, fragid)
 
-    def eval(self, subj, obj, queue, bindings, proof):
+    def eval(self, subj, obj, queue, bindings, proof, query):
 	"""This function which has access to the store, unless overridden,
 	calls a simpler one which uses python conventions.
 	
 	To reduce confusion, the inital ones called with the internals available
 	use abreviations "eval", "subj" etc while the python-style ones use evaluate, subject, etc."""
 	if hasattr(self, "evaluate"):
-	    return self.evaluate(self.store._toPython(subj, queue), (self.store._toPython(obj, queue)))
+	    return self.evaluate(self.store._toPython(subj, queue, query), (self.store._toPython(obj, queue, query)))
 	elif isinstance(self, Function):
-		return Function.eval(self, subj, obj, queue, bindings, proof)
+		return Function.eval(self, subj, obj, queue, bindings, proof, query)
 	elif isinstance(self, ReverseFunction):
-		return ReverseFunction.eval(self, subj, obj, queue, bindings, proof)
+		return ReverseFunction.eval(self, subj, obj, queue, bindings, proof, query)
 	raise RuntimeError("Instance %s of built-in has no eval() or subsititue for it" %`self`)
 	
 class LightBuiltIn(BuiltIn):
@@ -543,20 +543,20 @@ class Function(BuiltIn):
         pass
     
 
-    def evalObj(self, subj, queue, bindings, proof):
+    def evalObj(self, subj, queue, bindings, proof, query):
 	"""This function which has access to the store, unless overridden,
 	calls a simpler one which uses python conventions.
 
 	To reduce confusion, the inital ones called with the internals available
 	use abreviations "eval", "subj" etc while the python-style ones use "evaluate", "subject", etc."""
 
-	return self.store._fromPython(self.evaluateObject(self.store._toPython(subj, queue)), queue)
+	return self.store._fromPython(self.evaluateObject(self.store._toPython(subj, queue, query)), queue)
 
 
 # This version is used by functions by default:
 
-    def eval(self, subj, obj, queue, bindings, proof):
-	F = self.evalObj(subj, queue, bindings, proof)
+    def eval(self, subj, obj, queue, bindings, proof, query):
+	F = self.evalObj(subj, queue, bindings, proof, query)
 	return F is obj
 
 class ReverseFunction(BuiltIn):
@@ -570,15 +570,15 @@ class ReverseFunction(BuiltIn):
     def __init__(self):
         pass
 
-    def eval(self, subj, obj, queue, bindings, proof):
-	F = self.evalSubj(obj, queue, bindings, proof)
+    def eval(self, subj, obj, queue, bindings, proof, query):
+	F = self.evalSubj(obj, queue, bindings, proof, query)
 	return F is subj
 
 
-    def evalSubj(self, obj,  queue, bindings, proof):
+    def evalSubj(self, obj,  queue, bindings, proof, query):
 	"""This function which has access to the store, unless overridden,
 	calls a simpler one which uses python conventions"""
-	return self.store._fromPython(self.evaluateSubject(self.store._toPython(obj, queue)), queue)
+	return self.store._fromPython(self.evaluateSubject(self.store._toPython(obj, queue, query)), queue)
 
 #  For examples of use, see, for example, cwm_*.py
 

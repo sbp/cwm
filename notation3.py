@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.138 2003-04-25 19:12:46 sandro Exp $
+$Id: notation3.py,v 1.139 2003-06-24 13:44:48 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -120,7 +120,7 @@ eol = re.compile(r'[ \t]*(#[^\n]*)?\r?\n')	# end  of line, poss. w/comment
 eof = re.compile(r'[ \t]*(#[^\n]*)?$')      	# end  of file, poss. w/comment
 ws = re.compile(r'[ \t]*')			# Whitespace not including newline @@(whatabout unicode NL? ask MartinD)
 signed_integer = re.compile(r'[-+]?[0-9]+')	# integer
-number_syntax = re.compile(r'([-+]?[0-9]+)(.[0-9]+)?(e[-+]?[0-9]+)?')
+number_syntax = re.compile(r'([-+]?[0-9]+)(\.[0-9]+)?(e[-+]?[0-9]+)?')
 digitstring = re.compile(r'[0-9]+')		# Unsigned integer	
 interesting = re.compile(r'[\\\r\n\"]')
 langcode = re.compile(r'[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?')
@@ -1071,7 +1071,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.138 2003-04-25 19:12:46 sandro Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.139 2003-06-24 13:44:48 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1477,6 +1477,8 @@ class Reifier(RDFSink.RDFSink):
         if self._flat and tuple[CONTEXT] == self._context:
             return self._sink.makeStatement(tuple)   # In same context: does not need reifying
 
+	rs = self._sink.newBlankNode(self._context)
+	
         self._sink.makeStatement(( self._context, # quantifiers - use inverse?
                                   (SYMBOL, N3_forSome_URI),
                                   self._context,

@@ -19,7 +19,7 @@
 @prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
 @prefix :    <http://www.w3.org/2000/10/swap/pim/contact#> .
 
-<>  doc:version "$Id: doc.n3,v 1.8 2003-06-18 19:14:39 timbl Exp $";
+<>  doc:version "$Id: doc.n3,v 1.9 2003-06-24 13:44:50 timbl Exp $";
     doc:ipr <../LICENSE.n3>.
 
 
@@ -109,6 +109,11 @@ doc:mayControl a r:Property;
 #
 
 doc:rules a r:Property;
+	s:comment """
+	The subject is a namespace document; the object is a document
+	containing rules. The rules are valid information about the terms
+	defined in the namespace document.
+	""".
 	s:range :Work;
 	s:domain :Work.
 

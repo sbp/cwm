@@ -9,8 +9,8 @@ cf. http://www.w3.org/2000/10/swap/cwm.py
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_crypto.py,v 1.5 2002-12-31 05:50:30 timbl Exp $'
-__version__ = '$Revision: 1.5 $'
+__cvsid__ = '$Id: cwm_crypto.py,v 1.6 2003-06-24 13:44:47 timbl Exp $'
+__version__ = '$Revision: 1.6 $'
 
 import md5, sha, binascii, quopri, base64
 import thing
@@ -161,14 +161,14 @@ class BI_verifyBoolean(LightBuiltIn, Function):
       RSAKey = quoToKey(keypair) # Dequote the key
       signature = (long(baseDecode(signature)),)
       result = RSAKey.verify(hash, signature)
-      return store.intern((LITERAL, str(result)))
+      return str(result)
 
 class BI_publicKey(LightBuiltIn, Function): 
    def evaluateObject(self, subj_py): 
       """Generate a quopri public key from a keypair."""
       keypair = quoToKey(subj_py) # Dequote the key
       publickey = keypair.publickey() # Get the public key
-      return store.intern((LITERAL, keyToQuo(publickey)))
+      return keyToQuo(publickey)
 
 #  Register the string built-ins with the store
 

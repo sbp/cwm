@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.28 2003-04-02 03:42:04 timbl Exp $
+# $Id: Makefile,v 1.29 2003-06-24 13:44:47 timbl Exp $
 
 PYTHON=python
 
@@ -48,14 +48,14 @@ release : tested
 	cvs commit -m "Passes regression test. (make release)"
 	touch release
 
-package: math.rdf maths.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf times.rdf LICENSE.rdf cwm.tar.Z $(HTMLS)
+package: math.rdf maths.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf times.rdf LICENSE.rdf cwm.tgz $(HTMLS)
 
 # Can't make dependencies on *.py :-(
 
 # cwm.py notation3.py llyn.py  RDFSink.py toXML.py
 cwm.tgz:
 	cvs update
-	tar -czf cwm.tgz *.py $(HTMLS) LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply.*.py *.py
+	tar -czf cwm.tgz *.py $(HTMLS) LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply/*.py *.py
 
 
 yappstest: rdfn3_yapps.py rdfn3_yappstest.py
