@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.113 2002-08-06 01:36:09 connolly Exp $
+$Id: notation3.py,v 1.114 2002-08-07 14:32:21 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -427,7 +427,7 @@ class SinkParser:
                         self.makeStatement((self._context, N3_rest, previous, this ))
                     else:
                         head = this
-                    self.makeStatement((self._context, N3_first, this, item[0] ))
+                    self.makeStatement((self._context, N3_first, this, item[0]))
                 else:  # compact lists
                     if previous:
                         self.makeStatement((self._context, this, previous, previousvalue ))
@@ -888,7 +888,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.113 2002-08-06 01:36:09 connolly Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.114 2002-08-07 14:32:21 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

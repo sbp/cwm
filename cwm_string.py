@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.11 2002-08-06 01:36:08 connolly Exp $
+$Id: cwm_string.py,v 1.12 2002-08-07 14:32:21 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -14,7 +14,7 @@ See cwm.py
 import string
 import re
 
-from diag import verbosity
+from diag import verbosity, progress
 
 import notation3    # N3 parsers and generators, and RDF generator
 # import sax2rdf      # RDF1.0 syntax parser to N3 RDF stream

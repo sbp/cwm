@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: n3-xml-test.sh,v 1.2 2002-07-31 23:19:27 timbl Exp $
+# $Id: n3-xml-test.sh,v 1.3 2002-08-07 14:32:21 timbl Exp $
 #   Regression test for new versions of cwm - test xml and n3 conversion
 #
 #
@@ -34,5 +34,6 @@ function xml_n3_test () {
 for i in $*; do
 	xml_n3_test $i
 done
+echo "Passed $passes out of $tests n3>xml>n3 loopback tests."
 
 #ends

@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.15 2002-08-06 01:36:09 connolly Exp $
+$Id: thing.py,v 1.16 2002-08-07 14:32:21 timbl Exp $
 
 Interning of URIs and strings for stporage in SWAP store
 
@@ -135,7 +135,7 @@ class Resource(Thing):
             f = self.fragments.get(fragid, None)
             if f:
                 if not isinstance(f, thetype):
-                    raise RuntimeError("Oops.. %s existsnot with type %s"%(f, thetype))
+                    raise RuntimeError("Oops.. %s exists already but not with type %s"%(f, thetype))
                 return f    # (Could check that types match just to be sure)
             f = thetype(self, fragid)
             self.fragments[fragid] = f
