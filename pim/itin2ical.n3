@@ -3,7 +3,7 @@
 <> dc:description """
 rules to map from travel itinerary vocabulary
 to iCalendar vocabulary.
-$Id: itin2ical.n3,v 1.8 2003-03-24 17:08:00 connolly Exp $
+$Id: itin2ical.n3,v 1.9 2004-03-31 21:43:29 connolly Exp $
 """;
     dc:source <http://www.ietf.org/rfc/rfc2445.txt> ;
     dc:relation <ical>, <ical.n3>, <ical.rdf>, <toIcal.py>, <ical2rdf.pl>.
@@ -85,6 +85,12 @@ a:AHO a k:Airport-Physical;
   :timeZone  paris:tz. #@@ is that right?
 a:PIT a k:Airport-Physical;
   k:nameString "PITTSBURGH";
+  :timeZone ny:tz.
+a:PHL a k:Airport-Physical;
+  k:nameString "Philadelphia, PA";
+  :timeZone ny:tz.
+a:ATL a k:Airport-Physical;
+  k:nameString "Atlanta, GA";
   :timeZone ny:tz.
 a:YMX a k:Airport-Physical;
   k:nameString "MONTREAL DORVALQC";
