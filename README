@@ -1,4 +1,4 @@
-$Id: README,v 1.7 2004-11-15 18:23:45 connolly Exp $
+$Id: README,v 1.8 2004-11-15 19:01:58 syosi Exp $
 
 Cwm is a general-purpose data processor for the semantic 
 web, somewhat like sed, awk, etc. for text files or XSLT for XML. 
@@ -34,10 +34,10 @@ If a test fails: There are three possiblilities:
 		This is highly unlikely.
 
 
-== What's New In this Release (1.0) ==
+== What's New In this Release (1.0rc2) ==
 For a complete list of changes, look at doc/changes.html
 
-Release 1.0
+Release 1.0rc2
 
 ==General bugfixes
 Fixes in decimal support
