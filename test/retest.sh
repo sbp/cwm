@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.22 2001-11-19 15:25:16 timbl Exp $
+# $Id: retest.sh,v 1.23 2001-12-02 22:42:28 timbl Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -108,9 +108,14 @@ cwm_test smush.rdf "Data aggregation challenge from Jan 2001" --rdf smush-exampl
 TEST_PARAMETER_1=TEST_VALUE_1; export TEST_PARAMETER_1 
 cwm_test environ.n3 "Read operating system environment variable" os/environ.n3 -think
 
+TARGET=roadmap/test.graph; export TARGET
+cwm_test roadmap-test.dot "using notIncludes and --strings to make a graphviz file"  roadmap/todot.n3 --think --strings
 
 # $Log: retest.sh,v $
-# Revision 1.22  2001-11-19 15:25:16  timbl
+# Revision 1.23  2001-12-02 22:42:28  timbl
+# Added roadmap test
+#
+# Revision 1.22  2001/11/19 15:25:16  timbl
 # quantifiers
 #
 # Revision 1.21  2001/11/15 22:11:24  timbl
