@@ -12,7 +12,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.18 2003-01-21 16:10:35 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.19 2003-01-29 19:59:42 ryanlee Exp $"
 
 import uripath
 import time
@@ -72,7 +72,7 @@ from os import getpid
 from time import time
 
 # SWAP modules:
-from diag import verbosity
+from diag import verbosity, progress
 
 runNamespaceValue = None
 
