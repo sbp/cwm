@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2003-03-05 15:06:59 timbl Exp $
+# $Id: Makefile,v 1.4 2003-04-11 19:33:02 connolly Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -40,6 +40,22 @@ CwmBuiltins.html : $(SCHEMAS)
 
 
 states.svg: states.graph
+
+print: tut.pdf tut.ps
+
+#@@cwm.html -- remove junk
+#@@CwmBuiltins.html -- reformat
+TUTFILES=Overview.html ../Primer.html formats.html Shortcuts.html ontologies.html Rules.html Processing.html Built-In.html rule-systems.html Glossary.html
+
+HTML2PS=html2ps # debian package originally from http://www.tdb.uu.se/~jan/html2ps.html
+ # user guide http://www.tdb.uu.se/~jan/html2psug.html
+tut.ps: $(TUTFILES)
+	$(HTML2PS) -o $@ -2 --xref $(TUTFILES)
+
+PS2PDF=ps2pdf # ghostscript? acroread?
+tut.pdf: tut.ps
+	$(PS2PDF) tut.ps
+
 
 clean:
 	$(RM) swws.{rdf,dot,ps,svg,png}
