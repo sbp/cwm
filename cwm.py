@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.93 2002-05-14 22:11:04 timbl Exp $
+$Id: cwm.py,v 1.94 2002-06-07 13:48:31 timbl Exp $
 
 Closed World Machine
 
@@ -51,7 +51,7 @@ import llyn
 
 from thing import progress
 
-cvsRevision = "$Revision: 1.93 $"
+cvsRevision = "$Revision: 1.94 $"
 
 
 ######################################################### Tests  
@@ -405,7 +405,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.93 2002-05-14 22:11:04 timbl Exp $"
+        version = "$Id: cwm.py,v 1.94 2002-06-07 13:48:31 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -460,7 +460,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 if option_format == "rdf" :
                     p = sax2rdf.RDFXMLParser(_store, _inputURI, formulaURI=workingContextURI)
                 else: p = notation3.SinkParser(_store,  _inputURI, formulaURI=workingContextURI)
-                workingContext.reopen()
+                if not option_pipe: workingContext.reopen()
                 p.load(_inputURI)
                 del(p)
                 if not option_pipe:
