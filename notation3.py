@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-$Id: notation3.py,v 1.49 2001-01-22 02:02:39 timbl Exp $
+$Id: notation3.py,v 1.50 2001-01-22 02:04:16 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1031,7 +1031,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.49 2001-01-22 02:02:39 timbl Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.50 2001-01-22 02:04:16 timbl Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
