@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.52 2004-08-06 13:30:47 syosi Exp $
+# $Id: Makefile,v 1.53 2004-08-06 18:56:15 syosi Exp $
 
 PYTHON=python
 
@@ -72,7 +72,7 @@ cwm.tar.gz:  $(HTMLS) $(SOURCES) $(TESTS) $(TARBALL_STUFF) tested filelist
 	cvs add $(TARNAME).tar.gz
 #LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply/*.py *.py
 
-setup_tarball: $(HTMLS) $(SOURCES) $(TESTS) $(TARBALL_STUFF) tested filelist
+setup_tarball: $(HTMLS) $(SOURCES) $(TESTS) $(TARBALL_STUFF) # tested filelist
 	cvs -q update
 	rm -rf swap || true
 	mkdir swap

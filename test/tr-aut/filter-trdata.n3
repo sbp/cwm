@@ -6,7 +6,7 @@
   dc:description """
     This filter takes as input a list of tr-process#latestVersion docs, and any data you have on this docs and keeps only those that are #Interesting.
    """;
-  rcs:id "$Id: filter-trdata.n3,v 1.2 2004-07-28 15:31:18 dom Exp $";
+  rcs:id "$Id: filter-trdata.n3,v 1.3 2004-08-06 18:56:15 syosi Exp $";
   dc:relation <new-tr.rdf>, <tr-process.n3>.
 @prefix rec: <http://www.w3.org/2001/02pd/rec54#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
@@ -38,7 +38,7 @@ this log:forAll :WORK, :WORK2, :GENERIC, :P, :X, :P2.
   :P2 a trp:Interesting;
      log:notEqualTo <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>.
 
-  :WORK :P [:P2 :X], is trp:latestVersion of [].
+  :WORK :P [:P2 :X]; is trp:latestVersion of [].
 
 }
   log:implies { :WORK :P [ :P2 :X]}.
