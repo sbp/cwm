@@ -4,6 +4,8 @@
 #   and http://fink.sourceforge.net/doc/packaging/format.php#format
 # See http://www.w3.org/DesignIssues/Notation3.html
 #
+# To run:
+#        The notation3.py files must be in your PYTHONPATH (or installed)
 # TODO:
 #	- Recursive Splitoffs convert nicely to N3. Remember parent,  fink:child relation
 #	- Version number qualifiers on dependecies   [fink:thisOrSuccesso xxx]
@@ -15,7 +17,7 @@ import re
 
 PREFIX="/sw"
 
-version = "$Id: fink2n3.py,v 1.5 2002-06-10 03:05:28 timbl Exp $"[1:-1]
+version = "$Id: fink2n3.py,v 1.6 2002-06-22 11:53:41 timbl Exp $"[1:-1]
 macros = { "N": "_parent", "n":"Package",  "v":"Version", "r": "Revision",
 	    "p": "_prefix", "P": "_prefix"}
 
@@ -293,7 +295,7 @@ Syntax:    make2n3  [-r] <file>
 
     where <file> can be omitted and if so defaults to /sw/fink/dists .
     This program was http://www.w3.org/2000/10/swap/util/fink2p3.py
-    $Id: fink2n3.py,v 1.5 2002-06-10 03:05:28 timbl Exp $
+    $Id: fink2n3.py,v 1.6 2002-06-22 11:53:41 timbl Exp $
 """
         else:
             print """Bad option argument.""", arg, ". use -? for help."
