@@ -36,7 +36,13 @@ import urlparse  # Comes with python 1.6, lacks file<->url mapping
 import urllib   # Opening resources in load()
 import string
 
-import xml.sax
+import xml.sax # PyXML stuff
+               #   http://sourceforge.net/projects/pyxml
+               # Connolly uses the debian python2-xml 0.6.5-2 package
+               #  http://packages.debian.org/testing/interpreters/python2-xml.html
+               # and suggests TimBL try the win32 distribution from
+               # the PyXML sourceforge project
+               # http://prdownloads.sourceforge.net/pyxml/PyXML-0.6.5.win32-py2.1.exe
 from xml.sax.handler import feature_namespaces
 
 import notation3 # http://www.w3.org/2000/10/swap/notation3.py
@@ -79,7 +85,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.2 2001-06-01 07:50:21 connolly Exp $"
+        version = "$Id: sax2rdf.py,v 1.3 2001-06-01 13:58:57 connolly Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
