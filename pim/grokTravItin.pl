@@ -9,7 +9,7 @@
 #  http://www.w3.org/2001/07dc-bos/grokNavItin.pl
 #  Id: grokNavItin.pl,v 1.8 2002/06/04 01:45:38 connolly Exp
 #
-# $Id: grokTravItin.pl,v 1.2 2002-06-12 15:42:27 connolly Exp $
+# $Id: grokTravItin.pl,v 1.3 2002-06-12 20:36:15 connolly Exp $
 # see changelog at end
 #
 
@@ -234,6 +234,8 @@ sub theDay{
   if($dow =~ /^MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY|SUNDAY$/){
     $dow = ucfirst(lc($dow));
     makeStatement($d, $rdfNS . 'type', $kNS . $dow);
+    makeStatement($kNS . $dow, $rdfNS . 'type', $kNS . 'DayOfWeekType'); #@@ not yet a published part of opencyc, but mentioned in comments.
+    makeStatement($kNS . $dow, $kNS . 'nameString', '', $dow);
   }
   return $d;
 }
@@ -283,7 +285,10 @@ sub the{
 }
 
 # $Log: grokTravItin.pl,v $
-# Revision 1.2  2002-06-12 15:42:27  connolly
+# Revision 1.3  2002-06-12 20:36:15  connolly
+# factored out common stuff from travel tools
+#
+# Revision 1.2  2002/06/12 15:42:27  connolly
 # grokTravItin.pl seems to be working now
 #
 # Revision 1.1  2002/06/12 06:57:23  connolly
