@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.84 2001-07-02 21:06:31 connolly Exp $
+$Id: notation3.py,v 1.85 2001-07-26 04:45:47 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -284,7 +284,7 @@ class SinkParser:
 
     #@@I18N
     global _namechars
-    _namechars = string.lowercase + string.uppercase + string.digits + '_'
+    _namechars = string.lowercase + string.uppercase + string.digits + '_-'
 
     def tok(self, tok, str, i):
         """tokenizer strips whitespace and comment"""
@@ -841,7 +841,7 @@ def stripCR(str):
 ########################## RDF 1.0 Syntax generator
 
     global _namechars	
-    _namechars = string.lowercase + string.uppercase + string.digits + '_'
+    _namechars = string.lowercase + string.uppercase + string.digits + '_-'
 	    
 class ToRDF(RDFSink):
     """keeps track of most recent subject, reuses it"""
@@ -1068,7 +1068,7 @@ class XMLWriter:
         
     #@@ on __del__, close all open elements?
 
-    _namechars = string.lowercase + string.uppercase + string.digits + '_'
+    _namechars = string.lowercase + string.uppercase + string.digits + '_-'
 
 
     def newline(self, howmany=1):
@@ -1252,7 +1252,7 @@ t   "this" and "()" special syntax should be suppresed.
 
 	
 	#@@I18N
-    _namechars = string.lowercase + string.uppercase + string.digits + '_'
+    _namechars = string.lowercase + string.uppercase + string.digits + '_-'
     _rdfns = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
 
     
@@ -1274,7 +1274,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.84 2001-07-02 21:06:31 connolly Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.85 2001-07-26 04:45:47 connolly Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
