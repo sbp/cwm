@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.9 2004-03-21 04:24:35 timbl Exp $
+$Id: term.py,v 1.10 2004-05-12 01:27:08 timbl Exp $
 
 term
 
@@ -643,13 +643,6 @@ class Literal(Term):
         self.string = str    #  n3 notation EXcluding the "  "
 	self.datatype = dt
 	self.lang=lang
-#	self._value = None
-#	if dt == FLOAT_DATATYPE:
-#	    self._value = float(str)
-#	elif dt == INTEGER_DATATYPE:
-#	    self._value = int(str)
-#	elif dt == None:
-#	    self._value = str
 
     def __str__(self):
         return self.string

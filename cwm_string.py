@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.21 2004-01-28 23:52:16 connolly Exp $
+$Id: cwm_string.py,v 1.22 2004-05-12 01:27:08 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -111,7 +111,10 @@ class BI_concatenation(LightBuiltIn, Function):
         if verbosity() > 80: progress("Concatenation input:"+`subj_py`)
         str = ""
         for x in subj_py:
-            if not isString(x): return None # Can't
+            if not isString(x):
+		x = `x`
+		if verbosity() > 34: progress("Warning: Coercing to string for concat:"+`x`)
+#		return None # Can't
             str = str + x 
         return str
 

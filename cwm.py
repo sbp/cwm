@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.148 2004-03-21 04:24:32 timbl Exp $
+$Id: cwm.py,v 1.149 2004-05-12 01:27:06 timbl Exp $
 
 Closed World Machine
 
@@ -57,7 +57,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.148 $"
+cvsRevision = "$Revision: 1.149 $"
 
 
 
@@ -321,7 +321,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.148 2004-03-21 04:24:32 timbl Exp $"
+        version = "$Id: cwm.py,v 1.149 2004-05-12 01:27:06 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -352,7 +352,6 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             if option_first_format is None: option_first_format = option_format
 	    ContentType={ "rdf": "application/xml+rdf", "n3":
 				"application/n3" }[option_first_format]
-	    workingContext.reopen()
 	    workingContext = _store.load(
 #			    asIfFrom = join(_baseURI, ".stdin"),
 			    asIfFrom = _baseURI,
@@ -360,6 +359,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 			    flags = option_flags[option_first_format],
 			    remember = 0,
 			    why = becauseCwm)
+	    workingContext.reopen()
 
 
 

@@ -11,7 +11,7 @@ in the patch file.
 
 If from-file but not to-file is given, from-file is smushed and output
 Uris are relative to present working directory.
-$Id: diff.py,v 1.9 2004-03-23 19:33:44 timbl Exp $
+$Id: diff.py,v 1.10 2004-05-12 01:27:08 timbl Exp $
 http://www.w3.org/2000/10/swap/diff.py
 """
 
@@ -44,7 +44,7 @@ from llyn import Formula, CONTEXT, PRED, SUBJ, OBJ
 OWL = Namespace("http://www.w3.org/2002/07/owl#")
 RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
 LOG = Namespace("http://www.w3.org/2000/10/swap/log#")
-
+DELTA = Namespace("http://www.w3.org/2004/delta#")
 
 def lookUp(predicates):
     """Look up al lthe schemas for the predicates given"""
@@ -161,9 +161,9 @@ def patches(delta, f, only_f, originalBnodes, definitions, deleting=0):
     given the bnodes and definitions for f."""
     todo = only_f.copy()
     if deleting:
-	patchVerb = LOG.deletion
+	patchVerb = DELTA.deletion
     else:
-	patchVerb = LOG.insertion
+	patchVerb = DELTA.insertion
     if verbose: progress("Patch:", patchVerb)
     while todo:
 
@@ -355,7 +355,7 @@ def main():
 	usage()
 	sys.exit(2)
     graph = loadFiles(testFiles)
-    version = "$Id: diff.py,v 1.9 2004-03-23 19:33:44 timbl Exp $"[1:-1]
+    version = "$Id: diff.py,v 1.10 2004-05-12 01:27:08 timbl Exp $"[1:-1]
     if diffFiles == []:
 	nailFormula(graph)
 	if verbose: print "# Smush by " + version

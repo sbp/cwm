@@ -5,7 +5,7 @@ This is an RDF application.
 
 See also Morten F's http://www.wasab.dk/morten/2003/10/garmin2rdf.py
 
-$Id: fromGarmin.py,v 1.2 2004-03-21 04:24:35 timbl Exp $
+$Id: fromGarmin.py,v 1.3 2004-05-12 01:27:09 timbl Exp $
 """
 
 # Regular python library
@@ -15,6 +15,7 @@ import os, sys, time
 from myStore import Namespace, formula, symbol, intern, bind
 from diag import progress
 import uripath
+from uripath import join, base
 from notation3 import RDF_NS_URI
 import notation3    	# N3 parsers and generators
 import isodate  # for isodate.fullString
@@ -102,7 +103,7 @@ def doCommand(serialDevice=None, outputURI=None, doWaypoints=1, doTracks=1, verb
    f = f.close()
    if verbose:
 	progress("Beginning output")
-   s = f.n3String("d")   # Flag - no default prefix
+   s = f.n3String(base=base, flags="d")   # Flag - no default prefix
    if outputURI != None:
 	op = open(outputURI, "w")
 	op.write(s)

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.103 2004-03-21 04:24:35 timbl Exp $
+$Id: llyn.py,v 1.104 2004-05-12 01:27:08 timbl Exp $
 
 RDF Store and Query engine
 
@@ -85,8 +85,8 @@ from pretty import Serializer
 from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/n3;"
-
-cvsRevision = "$Revision: 1.103 $"
+Delta_NS = "http://www.w3.org/2004/delta#"
+cvsRevision = "$Revision: 1.104 $"
 
 # Magic resources we know about
 
@@ -968,8 +968,8 @@ class RDFStore(RDFSink) :
 	self.float  = self.symbol(FLOAT_DATATYPE)
         self.forAll  = self.symbol(forAllSym)
         self.implies = self.symbol(Logic_NS + "implies")
-        self.insertion = self.symbol(Logic_NS + "insertion")
-        self.deletion  = self.symbol(Logic_NS + "deletion")
+        self.insertion = self.symbol(Delta_NS + "insertion")
+        self.deletion  = self.symbol(Delta_NS + "deletion")
         self.means = self.symbol(Logic_NS + "means")
         self.asserts = self.symbol(Logic_NS + "asserts")
         
