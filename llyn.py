@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.28 2002-06-07 19:52:25 timbl Exp $
+$Id: llyn.py,v 1.29 2002-06-23 21:08:28 timbl Exp $
 
 RDF Store and Query engine
 
@@ -138,7 +138,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.28 $"
+cvsRevision = "$Revision: 1.29 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -829,10 +829,12 @@ class RDFStore(RDFSink.RDFSink) :
 
         import cwm_string  # String builtins
         import cwm_os      # OS builtins
+        import cwm_time    # time and date builtins
         import cwm_math    # Mathematics
         cwm_string.register(self)
         cwm_math.register(self)
         cwm_os.register(self)
+        cwm_time.register(self)
         if crypto:
 	    import cwm_crypto  # Cryptography
 	    cwm_crypto.register(self)  # would like to anyway to catch bug if used but not available

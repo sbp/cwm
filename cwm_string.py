@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.9 2002-05-21 01:51:01 timbl Exp $
+$Id: cwm_string.py,v 1.10 2002-06-23 21:08:28 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -134,6 +134,16 @@ class BI_scrape(LightBuiltIn, Function):
         else:
             return None
 
+class BI_matches(LightBuiltIn):
+    def evaluate(self, store, context, subj, subj_py, obj, obj_py):
+        return (re.compile(obj.string).search(subj.string))
+
+class BI_notMatches(LightBuiltIn):
+    def evaluate(self, store, context, subj, subj_py, obj, obj_py):
+        return (not re.compile(obj.string).search(subj.string))
+
+
+
 #  Register the string built-ins with the store
 
 def isString(x):
@@ -152,6 +162,8 @@ def register(store):
     str.internFrag("concat", BI_concat)
     str.internFrag("concatenation", BI_concatenation)
     str.internFrag("scrape", BI_scrape)
+    str.internFrag("matches", BI_matches)
+    str.internFrag("notMatches", BI_matches)
     str.internFrag("contains", BI_Contains)
     str.internFrag("containsIgnoringCase", BI_ContainsIgnoringCase)
     str.internFrag("doesNotContain", BI_DoesNotContain)
