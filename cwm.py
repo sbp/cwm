@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.140 2003-09-02 00:22:07 timbl Exp $
+$Id: cwm.py,v 1.141 2003-09-03 22:09:30 timbl Exp $
 
 Closed World Machine
 
@@ -57,7 +57,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.140 $"
+cvsRevision = "$Revision: 1.141 $"
 
 
 ######################################################### Tests  
@@ -386,7 +386,10 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             if _equals >=0:
                 _lhs = arg[:_equals]
                 _rhs = arg[_equals+1:]
-                _uri = join(option_baseURI, _rhs)
+		try:
+		    _uri = join(option_baseURI, _rhs)
+		except ValueError:
+		    _uri = _rhs
             if arg == "-test":
                 option_test = 1
                 _gotInput = 1
@@ -500,7 +503,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.140 2003-09-02 00:22:07 timbl Exp $"
+        version = "$Id: cwm.py,v 1.141 2003-09-03 22:09:30 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -550,8 +553,10 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             if _equals >=0:
                 _lhs = arg[:_equals]
                 _rhs = arg[_equals+1:]
+	    try:
                 _uri = join(option_baseURI, _rhs)
-                
+	    except ValueError:
+		_uri =_rhs
             if arg[0] != "-":
                 _inputURI = join(option_baseURI, arg)
                 assert ':' in _inputURI

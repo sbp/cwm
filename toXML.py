@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.10 2003-08-25 14:54:54 timbl Exp $
+$Id: toXML.py,v 1.11 2003-09-03 22:09:32 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -165,21 +165,26 @@ class ToRDF(RDFSink.RDFStructuredOutput):
             self._docOpen = 1
 
     def makeStatement(self,  tuple, why=None):
-        self.flushStart()
         context, pred, subj, obj = tuple # Context is ignored
+
+	if subj == context: # and context == self._formula:
+	    if pred == (SYMBOL, N3_forAll_URI):
+		progress("Ignoring universal quantification of ", obj)
+		return
+	    elif pred == (SYMBOL, N3_forSome_URI):
+		progress("Ignoring existential quantification of ", obj)
+		return
+	    
+	if subj[0] not in (SYMBOL, ANONYMOUS, LITERAL):
+	    progress("Warning:  because subject is not symbol, bnode or literal, Ignoring ", tuple)
+	    return
+
+        self.flushStart()
 	if self._formula == None:
 	    self._formula = context   # Asssume first statement is in outermost context @@
 	predn = refTo(self._base, pred[1])
 	subjn = refTo(self._base, subj[1])
 
-	if subj == context: # and context == self._formula:
-	    if pred == (SYMBOL, N3_forAll_URI):
-		progress("Ignoring universal ", obj)
-		return
-	    elif pred == (SYMBOL, N3_forSome_URI):
-		progress("Ignoring existential ", obj)
-		return
-	    
 	if self._subj != subj:
 	    if self._subj:
 		self._wr.endElement()
@@ -205,9 +210,7 @@ class ToRDF(RDFSink.RDFStructuredOutput):
 		self._wr.data(v)
 		self._wr.endElement()
 	    else:
-		progress("Warning:  because subject is strange, Ignoring ", tuple)
-		return
-		raise ValueError("Unexpected subject", `subj`)
+		raise RuntimeError("Unexpected subject", `subj`)
 	if obj[0] != LITERAL: 
 	    objn = refTo(self._base, obj[1])
 	    self._wr.emptyElement(pred[1], [(RDF_NS_URI+' resource', objn)], self.prefixes)

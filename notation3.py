@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.143 2003-09-02 00:13:42 timbl Exp $
+$Id: notation3.py,v 1.144 2003-09-03 22:09:32 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1000,8 +1000,12 @@ t   "this" and "()" special syntax should be suppresed.
     def __init__(self, write, base=None, genPrefix = None, noLists=0 , quiet=0, flags=""):
 	gp = genPrefix
 	if gp == None:
-	    if base==None: gp = "#_g"
-	    else: gp = uripath.join(base, "#_g")
+	    gp = "#_g"
+	    if base!=None: 
+		try:
+		    gp = uripath.join(base, "#_g")
+		except ValueError:
+		    pass # bogus: base eg
 	RDFSink.RDFSink.__init__(self, gp)
 	self._write = write
 	self._quiet = quiet or "q" in flags
@@ -1058,7 +1062,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.143 2003-09-02 00:13:42 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.144 2003-09-03 22:09:32 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
