@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.68 2001-05-08 08:14:51 connolly Exp $
+$Id: notation3.py,v 1.69 2001-05-08 19:46:35 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -87,6 +87,7 @@ ALL4 = CONTEXT, PRED, SUBJ, OBJ
 # The parser outputs quads where each item is a pair   type, value
 
 RESOURCE = 0        # which or may not have a fragment
+FORMULA = 1         # A { } set of statements
 LITERAL = 2         # string etc - maps to data:
 ANONYMOUS = 3       # existentially qualified unlabelled resource
 VARIABLE = 4        # 
@@ -386,7 +387,7 @@ class SinkParser:
 
         j = self.tok('[', str, i)
         if j>=0:
-            if subj is None: subj=self.genid()
+            if subj is None: subj=self.genid(RESOURCE)
             i = self.property_list(str, j, subj)
             if i<0: raise BadSyntax(self.lines, str, j, "property_list expected")
             j = self.tok(']', str, i)
@@ -397,8 +398,7 @@ class SinkParser:
         j = self.tok('{', str, i)
         if j>=0:
             oldContext = self._context
-            if subj is None: subj = self.genid()
-
+            if subj is None: subj = self.genid(FORMULA)
             self._context = subj
             
             while 1:
@@ -427,7 +427,7 @@ class SinkParser:
                 item = []
                 j = self.object(str,i, item)
                 if j<0: raise BadSyntax(self.lines, str, i, "expected item in list or ')'")
-                this = self.genid()
+                this = self.genid(RESOURCE)
                 if tail:
                     self.makeStatement((self._context, N3_rest, tail, this ))
                 else:
@@ -696,8 +696,8 @@ class SinkParser:
 	    else:
 		return -1
 
-    def genid(self):  # Generate existentially quantified variable id
-        subj = RESOURCE , self._genPrefix + `self._nextId` # ANONYMOUS node
+    def genid(self, type):  # Generate existentially quantified variable id
+        subj = type , self._genPrefix + `self._nextId` # ANONYMOUS node
         self._nextId = self._nextId + 1
         self.makeStatement((self._context, # quantifiers - use inverse?
                             (RESOURCE, N3_forSome_URI), #pred
@@ -1142,7 +1142,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.68 2001-05-08 08:14:51 connolly Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.69 2001-05-08 19:46:35 timbl Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
