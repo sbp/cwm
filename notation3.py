@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.173 2005-01-10 19:15:22 syosi Exp $
+$Id: notation3.py,v 1.174 2005-01-11 20:17:31 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -567,6 +567,11 @@ class SinkParser:
             return j
 
         if ch == "(":
+            thing_type = self._store.newList
+            ch2 = str[i+1:i+2]
+            if ch2 == '$':
+                thing_type = self._store.newSet
+                i += 1
 	    j=i+1
 ##            ######################################
 ##            #The below code should be hit with a sledgehammer multiple times.
@@ -611,7 +616,7 @@ class SinkParser:
                 j = self.item(str,i, item) #@@@@@ should be path, was object
                 if j<0: raise BadSyntax(self._thisDoc, self.lines, str, i, "expected item in list or ')'")
                 List.append(self._store.intern(item[0]))
-            res.append(self._store.newList(List, self._context))
+            res.append(thing_type(List, self._context))
             return j
 
         j = self.tok('this', str, i)   # This context
@@ -1229,7 +1234,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.173 2005-01-10 19:15:22 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.174 2005-01-11 20:17:31 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.126 2005-01-11 18:43:29 syosi Exp $
+$Id: llyn.py,v 1.127 2005-01-11 20:17:31 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.126 $"
+cvsRevision = "$Revision: 1.127 $"
 
 
 # Magic resources we know about
@@ -1073,6 +1073,7 @@ class RDFStore(RDFSink) :
         self.Chaff = self.symbol(Logic_NS + "Chaff")
 	self.docRules = self.symbol("http://www.w3.org/2000/10/swap/pim/doc#rules")
 	self.imports = self.symbol("http://www.w3.org/2002/07/owl#imports")
+	self.owlOneOf = self.symbol('http://www.w3.org/2002/07/owl#oneOf')
 
 # List stuff - beware of namespace changes! :-(
 
@@ -1121,7 +1122,7 @@ class RDFStore(RDFSink) :
     def newSymbol(self, uri):
 	return self.intern(RDFSink.newSymbol(self, uri))
 
-    def newSet(self, iterator=[]):
+    def newSet(self, iterator=[], context=None):
         new_set = N3Set(iterator)
         Term.__init__(new_set, self)
         return new_set

@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.25 2005-01-11 18:43:29 syosi Exp $
+$Id: term.py,v 1.26 2005-01-11 20:17:31 syosi Exp $
 
 term
 
@@ -712,9 +712,17 @@ class EmptyList(List):
     def newList(self, value):
         x = self
         l = len(value)
-        while l > 0:
-            l = l - 1
-            x = x.prepend(value[l])
+        if l == 0:
+            return x
+        try:
+            value[0]
+        except TypeError:
+            for a in value:
+                x = x.prepend(a)
+        else:
+            while l > 0:
+                l = l - 1
+                x = x.prepend(value[l])
         return x
 
     def unify(self, other, vars, existentials, bindings):
