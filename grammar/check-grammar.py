@@ -2,7 +2,7 @@
 """ Check ambiguity as for predictive parser
 """
 
-__version__ = "$Id: check-grammar.py,v 1.8 2004-09-07 21:58:03 timbl Exp $"
+__version__ = "$Id: check-grammar.py,v 1.9 2004-11-02 00:42:43 timbl Exp $"
 
 import llyn
 from myStore import load, Namespace
@@ -276,9 +276,10 @@ class PredictiveParser:
 
 # The Grammar formula
 
-print "Loading", argv[1]
+grammarFile = argv[1].split("#")[0]
+print "Loading", grammarFile
 start = clock()
-g = load(argv[1])
+g = load(grammarFile)
 taken = clock() - start
 print "Loaded %i statements in %fs, ie %f/s." % (len(g), taken, len(g)/taken)
 
