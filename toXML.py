@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.16 2004-03-21 04:24:35 timbl Exp $
+$Id: toXML.py,v 1.17 2004-06-30 18:06:19 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -193,7 +193,7 @@ z  - Allow relative URIs for namespaces
             self._nextId = 0
             self._docOpen = 1
 
-    def makeStatement(self,  tuple, why=None):
+    def makeStatement(self,  tuple, why=None, aIsPossible=0):
         context, pred, subj, obj = tuple # Context is ignored
 
 	if subj == context: # and context == self._formula:

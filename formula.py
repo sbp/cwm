@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.9 2004-06-24 03:17:12 timbl Exp $
+$Id: formula.py,v 1.10 2004-06-30 18:06:19 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -57,7 +57,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.9 $"
+cvsRevision = "$Revision: 1.10 $"
 
 # Magic resources we know about
 
@@ -553,9 +553,9 @@ class Formula(AnonymousNode, CompoundTerm):
 	ooo = sink.newSymbol(owlOneOf)
 	for vars, vocab in ((self.existentials(),  rei["existentials"]), 
 			(self.universals(), rei["universals"])):
-			
-	    progress("vars=", vars)
-	    progress("vars=", [v.uriref() for v in vars])
+	    if diag.chatty_flag > 54:
+        	progress("vars=", vars)
+                progress("vars=", [v.uriref() for v in vars])
 	    list = sink.store.nil.newList([sink.newLiteral(x.uriref()) for x in vars])
 	    klass = sink.newBlankNode()
             sink.add(klass, ooo, list)
@@ -579,6 +579,25 @@ class Formula(AnonymousNode, CompoundTerm):
         sink.add(F, rei["statements"], StatementClass)
 	    
 	return F
+
+    def doesNodeAppear(self, symbol):
+        """Does that particular node appear anywhere in this formula
+
+        This function is necessarily recursive, and is useful for the pretty printer
+        It will also be useful for the flattener, when we write it.
+        """
+        for quad in self.statements:
+            for s in SUBJ, OBJ:
+                val = 0
+                if isinstance(quad[s], CompoundTerm):
+                    val = val or quad[s].doesNodeAppear(symbol)
+                elif quad[s] == symbol:
+                    val = 1
+                else:
+                    pass
+                if val == 1:
+                    return 1
+        return 0
 
 #################################################################################
 

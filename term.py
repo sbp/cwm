@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.13 2004-06-24 03:17:12 timbl Exp $
+$Id: term.py,v 1.14 2004-06-30 18:06:19 syosi Exp $
 
 term
 
@@ -507,6 +507,25 @@ class List(CompoundTerm):
 	sink.add(subj=b, pred=sink.newSymbol(REIFY_NS+"items"), obj=elements, why=why)
 	return b
 
+    def doesNodeAppear(self, symbol):
+        """Does that particular node appear anywhere in this list
+
+        This function is necessarily recursive, and is useful for the pretty printer
+        It will also be useful for the flattener, when we write it.
+        """
+        for elt in self:
+            val = 0
+            if isinstance(elt, CompoundTerm):
+                val = val or elt.doesNodeAppear(symbol)
+            elif elt == symbol:
+                val = 1
+            else:
+                pass
+            if val == 1:
+                print 'I won!'
+                return 1
+        return 0
+            
 
 class NonEmptyList(List):
 

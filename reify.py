@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.3 2004-06-24 20:22:51 syosi Exp $
+$Id: reify.py,v 1.4 2004-06-30 18:06:19 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -18,6 +18,7 @@ SUBJ = 0
 PRED = 1
 OBJ  = 2
 import uripath
+import diag
 
 reifyNS = 'http://www.w3.org/2004/06/rei#'
 owlOneOf = 'http://www.w3.org/2002/07/owl#oneOf'
@@ -57,6 +58,8 @@ def reify(formula):
 ##    rest = 1.rest
 ##    
 
+
+#Note that the following is depricated and referenced nowhere.
 def reification(formula, sink, bnodes={}):
     """Create description of formula in sink
 
@@ -414,18 +417,22 @@ def dereification(x, f, sink, bnodes={}):
 	uset = f.the(subj=x, pred=rei["universals"])
 	ulist = f.the(subj=uset, pred=f.newSymbol(owlOneOf))
 	from diag import progress
-	progress("universals = ",ulist)
+	if diag.chatty_flag > 54:
+            progress("universals = ",ulist)
 	for v in ulist:
 	    z.declareUniversal(f.newSymbol(v.value()))
 
 	uset = f.the(subj=x, pred=rei["existentials"])
 	ulist = f.the(subj=uset, pred=f.newSymbol(owlOneOf))
-	progress("existentials %s =  %s"%(ulist, ulist.value()))
+	if diag.chatty_flag > 54:
+            progress("existentials %s =  %s"%(ulist, ulist.value()))
 	for v in ulist:
-	    progress("Variable is ", v)
+            if diag.chatty_flag > 54:
+                progress("Variable is ", v)
 	    z.declareExistential(f.newSymbol(v.value()))
 	yy = f.the(subj=y, pred=f.newSymbol(owlOneOf))
-	progress("Statements:  set=%s, list=%s = %s" %(y,yy, yy.value()))
+	if diag.chatty_flag > 54:
+            progress("Statements:  set=%s, list=%s = %s" %(y,yy, yy.value()))
 	for stmt in yy:
 	    z.add(dereification(f.the(subj=stmt, pred=rei["subject"]), f, sink, zbNodes),
 		dereification(f.the(subj=stmt, pred=rei["predicate"]), f, sink, zbNodes),
