@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.120 2004-10-28 17:41:59 timbl Exp $
+$Id: llyn.py,v 1.121 2004-11-19 01:58:39 syosi Exp $
 
 
 RDF Store and Query engine
@@ -88,7 +88,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.120 $"
+cvsRevision = "$Revision: 1.121 $"
 
 
 # Magic resources we know about
@@ -587,6 +587,8 @@ class IndexedFormula(Formula):
             pairs.append((s[SUBJ], s[OBJ]))
         pairs.sort(comparePair)
         for key, str in pairs:
+            if not hasattr(str, "string"):
+                print `str`
             channel.write(str.string.encode('utf-8'))
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.164 2004-10-28 17:41:59 timbl Exp $
+$Id: cwm.py,v 1.165 2004-11-19 01:58:39 syosi Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.164 $"
+cvsRevision = "$Revision: 1.165 $"
 
 
 
@@ -264,7 +264,7 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == "-strings": option_outputStyle = "-no"
             elif arg == "-triples" or arg == "-ntriples":
                 option_format = "n3"
-                option_flags["n3"] = "uspartane"
+                option_flags["n3"] = "uspartanev"
                 option_outputStyle = "-bySubject"
                 option_quiet = 1
             elif _lhs == "-outURI": option_outURI = _uri
@@ -328,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.164 2004-10-28 17:41:59 timbl Exp $"
+        version = "$Id: cwm.py,v 1.165 2004-11-19 01:58:39 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)

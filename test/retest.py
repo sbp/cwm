@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.30 2004-11-10 00:50:21 syosi Exp $
+ $Id: retest.py,v 1.31 2004-11-19 01:58:39 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -306,8 +306,14 @@ def main():
 	description = str(kb.the(t, n3test.description))
 #	    if description == None: description = case + " (no description)"
 	inputDocument = kb.the(t, n3test.inputDocument).uriref()
-
-	n3PositiveTestData.append((t.uriref(), case, description,  inputDocument))
+        good = 1
+        categories = kb.each(t, rdf.type)
+	for cat in categories:
+	    if cat is triage.knownError:
+		if verbose: print "\tknown failure: "+ inputDocument[-40:]
+		good = 0
+	if good:
+            n3PositiveTestData.append((t.uriref(), case, description,  inputDocument))
 
 
     for t in kb.each(pred=rdf.type, obj=n3test.NegativeParserTest):
