@@ -8,7 +8,7 @@
 #
 # Copyright (C) 2001, David M. Beazley
 #
-# $Header: /sources/public/2000/10/swap/ply/yacc.py,v 1.1 2003-02-14 00:34:06 sandro Exp $
+# $Header: /sources/public/2000/10/swap/ply/yacc.py,v 1.2 2003-02-14 14:41:20 sandro Exp $
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -1242,7 +1242,7 @@ def slr_parse_table():
     n_srconflict = 0
     n_rrconflict = 0
 
-    print "yacc: Generating SLR parsing table..."
+    #print "yacc: Generating SLR parsing table..."
     if yaccdebug:
         _vf.write("\n\nParsing method: SLR\n\n")
         
