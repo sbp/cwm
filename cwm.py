@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.155 2004-06-30 20:04:57 timbl Exp $
+$Id: cwm.py,v 1.156 2004-07-06 18:04:18 syosi Exp $
 
 Closed World Machine
 
@@ -52,7 +52,7 @@ import sys
 import llyn
 import RDFSink
 
-cvsRevision = "$Revision: 1.155 $"
+cvsRevision = "$Revision: 1.156 $"
 
 
 
@@ -141,6 +141,7 @@ the closure under the operation of looking up:
  t   the object of an rdf:type statement added
  i   any owl:imports documents
  r   any doc:rules documents
+ E   errors are ignored --- This is independant of --mode=E
  
  e   Smush together any nodes which are = (owl:sameAs)
 
@@ -309,7 +310,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.155 2004-06-30 20:04:57 timbl Exp $"
+        version = "$Id: cwm.py,v 1.156 2004-07-06 18:04:18 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -326,11 +327,6 @@ rdf/xml files. Note that this requires rdflib.
 	    myStore.setStore(_store)
 
 
-	becauseCwm = None
-	if diag.tracking:
-	    proof = FormulaReason(workingContext)
-	    becauseCwm = BecauseOfCommandLine(sys.argv[0]) 
-	    # @@ add user, host, pid, date time? Privacy!
 
 	workingContext = None
         if  _gotInput: 
@@ -348,7 +344,11 @@ rdf/xml files. Note that this requires rdflib.
 			    why = becauseCwm)
 	    workingContext.reopen()
 
-
+	becauseCwm = None
+	if diag.tracking:
+	    proof = FormulaReason(workingContext)
+	    becauseCwm = BecauseOfCommandLine(sys.argv[0]) 
+	    # @@ add user, host, pid, date time? Privacy!
 
 
 

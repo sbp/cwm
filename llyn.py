@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.108 2004-06-24 20:22:51 syosi Exp $
+$Id: llyn.py,v 1.109 2004-07-06 18:04:19 syosi Exp $
 
 
 RDF Store and Query engine
@@ -87,7 +87,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.108 $"
+cvsRevision = "$Revision: 1.109 $"
 
 
 # Magic resources we know about
@@ -1208,8 +1208,8 @@ class RDFStore(RDFSink) :
 	"""Takem a python string, seq etc and represent as a llyn object"""
         if isinstance(x, tuple(types.StringTypes)):
             return self.newLiteral(x)
-        elif type(x) is types.IntType:
-            return self.newLiteral(`x`, self.integer)
+        elif type(x) is types.LongType or type(x) is types.IntType:
+            return self.newLiteral(str(x), self.integer)
         elif type(x) is types.FloatType:
 	    if `x`.lower() == "nan":  # We can get these form eg 2.math:asin
 		return None
@@ -1232,6 +1232,8 @@ class RDFStore(RDFSink) :
 	    if isinstance(what, tuple(types.StringTypes)):
 		return self.newLiteral(what, dt, lang)
 #	    progress("llyn1450 @@@ interning non-string", `what`)
+	    if type(what) is types.LongType:
+		return self.newLiteral(str(what),  self.integer)
 	    if type(what) is types.IntType:
 		return self.newLiteral(`what`,  self.integer)
 	    if type(what) is types.FloatType:

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.157 2004-06-30 20:27:54 syosi Exp $
+$Id: notation3.py,v 1.158 2004-07-06 18:04:19 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -904,7 +904,7 @@ class SinkParser:
 #		    res.append(self._store.newLiteral(str[i:j],
 #			self._store.newSymbol(FLOAT_DATATYPE)))
 		else:
-		    res.append(int(str[i:j]))
+		    res.append(long(str[i:j]))
 #		    res.append(self._store.newLiteral(str[i:j],
 #			self._store.newSymbol(INTEGER_DATATYPE)))
 		return j
@@ -1180,7 +1180,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.157 2004-06-30 20:27:54 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.158 2004-07-06 18:04:19 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1446,7 +1446,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
 	    if dt != None and "n" not in self._flags:
 		dt_uri = dt.uriref()		 
 		if (dt_uri == INTEGER_DATATYPE):
-		    return str(int(s))
+		    return str(long(s))
 		if (dt_uri == FLOAT_DATATYPE):
 		    return str(float(s))    # numeric value python-normalized
 	    st = stringToN3(s, singleLine= singleLine)

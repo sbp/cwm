@@ -16,8 +16,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_maths.py,v 1.6 2004-06-24 03:17:11 timbl Exp $'
-__version__ = '$Revision: 1.6 $'
+__cvsid__ = '$Id: cwm_maths.py,v 1.7 2004-07-06 18:04:19 syosi Exp $'
+__version__ = '$Revision: 1.7 $'
 
 import sys, string, re, urllib
 
@@ -112,7 +112,7 @@ class BI_quotient(LightBuiltIn, Function):
 class BI_integerQuotient(LightBuiltIn, Function):
     def evaluateObject(self, subj_py): 
         t = None
-        if len(subj_py) == 2: t = int(subj_py[0]) / int(subj_py[1])
+        if len(subj_py) == 2: t = long(subj_py[0]) / long(subj_py[1])
         return tidy(t)
 
 class BI_quotientOf(LightBuiltIn, ReverseFunction):
