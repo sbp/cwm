@@ -31,13 +31,19 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.8 2004-11-09 19:48:17 timbl Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.9 2004-11-10 00:50:21 syosi Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
-from swap import webAccess, uripath, llyn, myStore, term, diag
-from myStore import load, Namespace
-from term import Literal
-from diag import progress, chatty_flag
+try:
+    from swap import webAccess, uripath, llyn, myStore, term, diag
+    from swap.myStore import load, Namespace
+    from swap.term import Literal
+    from swap.diag import progress, chatty_flag
+except ImportError:
+    import webAccess, uripath, llyn, myStore, term, diag
+    from myStore import load, Namespace
+    from term import Literal
+    from diag import progress, chatty_flag    
 
 #diag.chatty_flag=0
 

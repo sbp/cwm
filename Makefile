@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.65 2004-11-09 20:13:37 syosi Exp $
+# $Id: Makefile,v 1.66 2004-11-10 00:50:21 syosi Exp $
 
 
 PYTHON=python
@@ -87,6 +87,8 @@ setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(GRAMMAR) $(TARBALL_STUFF) tested f
 	mkdir swap
 	cd swap; for A in $(SOURCES); do ln "../$$A"; done
 	echo "cwm.py" > MANIFEST
+	echo "delta.py" >> MANIFEST
+	echo "cant.py" >> MANIFEST
 	echo "setup.py" >> MANIFEST
 	for A in $(TARBALL_STUFF) $(HTMLS) $(GRAMMAR) $(TESTS); do echo "$$A" >> MANIFEST; done
 	for A in $(SOURCES); do echo swap/"$$A" >> MANIFEST; done
@@ -99,6 +101,7 @@ setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(GRAMMAR) $(TARBALL_STUFF) tested f
 	-rm -rf ,cwm-$(VERSION)-test
 	mkdir ,cwm-$(VERSION)-test
 	cd ,cwm-$(VERSION)-test && tar -xzf ../cwm-$(VERSION).tar.gz
+	cd ,cwm-$(VERSION)-test/cwm-$(VERSION)/test && mkdir ,test
 	cd ,cwm-$(VERSION)-test/cwm-$(VERSION)/test && $(MAKE)
 	head -n 1 .htaccess > ,htaccess
 	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME) '[L]' >> ,htaccess

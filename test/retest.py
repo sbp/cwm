@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.29 2004-11-09 01:08:28 syosi Exp $
+ $Id: retest.py,v 1.30 2004-11-10 00:50:21 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -434,7 +434,7 @@ I should have.
 	assert case and description and inputDocument
 #	cleanup = """sed -e 's/\$[I]d.*\$//g' -e "s;%s;%s;g" -e '/@prefix run/d' -e '/^#/d' -e '/^ *$/d'""" % (
 #			WD, REFWD)
-	execute("""python %s ../grammar/n3-selectors.n3  http://www.w3.org/2000/10/swap/grammar/n3#document %s  > ,temp/%s 2>/dev/null""" %
+	execute("""python %s --grammar=../grammar/n3-selectors.n3  --as=http://www.w3.org/2000/10/swap/grammar/n3#document --parse=%s  > ,temp/%s 2>/dev/null""" %
 	    ('../grammar/predictiveParser.py', inputDocument, case))
 
 	passes = passes + 1
