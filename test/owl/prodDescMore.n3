@@ -1,5 +1,6 @@
+# $Id: prodDescMore.n3,v 1.2 2002-11-13 17:02:54 connolly Exp $
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix p: <prodDesc#>.
 
-p:obsoletes s:range s:Product.
+p:obsoletes s:range p:Product.
 

@@ -1,3 +1,4 @@
+# $Id: storeTerms.n3,v 1.2 2002-11-13 17:02:54 connolly Exp $
 @prefix p: <prodDesc#>.
 
 @prefix st: <storeTerms#>.
