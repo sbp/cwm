@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.80 2001-05-30 22:15:34 timbl Exp $
+$Id: notation3.py,v 1.81 2001-06-01 07:50:21 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -57,6 +57,7 @@ idea: use notation3 for wiki record keeping.
 
 
 import string
+import codecs # python 2-ism; for writing utf-8 in RDF/xml output
 import urlparse
 import urllib
 import re
@@ -833,7 +834,8 @@ class ToRDF(RDFSink):
     #@ Not actually complete, and can encode anyway
     def __init__(self, outFp, thisURI, base=None, flags=""):
         RDFSink.__init__(self)
-	self._wr = XMLWriter(outFp)
+        dummyEnc, dummyDec, dummyReader, encWriter = codecs.lookup('utf-8')
+	self._wr = XMLWriter(encWriter(outFp))
 	self._subj = None
 	self._base = base
 	if base == None: self._base = thisURI
@@ -1163,7 +1165,12 @@ class XMLWriter:
 	#@@ throw an exception if the element stack is empty
 	o = self._outFp
         self.flushClose()
-        xmldata(o.write, str, self.dataEsc)
+        try:
+            xmldata(o.write, str, self.dataEsc)
+        except:
+            print "@@problem writing", str
+            print "@@to", o
+            x=1/0
 	self.noWS = 1  # Suppress whitespace - we are in data
 
     def endDocument(self):
@@ -1255,7 +1262,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.80 2001-05-30 22:15:34 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.81 2001-06-01 07:50:21 connolly Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.53 2001-05-31 19:57:36 timbl Exp $
+$Id: cwm.py,v 1.54 2001-06-01 07:50:20 connolly Exp $
 
 Closed World Machine
 
@@ -100,7 +100,7 @@ import re
 import StringIO
 
 import notation3    # N3 parsers and generators, and RDF generator
-import xml2rdf      # RDF1.0 syntax parser to N3 RDF stream
+import sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
 
 
 LITERAL_URI_prefix = "data:application/n3;"
@@ -565,7 +565,7 @@ class BI_resolvesTo(HeavyBuiltIn, Function):
         if F: return F
         if chatty > 10: progress("Reading and parsing " + `doc`)
         inputURI = doc.uriref()
-#                if option_format == "rdf" : p = xml2rdf.RDFXMLParser(_store,  _inputURI)
+#                if option_format == "rdf" : p = sax2rdf.RDFXMLParser(_store,  _inputURI)
 # @@@ Only handles N3 - should handle anything especially RDF/XML.
         p = notation3.SinkParser(store,  inputURI)
         p.load(inputURI)
@@ -2123,7 +2123,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.53 2001-05-31 19:57:36 timbl Exp $"
+        version = "$Id: cwm.py,v 1.54 2001-06-01 07:50:20 connolly Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -2171,7 +2171,7 @@ Examples:
                 
             if arg[0] != "-":
                 _inputURI = urlparse.urljoin(option_baseURI, arg) # Make abs from relative
-                if option_format == "rdf" : p = xml2rdf.RDFXMLParser(_store,  _inputURI)
+                if option_format == "rdf" : p = sax2rdf.RDFXMLParser(_store,  _inputURI)
                 else: p = notation3.SinkParser(_store,  _inputURI)
                 p.load(_inputURI)
                 del(p)
