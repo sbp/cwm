@@ -27,7 +27,7 @@
 this log:forAll <#p>, <#p1>, <#p2>,	# Properties
 	 <#c>, <#c1>, <#c2>.   # Classes
 
-<> doc:version "$Id: rdfs-rules.n3,v 1.2 2002-04-09 21:10:23 timbl Exp $".
+<> doc:version "$Id: dpo-rules-subset.n3,v 1.1 2002-04-09 21:10:23 timbl Exp $".
 
 # The following is a subset of the properties of =, which should not need stating.
 # But cwm currently doesn't know a lot about = inherently. @@
