@@ -1,5 +1,5 @@
 #! /bin/bash
-# $Id: retest.sh,v 1.15 2001-08-09 21:38:09 timbl Exp $
+# $Id: retest.sh,v 1.16 2001-08-27 12:45:57 timbl Exp $
 #   Regression test for new versions of cwm
 #
 # TODO: separate notation3 testing from cwm testing
@@ -66,7 +66,7 @@ cwm_test schema1.n3 "Schema validity" daml-ex.n3 invalid-ex.n3 schema-rules.n3 -
 
 cwm_test schema2.n3 "Schema validity using filtering out essential output" daml-ex.n3 invalid-ex.n3 schema-rules.n3 -think -filter=schema-filter.n3
 
-echo " ########### Test builtins:"
+echo "        Test builtins:"
 
 cwm_test bi-t1.n3 "Simple use of log:includes" includes/t1.n3 -think
 
@@ -93,7 +93,10 @@ cwm_test smush.rdf "Data aggregation challenge from Jan 2001" --rdf smush-exampl
 
 
 # $Log: retest.sh,v $
-# Revision 1.15  2001-08-09 21:38:09  timbl
+# Revision 1.16  2001-08-27 12:45:57  timbl
+# Runs most of retest, not all builtins. List handling started but not tested.
+#
+# Revision 1.15  2001/08/09 21:38:09  timbl
 # See cwm.py log
 #
 # Revision 1.14  2001/07/20 16:21:59  connolly
