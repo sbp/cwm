@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.70 2003-02-16 03:36:01 timbl Exp $
+$Id: llyn.py,v 1.71 2003-02-21 23:27:52 eric Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.70 $"
+cvsRevision = "$Revision: 1.71 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -2775,7 +2775,7 @@ class Query:
         else:
             cachedSchema = None
         # The SqlDBAlgae object knows how to compile SQL query from query tree qp.
-        a = SqlDBAlgae(query.store.internURI(items[0].service.uri), cachedSchema, user, password, host, database, query.meta, query.store.pointsAt)
+        a = SqlDBAlgae(query.store.internURI(items[0].service.uri), cachedSchema, user, password, host, database, query.meta, query.store.pointsAt, query.store)
         # Execute the query.
         messages = []
         nextResults, nextStatements = a._processRow([], [], qp, rs, messages, {})
@@ -2791,7 +2791,7 @@ class Query:
             for i in range(len(query.variables)):
                 v = query.variables[i]
                 index = rs.getVarIndex(v)
-                interned = query.store.intern((LITERAL, `resultsRow[index]`))
+                interned = resultsRow[index]
                 boundRow = boundRow + [(v, interned)]
             bindings.append((boundRow, reason))
 
