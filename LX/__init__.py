@@ -3,8 +3,8 @@ an emphasis on going beyind RDF and handling more expressive logic
 languages (FOL), and various inference engines and syntaxes.
 
 """
-__version__ = "$Revision: 1.10 $"
-# $Id: __init__.py,v 1.10 2003-08-26 11:15:55 sandro Exp $
+__version__ = "$Revision: 1.11 $"
+# $Id: __init__.py,v 1.11 2003-09-04 03:14:01 sandro Exp $
 
 # Needed by test.py, and probably random python utils.
 __all__ = [
@@ -18,11 +18,14 @@ __all__ = [
     "namespace",
 #    "uri",
 #    "defaultns",
-    "ns",
+#    "ns",
     ] 
 
 # $Log: __init__.py,v $
-# Revision 1.10  2003-08-26 11:15:55  sandro
+# Revision 1.11  2003-09-04 03:14:01  sandro
+# remove reference to ns.py
+#
+# Revision 1.10  2003/08/26 11:15:55  sandro
 # rolled defaultns.py into namespace.py
 #
 # Revision 1.9  2003/02/14 17:21:59  sandro
