@@ -1,4 +1,4 @@
-# $Id: russel-dpo.n3,v 1.2 2002-01-17 21:27:50 connolly Exp $
+# $Id: russel-dpo.n3,v 1.3 2002-01-17 21:34:09 connolly Exp $
 
 @prefix owl: <http://www.daml.org/2001/03/daml+oil#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
@@ -34,7 +34,7 @@ this log:forAll :s, :p, :o, :C, :C1, :C2, :F.
 
 # next, since we don't have function symbols,
 # we need to say that any member of {x} is a member of {x}.
-{ :C1 owl:oneOf [ list:first :o ].
+{ :C1 owl:oneOf [ list:first :o; list:rest list:nil ].
   :C2 owl:oneOf [ list:first :o; list:rest list:nil ].
   :s a :C1 }
   log:implies { :s a :C2 }.
