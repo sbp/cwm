@@ -1,7 +1,7 @@
 #   n3 definition of some logical terms
 #
 # these raise the level above ontology
-# $Id: log.n3,v 1.9 2001-09-18 20:12:34 timbl Exp $
+# $Id: log.n3,v 1.10 2001-09-18 20:14:27 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -85,7 +85,7 @@ log:List, log:Other.  I only use testing for log:Formula right now (tbl 2001/9/1
 List and Other are not stable and may change.
 """.
 
-    rdfs:Class rdf:type of log:Formula, log:Literal, log:List, log:Other.
+    rdfs:Class is  rdf:type of log:Formula, log:Literal, log:List, log:Other.
  
 log:resolvesTo a rdf:Property;
     rdfs:domain doc:Work;
