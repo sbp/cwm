@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: fin.py,v 1.4 2002-12-03 21:09:58 timbl Exp $
+$Id: fin.py,v 1.5 2003-01-13 04:21:52 timbl Exp $
 
 Financial
 
@@ -272,7 +272,7 @@ def doCommand():
 	<body>
 	"""
 	
-        version = "$Id: fin.py,v 1.4 2002-12-03 21:09:58 timbl Exp $"
+        version = "$Id: fin.py,v 1.5 2003-01-13 04:21:52 timbl Exp $"
 	if not option_quiet:
             _outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
@@ -285,8 +285,15 @@ def doCommand():
 	    print "<th><a href='year-chron.html#m%s'>%s</a></th>" %(("0"+`month+1`)[-2:], monthName[month]),
 	print "</tr>"
 	for cat in quCategories + [ qu.UnclassifiedIncome, qu.UnclassifiedOutgoing]:
+	    label = meta.the(subj=cat, pred=rdfs.label)
+	    if label == None:
+		label = `cat`
+		sys.stderr.write("@@ No label for "+`cat` +"\n")
+	    else:
+		label = str(label)
+	    anchor = cat.fragid
 	    try:
-		print tableRow(`cat`, `cat`, totals[cat], byMonth.get(cat, [0] * 12))
+		print tableRow(anchor, anchor, totals[cat], byMonth.get(cat, [0] * 12))
 	    except KeyError:
 		continue
 

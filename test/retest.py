@@ -23,7 +23,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.2 2003-01-10 16:57:06 timbl Exp $
+ $Id: retest.py,v 1.3 2003-01-13 04:21:53 timbl Exp $
 """
 from os import system
 import os
@@ -140,7 +140,7 @@ def main():
 		sys.exit(-1)
 
 	if proofs:
-	    execute("""%spython ../cwm.py --quiet %s --why  > ,proofs/%s""" %
+	    execute("""%spython ../cwm.py --quiet %s --base=a --why  > ,proofs/%s""" %
 		(env, arguments, case))
 	    execute("""python ../check.py < ,proofs/%s | %s > ,temp/%s""" %
 		(case, cleanup , case))	

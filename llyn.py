@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.56 2003-01-10 17:13:15 timbl Exp $
+$Id: llyn.py,v 1.57 2003-01-13 04:21:52 timbl Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.56 $"
+cvsRevision = "$Revision: 1.57 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -2761,7 +2761,7 @@ class QueryItem(StoredStatement):  # Why inherit? Could be useful, and is logica
 		ur = []
 		ee = self.store.listElements(x, unmatched)
 		for e in ee: 
-		    if e in allvars: ur.append(e)
+		    if e in allvars and e not in ur: ur.append(e)
                 self.neededToRun[p] = ur
             elif isinstance(x, Formula): # expr
                 ur = self.store.occurringIn(x, allvars)
