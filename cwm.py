@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.125 2003-02-14 17:21:54 sandro Exp $
+$Id: cwm.py,v 1.126 2003-02-14 17:48:08 sandro Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.125 $"
+cvsRevision = "$Revision: 1.126 $"
 
 
 ######################################################### Tests  
@@ -397,7 +397,7 @@ Mode flags affect inference extedning to the web:
                 option_format = _rhs
                 if option_first_format == None: option_first_format = option_format
             elif _lhs == "-languageOptions":
-                option_flags[option_format] = _lhs
+                option_flags[option_format] = _rhs
             elif arg == "-quiet": option_quiet = 1
             elif arg == "-pipe": option_pipe = 1
             elif arg == "-crypto": option_crypto = 1
@@ -481,7 +481,7 @@ Mode flags affect inference extedning to the web:
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.125 2003-02-14 17:21:54 sandro Exp $"
+        version = "$Id: cwm.py,v 1.126 2003-02-14 17:48:08 sandro Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
