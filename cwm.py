@@ -1,6 +1,6 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
-$Id: cwm.py,v 1.26 2001-02-05 01:13:24 timbl Exp $
+$Id: cwm.py,v 1.27 2001-02-05 19:58:24 timbl Exp $
 
 Closed World Machine
 
@@ -709,10 +709,15 @@ class RDFStore(notation3.RDFSink) :
                 # continue to do arcs
 
             else:     #  Could have alternative syntax here
-                if len(statements) == 1:
-                    pass
-                    #print "# [].???: ", quadToString(statements[0].triple)
-                    #return       #  Don't bother with [].
+
+                for s in statements:  # Find at least one we will print
+                    context, pre, sub, obj = s.triple
+                    if sub is obj: break  # Ok, we will do it
+                    _anon, _incoming, _se = self._topology(obj, context)
+                    if not((pre is self.forSome) and sub is context and _anon):
+                        break # We will print it
+                else: return # Nothing to print - so avoid printing [].
+
                 sink.startAnonymousNode(subj.asPair())
                 if sorting: statements.sort()    # Order only for output
                 for s in statements:
@@ -1528,7 +1533,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, _outURI)
-        version = "$Id: cwm.py,v 1.26 2001-02-05 01:13:24 timbl Exp $"
+        version = "$Id: cwm.py,v 1.27 2001-02-05 19:58:24 timbl Exp $"
 	_outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
 	_outSink.makeComment("    using base " + _baseURI)
 
