@@ -9,8 +9,8 @@ cf. http://www.w3.org/2000/10/swap/cwm.py
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_crypto.py,v 1.8 2004-01-26 07:51:56 connolly Exp $'
-__version__ = '$Revision: 1.8 $'
+__cvsid__ = '$Id: cwm_crypto.py,v 1.9 2004-01-28 23:52:16 connolly Exp $'
+__version__ = '$Revision: 1.9 $'
 
 import md5, sha, binascii, quopri, base64
 from term import Function, ReverseFunction, LightBuiltIn
@@ -168,7 +168,7 @@ class BI_publicKey(LightBuiltIn, Function):
 #  Register the string built-ins with the store
 
 def register(store):
-   str = store.internURI(CRYPTO_NS_URI[:-1])
+   str = store.symbol(CRYPTO_NS_URI[:-1])
    str.internFrag('md5', BI_md5)
    str.internFrag('sha', BI_sha)
    if USE_PKC: 

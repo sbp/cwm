@@ -15,8 +15,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.13 2003-09-14 20:20:22 timbl Exp $'
-__version__ = '$Revision: 1.13 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.14 2004-01-28 23:52:16 connolly Exp $'
+__version__ = '$Revision: 1.14 $'
 
 import sys, string, re, urllib
 
@@ -194,7 +194,7 @@ class BI_memberCount(LightBuiltIn, Function):
 #  Register the string built-ins with the store
 
 def register(store):
-    str = store.internURI(MATH_NS_URI[:-1])
+    str = store.symbol(MATH_NS_URI[:-1])
     str.internFrag('sum', BI_sum)
     str.internFrag('difference', BI_difference)
     str.internFrag('product', BI_product)

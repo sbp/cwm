@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_os.py,v 1.9 2003-08-25 14:54:52 timbl Exp $
+$Id: cwm_os.py,v 1.10 2004-01-28 23:52:16 connolly Exp $
 
 Operating systems built-ins for cwm
 http://www.w3.org/2000/10/swap/string.py
@@ -85,7 +85,7 @@ def isString(x):
 #  Register the string built-ins with the store
 
 def register(store):
-    str = store.internURI(OS_NS_URI[:-1])
+    str = store.symbol(OS_NS_URI[:-1])
     str.internFrag("environ", BI_environ)
     str.internFrag("baseRelative", BI_baseRelative)
     str.internFrag("baseAbsolute", BI_baseAbsolute)

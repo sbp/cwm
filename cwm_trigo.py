@@ -14,8 +14,8 @@ http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.10 2003-10-20 17:31:54 timbl Exp $'
-__version__ = '$Revision: 1.10 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.11 2004-01-28 23:52:16 connolly Exp $'
+__version__ = '$Revision: 1.11 $'
 __all__ = ["evaluateObject"]
 
 from math import sin, acos, asin, atan, atan2, cos, cosh, sinh, tan, tanh
@@ -128,7 +128,7 @@ class BI_tanh(LightBuiltIn, Function):
 #  Register the string built-ins with the store
 
 def register(store):
-    str = store.internURI(MATH_NS_URI[:-1])
+    str = store.symbol(MATH_NS_URI[:-1])
     str.internFrag('cos', BI_cos)
     str.internFrag('cosh', BI_cosh)
     str.internFrag('degrees', BI_degrees)

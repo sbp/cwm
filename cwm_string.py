@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.20 2003-08-25 14:54:52 timbl Exp $
+$Id: cwm_string.py,v 1.21 2004-01-28 23:52:16 connolly Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -199,7 +199,7 @@ def isString(x):
     return type(x) is type('') or type(x) is type(u'')
 
 def register(store):
-    str = store.internURI(STRING_NS_URI[:-1])
+    str = store.symbol(STRING_NS_URI[:-1])
     
     str.internFrag("greaterThan", BI_GreaterThan)
     str.internFrag("notGreaterThan", BI_NotGreaterThan)

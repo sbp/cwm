@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.3 2003-12-04 21:20:17 timbl Exp $
+$Id: cwm_list.py,v 1.4 2004-01-28 23:52:16 connolly Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -69,7 +69,7 @@ def register(store):
 #    list.internFrag("first", BI_first)
 #    list.internFrag("rest", BI_rest)
 
-    ns = store.internURI(ListOperationsNamespace[:-1])
+    ns = store.symbol(ListOperationsNamespace[:-1])
     ns.internFrag("in", BI_in)
     ns.internFrag("last", BI_last)
 # ends
