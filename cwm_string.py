@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.18 2003-06-24 13:44:47 timbl Exp $
+$Id: cwm_string.py,v 1.19 2003-07-03 21:04:39 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -81,6 +81,10 @@ class BI_ContainsIgnoringCase(LightBuiltIn):
     def eval(self,  subj, obj, queue, bindings, proof, query):
         return subj.string.lower().find(obj.string.lower()) >= 0
 
+class BI_ContainsRoughly(LightBuiltIn):
+    def eval(self,  subj, obj, queue, bindings, proof, query):
+        return normalizeWhitespace(subj.string.lower()).find(normalizeWhitespace(obj.string.lower())) >= 0
+
 class BI_DoesNotContain(LightBuiltIn): # Converse of the above
     def eval(self,  subj, obj, queue, bindings, proof, query):
         return subj.string.find(obj.string) < 0
@@ -92,6 +96,17 @@ class BI_equalIgnoringCase(LightBuiltIn):
 class BI_notEqualIgnoringCase(LightBuiltIn):
     def eval(self,  subj, obj, queue, bindings, proof, query):
         return (string.lower(subj.string) != string.lower(obj.string))
+
+
+def normalizeWhitespace(s):
+    "Normalize whitespace sequences in a string to single spaces"
+    res = ""
+    for ch in s:
+	if ch in " \t\r\n":
+	    if res[-1:]!=" ": res = res + " " 
+	else:
+	    res = res + ch
+    return res
 
 #  String Constructors - more light built-ins
 
@@ -213,6 +228,7 @@ def register(store):
     str.internFrag("notMatches", BI_notMatches)
     str.internFrag("contains", BI_Contains)
     str.internFrag("containsIgnoringCase", BI_ContainsIgnoringCase)
+    str.internFrag("containsRoughly", BI_ContainsRoughly)
     str.internFrag("doesNotContain", BI_DoesNotContain)
     str.internFrag("equalIgnoringCase", BI_equalIgnoringCase)
     str.internFrag("notEqualIgnoringCase", BI_notEqualIgnoringCase)
