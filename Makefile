@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.11 2002-05-21 04:22:51 timbl Exp $
+# $Id: Makefile,v 1.12 2002-07-01 20:58:47 timbl Exp $
 
 PYTHON=python
 
@@ -12,11 +12,12 @@ TESTIN=test/sameDan.n3
 	$(PYTHON) $(YAPPS) $< $@
 
 .n3.rdf:
-	$(PYTHON) cwm.py $< > $@
+	$(PYTHON) cwm.py $<  --rdf > $@
+	cvs commit -m "Automatic: see Makefile" $@
 
 #all: yappstest yappsdoc math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf
 
-all: math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf
+all: math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf LICENSE.rdf
 
 yappstest: rdfn3_yapps.py rdfn3_yappstest.py
 	$(PYTHON) rdfn3_yappstest.py <$(TESTIN) >,xxx.n3

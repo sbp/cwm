@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.108 2002-05-15 00:38:10 timbl Exp $
+$Id: notation3.py,v 1.109 2002-07-01 20:58:47 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -61,6 +61,7 @@ import codecs # python 2-ism; for writing utf-8 in RDF/xml output
 import urlparse
 import urllib
 import re
+import thing
 
 import RDFSink
 from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4
@@ -1247,7 +1248,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.108 2002-05-15 00:38:10 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.109 2002-07-01 20:58:47 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1589,17 +1590,20 @@ def dummy():
 
 class Reifier(RDFSink.RDFSink):
 
-    def __init__(self, sink, contextURI, flat=0, genPrefix=None):
+    def __init__(self, sink, inputContextURI, flat=0, genPrefix=None):
         RDFSink.RDFSink.__init__(self)
         self.sink = sink
         self._ns = "http://www.w3.org/2000/10/swap/model.n3#"
         self.sink.bind("n3", (SYMBOL, self._ns))
         self._nextId = 1
-        self._context = (FORMULA, contextURI)
         self._genPrefix = genPrefix
         self._flat = flat      # Just flatten things not in this context
+	contextURI = inputContextURI + "__reified"
+	self._formula = (FORMULA, contextURI) # Formula node is what the document parses to @@kludge
+        self._context = self._formula
+
         if self._genPrefix == None:
-            self._genPrefix = string.split(contextURI,"#")[0] + "#_s"
+            self._genPrefix = string.split(contextURI,"#")[0] + "#_rei"
         
     def bind(self, prefix, nsPair):
         self.sink.bind(prefix, nsPair)
@@ -1638,7 +1642,7 @@ class Reifier(RDFSink.RDFSink):
     def startDoc(self):
         return self.sink.startDoc()
 
-    def endDoc(self):
+    def endDoc(self, rootFormulaPair=None):
         return self.sink.endDoc(self._formula)
 
 ######################################################### Tests
