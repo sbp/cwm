@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.26 2005-01-13 20:05:27 syosi Exp $
+$Id: pretty.py,v 1.27 2005-01-13 20:10:26 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.26 $"
+cvsRevision = "$Revision: 1.27 $"
 
 # Magic resources we know about
 
@@ -528,6 +528,7 @@ class Serializer:
 
     def _dumpNode(self, node):
         tm = self.tm
+        _anon, _incoming = self._topology(node, context)
         if isinstance(node, List):
             tm.startList()
             [self._dumpNode(x) for x in node]
@@ -538,7 +539,11 @@ class Serializer:
             tm.startFormula()
             self._dumpFormula(node)
             tm.endFormula()
+        elif _anon:
+            pass
         
+    def _dumbFormula(self, node):
+        pass
 
     def dumpFormulaContents(self, context, sink, sorting, equals=0):
         """ Iterates over statements in formula, bunching them up into a set
