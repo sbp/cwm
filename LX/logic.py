@@ -8,8 +8,8 @@ Also handly functions for handling these things.  They're not object
 methods because the OO hierarchy is sometimes too dynamic here.
 
 """
-__version__ = "$Revision: 1.6 $"
-# $Id: logic.py,v 1.6 2003-08-22 20:49:41 sandro Exp $
+__version__ = "$Revision: 1.7 $"
+# $Id: logic.py,v 1.7 2003-08-25 21:10:27 sandro Exp $
 
 import LX.expr
 
@@ -39,10 +39,10 @@ class Constant(LX.expr.AtomicExpr):
 
     def __repr__(self):
         try:
-            return "LX.logic.ConstantForURI(\""+self.uri+", "+str(id(self))+")"
+            #return "LX.logic.ConstantForURI(\""+self.uri+"\", "+str(id(self))+")"
+            return "LX.logic.ConstantForURI(\""+self.uri+")"
         except AttributeError:
             return "LX.logic.Constant(#"+str(id(self))+")"
-            
 
 
 class Function(LX.expr.AtomicExpr):
@@ -268,7 +268,10 @@ def _test():
 if __name__ == "__main__": _test()
 
 # $Log: logic.py,v $
-# Revision 1.6  2003-08-22 20:49:41  sandro
+# Revision 1.7  2003-08-25 21:10:27  sandro
+# slightly nicer printing
+#
+# Revision 1.6  2003/08/22 20:49:41  sandro
 # midway on getting load() and parser abstraction to work better
 #
 # Revision 1.5  2003/08/20 09:26:48  sandro
