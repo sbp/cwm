@@ -65,6 +65,7 @@ maxSecondsTable = {
     'http://www.w3.org/2002/03owlt/AllDifferent/Manifest001#test': 3 * fudge,
     'http://www.w3.org/2002/03owlt/FunctionalProperty/Manifest004#test': (5 * fudge),
     'http://www.w3.org/2002/03owlt/InverseFunctionalProperty/Manifest004#test': (5 * fudge),
+    'http://www.w3.org/2002/03owlt/maxCardinality/Manifest001#test': (110 * fudge),
     }
 
 axiomTag = { }
@@ -80,7 +81,7 @@ axiomTag['http://www.w3.org/2002/03owlt/cardinality/Manifest001#test']='-card'
 axiomTag['http://www.w3.org/2002/03owlt/cardinality/Manifest002#test']='-card'
 axiomTag['http://www.w3.org/2002/03owlt/cardinality/Manifest003#test']='-card'
 axiomTag['http://www.w3.org/2002/03owlt/cardinality/Manifest004#test']='-card'
-
+axiomTag['http://www.w3.org/2002/03owlt/maxCardinality/Manifest001#test']='-card'
 
 maxSeconds = 1
 
@@ -253,7 +254,7 @@ class MyArgHandler(ArgHandler.ArgHandler):
  
 if __name__ == "__main__":
     a = MyArgHandler(program="surnia",
-                     version="$Id: surnia.py,v 1.9 2003-08-01 16:17:12 sandro Exp $",
+                     version="$Id: surnia.py,v 1.10 2003-08-08 18:53:31 sandro Exp $",
                      uri="http://www.w3.org/2003/07/surnia")
 
     a.run()
