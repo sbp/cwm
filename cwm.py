@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.107 2002-10-02 22:56:32 sandro Exp $
+$Id: cwm.py,v 1.108 2002-10-03 16:13:02 sandro Exp $
 
 Closed World Machine
 
@@ -47,8 +47,9 @@ import uripath
 import llyn
 import LX
 import LX.rdf
+import LX.engine.llynInterface 
 
-cvsRevision = "$Revision: 1.107 $"
+cvsRevision = "$Revision: 1.108 $"
 
 
 ######################################################### Tests  
@@ -425,7 +426,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
-        version = "$Id: cwm.py,v 1.107 2002-10-02 22:56:32 sandro Exp $"
+        version = "$Id: cwm.py,v 1.108 2002-10-03 16:13:02 sandro Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -592,6 +593,15 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 s.addAbbreviation("", workingContext.resource.uri)
                 print s.serialize(lxkb)
 
+            elif arg == "-check":
+                need(lxkb)
+                # should we also check the inverse, to see if this
+                # is tautological?
+                if lxkb.isSelfConsistent():
+                    print "Consistency proven."
+                else:
+                    print "Contradiction found."
+
             elif arg == "-flatten":
                 need(lxkb); touch(lxkb)
                 lxkb.reifyAsTrueNonRDF()
@@ -666,7 +676,7 @@ def need(object):
             if object is lxkb:
                 #print "# copying _store to lxkb"
                 lxkb.clear()
-                _store.toLX(workingContext, kb=lxkb)
+                LX.engine.llynInterface.toLX(_store, workingContext, kb=lxkb)
                 del(_store.touched)
             else:
                 pass   # lxkb is out of date, but not needed yet
@@ -675,7 +685,7 @@ def need(object):
             if object is _store:
                 #print "# copying lxkb to _store"
                 _store.deleteFormula(workingContext)
-                _store.addLXKB(workingContext, lxkb)
+                LX.engine.llynInterface.addLXKB(_store, workingContext, lxkb)
                 del(lxkb.touched)
             else:
                 pass  # _store is out of date, but not needed yet

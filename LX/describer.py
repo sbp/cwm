@@ -2,8 +2,8 @@
 LX sentences).
 
 """
-__version__ = "$Revision: 1.3 $"
-# $Id: describer.py,v 1.3 2002-08-29 17:10:38 sandro Exp $
+__version__ = "$Revision: 1.4 $"
+# $Id: describer.py,v 1.4 2002-10-03 16:13:02 sandro Exp $
 
 import LX
 
@@ -11,7 +11,9 @@ class DescriptionFailed(Exception):
     pass
 
 class ListDescriber:
-    "A describer of python sequences using rdf:first/rest/nil"
+    """A describer of python sequences using rdf:first/rest/nil
+
+    """
 
     def describe(self, object, ladder):
 
@@ -90,8 +92,21 @@ class CombinedDescriber:
         raise DescriptionFailed, msg
 
 
+def _test():
+    import doctest, describer
+    return doctest.testmod(describer) 
+
+if __name__ == "__main__": _test()
+
 # $Log: describer.py,v $
-# Revision 1.3  2002-08-29 17:10:38  sandro
+# Revision 1.4  2002-10-03 16:13:02  sandro
+# some minor changes to LX-formula stuff, but it's still broken in ways
+# that don't show up on the regression test.
+#
+# mostly: moved llyn-LX conversion stuff out of llyn.py, into
+# LX.engine.llynInterface.py
+#
+# Revision 1.3  2002/08/29 17:10:38  sandro
 # fixed description bug; flatten runs and may even be correct
 #
 # Revision 1.2  2002/08/29 16:39:55  sandro
