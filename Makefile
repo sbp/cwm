@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2001-08-31 22:15:44 connolly Exp $
+# $Id: Makefile,v 1.4 2001-09-01 05:31:17 connolly Exp $
 
 PYTHON=python2
 
@@ -6,8 +6,16 @@ YAPPS=yapps2.py
 
 TESTIN=test/sameDan.n3
 
+all: test doc
+
 test: rdfn3_yapps.py rdfn3_yappstest.py
 	$(PYTHON) rdfn3_yappstest.py <$(TESTIN) >,xxx.n3
 
 rdfn3_yapps.py: rdfn3.g
 	$(PYTHON) $(YAPPS) rdfn3.g $@
+
+doc: rdfn3-gram.html
+
+rdfn3-gram.html: rdfn3.g gram2html.py
+	$(PYTHON) gram2html.py rdfn3.g "RDF Notation3 Grammar" >$@
+
