@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.137 2003-08-25 14:54:52 timbl Exp $
+$Id: cwm.py,v 1.138 2003-08-30 18:04:11 timbl Exp $
 
 Closed World Machine
 
@@ -57,7 +57,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.137 $"
+cvsRevision = "$Revision: 1.138 $"
 
 
 ######################################################### Tests  
@@ -498,7 +498,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.137 2003-08-25 14:54:52 timbl Exp $"
+        version = "$Id: cwm.py,v 1.138 2003-08-30 18:04:11 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -638,6 +638,11 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 		workingContext.close()
 		workingContext = workingContext.collector.explanation()
 
+            elif arg == "-dump":
+                need(_store); touch(_store)
+		workingContext = workingContext.canonicalize()
+		progress("\nDump of working formula:\n" + workingContext.debugString())
+		
             elif arg == "-purge":
                 need(_store); touch(_store)
 		workingContext = workingContext.canonicalize()
