@@ -250,18 +250,23 @@ class MyArgHandler(ArgHandler.ArgHandler):
 if __name__ == "__main__":
     # should pass some extra help text...
     a = MyArgHandler(program="plwm",
-                     version="$Id: plwm.py,v 1.3 2003-04-03 04:51:49 sandro Exp $",
+                     version="$Id: plwm.py,v 1.4 2003-04-03 05:14:55 sandro Exp $",
                      uri="http://www.w3.org/2000/10/swap/doc/cwm")
 
+    hotswap.append("sillyParser")
     try:
         a.run()
     except hotswap.NoMatchFound, e:
         print e
+        print "Try  --help preplug  for more information\n"
         sys.exit(1)
 
 
 # $Log: plwm.py,v $
-# Revision 1.3  2003-04-03 04:51:49  sandro
+# Revision 1.4  2003-04-03 05:14:55  sandro
+# passes two simple tests
+#
+# Revision 1.3  2003/04/03 04:51:49  sandro
 # fairly stable in skeletal state
 #
 # Revision 1.2  2003/04/02 20:53:13  sandro
