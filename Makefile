@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.38 2004-01-30 17:27:32 timbl Exp $
+# $Id: Makefile,v 1.39 2004-02-04 17:56:59 timbl Exp $
 
 PYTHON=python
 
@@ -27,16 +27,14 @@ DOC=doc/CwmHelp.html
 tested : package
 	(cd test; make all)
 	echo "Test worked, now can make release"
-	touch tested
 
 doc.made : cwm.py notation3.py
 	(cd doc; make all)
-	touch doc.made
 
 release : tested doc.made message.txt
 	cvs commit -F message.txt
 	rm message.txt
-	touch release
+
 
 package: math.rdf maths.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf times.rdf LICENSE.rdf cwm.tgz $(HTMLS)
 

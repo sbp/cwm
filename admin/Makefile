@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.5 2004-01-30 23:13:47 connolly Exp $
+# $Id: Makefile,v 1.6 2004-02-04 17:57:06 timbl Exp $
 
 PYTHON=python
 SWAP=..
@@ -11,12 +11,6 @@ SWAP=..
 .py.html:
 	pydoc -w `echo $< | sed -e 's/\.py//'`
 
-#all: yappstest yappsdoc math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf
-
-
-#######
-
-GET=GET
 
 # cf
 # W3C mailing list search results in RDF
@@ -28,6 +22,23 @@ CWM=PYTHONPATH=$(SWAP) $(PYTHON) $(SWAP)/cwm.py
 
 N3-Bugs.ics: ,bugsToDo.cal3 $(SWAP)/pim/toIcal.py
 	PYTHONPATH=$(SWAP) $(PYTHON) $(SWAP)/pim/toIcal.py ,bugsToDo.cal3 >$@
+
+# Make update means fteches new info from outside this directory.
+
+update:
+	mv ,n3bugs.rdf ,,n3bugs.rdf
+	make N3-Bugs.ics
+
+# Make publlish makes the results avilable using CVS
+
+publish : N3-Bugs.ics
+	cvs commit -m "make publish" N3-Bugs.ics
+
+
+# Make cycle does one cycle of importing data, recalcuating and exprting.
+
+cycle:	update publish
+	echo "Cycle complete"
 
 
 ,bugsToDo.cal3: ,n3bugs.rdf $(SWAP)/util/bugstatus.n3

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.19 2003-10-20 17:31:55 timbl Exp $
+# $Id: Makefile,v 1.20 2004-02-04 17:57:06 timbl Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -31,7 +31,7 @@ SCHEMAS= ../log.n3 ../crypto.n3 ../list.n3 ../math.n3 ../os.n3 ../string.n3 ../t
 
 
 all:	CwmBuiltins.html formats-example1 CwmHelp.html
-	touch all
+	echo all done
 
 CwmBuiltins.html : $(SCHEMAS)
 	$(PYTHON) $(CWM) $(SCHEMAS) schema2html.n3 --think --strings > $@
