@@ -2,7 +2,7 @@
 
 @prefix dc: <http://purl.org/dc/elements/1.1/>.
 <> dc:description """comput xplanet markers from an itinerary""",
-"$Id: itinMarks.n3,v 1.2 2002-09-27 21:16:04 connolly Exp $";
+"$Id: itinMarks.n3,v 1.3 2003-03-24 22:24:50 connolly Exp $";
 dc:relation <airportLookup.n3>.
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
@@ -39,7 +39,7 @@ k:Wednesday
 k:Thursday
   :dayColor "blue".
 k:Friday
-  :dayColor "indigo".
+  :dayColor "pink".
 k:Saturday
   :dayColor "violet".
 
