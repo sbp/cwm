@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.105 2002-08-30 16:59:47 sandro Exp $
+$Id: cwm.py,v 1.106 2002-09-13 23:36:48 timbl Exp $
 
 Closed World Machine
 
@@ -48,7 +48,7 @@ import llyn
 import LX
 import LX.rdf
 
-cvsRevision = "$Revision: 1.105 $"
+cvsRevision = "$Revision: 1.106 $"
 
 
 ######################################################### Tests  
@@ -382,6 +382,11 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 print doCommand.__doc__
                 print notation3.ToN3.flagDocumentation
                 print toXML.ToRDF.flagDocumentation
+		try:
+		    import sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
+		    print sax2rdf.RDFXMLParser.flagDocumentation
+		except:
+		    pass
                 return
             elif arg == "-revision":
                 progress( "cwm=",cvsRevision, "llyn=", llyn.cvsRevision)
@@ -416,7 +421,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.105 2002-08-30 16:59:47 sandro Exp $"
+        version = "$Id: cwm.py,v 1.106 2002-09-13 23:36:48 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -441,7 +446,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         if not _gotInput: # default input
             _inputURI = _baseURI # Make abs from relative
 	    if option_first_format == "rdf" :
-		p = sax2rdf.RDFXMLParser(_store, _inputURI, formulaURI=workingContextURI)
+		p = sax2rdf.RDFXMLParser(_store, _inputURI, formulaURI=workingContextURI, flags=option_rdf_flags)
 	    else: p = notation3.SinkParser(_store,  _inputURI, formulaURI=workingContextURI)
             p.load("", baseURI=_baseURI)
             del(p)
@@ -472,7 +477,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
                 _inputURI = join(option_baseURI, arg)
                 assert ':' in _inputURI
                 if option_format == "rdf" :
-                    p = sax2rdf.RDFXMLParser(_store, _inputURI, formulaURI=workingContextURI)
+                    p = sax2rdf.RDFXMLParser(_store, _inputURI, formulaURI=workingContextURI, flags=option_rdf_flags)
                 else: p = notation3.SinkParser(_store,  _inputURI, formulaURI=workingContextURI)
                 if not option_pipe: workingContext.reopen()
                 p.load(_inputURI)
