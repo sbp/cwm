@@ -3,8 +3,8 @@ an emphasis on going beyind RDF and handling more expressive logic
 languages (FOL), and various inference engines and syntaxes.
 
 """
-__version__ = "$Revision: 1.12 $"
-# $Id: __init__.py,v 1.12 2003-09-17 18:01:30 sandro Exp $
+__version__ = "$Revision: 1.13 $"
+# $Id: __init__.py,v 1.13 2003-09-17 18:09:28 sandro Exp $
 
 # Needed by test.py, and probably random python utils.
 __all__ = [
@@ -20,10 +20,14 @@ __all__ = [
     "sniff",
     "ladder",
     "describer",
+    "reporter",
     ] 
 
 # $Log: __init__.py,v $
-# Revision 1.12  2003-09-17 18:01:30  sandro
+# Revision 1.13  2003-09-17 18:09:28  sandro
+# added reporter
+#
+# Revision 1.12  2003/09/17 18:01:30  sandro
 # more complete module list
 #
 # Revision 1.11  2003/09/04 03:14:01  sandro
