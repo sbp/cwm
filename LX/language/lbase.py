@@ -8,8 +8,8 @@ how to wrap as object?    maybe just do?   nah - parse in one pass; no need.
 
 
 """
-__version__ = "$Revision: 1.5 $"
-# $Id: lbase.py,v 1.5 2003-02-14 00:52:03 sandro Exp $
+__version__ = "$Revision: 1.6 $"
+# $Id: lbase.py,v 1.6 2003-02-14 14:47:24 sandro Exp $
 
 import LX.fol
 import LX.expr
@@ -30,7 +30,8 @@ tokens = (
     'AND', 'OR', 'IMPLIES', 'IFF', 'NOT',
     'FORALL', 'EXISTS',
     'CONSTANT', 'VARIABLE', 'URIREF',
-    'NUMERAL', 'QUOTEDSTRING', 'XMLSTRUCTURE',
+    'NUMERAL', 'QUOTEDSTRING',
+    # 'XMLSTRUCTURE',
     'LPAREN', 'RPAREN', 'COMMA', 'EQUALS', 'PERIOD'
     )
 
@@ -452,7 +453,10 @@ class Serializer:
         pass
 
 # $Log: lbase.py,v $
-# Revision 1.5  2003-02-14 00:52:03  sandro
+# Revision 1.6  2003-02-14 14:47:24  sandro
+# possible fix to yacc warning
+#
+# Revision 1.5  2003/02/14 00:52:03  sandro
 # added literals, some tweaks in URI handling
 #
 # Revision 1.4  2003/02/13 19:50:55  sandro
