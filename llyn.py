@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.89 2003-08-30 18:04:11 timbl Exp $
+$Id: llyn.py,v 1.90 2003-08-30 19:29:19 timbl Exp $
 
 RDF Store and Query engine
 
@@ -157,7 +157,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.89 $"
+cvsRevision = "$Revision: 1.90 $"
 
 # Magic resources we know about
 
@@ -447,7 +447,7 @@ class IndexedFormula(Formula):
 	    
         if verbosity() > 50:
             progress("Add statement (size before %i) to %s: {%s %s %s}" % (
-		self.store.size, self,  subj, pred, obj) )
+		self.store.size, `self`,  `subj`, `pred`, `obj`) )
         if self.statementsMatching(pred, subj, obj):
             if verbosity() > 97:
 		progress("Add duplicate SUPPRESSED %s: {%s %s %s}" % (
