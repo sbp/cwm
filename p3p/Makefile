@@ -1,12 +1,10 @@
-# $Id: Makefile,v 1.2 2001-12-05 22:18:16 connolly Exp $
+# $Id: Makefile,v 1.3 2004-08-04 20:27:02 connolly Exp $
 
 W=../../../..
 SWAP=..
 PD=$(W)/2001/02pd
 
-include $(PD)/XSLT.mak
-
-JAVA=java
+XSLTPROC=xsltproc --novalid
 PYTHON=python
 
 WGET=wget
@@ -19,7 +17,7 @@ P3PBASE=http://www.w3.org/TR/P3P/base
 	$(PYTHON) ../cwm.py --rdf $< --n3 >$@
 
 .xml.rdf:
-	$(XSLT) $< grokPolicy.xsl $@
+	$(XSLTPROC) -o $@ grokPolicy.xsl $< 
 
 
 all: forShoppers.rdf forShoppers.n3 anonShop.n3
@@ -30,11 +28,11 @@ anonShop.n3: forShoppers.rdf p3pbase.rdf p3pAArules.n3
 forShoppers.n3: forShoppers.rdf
 
 forShoppers.rdf: grokPolicy.xsl ex32.xml
-	$(XSLT) ex32.xml grokPolicy.xsl $@
+	$(XSLTPROC) -o $@ grokPolicy.xsl ex32.xml 
 
 #seems Brian already did this...
 p3pbase.rdf: grokDataSchema.xsl ,cache-p3pbase.xml
-	$(XSLT) ,cache-p3pbase.xml grokDataSchema.xsl $@
+	$(XSLTPROC) -o  $@ grokDataSchema.xsl ,cache-p3pbase.xml
 
 ,cache-p3pbase.xml:
 	$(WGET) -O $@ $(P3PBASE)
