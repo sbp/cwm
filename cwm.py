@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.95 2002-06-07 19:52:25 timbl Exp $
+$Id: cwm.py,v 1.96 2002-06-07 20:07:17 timbl Exp $
 
 Closed World Machine
 
@@ -51,7 +51,7 @@ import llyn
 
 from thing import progress
 
-cvsRevision = "$Revision: 1.95 $"
+cvsRevision = "$Revision: 1.96 $"
 
 
 ######################################################### Tests  
@@ -266,6 +266,7 @@ def doCommand():
 --rules     Apply rules in store to store, adding conclusions to store
 --think     as -rules but continue until no more rule matches (or forever!)
 --think=foo as -apply=foo but continue until no more rule matches (or forever!)
+--crypto    Enable processing of crypto builtin functions. Requires python crypto.
 --reify     Replace the statements in the store with statements describing them.
 --flat      Reify only nested subexpressions (not top level) so that no {} remain.
 --help      print this message
@@ -407,7 +408,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.95 2002-06-07 19:52:25 timbl Exp $"
+        version = "$Id: cwm.py,v 1.96 2002-06-07 20:07:17 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
