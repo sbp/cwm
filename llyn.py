@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.17 2002-03-08 03:53:39 timbl Exp $
+$Id: llyn.py,v 1.18 2002-03-08 18:54:01 timbl Exp $
 
 RDF Store and Query engine
 
@@ -135,7 +135,7 @@ RESOURCE = RDFSink.SYMBOL # @@misnomer
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.17 $"
+cvsRevision = "$Revision: 1.18 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -1900,18 +1900,18 @@ class RDFStore(RDFSink.RDFSink) :
                 if thing.verbosity() > 30: progress("@@Duplicate result: ", bindingsToString(bindings))
                 # raise foo
                 return 0
-            if thing.verbosity() > 30: progress("-- ok: ", bindingsToString(bindings))
+            if thing.verbosity() > 30: progress("Not duplicate: ", bindingsToString(bindings))
             already.append(bindings)   # A list of lists
 
-        b2 = bindings[:]
-        b2.append((conclusion, targetContext))
+        b2 = bindings + [(conclusion, targetContext)]
         ok = targetContext.universals()  # It is actually ok to share universal variables with other stuff
         poss = conclusion.universals()
         for x in poss[:]:
             if x in ok: poss.remove(x)
         vars = conclusion.existentials() + poss  # Things with arbitrary identifiers
-        clashes = self.occurringIn(targetContext, vars)
-        for v in clashes:
+#        clashes = self.occurringIn(targetContext, vars)    Too slow to do every time
+#        for v in clashes:
+        for v in vars:
             b2.append((v, store.genid(RESOURCE))) # Regenerate names to avoid clash
         if thing.verbosity()>20:
             progress( "Concluding definitively" + bindingsToString(b2))
