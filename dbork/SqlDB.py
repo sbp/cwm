@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: SqlDB.py,v 1.18 2003-02-20 21:06:27 eric Exp $
+$Id: SqlDB.py,v 1.19 2003-02-21 16:10:21 connolly Exp $
 
 """
 
@@ -149,7 +149,8 @@ class ResultSet:
         self.symbols = {}
         self.fragments = {}
     def myIntern(self, q, index, variables, existentials):
-        symbol = q.fragid # re.sub(':', '_', q.qname())
+        if hasattr(q, 'fragid'): symbol = q.fragid # re.sub(':', '_', q.qname())
+        else: symbol = q.string
         try:
             existentials.index(q)
             try:
