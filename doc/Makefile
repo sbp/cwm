@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.11 2003-04-11 22:29:54 timbl Exp $
+# $Id: Makefile,v 1.12 2003-04-11 22:59:46 sandro Exp $
 
 # Dan Connolly's process diagram stuff
 #PD=../../02pd/
@@ -62,9 +62,9 @@ print: tutorial.pdf tutorial.ps
 TUTFILES=Overview.html ../Primer.html formats.html CwmInstall.html CwmHelp.html Shortcuts.html ontologies.html Rules.html Processing.html Built-In.html rule-systems.html Glossary.html
 
 HTML2PS=html2ps # debian package originally from http://www.tdb.uu.se/~jan/html2ps.html
- # user guide http://www.tdb.uu.se/~jan/html2psug.html
-tutorial.ps: $(TUTFILES)
-	$(HTML2PS) -o $@ -2 --xref $(TUTFILES)
+# user guide http://www.tdb.uu.se/~jan/html2psug.html
+tutorial.ps: $(TUTFILES) print.css formats-examplex1.ps
+	$(HTML2PS) -f print.css -o $@ $(TUTFILES)
 
 PS2PDF=ps2pdf # ghostscript? acroread?
 tutorial.pdf: tutorial.ps
