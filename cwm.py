@@ -1,6 +1,6 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
-$Id: cwm.py,v 1.15 2001-01-05 22:53:12 timbl Exp $
+$Id: cwm.py,v 1.16 2001-01-05 22:54:53 timbl Exp $
 
 Closed World Machine
 

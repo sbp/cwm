@@ -44,18 +44,16 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.7 2001-01-05 13:37:50 timbl Exp $")
+        self.sink.makeComment("RDF parsed by $Id: xml2rdf.py,v 1.8 2001-01-05 22:54:54 timbl Exp $")
 
 
     def load(self, uri, _baseURI=""):
         if uri:
             _inputURI = urlparse.urljoin(_baseURI, uri) # Make abs from relative
-            print "# Input from ", _inputURI
             netStream = urllib.urlopen(_inputURI)
             self.feed(netStream.read())     # @ May be big - buffered in memory!
             self.close()
         else:
-            print "# Taking N3 input from standard input"
             _inputURI = urlparse.urljoin(_baseURI, "STDIN") # Make abs from relative
             self.feed(sys.stdin.read())     # May be big - buffered in memory!
             self.close()
