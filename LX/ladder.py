@@ -9,8 +9,8 @@ don't need to know about our particular parameters.
 
 Is this a software pattern?
 """
-__version__ = "$Revision: 1.1 $"
-# $Id: ladder.py,v 1.1 2002-08-29 11:00:46 sandro Exp $
+__version__ = "$Revision: 1.2 $"
+# $Id: ladder.py,v 1.2 2002-08-29 16:39:55 sandro Exp $
 
 
 class Ladder:
@@ -43,8 +43,11 @@ class Ladder:
     #    return self.__dict__.get(key, None)
     # ? Maybe nah, people should use  g.getattr(key, None) instead
     #   or try/catch 
-    
-    def setIfAbsent(self, key, value):
+
+    def set(self, key, value):
+        return Ladder(self, (key, value))
+        
+    def setIfMissing(self, key, value):
         """Add this pair if key is not already present; return
         a new object if changes are made.
 
@@ -65,7 +68,10 @@ class Ladder:
         return key not in self.__dict__
 
 # $Log: ladder.py,v $
-# Revision 1.1  2002-08-29 11:00:46  sandro
+# Revision 1.2  2002-08-29 16:39:55  sandro
+# fixed various early typos and ommissions; working on logic bug which is manifesting in description loops
+#
+# Revision 1.1  2002/08/29 11:00:46  sandro
 # initial version, mostly written or heavily rewritten over the past
 # week (not thoroughly tested)
 #
