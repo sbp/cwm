@@ -122,7 +122,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.35 2003-08-25 14:54:54 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.36 2003-08-27 15:39:16 ryanlee Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -353,7 +353,7 @@ class RDFHandler(xml.sax.ContentHandler):
                 self._predicate = self.sink.newSymbol(tagURI)
 
             self._state = STATE_VALUE  # May be looking for value but see parse type
-	    self._dataType = None
+	    self._datatype = None
 	    self._language = None
             self.testdata = ""         # Flush value data
             
