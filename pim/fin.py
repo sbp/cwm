@@ -8,7 +8,7 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.7 2003-02-03 04:18:30 timbl Exp $
+$Id: fin.py,v 1.8 2003-02-09 03:03:50 timbl Exp $
 """
 import llyn
 
@@ -167,12 +167,13 @@ def doCommand(year, inputURI="/dev/stdin"):
 
 # Load the data:
 
+#	print "Data from", inputURI
 	kb=store.load(inputURI)
 	
-	print "Size of kb: ", len(kb)
+#	print "Size of kb: ", len(kb)
 	
 	meta = store.loadMany(["categories.n3", "classify.n3"])  # Category names etc
-	print "Size of meta", len(meta)
+#	print "Size of meta", len(meta)
 	
 	qu_date = qu.date
 	qu_amount = qu.amount
@@ -196,10 +197,12 @@ def doCommand(year, inputURI="/dev/stdin"):
 	unclassified = kb.each(pred=rdf_type, obj=qu_Unclassified)
 	for t in classified: assert t not in unclassified, "Can't be classified and unclassified!"+`t`
 	for s in classified + unclassified:
+#	    print "Transaction ", `s`
 	    t_ok, c_ok = 0, 0
 	    date = kb.any(subj=s, pred=qu_date).__str__()
 	    year = int(date[0:4])
-	    if  year != yearInQuestion: continue
+#	    print year, yearInQuestion, `s`
+	    if  int(year) != int(yearInQuestion): continue
 	    month = int(date[5:7]) -1
 	    
 	    payees = kb.each(subj=s, pred=qu_payee)
@@ -236,7 +239,7 @@ def doCommand(year, inputURI="/dev/stdin"):
 	<body>
 	"""
 	
-        version = "$Id: fin.py,v 1.7 2003-02-03 04:18:30 timbl Exp $"
+        version = "$Id: fin.py,v 1.8 2003-02-09 03:03:50 timbl Exp $"
 #	if not option_quiet:
 #	_outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 

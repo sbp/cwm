@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.121 2003-02-02 16:09:06 timbl Exp $
+$Id: cwm.py,v 1.122 2003-02-09 03:03:47 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.engine.otter
 import LX.language.htables
 import RDFSink
 
-cvsRevision = "$Revision: 1.121 $"
+cvsRevision = "$Revision: 1.122 $"
 
 
 ######################################################### Tests  
@@ -483,7 +483,7 @@ Mode flags affect inference extedning to the web:
             _outSink = LX.language.htables.Serializer(sys.stdout, flags=myflags)
         else:
             raise RuntimeError, "unknown output format: "+str(option_format)
-        version = "$Id: cwm.py,v 1.121 2003-02-02 16:09:06 timbl Exp $"
+        version = "$Id: cwm.py,v 1.122 2003-02-09 03:03:47 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -737,8 +737,12 @@ def getParser(format, inputURI, formulaURI, flags):
     r = BecauseOfCommandLine(sys.argv[0]) # @@ add user, host, pid, date time? Privacy!
     if format == "rdf" :
         touch(_store)
-        return sax2rdf.RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
-                                    flags=flags[format], why=r)
+	if "l" in flags["rdf"]:
+	    return rdflib2rdf.RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
+					flags=flags[format], why=r)
+	else:
+	    return sax2rdf.RDFXMLParser(_store, inputURI, formulaURI=formulaURI,
+					flags=flags[format], why=r)
     elif format == "n3":
         touch(_store)
         return notation3.SinkParser(_store, inputURI, formulaURI=formulaURI, why=r)

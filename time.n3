@@ -7,7 +7,7 @@
 #
 # Schema (c) TimBL, #C code licence.
 # 
-# $Id: time.n3,v 1.5 2002-07-01 20:58:47 timbl Exp $
+# $Id: time.n3,v 1.6 2003-02-09 03:03:50 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -45,7 +45,7 @@ time:year a rdf:Property,
 	ont:UniqueProperty;
     rdfs:label "year";
     rdfs:comment """
-For a date-time, its time:inSeconds is the (string reopresntation of)
+For a date-time, its time:inSeconds is the (string representation of)
 the four-digit year.
 
 Cwm implements this as a function.
