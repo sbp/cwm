@@ -3,7 +3,7 @@
 Share and Enjoy. Open Source license:
 Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 http://www.w3.org/Consortium/Legal/copyright-software-19980720
-$Id: KIFSink.py,v 1.8 2002-06-21 16:04:02 connolly Exp $
+$Id: KIFSink.py,v 1.9 2002-08-07 16:01:23 connolly Exp $
 see log at end
 
 References
@@ -14,7 +14,7 @@ References
   http://logic.stanford.edu/kif/dpans.html
   Thu, 25 Jun 1998 22:31:37 GMT
 """
-__version__="$Id: KIFSink.py,v 1.8 2002-06-21 16:04:02 connolly Exp $"
+__version__="$Id: KIFSink.py,v 1.9 2002-08-07 16:01:23 connolly Exp $"
 
 from string import rfind, split
 import re
@@ -147,8 +147,18 @@ class Sink(RDFSink.RDFSink):
             w("^ ")
             self._writeScope(t[1], vmap, level + 1)
         elif t[0] is LITERAL:
-            lit = re.sub(r'[\"\\]', escchar, t[1]) # escape newlines? hmm...
-            w('"%s"' % lit)
+            v = t[1]
+            if type(v) is type(1):
+                w("%s" % (v,))
+            elif type(v) is type(1L):
+                w("%s" % (v,))
+            elif type(v) is type(()):
+                ty, str = v
+                lit = re.sub(r'[\"\\]', escchar, str) # escape newlines? hmm...
+                w('(%s "%s")' % (ty, lit))
+            else:
+                lit = re.sub(r'[\"\\]', escchar, v) # escape newlines? hmm...
+                w('"%s"' % lit)
         else:
             raise RuntimeError, "term implemented: " + str(t)
         
@@ -192,7 +202,10 @@ def _moreVarNames(outermap, uris, level):
 
 
 # $Log: KIFSink.py,v $
-# Revision 1.8  2002-06-21 16:04:02  connolly
+# Revision 1.9  2002-08-07 16:01:23  connolly
+# working on datatypes
+#
+# Revision 1.8  2002/06/21 16:04:02  connolly
 # implemented list handling
 #
 # Revision 1.7  2001/11/27 00:51:59  connolly
