@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: SqlDB.py,v 1.1 2002-07-17 17:15:28 eric Exp $
+$Id: SqlDB.py,v 1.2 2002-07-24 02:31:41 timbl Exp $
 
 """
 
@@ -223,7 +223,7 @@ class SqlDBAlgae(RdfDBAlgae):
 
         query = self._buildQuery(implQuerySets, asz, wheres, selectPunct, selects, labels)
         messages.append("query SQLselect \"\"\""+query+"\"\"\" .")
-        connection = MySQLdb.connect("localhost", "root", "", "w3c")
+        connection = MySQLdb.connect("localhost", "SqlDB", "SqlDB", "w3c")
         cursor = connection.cursor()
         cursor.execute(query)
 
