@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.19 2004-07-13 14:52:41 syosi Exp $
+$Id: toXML.py,v 1.20 2004-08-05 18:01:42 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -55,6 +55,8 @@ import RDFSink
 from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 from RDFSink import Logic_NS, NODE_MERGE_URI
+
+from isXML import isXMLChar, NCNameChar, NCNameStartChar
 
 N3_forSome_URI = RDFSink.forSomeSym
 N3_forAll_URI = RDFSink.forAllSym
@@ -429,14 +431,19 @@ class XMLWriter:
     def figurePrefix(self, uriref, rawAttrs, prefixes):
 	i = len(uriref)
 	while i>0:
-	    if uriref[i-1] in self._namechars:
+	    if isXMLChar(uriref[i-1], NCNameChar): # uriref[i-1] in self._namechars:
 		i = i - 1
 	    else:
 		break
+	while i<len(uriref):
+            if not isXMLChar(uriref[i], NCNameStartChar):
+                i = i+1
+            else:
+                break
 	ln = uriref[i:]
 	ns = uriref[:i]
 	self.counter.countNamespace(ns)
-#        print "@@@ ns=",ns, "@@@ prefixes =", prefixes
+#        print "@@@ ns=",`ns`, "@@@ prefixes =", `prefixes`
 	
         prefix = prefixes.get(ns, ":::")
         attrs = []
