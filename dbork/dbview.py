@@ -66,7 +66,7 @@ earlier dev notes, links, ...
  http://rdfig.xmlhack.com/2002/02/27/2002-02-27.html#1014821419.001175
 """
 
-__version__ = "$Id: dbview.py,v 1.17 2002-03-16 05:59:43 connolly Exp $" #@@consult python style guide
+__version__ = "$Id: dbview.py,v 1.18 2002-03-16 06:14:53 connolly Exp $" #@@consult python style guide
 
 
 from string import join, split
@@ -199,7 +199,7 @@ class DBViewHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.wfile.write("</ul>")
 
         self.wfile.write("""
-        <address>Dan C@@ $Revision: 1.17 $ $Date: 2002-03-16 05:59:43 $</address>
+        <address>Dan C@@ $Revision: 1.18 $ $Date: 2002-03-16 06:14:53 $</address>
         </body></html>
         """)
 
@@ -707,6 +707,8 @@ def testSQL():
                       '/w3c/.dbq?name1=uris&fields1=uri&key1=id'
            )
 
+    if sys.argv[2:]: cases = sys.argv[2:]
+    
     for path in cases:
         path, fields = split(path, '?')
         print "CGI parse:", cgi.parse_qs(fields)
@@ -779,7 +781,10 @@ if __name__ == '__main__':
 
 
 # $Log: dbview.py,v $
-# Revision 1.17  2002-03-16 05:59:43  connolly
+# Revision 1.18  2002-03-16 06:14:53  connolly
+# allow command-line test cases for --testSQL
+#
+# Revision 1.17  2002/03/16 05:59:43  connolly
 # xml mime type more convenient; fixed buggy namespace bindings
 #
 # Revision 1.16  2002/03/08 06:45:24  connolly
