@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.46 2001-05-21 14:35:47 connolly Exp $
+$Id: cwm.py,v 1.47 2001-05-23 01:39:39 timbl Exp $
 
 Closed World Machine
 
@@ -1104,6 +1104,13 @@ class RDFStore(notation3.RDFSink) :
 #      (this links to dynamic data, live variables.)
 #   - recognising in advance disjoint graph templates, doing cross product of separate searches
 #
+# Built-Ins:
+#   The trick seems to be to figure out which built-ins are going to be faster to
+# calculate, and so should be resolved before query terms involving a search, and
+# which, like those involving recursive queries or net access, will be slower than a query term,
+# and so should be left till last.
+#   I feel that it should be possible to argue about built-ins just like anything else,
+# so we donot exclude these things from the query system.
 
     def test45(self, test436):
         return 0
@@ -1175,7 +1182,7 @@ class RDFStore(notation3.RDFSink) :
 #                (short_p == SUBJ or short_p == OBJ)
 #                     @@@ deal with assigning to variable?
 
-# In some circumstances we can simply calculate whether a statement is true:
+# In some circumstances we can simply calculate whether a statement is true: LOGICAL OPERATORS:
             if quad[CONTEXT] in smartIn:
                 if found == 0:   # no variables: constant expression
                     result = "nope"
@@ -1779,7 +1786,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI, base=option_baseURI, flags=option_rdf_flags)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI, quiet=option_quiet)
-        version = "$Id: cwm.py,v 1.46 2001-05-21 14:35:47 connolly Exp $"
+        version = "$Id: cwm.py,v 1.47 2001-05-23 01:39:39 timbl Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
