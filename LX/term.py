@@ -2,8 +2,8 @@
 
 
 """
-__version__ = "$Revision: 1.3 $"
-# $Id: term.py,v 1.3 2002-08-29 21:02:13 sandro Exp $
+__version__ = "$Revision: 1.4 $"
+# $Id: term.py,v 1.4 2002-08-29 21:56:54 sandro Exp $
 
 import LX
 from LX.language.otter import serialize
@@ -18,7 +18,6 @@ class Variable(Term):
     def __init__(self, name=None, uriref=None):
         self.name = name
         self.value = uriref
-        print uriref
 
 class ExiVar(Variable):
     pass
@@ -58,7 +57,10 @@ class String(Constant):
 
 
 # $Log: term.py,v $
-# Revision 1.3  2002-08-29 21:02:13  sandro
+# Revision 1.4  2002-08-29 21:56:54  sandro
+# remove debugging print left in accidentally
+#
+# Revision 1.3  2002/08/29 21:02:13  sandro
 # passes many more tests, esp handling of variables
 #
 # Revision 1.2  2002/08/29 16:39:55  sandro
