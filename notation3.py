@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.56 2001-04-03 22:46:27 connolly Exp $
+$Id: notation3.py,v 1.57 2001-04-05 14:58:55 connolly Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -405,7 +405,7 @@ class SinkParser:
                 if j >=0: break
 
                 item = []
-                j = self.node(str,i, item)
+                j = self.object(str,i, item)
                 if j<0: raise BadSyntax(str, i, "expected item in list or ')'")
                 this = self.genid()
                 if tail:
@@ -1062,7 +1062,7 @@ class ToN3(RDFSink):
     def startDoc(self):
  
         self._write("\n#  Notation3 generation by\n")
-        idstring = "$Id: notation3.py,v 1.56 2001-04-03 22:46:27 connolly Exp $" # CVS CHANGES THIS
+        idstring = "$Id: notation3.py,v 1.57 2001-04-05 14:58:55 connolly Exp $" # CVS CHANGES THIS
         self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
         if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
