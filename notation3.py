@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.169 2004-12-07 20:43:49 syosi Exp $
+$Id: notation3.py,v 1.170 2004-12-20 02:32:51 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1228,7 +1228,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.169 2004-12-07 20:43:49 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.170 2004-12-20 02:32:51 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1557,6 +1557,106 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
 def nothing():
     pass
 
+class tmToN3:
+    """
+
+
+    """
+    def __init__(self, write):
+        self._write = writeEncoded
+        self._writeRaw = write
+    
+    def writeEncoded(self, str):
+	"""Write a possibly unicode string out to the output"""
+	return self._writeRaw(str.encode('utf-8'))
+    
+    def start(self):
+        pass
+        self._parts = [0]
+        self._types = [None]
+
+    def end(self):
+        self._write('\n\n#End')
+
+    def addNode(self, node):
+        pass
+
+    def IsOf(self):
+        self._write('is ')
+        self._predIsOfs[-1] = FRESH
+
+    def checkIsOf(self):
+        return self._predIsOfs[-1]
+
+    def forewardPath(self):
+        self._write('!')
+        
+    def backwardPath(self):
+        self._write('^')
+        
+    def endStatement(self):
+        self._parts[-1] = 0
+
+    def addLiteral(self, lit, dt=None, lang=None):
+        self._types = LITERAL
+        self.addNode((lit, dt, lang))
+
+    def addSymbol(self, sym):
+        self._types = SYMBOL
+        self.addNode(sym)
+    
+    def beginFormula(self):
+        self._parts.append(0)
+        self._write('{')
+
+    def endFormula(self):
+        self._parts.pop()
+        self._write('}')
+        self._types = None
+        self.addNode(None)
+
+    def beginList(self):
+        self._parts.append(-1)
+
+    def endList(self):
+        self._parts.pop()
+        self._types = LIST
+        self.addNode(None)
+
+    def addAnonymous(self, Id):
+        """If an anonymous shows up more than once, this is the
+        function to call
+
+        """
+        if Id not in bNodes:
+            a = self.formulas[-1].newBlankNode()
+            bNodes[Id] = a
+        else:
+            a = bNodes[Id]
+        self.addNode(a)
+        
+    
+    def beginAnonymous(self):
+        self._parts.append(0)
+        self._write('[')
+        
+
+    def endAnonymous(self):
+        self._parts.pop()
+        self._write(']')
+        self._types = None
+        self.addNone(None)
+
+    def declareExistential(self, sym):
+        self._write('@forSome ' + sym + ' . ')
+
+    def declareUniversal(self, sym):
+        self._write('@forAll ' + sym + ' . ')
+
+    def addQuestionMarkedSymbol(self, sym):
+        self._types = QUESTION
+        self.addNode(sym)
+
 import fake_llyn
 from formula import Formula
 from term import Node, Literal, AnonymousExistential
@@ -1723,7 +1823,7 @@ class N3OutputStore(fake_llyn.fakeRDFStore):
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.169 2004-12-07 20:43:49 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.170 2004-12-20 02:32:51 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

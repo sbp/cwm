@@ -1,6 +1,6 @@
 """Triple Maker
 
-$Id: triple_maker.py,v 1.5 2004-12-16 20:59:27 syosi Exp $
+$Id: triple_maker.py,v 1.6 2004-12-20 02:32:51 syosi Exp $
 Explanation of the API
 
 the functions are addNode(),addNode(), addNode() endStatement() to add a triple
@@ -190,6 +190,10 @@ class TripleMaker:
         self.addNode(a)
 
     def addAnonymous(self, Id):
+        """If an anonymous shows up more than once, this is the
+        function to call
+
+        """
         if Id not in bNodes:
             a = self.formulas[-1].newBlankNode()
             bNodes[Id] = a
