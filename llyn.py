@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.106 2004-06-23 21:04:24 syosi Exp $
+$Id: llyn.py,v 1.107 2004-06-24 03:17:12 timbl Exp $
 
 RDF Store and Query engine
 
@@ -65,8 +65,8 @@ import diag  # problems importing the tracking flag, and chatty_flag must be exp
 from diag import progress, verbosity
 from term import BuiltIn, LightBuiltIn, \
     HeavyBuiltIn, Function, ReverseFunction, \
-    Literal, Symbol, Fragment, FragmentNil, Anonymous, Term,\
-    CompoundTerm, List, EmptyList, NonEmptyList
+    Literal, Symbol, Fragment, FragmentNil, Term,\
+    CompoundTerm, List, EmptyList, NonEmptyList, AnonymousNode
 from OrderedSequence import merge
 from formula import Formula, StoredStatement
 
@@ -84,9 +84,9 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 from pretty import Serializer
 from OrderedSequence import indentString
 
-LITERAL_URI_prefix = "data:application/n3;"
+LITERAL_URI_prefix = "data:text/rdf+n3;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.106 $"
+cvsRevision = "$Revision: 1.107 $"
 
 # Magic resources we know about
 
@@ -1205,7 +1205,7 @@ class RDFStore(RDFSink) :
         elif type(x) is types.IntType:
             return self.newLiteral(`x`, self.integer)
         elif type(x) is types.FloatType:
-	    if `x` == "NaN":  # We can get these form eg 2.math:asin
+	    if `x`.lower() == "nan":  # We can get these form eg 2.math:asin
 		return None
             return self.newLiteral(`x`, self.float)
         elif type(x) == type([]):
@@ -1260,7 +1260,7 @@ class RDFStore(RDFSink) :
                     else:
                         result = r.internFrag(urirefString[hash+1:], Fragment)
                 elif typ == ANONYMOUS:
-		    result = r.internFrag(urirefString[hash+1:], Anonymous)
+		    result = r.internFrag(urirefString[hash+1:], AnonymousNode)
                 elif typ == FORMULA:
 		    raise RuntimeError("obsolete")
 		    result = r.internFrag(urirefString[hash+1:], IndexedFormula)

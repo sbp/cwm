@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.22 2004-05-12 01:27:08 timbl Exp $
+$Id: cwm_string.py,v 1.23 2004-06-24 03:17:11 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -19,7 +19,7 @@ import md5, binascii  # for building md5 URIs
 
 from term import LightBuiltIn, ReverseFunction, Function
 
-LITERAL_URI_prefix = "data:application/n3;"
+LITERAL_URI_prefix = "data:text/rdf+n3;"
 
 
 STRING_NS_URI = "http://www.w3.org/2000/10/swap/string#"

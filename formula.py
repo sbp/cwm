@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.8 2004-03-21 04:24:35 timbl Exp $
+$Id: formula.py,v 1.9 2004-06-24 03:17:12 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,6 +20,8 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
+reifyNS = 'http://www.w3.org/2004/06/rei#'
+owlOneOf = 'http://www.w3.org/2002/07/owl#oneOf'
 
 from __future__ import generators
 
@@ -44,7 +46,7 @@ from diag import progress, verbosity, tracking
 from term import BuiltIn, LightBuiltIn, \
     HeavyBuiltIn, Function, ReverseFunction, \
     Literal, AnonymousNode , AnonymousExistential, AnonymousUniversal, \
-    Symbol, Fragment, FragmentNil, Anonymous, Term, CompoundTerm, List, EmptyList, NonEmptyList
+    Symbol, Fragment, FragmentNil,  Term, CompoundTerm, List, EmptyList, NonEmptyList
 
 from RDFSink import Logic_NS, RDFSink, forSomeSym, forAllSym
 from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4
@@ -55,7 +57,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.8 $"
+cvsRevision = "$Revision: 1.9 $"
 
 # Magic resources we know about
 
@@ -175,6 +177,9 @@ class Formula(AnonymousNode, CompoundTerm):
 	
 	The symbol is created in the same store as the formula."""
 	return self.store.newSymbol(uri)
+
+    def newList(self, list):
+	return self.store.nil.newList(list)
 
     def newLiteral(self, str, dt=None, lang=None):
 	"""Create or reuse the internal representation of the RDF literal whose string is given
@@ -533,6 +538,47 @@ class Formula(AnonymousNode, CompoundTerm):
 	for s in self.statementsMatching(pred=pred, subj=subj)[:]:
 	    yield s[OBJ]
 
+    def reification(self, sink, bnodeMap={}, why=None):
+	"""Describe myself in RDF to the given context
+	
+	
+	"""
+	try:
+	    return bnodeMap[self]
+	except KeyError:
+	    F = sink.newBlankNode()
+	    bnodeMap[self] = F
+	rei = sink.newSymbol(reifyNS[:-1])
+	myMap = {}
+	ooo = sink.newSymbol(owlOneOf)
+	for vars, vocab in ((self.existentials(),  rei["existentials"]), 
+			(self.universals(), rei["universals"])):
+			
+	    progress("vars=", vars)
+	    progress("vars=", [v.uriref() for v in vars])
+	    list = sink.store.nil.newList([sink.newLiteral(x.uriref()) for x in vars])
+	    klass = sink.newBlankNode()
+            sink.add(klass, ooo, list)
+	    sink.add(F, vocab, klass) 
+
+
+	#The great list of statements
+        statementList = []
+        for s in self.statements:
+            subj = sink.newBlankNode()
+	    sink.add(subj, rei["subject"], s[SUBJ].reification(sink, myMap, why)) 
+	    sink.add(subj, rei["predicate"], s[PRED].reification(sink, myMap, why) )
+	    sink.add(subj, rei["object"], s[OBJ].reification(sink, myMap, why)) 
+	    statementList.append(subj)
+            
+    #The great class of statements
+        StatementClass = sink.newBlankNode()
+        realStatementList = sink.store.nil.newList(statementList)
+        sink.add(StatementClass, ooo, realStatementList)
+    #We now know something!
+        sink.add(F, rei["statements"], StatementClass)
+	    
+	return F
 
 #################################################################################
 

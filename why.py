@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.12 2003-08-25 14:54:54 timbl Exp $
+$Id: why.py,v 1.13 2004-06-24 03:17:12 timbl Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves- we could make
@@ -121,7 +121,7 @@ class FormulaReason(Reason):
 	returns it.
 	(NB: This is different from reason.explain(ko) which returns the reason)"""
 	if ko == None: ko = self.formula.store.newFormula()
-	ko.bind("n3", "http://www.w3.org/2000/10/swap/reify#")
+	ko.bind("n3", "http://www.w3.org/2004/06/rei#")
 	ko.bind("log", "http://www.w3.org/2000/10/swap/log#")
 	ko.bind("reason", "http://www.w3.org/2000/10/swap/reason#")
 	ko.bind("run", runNamespace())

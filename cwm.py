@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.153 2004-06-23 21:04:24 syosi Exp $
+$Id: cwm.py,v 1.154 2004-06-24 03:17:11 timbl Exp $
 
 Closed World Machine
 
@@ -52,7 +52,7 @@ import sys
 import llyn
 import RDFSink
 
-cvsRevision = "$Revision: 1.153 $"
+cvsRevision = "$Revision: 1.154 $"
 
 
 
@@ -309,7 +309,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.153 2004-06-23 21:04:24 syosi Exp $"
+        version = "$Id: cwm.py,v 1.154 2004-06-24 03:17:11 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -338,7 +338,7 @@ rdf/xml files. Note that this requires rdflib.
 	else: # default input
             if option_first_format is None: option_first_format = option_format
 	    ContentType={ "rdf": "application/xml+rdf", "n3":
-				"application/n3" }[option_first_format]
+				"text/rdf+n3" }[option_first_format]
 	    workingContext = _store.load(
 #			    asIfFrom = join(_baseURI, ".stdin"),
 			    asIfFrom = _baseURI,
@@ -375,7 +375,7 @@ rdf/xml files. Note that this requires rdflib.
                 _inputURI = join(option_baseURI, arg)
                 assert ':' in _inputURI
 		ContentType={ "rdf": "application/xml+rdf", "n3":
-				"application/n3" }[option_format]
+				"text/rdf+n3" }[option_format]
 
 		if not option_pipe: workingContext.reopen()
 		load(_store, _inputURI,

@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.40 2004-03-21 04:24:31 timbl Exp $
+# $Id: Makefile,v 1.41 2004-06-24 03:17:11 timbl Exp $
 
 PYTHON=python
 
@@ -25,7 +25,7 @@ DOC=doc/CwmHelp.html
 
 
 tested : package
-	(cd test; make all)
+	(cd test; make pre-release)
 	echo "Test worked, now can make release"
 
 doc.made : cwm.py notation3.py sax2rdf.py toXML.py

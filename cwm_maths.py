@@ -16,18 +16,12 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_maths.py,v 1.5 2004-01-28 23:52:16 connolly Exp $'
-__version__ = '$Revision: 1.5 $'
+__cvsid__ = '$Id: cwm_maths.py,v 1.6 2004-06-24 03:17:11 timbl Exp $'
+__version__ = '$Revision: 1.6 $'
 
 import sys, string, re, urllib
 
 from term import LightBuiltIn, Function, ReverseFunction
-
-#LITERAL_URI_prefix = 'data:application/n3,'
-#DAML_LISTS = notation3.DAML_LISTS
-
-#RDF_type_URI = notation3.RDF_type_URI
-#DAML_sameAs_URI = notation3.DAML_sameAs_URI
 
 MATHS_NS_URI = 'http://www.w3.org/2000/10/swap/maths#'
 
