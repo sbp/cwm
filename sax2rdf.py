@@ -96,7 +96,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.15 2001-11-10 23:21:14 connolly Exp $"
+        version = "$Id: sax2rdf.py,v 1.16 2001-12-29 04:00:41 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -484,7 +484,8 @@ class RDFXMLParser(RDFHandler):
         try:
             self._p.parse(s)
         except xml.sax._exceptions.SAXException, e:
-            raise SyntaxError()
+            # was: raise SyntaxError() which left no info as to what had happened
+            raise SyntaxError("parsing XML: "+sys.exc_info()[1].__str__())   # Remove all XML diagnostic info?!? -tbl
         self.close()
 
     def close(self):

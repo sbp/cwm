@@ -1,12 +1,13 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/>.
 
 <> dc:description """test that log:uri only
-gives URIs that somebody actually used, not variable names""";
-"""
+gives URIs that somebody actually used, not variable names
+
 run it ala:
  python cwm.py --rdf test/animal.rdf --n3 test/vblsNotURIs.n3 --think
 """;
-"$Id: vblsNotURIs.n3,v 1.1 2001-12-06 21:02:28 connolly Exp $".
+   dc:version
+"$Id: vblsNotURIs.n3,v 1.2 2001-12-29 04:00:42 timbl Exp $".
 
 
 @prefix d12: <http://www.daml.org/2000/12/daml+oil#>.
