@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.21 2002-12-27 21:49:07 timbl Exp $
+$Id: thing.py,v 1.22 2002-12-30 15:00:34 timbl Exp $
 
 Interning of URIs and strings for storage in SWAP store
 
@@ -277,6 +277,7 @@ class Fragment(Term):
          It is useful to know that its ID has no use outside that
          context.
          """
+	 return 0   # Use class Anonymous for generated IDs
          return self.fragid[0] == "_"  # Convention for now @@@@@
                                 # parser should use seperate class?
 
