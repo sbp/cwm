@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.79 2001-05-30 21:57:29 timbl Exp $
+$Id: notation3.py,v 1.80 2001-05-30 22:15:34 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1190,6 +1190,20 @@ class ToN3(RDFSink):
 
       Adapted from Dan's ToRDFParser(Parser);
     """
+
+    flagDocumentation = """Flags for N3 output are as follows:-
+        
+a   Anonymous nodes should be output using the _: convention (p flag or not).
+p   Prefix suppression - don't use them, always URIs in <> instead of qnames.
+q   Quiet - don't make comments about the environment in which processing was done.
+r   Relative URI suppression. Always use absolute URIs.
+s   Subject must be explicit for every statement. Don't use ";" shorthand.
+t   "this" and "()" special syntax should be suppresed.
+"""
+
+
+
+
 #   A word about regenerated Ids.
 #
 # Within the program, the URI of a resource is kept the same, and in fact
@@ -1222,16 +1236,6 @@ class ToN3(RDFSink):
     _namechars = string.lowercase + string.uppercase + string.digits + '_'
     _rdfns = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
 
-    def flagDocumentation(self):
-        return """Flags for N3 output are as follows:-
-        
-a   Anonymous nodes should be output using the _: convention (p flag or not).
-p   Prefix suppression - don't use them, always URIs in <> instead of qnames.
-q   Quiet - don't make comments about the environment in which processing was done.
-r   Relative URI suppression. Always use absolute URIs.
-s   Subject must be explicit for every statement. Don't use ";" shorthand.
-t   "this" and "()" special syntax should be suppresed.
-"""
     
     def newId(self):
         nextId = nextId + 1
@@ -1251,7 +1255,7 @@ t   "this" and "()" special syntax should be suppresed.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.79 2001-05-30 21:57:29 timbl Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.80 2001-05-30 22:15:34 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
@@ -1435,9 +1439,9 @@ t   "this" and "()" special syntax should be suppresed.
                   self._newline(1)   # Indent predicate from subject
             else: self._write("    ")
 
-            if pred == ( RESOURCE,  DAML_equivalentTo_URI ) :
+            if pred == ( RESOURCE,  DAML_equivalentTo_URI ) and "t" not in self._flags:
                 self._write(" = ")
-            elif pred == ( RESOURCE, RDF_type_URI ) :
+            elif pred == ( RESOURCE, RDF_type_URI )  and "t" not in self._flags:
                 self._write(" a ")
             else :
 #               self._write( " >- %s -> " % self.representationOf(context, pred))
