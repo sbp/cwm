@@ -1,4 +1,4 @@
-% $Id: owlAx-oneOf.otter,v 1.1 2003-07-31 04:35:07 sandro Exp $
+% $Id: owlAx-oneOf.otter,v 1.2 2003-08-01 04:24:32 sandro Exp $
 formula_list(usable).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -30,4 +30,7 @@ all MEMBER LIST HEAD TAIL (
 all MEMBER (-inList(MEMBER, rdf_nil)).
 
 
-% $Log $
+% $Log: owlAx-oneOf.otter,v $
+% Revision 1.2  2003-08-01 04:24:32  sandro
+% intermediate; about to play with paramodulation
+%
