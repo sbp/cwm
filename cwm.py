@@ -1,6 +1,6 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
-$Id: cwm.py,v 1.30 2001-03-22 16:41:03 timbl Exp $
+$Id: cwm.py,v 1.31 2001-03-30 16:37:28 connolly Exp $
 
 Closed World Machine
 
@@ -292,6 +292,13 @@ class Literal(Thing):
 
     def uriref(self, base=None):      # Unused at present but interesting! 2000/10/14
         return  Literal_URI_Prefix + uri_encode(self.representation())
+
+    def __cmp__(self, other):
+        if isinstance(other, Literal):
+            return cmp(self.string, other.string)
+        else:
+            return cmp(self.string, other.representation())
+
 
 def uri_encode(str):
         """ untested - this must be in a standard library somewhere
@@ -1561,7 +1568,7 @@ Examples:
             _outSink = notation3.ToRDF(sys.stdout, _outURI)
         else:
             _outSink = notation3.ToN3(sys.stdout.write, _outURI)
-        version = "$Id: cwm.py,v 1.30 2001-03-22 16:41:03 timbl Exp $"
+        version = "$Id: cwm.py,v 1.31 2001-03-30 16:37:28 connolly Exp $"
 	_outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
 	_outSink.makeComment("    using base " + _baseURI)
 
