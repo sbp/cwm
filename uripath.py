@@ -20,7 +20,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: uripath.py,v 1.8 2002-11-24 03:12:02 timbl Exp $"
+__version__ = "$Id: uripath.py,v 1.9 2002-12-25 20:01:32 timbl Exp $"
 
 from string import find, rfind, index
 
@@ -97,7 +97,7 @@ def join(here, there):
 
     # join('mid:foo@example', '../foo') bzzt
     if here[bcolonl+1:bcolonl+2] <> '/':
-        raise ValueError, here
+        raise ValueError ("Base <%s> has no slash after colon - with relative <%s>." %(here, there))
 
     if here[bcolonl+1:bcolonl+3] == '//':
         bpath = find(here, '/', bcolonl+3)
@@ -361,7 +361,10 @@ if __name__ == '__main__':
 
 
 # $Log: uripath.py,v $
-# Revision 1.8  2002-11-24 03:12:02  timbl
+# Revision 1.9  2002-12-25 20:01:32  timbl
+# some --flatten tests fail. --why fails. Formulae must be closed to be referenced in a add()
+#
+# Revision 1.8  2002/11/24 03:12:02  timbl
 # base can be None in uripath:refTo
 #
 # Revision 1.7  2002/09/04 05:03:07  connolly

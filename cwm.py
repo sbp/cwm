@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.111 2002-12-07 01:16:18 timbl Exp $
+$Id: cwm.py,v 1.112 2002-12-25 20:01:31 timbl Exp $
 
 Closed World Machine
 
@@ -30,7 +30,7 @@ Agenda:
 
 
 import string
-from diag import verbosity, setVerbosity, progress
+from diag import verbosity, setVerbosity, progress, tracking
 from llyn import compareURI
 from uripath import join
 
@@ -43,7 +43,6 @@ import toXML 		#  RDF generator
 from why import BecauseOfCommandLine
 
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL, Logic_NS
-from why import explanation
 import uripath
 import sys
 
@@ -53,7 +52,7 @@ import LX
 import LX.rdf
 import LX.engine.llynInterface 
 
-cvsRevision = "$Revision: 1.111 $"
+cvsRevision = "$Revision: 1.112 $"
 
 
 ######################################################### Tests  
@@ -319,6 +318,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         option_reify = 0    # Flag: reify on output  (process?)
         option_flat = 0    # Flag: reify on output  (process?)
 	option_crypto = 0  # Flag: make cryptographic algorithms available
+	tracking = 0
         option_outURI = None
         option_outputStyle = "-best"
         _gotInput = 0     #  Do we not need to take input from stdin?
@@ -374,6 +374,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             elif arg == "-quiet": option_quiet = 1
             elif arg == "-pipe": option_pipe = 1
             elif arg == "-crypto": option_crypto = 1
+            elif arg == "-why": tracking = 1
             elif arg == "-bySubject": option_outputStyle = arg
             elif arg == "-no": option_outputStyle = "-no"
             elif arg == "-strings": option_outputStyle = "-no"
@@ -414,6 +415,8 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         # needs C and Python to compile xpat.
         if option_need_rdf_sometime:
             import sax2rdf      # RDF1.0 syntax parser to N3 RDF stream
+	if tracking:
+	    from why import explanation
 
         # Between passes, prepare for processing
         setVerbosity(0)
@@ -431,7 +434,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_flags["n3"])
-        version = "$Id: cwm.py,v 1.111 2002-12-07 01:16:18 timbl Exp $"
+        version = "$Id: cwm.py,v 1.112 2002-12-25 20:01:31 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -504,6 +507,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
             elif arg == "-ugly":
                 option_outputStyle = arg            
 
+            elif arg == "-crypto": pass
             elif arg == "-pipe": pass
             elif _lhs == "-outURI": option_outURI = _uri
 
@@ -551,8 +555,7 @@ See http://www.w3.org/2000/10/swap/doc/cwm  for more documentation.
 
             elif arg == "-why":
                 need(_store); touch(_store)
-		_newContext = explanation(workingContext)
-                workingContext = _newContext
+		workingContext = explanation(workingContext.close())
                 workingContextURI = workingContext.uriref()
 
             elif arg == "-purge":

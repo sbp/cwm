@@ -56,13 +56,13 @@ class RDFXMLParser(xmllib.XMLParser):
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self._data = ""
         self.sink.startDoc()
-        version = "$Id: xml2infoset.py,v 1.2 2002-03-17 04:24:12 timbl Exp $"
+        version = "$Id: xml2infoset.py,v 1.3 2002-12-25 20:01:32 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
         self._root = self._generate("doc")
         self._cursor = self._root
         self._children = None
-        self.sink.bind("x", (SYMBOL, NS))
+        self.sink.bind("x", NS)
         self.unordered = 0
 
 

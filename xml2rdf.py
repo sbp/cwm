@@ -51,7 +51,7 @@ class RDFXMLParser(xmllib.XMLParser):
         self._genPrefix = "#_g"    # @@@ allow parameter override
         self._nextId = 0        # For generation of arbitrary names for anonymous nodes
         self.sink.startDoc()
-        version = "$Id: xml2rdf.py,v 1.19 2002-02-21 04:55:41 timbl Exp $"
+        version = "$Id: xml2rdf.py,v 1.20 2002-12-25 20:01:32 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -237,7 +237,7 @@ class RDFXMLParser(xmllib.XMLParser):
   #              print "### Namespaces: ", `nslist`
                 for prefix, nsURI in nslist:
                     if nsURI:
-                        self.sink.bind(prefix, (RESOURCE, nsURI))
+                        self.sink.bind(prefix, nsURI)
                     
             else:
                 pass                    # Some random XML
