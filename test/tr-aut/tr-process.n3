@@ -7,7 +7,7 @@
    Compute the current state of the W3C tech reports index
    from a previous state and a set of publications since
    then.""" ;
-  rcs:id "$Id: tr-process.n3,v 1.1 2004-07-28 15:11:41 connolly Exp $";
+  rcs:id "$Id: tr-process.n3,v 1.2 2004-07-28 15:31:18 dom Exp $";
   dc:relation <new-tr.rdf>.
 
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#>.
@@ -49,8 +49,7 @@ log:implies {
   rec:prReviewsDue, rec:previousEdition, rec:supersedes, 
   contact:fullName, org:name, mat:hasTranslations, mat:hasErrata,
   rdf:type, contact:homePage, rec:minTimeCR, rec:sameWorkAs,
-  rec:perReviewsDue .
-:InterestingVector is rdf:type of rec:editor, org:deliveredBy.
+  rec:perReviewsDue, rec:editor, org:deliveredBy.
 
 # a tr present in the frozen state but not in new-tr is
 # still the latest version...
