@@ -7,7 +7,7 @@ dev notes, links, ...
  http://rdfig.xmlhack.com/2002/02/27/2002-02-27.html#1014821419.001175
 """
 
-__version__ = "$Id: dbview.py,v 1.1 2002-02-28 09:56:47 connolly Exp $" #@@consult python style guide
+__version__ = "$Id: dbview.py,v 1.2 2002-02-28 11:30:04 connolly Exp $" #@@consult python style guide
 
 
 from string import join
@@ -27,12 +27,10 @@ def something(sink, scope=None, hint='gensym'):
     global g
     g=g+1
     term = (RDFSink.SYMBOL, '#%s%s' % (hint, g))
-    if scope: sink.makeStatement(scope, RDFSink.forSomeSym, scope, term)
+    #if scope: sink.makeStatement((scope,
+    #(RDFSink.SYMBOL, RDFSink.forSomeSym),
+    #scope, term))
     return term
-
-
-def bind(pfx, ns):
-    print "@prefix %s: <%s>.\n" % (pfx, ns)
 
 
 def askdb(db, ns, sink, fields, tables, condition):
@@ -43,20 +41,29 @@ def askdb(db, ns, sink, fields, tables, condition):
 
     while 1:
 	row=c.fetchone()
-	if not row: break
+	if not row:
+            break
 	subj = something(sink, scope, 'ans')
+        sink.startAnonymousNode(subj)
 	col = 0
-	for ol in row:
-	    sink.makeStatement(None,
-                               (RDFSink.SYMBOL, "%s%s" % (ns, fields[col])),
-                               subj, ol)
+	for cell in row:
+            # our mysql implementation happens to use iso8859-1
+            ol = cell.decode('iso8859-1')
+            
+	    tup = (scope,
+                   (RDFSink.SYMBOL, "%s%s" % (ns, fields[col])),
+                   subj, (RDFSink.LITERAL, ol))
+            sink.makeStatement(tup)
 	    col = col + 1
-    
+        sink.endAnonymousNode()
+
+
 
 def testDBView(fp, host, port, user, passwd):
     import notation3
     
-    sink = notation3.ToN3(fp, 'stdout:')
+    #sink = notation3.ToN3(fp.write, 'stdout:')
+    sink = notation3.ToRDF(fp, 'stdout:')
     db=MySQLdb.connect(host=host, port=port,
                        user=user, passwd=passwd,
                        db='administration')
