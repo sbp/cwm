@@ -1,4 +1,4 @@
-$Id: README,v 1.6 2004-11-15 18:00:21 syosi Exp $
+$Id: README,v 1.7 2004-11-15 18:23:45 connolly Exp $
 
 Cwm is a general-purpose data processor for the semantic 
 web, somewhat like sed, awk, etc. for text files or XSLT for XML. 
@@ -84,7 +84,7 @@ to add.
 cwm is open source. Share and Enjoy.
 For details, see the attached files, LICENSE.n3 and LICENSE
 
-== Contributers ==
+== Contributors ==
 Tim Berners-Lee
 Dan Connolly
 Sean Palmer
