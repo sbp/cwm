@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.37 2001-05-08 20:42:35 timbl Exp $
+$Id: cwm.py,v 1.38 2001-05-09 20:11:39 timbl Exp $
 
 Closed World Machine
 
@@ -1729,10 +1729,10 @@ Examples:
         if option_outURI: _outURI = urlparse.urljoin(_outURI, option_outURI)
         
 	if option_rdf:
-            _outSink = notation3.ToRDF(sys.stdout, _outURI)
+            _outSink = notation3.ToRDF(sys.stdout, _outURI, base=option_baseURI)
         else:
-            _outSink = notation3.ToN3(sys.stdout.write, _outURI)
-        version = "$Id: cwm.py,v 1.37 2001-05-08 20:42:35 timbl Exp $"
+            _outSink = notation3.ToN3(sys.stdout.write, _outURI, base=option_baseURI)
+        version = "$Id: cwm.py,v 1.38 2001-05-09 20:11:39 timbl Exp $"
 	_outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
 	_outSink.makeComment("    using base " + _baseURI)
 
