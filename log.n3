@@ -4,7 +4,7 @@
 # and Web Ontology's ontological level, to allow rules to be expressed
 # and inference done.
 # 
-# $Id: log.n3,v 1.17 2002-07-18 05:02:20 connolly Exp $
+# $Id: log.n3,v 1.18 2002-07-31 23:19:26 timbl Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -55,7 +55,7 @@ log:Other   a rdfs:Class.     # Not one of the above.
 
 #   The following are inherent in the translation of N3 syntax to quad representation:
 
-log:forSome a rdf:Property;  #@@@@@ buggy!
+log:forSome a rdf:Property;  #@@@@@ buggy!  Not a real property. A psedoproperty
     rdfs:comment """A is true for some object for which here we use B. This
                 is NOT a real rdf property in its behaviour - a pseudoproperty.""" ;
 	   rdfs:domain log:Formula.
@@ -159,6 +159,17 @@ cwm's "--think" command line function.  It does use built-ins, so
 it may for example indirectly invoke other documents, validate
 signatures, etc.
 """.
+
+
+################### String output
+
+log:outputString a rdf:Property;
+	rdfs:label "output string";
+	rdfs:comment """The subject is a key and the object is a string,
+where the strings are to be output in the order of the keys.
+See cwm --strings in cwm --help.
+""".
+
 
 ################### Purge control
 

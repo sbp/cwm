@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.15 2002-07-20 16:58:24 timbl Exp $
+# $Id: Makefile,v 1.16 2002-07-31 23:19:26 timbl Exp $
 
 PYTHON=python
 
@@ -23,7 +23,7 @@ all: math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf time.rdf LICENSE.rdf c
 
 cwm.tar.Z: cwm.py notation3.py llyn.py  RDFSink.py toXML.py
 	tar -cf cwm.tar *.py
-	compress cwm.tar
+	compress -f cwm.tar
 
 yappstest: rdfn3_yapps.py rdfn3_yappstest.py
 	$(PYTHON) rdfn3_yappstest.py <$(TESTIN) >,xxx.n3

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.32 2002-07-24 02:31:39 timbl Exp $
+$Id: llyn.py,v 1.33 2002-07-31 23:19:26 timbl Exp $
 
 RDF Store and Query engine
 
@@ -141,7 +141,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.32 $"
+cvsRevision = "$Revision: 1.33 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS=1    # If not, do the funny compact ones
@@ -456,7 +456,7 @@ class BI_notEqualTo(LightBuiltIn):
 class BI_uri(LightBuiltIn, Function, ReverseFunction):
     def evaluateObject(self, store, context, subj, subj_py):
 	type, value = subj.asPair()
-	if type == SYMBOL or type == ANONYMOUS: 
+	if type == SYMBOL:     #    or type == ANONYMOUS: 
 	# @@@@@@ Should not allow anonymous, but test/forgetDups.n3 uses it
 	    return store.intern((LITERAL, value))
 
@@ -469,6 +469,15 @@ class BI_uri(LightBuiltIn, Function, ReverseFunction):
         elif type(obj_py) is type(u""):
             uri = obj_py.encode('utf-8')
             return store.intern((SYMBOL, uri))
+
+class BI_rawUri(BI_uri):
+    """This is like  uri except that it allows you to get the internal
+    identifiers for anonymous nodes and formuale etc."""
+     
+    def evaluateObject(self, store, context, subj, subj_py):
+	type, value = subj.asPair()
+	return store.intern((LITERAL, value))
+
 
 class BI_rawType(LightBuiltIn, Function):
     """
@@ -780,12 +789,14 @@ class RDFStore(RDFSink.RDFSink) :
         log.internFrag("racine", BI_racine)  # Strip fragment identifier from string
 
         self.rawType =  log.internFrag("rawType", BI_rawType) # syntactic type, oneOf:
+        log.internFrag("rawUri", BI_rawUri)
         self.Literal =  log.internFrag("Literal", Fragment) # syntactic type possible value - a class
         self.List =     log.internFrag("List", Fragment) # syntactic type possible value - a class
         self.Formula =  log.internFrag("Formula", Fragment) # syntactic type possible value - a class
         self.Other =    log.internFrag("Other", Fragment) # syntactic type possible value - a class (Use?)
 
         log.internFrag("conjunction", BI_conjunction)
+
         
 # Bidirectional things:
         log.internFrag("uri", BI_uri)

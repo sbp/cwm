@@ -3,7 +3,7 @@
 @prefix rcs: <http://www.w3.org/2001/03swell/rcs#>.
 
 <> dc:description """rules for forgetting things that are equal to other things. Usage: cwm ...data and rules... --think --apply=forgetDups.n3 --purge""";
-  rcs:id "$Id: forgetDups.n3,v 1.4 2001-11-15 22:11:24 timbl Exp $";
+  rcs:id "$Id: forgetDups.n3,v 1.5 2002-07-31 23:19:27 timbl Exp $";
   dc:creator [ 
 	contact:fullName "Dan Connolly";
 	contact:homePage <http://www.w3.org/People/Connolly/>;
@@ -24,8 +24,8 @@ this log:forAll :x, :y, :z, :p, :q.
 this log:forAll :s1, :s2.
 
 { :x = :y.
-  :x log:uri :s1.
-  :y log:uri :s2.
+  :x log:rawUri :s1.  # Levelbreaker - cheats by looking at URI of bnode
+  :y log:rawUri :s2.
   :s1 string:lessThan :s2.
 }
   log:implies {
