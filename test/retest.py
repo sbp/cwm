@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.24 2004-10-26 14:19:37 syosi Exp $
+ $Id: retest.py,v 1.25 2004-10-28 17:42:00 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -217,6 +217,7 @@ def main():
 #	kb=load(fn)
     
     for t in kb.each(pred=rdf.type, obj=test.CwmTest):
+	verboseDebug = kb.contains(subj=t, pred=rdf.type, obj=test.VerboseTest)
 	u = t.uriref()
 	ref = kb.the(t, test.referenceOutput)
 	if ref == None:
@@ -233,7 +234,7 @@ def main():
 	environment = kb.the(t, test.environment)
 	if environment == None: env=""
 	else: env = str(environment) + " "
-	testData.append((t.uriref(), case, refFile, description, env, arguments))
+	testData.append((t.uriref(), case, refFile, description, env, arguments, verboseDebug))
 
     for t in kb.each(pred=rdf.type, obj=rdft.PositiveParserTest):
 
@@ -284,7 +285,7 @@ def main():
     totalTests = cwmTests + rdfTests + perfTests
     if verbose: print "RDF parser tests: %i" % rdfTests
 
-    for u, case, refFile, description, env, arguments in testData:
+    for u, case, refFile, description, env, arguments, verboseDebug in testData:
 	tests = tests + 1
 	if tests < start: continue
 	
@@ -302,7 +303,7 @@ def main():
 		problem("######### from normal case %s: %scwm %s" %( case, env, arguments))
 		continue
 
-	if chatty:
+	if chatty and not verboseDebug:
 	    execute("""%spython %s --chatty=100  %s  &> /dev/null""" %
 		(env, cwm_command, arguments))	
 

@@ -5,7 +5,7 @@ Options:
 
 --verbose	-v      Print what you are doing as you go
 --help          -h      Print this message and exit
---from=	uri	-f uri	Specify an input file (or web resource)
+--from=uri	-f uri	Specify an input file (or web resource)
 --diff=uri      -d uri  Specify a difference file
 
 Can have any number of --from <file> parameters, in which case files are
@@ -43,7 +43,7 @@ References:
  Not to mention,  published this month by coincidence:
   Kelly, Brian, [Whitehead Institute]  "Graph cannonicalization", Dr Dobb's Journal, May 2003.
  
- $Id: cant.py,v 1.11 2004-06-21 16:53:34 syosi Exp $
+ $Id: cant.py,v 1.12 2004-10-28 17:41:59 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 

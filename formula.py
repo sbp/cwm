@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.14 2004-08-08 01:44:49 syosi Exp $
+$Id: formula.py,v 1.15 2004-10-28 17:41:59 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -57,7 +57,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.14 $"
+cvsRevision = "$Revision: 1.15 $"
 
 # Magic resources we know about
 
@@ -98,7 +98,16 @@ class Formula(AnonymousNode, CompoundTerm):
 	self._existentialVariables = []
 	self._universalVariables = []
 
+    def __repr__(self):
+	if self.statements == []:
+	    return "{}"
+	if len(self.statements) == 1:
+	    st = self.statements[0]
+	    return "{"+`st[SUBJ]`+" "+`st[PRED]`+" "+`st[OBJ]`+"}"
 
+	s = Term.__repr__(self)
+	return "{%i}" % len(self.statements)
+	
     def classOrder(self):
 	return	11  # Put at the end of a listing because it makes it easier to read
 

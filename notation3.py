@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.165 2004-10-19 20:23:08 syosi Exp $
+$Id: notation3.py,v 1.166 2004-10-28 17:41:59 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -978,7 +978,8 @@ class SinkParser:
             m = interesting.search(str, j)  # was str[j:].
 	    # Note for pos param to work, MUST be compiled  ... re bug?
 #	    print "Matched >>>>", m.group(0), "<<< in string >>>>>", m.string, "<<<<<<"
-            assert m # we at least have to find a quote
+            assert m , "Quote expected in string at ^ in %s^%s" %(
+		str[j-20:j], str[j:j+20]) # we at least have to find a quote
 #	    print "@@@ old i = ",i, " j=",j, "m.start=", m.start(),"m.end=", m.end(), 
 #	    print ">>>>>>>", m.string[:j+m.start()], "|||||||", m.string[j+m.start(): j+m.end()], "<<<<<<<"
 
@@ -1204,7 +1205,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.165 2004-10-19 20:23:08 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.166 2004-10-28 17:41:59 timbl Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

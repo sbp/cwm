@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.61 2004-10-28 13:15:19 timbl Exp $
+# $Id: Makefile,v 1.62 2004-10-28 17:41:59 timbl Exp $
 
 
 PYTHON=python
@@ -48,7 +48,7 @@ filelist: $(SOURCES) $(TESTS)
 doc.made : cwm.py notation3.py sax2rdf.py toXML.py
 	(cd doc; make)
 
-release : doc.made cwm.tar.gz message.txt
+release : doc.made setup_tarball message.txt
 	cvs commit -F message.txt
 	rm message.txt
 
@@ -78,7 +78,7 @@ cwm.tar.gz:  $(HTMLS) $(SOURCES) $(TESTS) $(TARBALL_STUFF) tested filelist
 	cvs add $(TARNAME).tar.gz
 #LX/*.py LX/*/*.py  LX/*/*.P dbork/*.py ply/*.py *.py
 
-setup_tarball: $(SOURCES) tested $(HTMLS) $(TESTS) $(TARBALL_STUFF) filelist
+setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(TARBALL_STUFF) #tested filelist
 	-rm -rf swap
 	mkdir swap
 	cd swap; for A in $(SOURCES); do ln "../$$A"; done

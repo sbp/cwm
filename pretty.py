@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.13 2004-08-08 01:44:49 syosi Exp $
+$Id: pretty.py,v 1.14 2004-10-28 17:41:59 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -27,7 +27,7 @@ from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
-cvsRevision = "$Revision: 1.13 $"
+cvsRevision = "$Revision: 1.14 $"
 
 # Magic resources we know about
 
@@ -580,7 +580,7 @@ class Serializer:
         self._outputStatement(sink, triple)
 
 	
-def canItbeABNode(formula, symbol):
+def canItbeABNode(formula, symbol):   # @@@@ Really slow -tbl
     def returnFunc():
         for quad in formula.statements:
             for s in PRED, SUBJ, OBJ:
