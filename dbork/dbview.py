@@ -56,7 +56,7 @@ earlier dev notes, links, ...
  http://rdfig.xmlhack.com/2002/02/27/2002-02-27.html#1014821419.001175
 """
 
-__version__ = "$Id: dbview.py,v 1.11 2002-03-06 17:20:18 timbl Exp $" #@@consult python style guide
+__version__ = "$Id: dbview.py,v 1.12 2002-03-06 17:24:39 connolly Exp $" #@@consult python style guide
 
 
 from string import join, split
@@ -140,7 +140,7 @@ class DBViewHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 self.server._dbName)
 
         self.wfile.write("""
-        <address>Dan C@@ $Revision: 1.11 $ $Date: 2002-03-06 17:20:18 $</address>
+        <address>Dan C@@ $Revision: 1.12 $ $Date: 2002-03-06 17:24:39 $</address>
         </body></html>
         """)
 
@@ -349,7 +349,7 @@ def aboutDB(db, dbaddr, sink):
     sink.bind('rdf', (RDFSink.SYMBOL, str(RDF)))
     
     c = db.cursor()
-    c.execute("show tables")
+    c.execute("show tables") # http://www.mysql.com/documentation/mysql/bychapter/manual_MySQL_Database_Administration.html#SHOW
     while 1:
         row = c.fetchone()
         if not row: break
@@ -590,7 +590,10 @@ if __name__ == '__main__':
 
 
 # $Log: dbview.py,v $
-# Revision 1.11  2002-03-06 17:20:18  timbl
+# Revision 1.12  2002-03-06 17:24:39  connolly
+# add pointer to msql doc for mysql-specific schema-interrogation stuff
+#
+# Revision 1.11  2002/03/06 17:20:18  timbl
 # (timbl) Changed through Jigsaw.
 #
 # Revision 1.10  2002/03/06 06:37:32  connolly
