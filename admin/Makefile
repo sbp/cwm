@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.9 2004-04-24 10:35:39 connolly Exp $
+# $Id: Makefile,v 1.10 2004-05-20 21:56:36 connolly Exp $
 
 W=../../../..
 PYTHON=python
@@ -22,6 +22,9 @@ CAL=$W/2002/12/cal
 bugstatus: N3-Bugs.ics
 
 CWM=PYTHONPATH=$(SWAP) $(PYTHON) $(SWAP)/cwm.py
+
+bugStatus.html: ,bugsToDo.cal3 bugReport.n3
+	PYTHONPATH=$(SWAP) $(PYTHON) $(SWAP)/cwm.py ,bugsToDo.cal3 bugReport.n3 --think --strings >$@
 
 N3-Bugs.ics: ,bugsToDo.cal3 $(SWAP)/pim/toIcal.py
 	PYTHONPATH=$(SWAP):$(CAL) $(PYTHON) $(SWAP)/pim/toIcal.py ,bugsToDo.cal3 >$@
