@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.29 2002-06-23 21:08:28 timbl Exp $
+$Id: llyn.py,v 1.30 2002-07-01 20:45:25 timbl Exp $
 
 RDF Store and Query engine
 
@@ -138,7 +138,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, VARIABLE, SYMBOL
 
 LITERAL_URI_prefix = "data:application/n3;"
 
-cvsRevision = "$Revision: 1.29 $"
+cvsRevision = "$Revision: 1.30 $"
 
 # Should the internal representation of lists be with DAML:first and :rest?
 DAML_LISTS = notation3.DAML_LISTS    # If not, do the funny compact ones
@@ -2479,6 +2479,7 @@ class QueryItem:
                     self.neededToRun[p] = [] # Now it is definitely all bound
             if changed:
                 q[p] = _lookupRecursive(newBindings, q[p])   # possibly expensive
+		if self.searchPattern[p] != None: self.searchPattern[p] = q[p]
                 
         self.quad = q[0], q[1], q[2], q[3]  # yuk
 
@@ -2497,7 +2498,6 @@ class QueryItem:
 #                progress("@@@ Ooops, short is ", self.short, self.searchPattern)
             if self.short == 0:
                 self.searchDone()
-
 
         if isinstance(self.quad[PRED], BuiltIn):
             if self.canRun():
