@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.126 2003-02-14 17:48:08 sandro Exp $
+$Id: cwm.py,v 1.127 2003-03-28 14:11:20 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.126 $"
+cvsRevision = "$Revision: 1.127 $"
 
 
 ######################################################### Tests  
@@ -481,7 +481,7 @@ Mode flags affect inference extedning to the web:
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.126 2003-02-14 17:48:08 sandro Exp $"
+        version = "$Id: cwm.py,v 1.127 2003-03-28 14:11:20 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -586,7 +586,7 @@ Mode flags affect inference extedning to the web:
 
             elif arg == "-triples" or arg == "-ntriples":
                 option_format = "n3"
-                option_flags["n3"] = "spart"
+                option_flags["n3"] = "spartan"
                 option_outputStyle = "-bySubject"
                 option_quiet = 1
 
