@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.68 2001-09-06 13:54:08 timbl Exp $
+$Id: cwm.py,v 1.69 2001-09-07 02:46:58 timbl Exp $
 
 Closed World Machine
 
@@ -2720,7 +2720,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.68 2001-09-06 13:54:08 timbl Exp $"
+        version = "$Id: cwm.py,v 1.69 2001-09-07 02:46:58 timbl Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -2919,10 +2919,6 @@ if __name__ == '__main__':
     import urlparse
     if os.environ.has_key('SCRIPT_NAME'):
         serveRequest(os.environ)
-    else:
-        doCommand()
-
-    serveRequest(os.environ)
     else:
         doCommand()
 
