@@ -19,7 +19,7 @@
 @prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
 @prefix :    <http://www.w3.org/2000/10/swap/pim/contact#> .
 
-<>  doc:version "$Id: doc.n3,v 1.9 2003-06-24 13:44:50 timbl Exp $";
+<>  doc:version "$Id: doc.n3,v 1.10 2003-07-07 16:10:16 connolly Exp $";
     doc:ipr <../LICENSE.n3>.
 
 
@@ -53,7 +53,7 @@ doc:OpenSourceLicense s:subClassOf doc:Work;
     s:comment   """Class of licenses which can be called Open Soutrce
                 according to opensource.org""".
 
-doc:persitencePolicy a r:Property;
+doc:persistencePolicy a r:Property;
     s:comment   """Publishers policy regarding the peristence of the mapping
                 between URI and its meaning and/or representation in bits.""";
     s:domain    doc:Work;
