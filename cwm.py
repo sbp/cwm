@@ -1,7 +1,7 @@
 #! /usr/bin/python /devel/WWW/2000/10/swap/cwm.py
 """
 
-$Id: cwm.py,v 1.55 2001-06-13 23:58:47 timbl Exp $
+$Id: cwm.py,v 1.56 2001-06-14 01:29:13 connolly Exp $
 
 Closed World Machine
 
@@ -515,7 +515,7 @@ class BI_uri(LightBuiltIn, Function, ReverseFunction):
         return store.engine.intern((LITERAL, subj.uriref))
 
     def evaluateSubject(self, store, context, obj):    
-        return store.engine.intern((RESOURCE, subj.string))
+        return store.engine.intern((RESOURCE, obj.string))
 
 class BI_racine(LightBuiltIn, Function):
 
@@ -2159,7 +2159,7 @@ Examples:
         else:
             _outSink = notation3.ToN3(sys.stdout.write, base=option_baseURI,
                                       quiet=option_quiet, flags=option_n3_flags)
-        version = "$Id: cwm.py,v 1.55 2001-06-13 23:58:47 timbl Exp $"
+        version = "$Id: cwm.py,v 1.56 2001-06-14 01:29:13 connolly Exp $"
 	if not option_quiet:
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
