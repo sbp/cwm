@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.128 2005-01-13 00:20:27 syosi Exp $
+$Id: llyn.py,v 1.129 2005-01-13 20:05:27 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.128 $"
+cvsRevision = "$Revision: 1.129 $"
 
 
 # Magic resources we know about
@@ -1282,6 +1282,8 @@ class RDFStore(RDFSink) :
 	    if `x`.lower() == "nan":  # We can get these form eg 2.math:asin
 		return None
             return self.newLiteral(`x`, self.float)
+        elif isinstance(x, Set) or isinstance(x, ImmutableSet):
+            return self.newSet([self._fromPython(y) for y in x])
         elif isinstance(x, Term):
             return x
         elif hasattr(x,'__getitem__'): #type(x) == type([]):

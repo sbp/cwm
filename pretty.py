@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.25 2005-01-13 00:20:27 syosi Exp $
+$Id: pretty.py,v 1.26 2005-01-13 20:05:27 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.25 $"
+cvsRevision = "$Revision: 1.26 $"
 
 # Magic resources we know about
 
@@ -514,6 +514,31 @@ class Serializer:
         self.selectDefaultPrefix(Serializer.dumpNested)        
         self.dumpFormulaContents(context, self.sink, sorting=1, equals=1)
         self.sink.endDoc()
+
+    def tmDumpNested(self):
+        """
+
+        """
+        context = self.context
+        assert context.canonical is not None
+        self._scan(context)
+        self.tm.start()
+        self._dumpFormula(context)
+        self.tm.end()
+
+    def _dumpNode(self, node):
+        tm = self.tm
+        if isinstance(node, List):
+            tm.startList()
+            [self._dumpNode(x) for x in node]
+            tm.endList()
+        elif isinstance(node, N3Set):
+            pass
+        elif isinstance(node, formula):
+            tm.startFormula()
+            self._dumpFormula(node)
+            tm.endFormula()
+        
 
     def dumpFormulaContents(self, context, sink, sorting, equals=0):
         """ Iterates over statements in formula, bunching them up into a set
