@@ -32,12 +32,13 @@ is complete lack of treatment of symmetry between bnodes.
 References:
  .google graph isomorphism
  
- $Id: cant.py,v 1.2 2003-04-01 13:38:58 timbl Exp $
+ $Id: cant.py,v 1.3 2003-04-02 03:42:04 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
 NTriples http://www.w3.org/TR/rdf-testcases/#ntriples
 """
+# canticle - Canonicalizer of NTriples Independent of Cwm , Llyn, Etc. ?
 import os
 import sys
 import urllib
@@ -96,7 +97,7 @@ def main():
 	    testFiles.append(a)
 
     
-    WD = "file:///" + os.getcwd()
+    WD = "file://" + os.getcwd() + "/"
     graph = []
     if testFiles == []: testFiles = [ "/dev/stdin" ]
     for fn in testFiles:
@@ -136,7 +137,7 @@ def serialize(graph):
     if verbose: print "# Canonicalized:"
     for t in graph:
 	for x in t:
-	    if x.startswith: x = x[1:]
+	    if x.startswith("__"): x = x[1:]
 	    print x,
 	print "."
 
@@ -182,11 +183,12 @@ def canon(graph, c0=0):
 	    if verbose: print "@@@ %3i]  %i and %i have same signature: \n\t%s\nand\t%s\n" % (
 		    i, s[i][1], s[i+1][1], s[i][0], s[i+1][0])
 	    dups = dups + 1
-	elif i != 1 and s[i][0] == s[i-1][0]:
+	elif i != 0 and s[i][0] == s[i-1][0]:
 	    if verbose: print "@@@ %3i]  %i and %i have same signature: \n\t%s\nand\t%s\n" % (
 		    i, s[i][1], s[i-1][1], s[i][0], s[i-1][0])
 	else:
 	    canonical[i] = c
+	    if verbose: print "\t#%i canonicalized #%i" %(s[i][1], c)
 	    c = c + 1
 	    
     if verbose: print "@@@ %i duplicate sigs out of %i" %(dups, n)

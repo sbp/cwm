@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """
 
-$Id: cwm.py,v 1.127 2003-03-28 14:11:20 timbl Exp $
+$Id: cwm.py,v 1.128 2003-04-02 03:42:04 timbl Exp $
 
 Closed World Machine
 
@@ -58,7 +58,7 @@ import LX.language
 import LX.engine.llynInterface
 import RDFSink
 
-cvsRevision = "$Revision: 1.127 $"
+cvsRevision = "$Revision: 1.128 $"
 
 
 ######################################################### Tests  
@@ -267,7 +267,7 @@ def doCommand():
 --n3          Input & Output in N3 from now on
 --rdf=flags   Input & Output ** in RDF and set given RDF flags
 --n3=flags    Input & Output in N3 and set N3 flags
---ntriples    Input & Output in NTriples (equiv --n3=spart -bySubject -quiet)
+--ntriples    Input & Output in NTriples (equiv --n3=spartan -bySubject -quiet)
 --language=x  Input & Output in "x" (rdf, n3, etc)  --rdf same as: --language=rdf
 --languageOptions=y     --n3=sp same as:  --language=n3 --languageOptions=sp
 --ugly        Store input and regurgitate *
@@ -412,7 +412,7 @@ Mode flags affect inference extedning to the web:
             elif arg == "-strings": option_outputStyle = "-no"
             elif arg == "-triples" or arg == "-ntriples":
                 option_format = "n3"
-                option_flags["n3"] = "spart"
+                option_flags["n3"] = "spartan"
                 option_outputStyle = "-bySubject"
                 option_quiet = 1
             elif _lhs == "-outURI": option_outURI = _uri
@@ -481,7 +481,7 @@ Mode flags affect inference extedning to the web:
                                                  stream=sys.stdout,
                                                  flags=myflags)
 
-        version = "$Id: cwm.py,v 1.127 2003-03-28 14:11:20 timbl Exp $"
+        version = "$Id: cwm.py,v 1.128 2003-04-02 03:42:04 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)

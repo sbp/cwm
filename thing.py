@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: thing.py,v 1.29 2003-03-28 14:11:21 timbl Exp $
+$Id: thing.py,v 1.30 2003-04-02 03:42:06 timbl Exp $
 
 Interning of URIs and strings for storage in SWAP store
 
@@ -123,6 +123,14 @@ def load(uri=None, contentType=None, formulaURI=None, remember=1):
     Raises:   IOError, SyntaxError, DocumentError
     """
     return _checkStore().load(uri, contentType, formulaURI, remember)
+
+def loadMany(uris):
+    """Load a number of resources into the same formula
+    
+    Returns:  top-level formula of the parsed information.
+    Raises:   IOError, SyntaxError, DocumentError
+    """
+    return _checkStore().loadMany(uris)
 
 import sys
 if sys.hexversion < 0x02020000:
