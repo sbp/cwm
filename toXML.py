@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.24 2004-11-08 20:08:26 timbl Exp $
+$Id: toXML.py,v 1.25 2004-12-03 20:17:56 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -347,6 +347,7 @@ z  - Allow relative URIs for namespaces
         self._subj = subj    # The object is not the subject context
 
     def endAnonymousNode(self, subj=None):    # Remove context
+        return #If a new subject is started, they'll know to close this one
     	self._xwr.endElement()
 	self._subj = None
 
