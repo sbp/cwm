@@ -35,12 +35,12 @@
 
 """
 
-import urlparse  # Comes with python 1.6, lacks file<->url mapping
 import urllib   # Opening resources in load()
 import string
 import sys
 
 import thing
+import uripath
 
 import xml.sax # PyXML stuff
                #   http://sourceforge.net/projects/pyxml
@@ -96,11 +96,11 @@ class RDFHandler(xml.sax.ContentHandler):
         self._subject = None
         self._predicate = None
         self._items = [] # for <rdf:li> containers
-        self._genPrefix = "#_rdfxg"    # @@@ allow parameter override
+        self._genPrefix = uripath.join(thisURI, "#_rdfxg")    # allow parameter override?
 
         self._litDepth = 0
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.19 2002-03-08 03:53:40 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.20 2002-03-18 23:01:52 connolly Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 
@@ -136,16 +136,8 @@ class RDFHandler(xml.sax.ContentHandler):
         """ Generate uri from uriref in this document
         """
 
-        # @@move this to uriparse module-to-be?
-        h1 = string.rfind(str, "#")
-        if h1 >= 0:
-            h2 = string.rfind(str[:h1], "#")
-            if h2 >= 0:
-                raise BadSyntax(sys.exc_info(),
-                                "URI with two hashes: %s" % str)
-        
-        return urlparse.urljoin(self._thisURI,
-                                str.encode('utf-8')) # fails on non-ascii; do %xx encoding?
+        return uripath.join(self._thisURI,
+                            str.encode('utf-8')) # fails on non-ascii; do %xx encoding?
 
     def idAboutAttr(self, attrs):  #6.5 also proprAttr 6.10
         """ set up subject and maybe context from attributes
@@ -475,10 +467,10 @@ class RDFXMLParser(RDFHandler):
 
     def load(self, uri, _baseURI=""):
         if uri:
-            _inputURI = urlparse.urljoin(_baseURI, uri) # Make abs from relative
+            _inputURI = uripath.join(_baseURI, uri) # Make abs from relative
             f = urllib.urlopen(_inputURI)
         else:
-            _inputURI = urlparse.urljoin(_baseURI, "STDIN") # Make abs from relative
+            _inputURI = uripath.join(_baseURI, "STDIN") # Make abs from relative
             f = sys.stdin
         self.loadStream(f)
 
