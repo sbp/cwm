@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2002-07-18 04:41:45 connolly Exp $
+# $Id: Makefile,v 1.4 2002-08-28 22:00:50 connolly Exp $
 
 PERL=perl
 PYTHON=python
@@ -34,6 +34,10 @@ ical.n3: $(PIMTEST)/testCal.rdf $(PIMTEST)/testTasks.rdf ,chi.rdf
 
 ,chi.rdf: ical2rdf.pl /usr/share/libical-evolution/zoneinfo/America/Chicago.ics
 	$(PERL) ical2rdf.pl /usr/share/libical-evolution/zoneinfo/America/Chicago.ics >$@
+
+,evocal.rdf: $(HOME)/evolution/local/Calendar/calendar.ics ical2rdf.pl
+	$(PERL) ical2rdf.pl $(HOME)/evolution/local/Calendar/calendar.ics >$@
+
 
 $(PIMTEST)/testCal.rdf: $(PIMTEST)/testCal.ics ical2rdf.pl
 	$(PERL) ical2rdf.pl $(PIMTEST)/testCal.ics >$@
