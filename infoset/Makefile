@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2001-05-09 19:00:07 connolly Exp $
+# $Id: Makefile,v 1.3 2001-05-09 20:32:52 connolly Exp $
 
 W=../../../..
 # Dan Connolly's process diagram stuff
@@ -25,13 +25,17 @@ CWM=$W/2000/10/swap/cwm.py
 
 #	$(XSLT) $(PD)rdf2dot.xsl  $< $@
 
-all: infoset.svg
+all: infoset-diagram.svg infoset-diagram.svg infoset-diagram.png infoset.svg
 
 clean:
-	$(RM) infoset.{rdf,dot,ps,svg,png}
+	$(RM) infoset.{rdf,dot,ps,svg,png} infoset-diagram.{rdf,dot,ps,svg,png}
 
 infoset.rdf: infoset.n3 infoset-labels.n3 style.n3 $(PD)rdf2dot.xsl
 	$(PYTHON) $(CWM) infoset.n3 infoset-labels.n3 style.n3 -think -purge -bySubject -rdf >$@
+
+
+infoset-diagram.rdf: infoset.n3 infoset-labels.n3 style-arcprop.n3 $(PD)rdf2dot.xsl
+	$(PYTHON) $(CWM) infoset.n3 infoset-labels.n3 style-arcprop.n3 -think -purge -bySubject -base=bogus: -rdf >$@
 
 
 #swws.dot: swws.rdf
