@@ -3,9 +3,16 @@
 Declare some basic pluggable interfaces.
 
 
+Problems:
+  we need at least three kinds of sinks:
+      triples, quads, and fol
+
+  how does the parser say which kind of sink it can write to?
+  
+
 """
 
-revision = '$Id: pluggable.py,v 1.1 2003-04-25 19:55:53 sandro Exp $'
+revision = '$Id: pluggable.py,v 1.2 2003-08-01 15:42:12 sandro Exp $'
 
 # Opener?
 # Reader?
