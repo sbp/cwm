@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.29 2003-06-24 13:44:47 timbl Exp $
+# $Id: Makefile,v 1.30 2003-07-29 02:56:56 timbl Exp $
 
 PYTHON=python
 
@@ -40,7 +40,7 @@ HTMLS= check.html RDFSink.html cwm.html cwm_crypto.html cwm_math.html cwm_maths.
 #all: yappstest yappsdoc math.rdf log.rdf db.rdf os.rdf string.rdf crypto.rdf
 
 tested : package
-	(cd test; PYTHONPATH=.. $(PYTHON) retest.py -n -c -f regression.n3)
+	(cd test; make all)
 	echo "Test worked, now can release"
 	touch tested
 
