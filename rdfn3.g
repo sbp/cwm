@@ -4,7 +4,7 @@
 # Share and Enjoy. Open Source license:
 # Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 # http://www.w3.org/Consortium/Legal/copyright-software-19980720
-# $Id: rdfn3.g,v 1.11 2001-09-01 05:31:17 connolly Exp $
+# $Id: rdfn3.g,v 1.12 2001-09-01 05:56:28 connolly Exp $
 # see log at end
 #
 # REFERENCES
@@ -54,7 +54,7 @@ parser _Parser:
 
     rule term<<scp>>:
                 expr<<scp>>     {{ return expr }}
-              | name<<scp>>     {{ return name }}
+              | name           {{ return name }}
               
     rule predicate<<scp,subj>>: verb<<scp>> objects1<<scp,subj,verb>>
 
@@ -74,19 +74,19 @@ parser _Parser:
 
     # details about terms...
 
-    rule name<<scp>>:
+    rule name:
                 URIREF        {{ return self.uriref(URIREF) }}
               | QNAME         {{ return self.qname(QNAME) }}
               | "a"           {{ return self.termA() }}
               | "="           {{ return self.termEq() }}
 
     rule expr<<scp>>:
-                STRLIT3       {{ return self.strlit(STRLIT3, '"""') }}
-              | STRLIT1       {{ return self.strlit(STRLIT1, '"') }}
-              | STRLIT2       {{ return self.strlit(STRLIT2, "'") }}
-              | "this"        {{ return scp }}
+                "this"        {{ return scp }}
               | EXVAR         {{ return self.lname(EXVAR) }}
               | UVAR          {{ return self.vname(UVAR) }}
+              | STRLIT3       {{ return self.strlit(STRLIT3, '"""') }}
+              | STRLIT1       {{ return self.strlit(STRLIT1, '"') }}
+              | STRLIT2       {{ return self.strlit(STRLIT2, "'") }}
               | list<<scp>>   {{ return list }}
               | phrase<<scp>> {{ return phrase }}
               | clause_sub    {{ return clause_sub }}
@@ -211,7 +211,10 @@ def DEBUG(*args):
     sys.stderr.write("\n")
     
 # $Log: rdfn3.g,v $
-# Revision 1.11  2001-09-01 05:31:17  connolly
+# Revision 1.12  2001-09-01 05:56:28  connolly
+# the name rule does not need a scope param
+#
+# Revision 1.11  2001/09/01 05:31:17  connolly
 # - gram2html.py generates HTML version of grammar from rdfn3.g
 # - make use of [] in rdfn3.g
 # - more inline terminals
