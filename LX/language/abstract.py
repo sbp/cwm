@@ -2,8 +2,8 @@
 
 
 """
-__version__ = "$Revision: 1.2 $"
-# $Id: abstract.py,v 1.2 2002-08-29 17:10:38 sandro Exp $
+__version__ = "$Revision: 1.3 $"
+# $Id: abstract.py,v 1.3 2002-10-02 22:56:35 sandro Exp $
 
 
 import LX
@@ -101,13 +101,19 @@ class Serializer:
             except:
                 # should we do auto-abbreviation???
                 return "'<"+t.value+">'"
-        if isinstance(t, LX.ExiVar):
-            return t.name      #  @@@@ not global enough!
         raise RuntimeError, "No serialization for term: "+`t`
 
     
 # $Log: abstract.py,v $
-# Revision 1.2  2002-08-29 17:10:38  sandro
+# Revision 1.3  2002-10-02 22:56:35  sandro
+# Switched cwm main-loop to keeping state in llyn AND/OR an LX.formula,
+# as needed by each command-line option.  Also factored out common
+# language code in main loop, so cwm can handle more than just "rdf" and
+# "n3".  New functionality is not thoroughly tested, but old functionality
+# is and should be fine.  Also did a few changes to LX variable
+# handling.
+#
+# Revision 1.2  2002/08/29 17:10:38  sandro
 # fixed description bug; flatten runs and may even be correct
 #
 # Revision 1.1  2002/08/29 11:00:46  sandro
