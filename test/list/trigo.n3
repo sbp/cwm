@@ -1,12 +1,12 @@
 # Author: karl
-#  $Id: trigo.n3,v 1.1 2003-10-14 22:34:01 kdubost Exp $
+#  $Id: trigo.n3,v 1.2 2004-06-25 01:27:00 timbl Exp $
 
 @prefix : <#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
 @prefix math: <http://www.w3.org/2000/10/swap/math#> .
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
 
-this log:forAll :x , :y , :z .
+@forAll :x , :y , :z .
 
 # A math test to see if it works here:
 

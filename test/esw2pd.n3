@@ -7,14 +7,14 @@ Invoke ala:
 
 python cwm.py esw2pd.n3 --think --purge --rdf=d >,palmStuff.rdf
 """,
-"$Id: esw2pd.n3,v 1.3 2002-07-31 21:22:11 danbri Exp $";
+"$Id: esw2pd.n3,v 1.4 2004-06-25 01:26:59 timbl Exp $";
   dc:source <http://ilrt.org/discovery/chatlogs/rdfig/2002-07-31#T17-05-30>.
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 
 @prefix : <#>.
 
-this log:forAll :E, :WHAT, :WHEN, :DESC.
+@forAll :E, :WHAT, :WHEN, :DESC.
 
 @prefix ev: <http://purl.org/rss/1.0/modules/event/>.
 @prefix rss: <http://purl.org/rss/1.0/>.

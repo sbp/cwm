@@ -1,9 +1,9 @@
-#$Id: bindRest.n3,v 1.2 2002-03-28 20:12:48 connolly Exp $
+#$Id: bindRest.n3,v 1.3 2004-06-25 01:27:00 timbl Exp $
 @prefix : <bindRest#>.
 @prefix lst: <http://www.daml.org/2001/03/daml+oil#>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 
-this log:forAll :l.
+@forAll :l.
 
 :xyz :foo ("1").
 

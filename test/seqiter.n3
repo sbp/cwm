@@ -1,4 +1,4 @@
-# $Id: seqiter.n3,v 1.1 2002-06-19 21:53:33 connolly Exp $
+# $Id: seqiter.n3,v 1.2 2004-06-25 01:26:59 timbl Exp $
 # from discussion:
 # * em wanders by and wonders if anyone has an example of iterating
 #   over a :Seq in n3
@@ -13,7 +13,7 @@
 @prefix : <seqiter#>.
 @prefix si: <seqiter#>.
 
-this log:forAll :SEQ, :X, :P, :Q, :N, :NN.
+@forAll :SEQ, :X, :P, :Q, :N, :NN.
 
 
 { :SEQ rdf:_1 :X } log:implies { :X a :IterationCandidate }.

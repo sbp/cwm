@@ -1,12 +1,12 @@
 # Author: sbp
-#  $Id: math-test-subset.n3,v 1.1 2003-08-14 00:00:24 timbl Exp $
+#  $Id: math-test-subset.n3,v 1.2 2004-06-25 01:27:00 timbl Exp $
 
 @prefix : <#> .
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
 @prefix math: <http://www.w3.org/2000/10/swap/math#> .
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
 
-this log:forAll :x , :y , :z .
+@forAll :x , :y , :z .
 
 # Some simple rules
 

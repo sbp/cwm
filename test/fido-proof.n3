@@ -3,7 +3,7 @@
 @prefix rcs: <http://www.w3.org/2001/03swell/rcs#>.
 
 <> dc:description """fiddling around with proof-checking""";
-  rcs:id "$Id: fido-proof.n3,v 1.1 2002-01-21 21:41:03 connolly Exp $";
+  rcs:id "$Id: fido-proof.n3,v 1.2 2004-06-25 01:26:59 timbl Exp $";
   dc:creator [ 
 	contact:fullName "Dan Connolly";
 	contact:homePage <http://www.w3.org/People/Connolly/>;
@@ -19,13 +19,13 @@
 @prefix ex: <http://example/vocab#>.
 
 :given1
-  pf:proves { this log:forAll :x.
+  pf:proves { @forAll :x.
               { :x a ex:Dog } log:implies { :x ex:gets ex:Fleas } }.
 
 :given2
   pf:proves { ex:fido a ex:Dog. }.
 
-this log:forAll :PfPthenQ, :PfPgnd, :A, :P, :Q, :F, :Pgnd, :v.
+@forAll :PfPthenQ, :PfPgnd, :A, :P, :Q, :F, :Pgnd, :v.
 { :PfPgnd pf:proves :Pgnd.
   :PfPthenQ pf:proves [ log:includes { :P log:implies :Q };
                       ].

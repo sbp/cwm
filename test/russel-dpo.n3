@@ -1,4 +1,4 @@
-# $Id: russel-dpo.n3,v 1.4 2002-01-17 22:17:04 connolly Exp $
+# $Id: russel-dpo.n3,v 1.5 2004-06-25 01:26:59 timbl Exp $
 #
 # taken from
 #  A Proposal for the Web Ontology Language - slide "DAML+OIL Paradox"
@@ -16,7 +16,7 @@
 
 @prefix : <#>.
 
-this log:forSome :_g1 .
+@forSome :_g1 .
 
 :_g1 a :_g1, owl:Restriction;
  owl:hasClassQ [ owl:oneOf [ list:first :_g1; list:rest list:nil] ];
@@ -27,7 +27,7 @@ this log:forSome :_g1 .
 #####
 # background... some rules/axioms to define the DAML+OIL/owl terms...
 
-this log:forAll :s, :p, :o, :C, :C1, :C2, :F,
+@forAll :s, :p, :o, :C, :C1, :C2, :F,
 	:sn, :pn, :on.
 
 
