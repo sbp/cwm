@@ -3,7 +3,7 @@
 <> dc:description """
 rules to map from travel itinerary vocabulary
 to iCalendar vocabulary.
-$Id: itin2ical.n3,v 1.2 2002-08-28 22:01:05 connolly Exp $
+$Id: itin2ical.n3,v 1.3 2002-09-22 21:54:56 connolly Exp $
 """;
     dc:source <http://www.ietf.org/rfc/rfc2445.txt> ;
     dc:relation <ical>, <ical.n3>, <ical.rdf>, <toIcal.py>, <ical2rdf.pl>.
@@ -12,10 +12,12 @@ $Id: itin2ical.n3,v 1.2 2002-08-28 22:01:05 connolly Exp $
 @prefix dt: <http://www.w3.org/2001/XMLSchema#> .
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix str: <http://www.w3.org/2000/10/swap/string#>.
+
 @prefix cal: <http://www.w3.org/2000/10/swap/pim/ical#>.
 @prefix t:   <http://www.w3.org/2000/10/swap/pim/travelTerms#> .
 
-@prefix str: <http://www.w3.org/2000/10/swap/string#>.
+@prefix k: <http://opencyc.sourceforge.net/daml/cyc.daml#>.
 
 @prefix :   <itin2ical#>.
 @prefix ic: <itin2ical#>.
