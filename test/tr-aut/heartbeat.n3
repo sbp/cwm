@@ -1,4 +1,4 @@
-# $Id: heartbeat.n3,v 1.2 2005-03-31 15:05:40 connolly Exp $
+# $Id: heartbeat.n3,v 1.3 2005-04-07 15:09:26 connolly Exp $
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix str: <http://www.w3.org/2000/10/swap/string#>.
 
@@ -29,7 +29,7 @@ months18    a InterestingPeriod; start "2003-10-01".
   ?AUDITKB a AuditKB.
   PSHORT a InterestingPeriod.
 
-  <../../../../04/mem-news/groups.rdf>.log:semantics log:includes {
+  <http://www.w3.org/2000/04/mem-news/public-groups.rdf>.log:semantics log:includes {
    [ a org:WorkingGroup; contact:homePage PG ].
   }.
 
