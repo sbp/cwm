@@ -1,7 +1,7 @@
 # notes as this was developed...
 # http://ilrt.org/discovery/chatlogs/rdfig/2003-03-10#T22-49-48
 #
-# $Id: cityLookup.n3,v 1.12 2004-12-23 15:58:28 connolly Exp $
+# $Id: cityLookup.n3,v 1.13 2005-04-22 15:52:21 connolly Exp $
 # see log at end
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
@@ -14,7 +14,7 @@
 @prefix usps: <http://www.w3.org/2000/10/swap/pim/usps#> .
 
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
-@prefix cal: <http://www.w3.org/2002/12/cal/ical#>.
+@prefix cal: <http://www.w3.org/2002/12/cal/icaltzd#>.
 
 @prefix apt: <http://www.daml.org/2001/10/html/airport-ont#>.
 
@@ -172,7 +172,10 @@ k:Massachusetts-State  usps:stateAbbr "MA".
 #  k:inRegion [ map:countryName "Hungary" ] ].
 
 # $Log: cityLookup.n3,v $
-# Revision 1.12  2004-12-23 15:58:28  connolly
+# Revision 1.13  2005-04-22 15:52:21  connolly
+# icaltzd namespace update
+#
+# Revision 1.12  2004/12/23 15:58:28  connolly
 # patch for HEL/Helsinki
 #
 # Revision 1.11  2004/12/23 15:42:05  connolly
