@@ -3,7 +3,7 @@
 <> dc:description """
 rules to map from travel itinerary vocabulary
 to iCalendar vocabulary.
-$Id: itin2ical.n3,v 1.12 2004-09-08 15:33:55 connolly Exp $
+$Id: itin2ical.n3,v 1.13 2005-04-22 15:52:45 connolly Exp $
 """;
     dc:source <http://www.ietf.org/rfc/rfc2445.txt> ;
     dc:relation <http://www.w3.org/2002/12/cal/ical>, <toIcal.py>,
@@ -15,7 +15,7 @@ $Id: itin2ical.n3,v 1.12 2004-09-08 15:33:55 connolly Exp $
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix str: <http://www.w3.org/2000/10/swap/string#>.
 
-@prefix cal: <http://www.w3.org/2002/12/cal/ical#>.
+@prefix cal: <http://www.w3.org/2002/12/cal/icaltzd#>.
 @prefix t:   <http://www.w3.org/2000/10/swap/pim/travelTerms#> .
 @prefix apt: <http://www.daml.org/2001/10/html/airport-ont#>.
 
@@ -57,12 +57,28 @@ $Id: itin2ical.n3,v 1.12 2004-09-08 15:33:55 connolly Exp $
   ?DTEND is str:concatenation of
     (?YYMMDD2 "T" ?HH_MM2 ":00") .
 
+  (?DTSTART ?TZ) log:dtlit ?STARTT.
+  (?DTEND ?TZ2) log:dtlit ?ENDT.
 }
  => {
   ?FLT a cal:Vevent;
-    cal:dtstart [ ?TZ ?DTSTART ];
-    cal:dtend [?TZ2 ?DTEND] .
+    cal:dtstart ?STARTT;
+    cal:dtend ?ENDT.
 }.
+
+# withZoneInfo.n3 used to do this, but can't with new timezone design
+{ ?CAL
+    k:containsInformationAbout-Focally [
+     k:subEvents ?E].
+
+  ?FLT
+    k:fromLocation [ k:inRegion ?TZ ];
+    k:toLocation [ k:inRegion ?TZ2 ].
+
+  ?TZ a cal:Vtimezone.
+  ?TZ2 a cal:Vtimezone.
+} => { ?CAL cal:component ?TZ, ?TZ2 }.
+
 
 
 { ?FLT
