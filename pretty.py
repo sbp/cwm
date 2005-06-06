@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.30 2005-02-18 20:02:25 syosi Exp $
+$Id: pretty.py,v 1.31 2005-06-06 20:16:15 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.30 $"
+cvsRevision = "$Revision: 1.31 $"
 
 # Magic resources we know about
 
@@ -249,7 +249,7 @@ class Serializer:
 
     def _outputStatement(self, sink, quad, aWorks = 1):
         if isinstance(quad[1], Literal):
-            raise ValueError("Cannot have a literal as a predicate. This makes no sense")
+            raise ValueError("Cannot have a literal as a predicate. This makes no sense, %s" % `quad[1]`)
         if isinstance(quad[1], Formula):
             raise ValueError("Cannot have a formula as a predicate. This makes no sense")
         sink.makeStatement(self.extern(quad), aIsPossible=aWorks)

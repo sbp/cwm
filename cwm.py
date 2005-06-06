@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.168 2005-01-27 20:06:43 syosi Exp $
+$Id: cwm.py,v 1.169 2005-06-06 20:16:15 syosi Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.168 $"
+cvsRevision = "$Revision: 1.169 $"
 
 
 
@@ -328,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.168 2005-01-27 20:06:43 syosi Exp $"
+        version = "$Id: cwm.py,v 1.169 2005-06-06 20:16:15 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -561,6 +561,21 @@ rdf/xml files. Note that this requires rdflib.
                 
             elif arg == "-think":  
                 think(workingContext, mode=option_flags["think"])
+
+            elif arg == '-pythink':
+                from swap import pycwmko
+                from pychinko import interpreter
+                from swap.set_importer import Set, ImmutableSet
+                pyf = pycwmko.N3Loader.N3Loader()
+                conv = pycwmko.ToPyStore(pyf)
+                conv.statements(workingContext)
+                interp = interpreter.Interpreter(pyf.rules[:])
+                interp.addFacts(Set(pyf.facts), initialSet=True)
+                interp.run()
+                pyf.facts = interp.totalFacts
+                workingContext = workingContext.store.newFormula()
+                reconv = pycwmko.FromPyStore(workingContext, pyf)
+                reconv.run()
 
             elif arg == "-lxkbdump":  # just for debugging
                 raise NotImplementedError

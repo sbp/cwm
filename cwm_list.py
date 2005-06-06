@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.8 2005-01-18 19:29:02 syosi Exp $
+$Id: cwm_list.py,v 1.9 2005-06-06 20:16:15 syosi Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -52,6 +52,24 @@ class BI_last(LightBuiltIn, Function):
 	    x = x.rest
 	    if isinstance(x, EmptyList): return last.first
 
+##class BI_map(LightBuiltIn, Function):
+##    def evalObj(self,subj, queue, bindings, proof, query):
+##        print subj
+##        store = self.store
+##        genID = store.genId()
+##        print genID
+##        hash = genID.rfind("#")
+##        print genID[hash+1:]
+##        symbol = genID[:hash]
+##        mapped = store.symbol(symbol)
+##        class Map(LightBuiltIn, Function):
+##            def evalObj(self, subj, queue, bindings, proof, query):
+##                print 'hi'
+##                return subj
+##        
+##        mapped.internFrag(genID[hash+1:], Map)
+##        return store.symbol(genID)
+
 
 class BI_in(LightBuiltIn, MultipleReverseFunction):
     """Is the subject in the object?
@@ -64,7 +82,7 @@ class BI_in(LightBuiltIn, MultipleReverseFunction):
     def evalSubj(self, obj, queue, bindings, proof, query):
 	if not isinstance(obj, NonEmptyList) and not isinstance(obj, N3Set): return None
 	rea = None
-	return [x or x in obj]  # [({subj:x}, rea) for x in obj]
+	return [x for x in obj]  # [({subj:x}, rea) for x in obj]
 
 class BI_member(LightBuiltIn, MultipleFunction):
     """Is the subject in the object?
@@ -115,5 +133,6 @@ def register(store):
     ns.internFrag("last", BI_last)
     ns.internFrag("append", BI_append)
     ns.internFrag("members", BI_members)
+##    ns.internFrag("map", BI_map)
 # ends
 
