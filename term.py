@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.30 2005-06-06 20:16:15 syosi Exp $
+$Id: term.py,v 1.31 2005-06-06 20:23:49 syosi Exp $
 
 term
 
@@ -835,7 +835,7 @@ typeMap = { "decimal": Decimal,
             "anyURI": unicode,
             "QName": unicode,
             "NOTATION": unicode,
-            "unicodeing": unicode,
+            "string": unicode,
                 "normalizedunicodeing": unicode,
                     "token": unicode,
                         "language": unicode,
