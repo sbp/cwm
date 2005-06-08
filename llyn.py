@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.131 2005-01-24 18:59:23 syosi Exp $
+$Id: llyn.py,v 1.132 2005-06-08 21:07:05 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.131 $"
+cvsRevision = "$Revision: 1.132 $"
 
 
 # Magic resources we know about
@@ -948,9 +948,12 @@ class BI_filter(LightBuiltIn, Function):
         store = subj.store
         if not isinstance(subj, List):
             raise ValueError('I need a list of two formulae')
-        list = [x for x in subj]
+        list = [x for x in subj] 
         if len(list) != 2:
             raise ValueError('I need a list of TWO formulae')
+        if diag.chatty_flag > 30:
+            progress("=== begin filter of:" + `list`)
+        # list = [bindings.get(a,a) for a in list]
         base, filter = list
         F = self.store.newFormula()
         if diag.tracking:
@@ -958,8 +961,19 @@ class BI_filter(LightBuiltIn, Function):
         else: reason = None
         applyRules(base, filter, F)
         F = F.close()
+        if diag.chatty_flag > 30:
+            progress("=== end filter of:" + `list` + "we got: " + `F`)
         return F
-        
+
+class BI_vars(LightBuiltIn, Function):
+    """Get only the variables from a formula
+
+    """
+    def evalObj(self, subj, queue, bindings, proof, query):
+        F = self.store.newFormula()
+        #F.existentials().update(subj.existentials())
+        F.universals().update(subj.universals())
+        return F.close()
     
 class BI_conjunction(LightBuiltIn, Function):      # Light? well, I suppose so.
     """ The conjunction of a set of formulae is the set of statements which is
@@ -1072,6 +1086,7 @@ class RDFStore(RDFSink) :
         self.Formula =  log.internFrag("Formula", Fragment) # syntactic type possible value - a class
         self.Other =    log.internFrag("Other", Fragment) # syntactic type possible value - a class
         self.filter  =  log.internFrag("filter", BI_filter) # equivilent of --filter
+        self.vars    =  log.internFrag("vars", BI_vars) # variables of formula
 
         log.internFrag("conjunction", BI_conjunction)
         
