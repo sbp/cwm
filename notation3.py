@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.178 2005-01-27 20:06:43 syosi Exp $
+$Id: notation3.py,v 1.179 2005-06-09 20:13:48 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -137,7 +137,6 @@ class SinkParser:
         if thisDoc != "":
 	    assert ':' in thisDoc, "Document URI if any must be absolute: <%s>" % thisDoc
 	    self._bindings[""] = thisDoc + "#"  # default
-
 
         self._store = store
 	if genPrefix: store.setGenPrefix(genPrefix) # pass it on
@@ -1261,7 +1260,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.178 2005-01-27 20:06:43 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.179 2005-06-09 20:13:48 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
