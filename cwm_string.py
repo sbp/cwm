@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.29 2004-12-08 19:54:06 syosi Exp $
+$Id: cwm_string.py,v 1.30 2005-06-09 21:05:14 syosi Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -18,7 +18,7 @@ import urllib # for hasContent
 import md5, binascii  # for building md5 URIs
 
 from term import LightBuiltIn, ReverseFunction, Function
-from decimal import Decimal
+from local_decimal import Decimal
 
 LITERAL_URI_prefix = "data:text/rdf+n3;"
 

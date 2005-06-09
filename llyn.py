@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.133 2005-06-09 20:13:48 syosi Exp $
+$Id: llyn.py,v 1.134 2005-06-09 21:05:14 syosi Exp $
 
 
 RDF Store and Query engine
@@ -77,7 +77,7 @@ import reify
 from query import think, applyRules, testIncludes
 import webAccess
 from webAccess import DocumentAccessError
-from decimal import Decimal
+from local_decimal import Decimal
 
 from RDFSink import Logic_NS, RDFSink, forSomeSym, forAllSym
 from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.133 $"
+cvsRevision = "$Revision: 1.134 $"
 
 
 # Magic resources we know about

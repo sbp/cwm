@@ -4,7 +4,7 @@ This is an implementation of the Decimal XML schema datatype in python
 
 magnitude is the log10 of the number we multiply it by to get an integer
 
-$Id: decimal.py,v 1.4 2004-10-26 17:10:29 syosi Exp $
+$Id: local_decimal.py,v 1.1 2005-06-09 21:05:14 syosi Exp $
 """
 
 from types import IntType, FloatType, LongType, StringTypes

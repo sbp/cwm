@@ -16,13 +16,13 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_maths.py,v 1.10 2004-10-26 17:10:29 syosi Exp $'
-__version__ = '$Revision: 1.10 $'
+__cvsid__ = '$Id: cwm_maths.py,v 1.11 2005-06-09 21:05:14 syosi Exp $'
+__version__ = '$Revision: 1.11 $'
 
 import sys, string, re, urllib
 
 from term import LightBuiltIn, Function, ReverseFunction
-from decimal import Decimal
+from local_decimal import Decimal
 
 MATHS_NS_URI = 'http://www.w3.org/2000/10/swap/maths#'
 

@@ -15,13 +15,13 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.21 2005-01-10 19:15:22 syosi Exp $'
-__version__ = '$Revision: 1.21 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.22 2005-06-09 21:05:14 syosi Exp $'
+__version__ = '$Revision: 1.22 $'
 
 import sys, string, re, urllib
 
 from term import LightBuiltIn, Function, ReverseFunction
-from decimal import Decimal
+from local_decimal import Decimal
 import types
 
 # from RDFSink import DAML_LISTS, RDF_type_URI, DAML_sameAs_URI

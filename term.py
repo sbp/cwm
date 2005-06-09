@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.33 2005-06-09 20:13:48 syosi Exp $
+$Id: term.py,v 1.34 2005-06-09 21:05:14 syosi Exp $
 
 term
 
@@ -34,7 +34,7 @@ import md5, binascii  # for building md5 URIs
 
 from uripath import refTo
 from RDFSink import runNamespace
-from decimal import Decimal  # for xsd:decimal
+from local_decimal import Decimal  # for xsd:decimal
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 
