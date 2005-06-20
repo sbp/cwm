@@ -6,7 +6,7 @@
 # allowing data to be fetched from resources elsewhere, and remote
 # servers to be queried.
 # 
-# $Id: log.n3,v 1.21 2003-04-14 01:33:54 timbl Exp $
+# $Id: log.n3,v 1.22 2005-06-20 00:45:06 eefi Exp $
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -277,6 +277,8 @@ log:racine a rdf:Property;
 thing identified by the same URI without a hash or fragid.
 For anything else, it is itself.""".
 
+log:dtlit a rdf:Property;
+    rdfs:comment """Takes a list of a string and a URI and creates a datatyped literal. For example, { ("2005-03-30T11:00:00" :tz) log:dtlit ?X } => { ?X a :Answer } . will produce "2005-03-30T11:00:00"^^:tz a :Answer .""" .
 
 
 # ends

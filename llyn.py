@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.134 2005-06-09 21:05:14 syosi Exp $
+$Id: llyn.py,v 1.135 2005-06-20 00:45:06 eefi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.134 $"
+cvsRevision = "$Revision: 1.135 $"
 
 
 # Magic resources we know about
@@ -753,6 +753,13 @@ class BI_uri(LightBuiltIn, Function, ReverseFunction):
         return store.intern((SYMBOL, object))
 
 
+class BI_dtlit(LightBuiltIn, Function):
+    """built a datatype literal from a string and a uri"""
+     
+    def evaluateObject(self, subj_py):
+	return self.store.newLiteral(subj_py[0], subj_py[1])
+
+
 class BI_rawUri(BI_uri):
     """This is like  uri except that it allows you to get the internal
     identifiers for anonymous nodes and formuale etc."""
@@ -1106,6 +1113,7 @@ class RDFStore(RDFSink) :
 # Functions:        
 
         log.internFrag("racine", BI_racine)  # Strip fragment identifier from string
+        log.internFrag("dtlit", BI_dtlit)
 
         self.rawType =  log.internFrag("rawType", BI_rawType) # syntactic type, oneOf:
         log.internFrag("rawUri", BI_rawUri)
