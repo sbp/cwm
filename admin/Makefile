@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.11 2004-06-08 21:28:28 connolly Exp $
+# $Id: Makefile,v 1.12 2005-06-20 00:49:12 eefi Exp $
 
 W=../../../..
 PYTHON=python
@@ -32,8 +32,9 @@ N3-Bugs.ics: ,bugsToDo.cal3 $(SWAP)/pim/toIcal.py
 # Make update means fteches new info from outside this directory.
 
 update:
-	mv ,n3bugs0.rdf ,,n3bugs0.rdf
-	make N3-Bugs.ics
+	-mv ,n3bugs0.rdf ,,n3bugs0.rdf
+	-mv ,n3bugs1.rdf ,,n3bugs1.rdf
+	make bugstatus
 
 # Make publlish makes the results avilable using CVS
 
