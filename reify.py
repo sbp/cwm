@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.13 2005-06-15 19:19:38 syosi Exp $
+$Id: reify.py,v 1.14 2005-06-23 21:05:14 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -122,6 +122,58 @@ class rLiteral(Mixin, Literal):
 
     def flatten(self, sink, why=None):
         return self
+
+
+class rFormula(Mixin, Formula):
+    def reification(self, sink, bnodeMap={}, why=None):
+	"""Describe myself in RDF to the given context
+	
+	
+	"""
+	list = [].__class__
+	try:
+	    return bnodeMap[self]
+	except KeyError:
+	    F = sink.newBlankNode()
+	    bnodeMap[self] = F
+	rei = sink.newSymbol(reifyNS[:-1])
+	myMap = {}
+	ooo = sink.newSymbol(owlOneOf)
+	es = list(self.existentials())
+	es.sort(Term.compareAnyTerm)
+	us = list(self.universals())
+	us.sort(Term.compareAnyTerm)
+	for vars, vocab in ((es,  rei["existentials"]), 
+			(us, rei["universals"])):
+	    if diag.chatty_flag > 54:
+        	progress("vars=", vars)
+                progress("vars=", [v.uriref() for v in vars])
+	    list = sink.store.nil.newList([sink.newLiteral(x.uriref()) for x in vars])
+	    klass = sink.newBlankNode()
+            sink.add(klass, ooo, list)
+	    sink.add(F, vocab, klass) 
+
+
+	#The great list of statements
+        statementList = []
+        for s in self.statements:
+            subj = sink.newBlankNode()
+	    sink.add(subj, rei["subject"], s[SUBJ].reification(sink, myMap, why)) 
+	    sink.add(subj, rei["predicate"], s[PRED].reification(sink, myMap, why) )
+	    sink.add(subj, rei["object"], s[OBJ].reification(sink, myMap, why)) 
+	    statementList.append(subj)
+            
+    #The great class of statements
+        StatementClass = sink.newBlankNode()
+        realStatementList = sink.store.nil.newList(statementList)
+        sink.add(StatementClass, ooo, realStatementList)
+    #We now know something!
+        sink.add(F, rei["statements"], StatementClass)
+	    
+	return F
+
+    def flatten(self, sink, why=None):
+        return self.reification(sink, {}, why=why)
 
 def flatten(formula):
     """Flatten a formula
