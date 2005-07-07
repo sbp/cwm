@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.135 2005-06-20 00:45:06 eefi Exp $
+$Id: llyn.py,v 1.136 2005-07-07 20:08:03 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.135 $"
+cvsRevision = "$Revision: 1.136 $"
 
 
 # Magic resources we know about
@@ -1138,7 +1138,7 @@ class RDFStore(RDFSink) :
 
         self.includes =         log.internFrag( "includes", BI_includes)
 #        log.internFrag("directlyIncludes", BI_directlyIncludes)
-        log.internFrag("notIncludes", BI_notIncludes)
+        self.notIncludes = log.internFrag("notIncludes", BI_notIncludes)
 #        log.internFrag("notDirectlyIncludes", BI_notDirectlyIncludes)
 
 #Heavy functions:
