@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.170 2005-07-12 14:44:43 syosi Exp $
+$Id: cwm.py,v 1.171 2005-07-12 18:47:01 syosi Exp $
 
 Closed World Machine
 
@@ -56,7 +56,7 @@ from swap import  notation3    	# N3 parsers and generators
 from swap import  toXML 		#  RDF generator
 
 from swap.why import BecauseOfCommandLine
-from swap.query import think, applyRules, applyQueries, testIncludes
+from swap.query import think, applyRules, applyQueries, applySparqlQueries, testIncludes
 from swap.update import patch
 
 from swap import  uripath
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.170 $"
+cvsRevision = "$Revision: 1.171 $"
 
 
 
@@ -328,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.170 2005-07-12 14:44:43 syosi Exp $"
+        version = "$Id: cwm.py,v 1.171 2005-07-12 18:47:01 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -516,6 +516,21 @@ rdf/xml files. Note that this requires rdflib.
 		if diag.tracking: proof = FormulaReason(_newContext)
                 applyQueries(workingContext, filterContext, _newContext)
 		workingContext.close()
+                workingContext = _newContext
+
+            elif _lhs == "-sparql":
+                workingContext.stayOpen = False
+		workingContext = workingContext.canonicalize()
+		if tracking: 
+		    r = BecauseOfCommandLine(sys.argv[0]) # @@ add user, host, pid, date time? Privacy!
+		else:
+		    r = None
+		filterContext = _store.load(_uri, why=r, referer="", contentType="x-application/sparql")
+		_newContext = _store.newFormula()
+		_newContext.stayOpen = True
+		if diag.tracking: proof = FormulaReason(_newContext)
+                applySparqlQueries(workingContext, filterContext, _newContext)
+#		workingContext.close()
                 workingContext = _newContext
 
             elif arg == "-why":

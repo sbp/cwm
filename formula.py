@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.20 2005-07-12 14:44:44 syosi Exp $
+$Id: formula.py,v 1.21 2005-07-12 18:47:01 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -59,7 +59,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.20 $"
+cvsRevision = "$Revision: 1.21 $"
 
 # Magic resources we know about
 
@@ -571,12 +571,6 @@ class Formula(AnonymousNode, CompoundTerm):
                     return 1
         return 0
 
-    def doNodesAppear(self, symbols):
-        val = Set()
-        for quad in self.statements:
-            for s in PRED, SUBJ, OBJ:
-                val.update(quad[s].doesNodeAppear(symbols))
-        return val
 
 #################################################################################
 
