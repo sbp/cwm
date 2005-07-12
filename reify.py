@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.14 2005-06-23 21:05:14 syosi Exp $
+$Id: reify.py,v 1.15 2005-07-12 14:44:44 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -300,7 +300,7 @@ def dereify(formula, sink=None, xList=[]):
     weKnowList = formula.each(pred=store.type, obj=store.Truth)
     for weKnow in weKnowList:
 	f = dereification(weKnow, formula, sink, xList=xList)
-	sink.loadFormulaWithSubsitution(f)
+	sink.loadFormulaWithSubstitution(f)
     return sink
 
 def dereification(x, f, sink, bnodes={}, xList=[]):

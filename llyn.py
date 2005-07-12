@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.136 2005-07-07 20:08:03 syosi Exp $
+$Id: llyn.py,v 1.137 2005-07-12 14:44:44 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.136 $"
+cvsRevision = "$Revision: 1.137 $"
 
 
 # Magic resources we know about
@@ -355,7 +355,7 @@ class IndexedFormula(Formula):
 	if "T" in self._closureMode:
 	    if pred is store.type and obj is store.Truth:
 		assert isinstance(subj, Formula), "What are we doing concluding %s is true?" % subj
-		self.loadFormulaWithSubsitution(subj)
+		self.loadFormulaWithSubstitution(subj)
 
 #########
 	if newBindings != {}:

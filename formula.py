@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.19 2005-06-23 21:05:14 syosi Exp $
+$Id: formula.py,v 1.20 2005-07-12 14:44:44 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -59,7 +59,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.19 $"
+cvsRevision = "$Revision: 1.20 $"
 
 # Magic resources we know about
 
@@ -359,10 +359,10 @@ class Formula(AnonymousNode, CompoundTerm):
 	y = store.newFormula()
 	if verbosity() > 90: progress("substitution: formula"+`self`+" becomes new "+`y`,
 				    " because of ", oc)
-	y.loadFormulaWithSubsitution(self, bindings, why=why)
+	y.loadFormulaWithSubstitution(self, bindings, why=why)
 	return y.canonicalize()
 
-    def loadFormulaWithSubsitution(self, old, bindings={}, why=None):
+    def loadFormulaWithSubstitution(self, old, bindings={}, why=None):
 	"""Load information from another formula, subsituting as we go
 	returns number of statements added (roughly)"""
         total = 0
