@@ -8,7 +8,7 @@ http://www.w3.org/Consortium/Legal/copyright-software-19980720
 
 see log at end
 """
-rcsId = "$Id: n3spark.py,v 1.2 2001-08-28 21:54:44 connolly Exp $"
+rcsId = "$Id: n3spark.py,v 1.3 2005-07-13 22:38:33 syosi Exp $"
 
 
 from string import find
@@ -166,6 +166,7 @@ class Scanner0(spark.GenericScanner):
     
     def __init__(self):
         spark.GenericScanner.__init__(self)
+        self.ln = 0
 
     def t_whitespace(self, s):
         r' \s+ '
@@ -202,12 +203,12 @@ class Scanner0(spark.GenericScanner):
     def t_strlit1(self, s):
         r' "([^\"\\\n]|\\[\\\"nrt])*" '
         self.rv.append(Token(lineno=self._ln, type='strlit1', attr=s))
-        self.line = self.line + countNewlines(s)
+        self.ln = self.ln + countNewlines(s)
     
     def t_strlit2(self, s):
         r" '([^\'\\\n]|\\[\\\'nrt])*' "
         self.rv.append(Token(lineno=self._ln, type='strlit2', attr=s))
-        self.line = self.line + countNewlines(s)
+        self.ln = self.ln + countNewlines(s)
     
     def t_punct(self, s):
         r' [\(\)\[\]=\.{};,] '
@@ -286,7 +287,10 @@ if __name__ == '__main__':
 
 
 # $Log: n3spark.py,v $
-# Revision 1.2  2001-08-28 21:54:44  connolly
+# Revision 1.3  2005-07-13 22:38:33  syosi
+# fix conflicts
+#
+# Revision 1.2  2001/08/28 21:54:44  connolly
 # line numbering, =, run-on fix
 #
 # Revision 1.1  2001/08/28 05:10:31  connolly

@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: lexedParser.py,v 1.2 2005-06-16 21:00:13 syosi Exp $"
+__version__ = "$Id: lexedParser.py,v 1.3 2005-07-13 22:38:33 syosi Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 import sparql_tokens
@@ -73,6 +73,8 @@ class tokenHolder(object):
             self.tok = val
             return self
         return self.tok
+    def __repr__(self):
+        return repr(self.tok)
 
 def recordError(str):
     global errors
@@ -284,9 +286,9 @@ class PredictiveParser(object):
 	rhs = lookupTable.get(name, None)  # Predict branch from token
 	if rhs == None:
             progress("""Found %s when expecting some form of %s,
-\tsuch as %s\n\t%s"""  % (tok, lhs, lookupTable.keys(), parser.around(None, None)))
+\tsuch as %s\n\t%s"""  % (tok(), lhs, lookupTable.keys(), parser.around(None, None)))
             raise SyntaxError("""Found %s when expecting some form of %s,
-\tsuch as %s\n\t%s"""  % (tok, lhs, lookupTable.keys(), parser.around(None, None)))
+\tsuch as %s\n\t%s"""  % (tok(), lhs, lookupTable.keys(), parser.around(None, None)))
 	if parser.verb: progress( "%i  %s means expand %s as %s" %(parser.lineNumber,tok(), lhs, rhs.value()))
 	tree = [lhs]
 	for term in rhs:
@@ -414,7 +416,6 @@ def main():
     lexer = sparql_tokens.Lexer()
     lexer.input(ip)
     #str = ip.read().decode('utf_8')
-    lexer.chunk
     sink = g.newFormula()
     keywords = g.each(pred=BNF.keywords, subj=document)
     keywords = [a.value() for a in keywords]
