@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.3 2005-07-12 18:47:01 syosi Exp $
+$Id: sparql2cwm.py,v 1.4 2005-07-13 21:00:57 syosi Exp $
 """
 
 from set_importer import Set
@@ -11,7 +11,7 @@ import uripath
 from term import Term, CompoundTerm
 from formula import Formula
 
-SPARQL_NS = 'http://yosi.us/2005/sparql'
+from cwm_sparql import SPARQL_NS
 
 knownFunctions = {}
 
@@ -558,8 +558,8 @@ class FromSparql(productionHandler):
         f.add(q, store.type, sparql['SelectQuery'])
         variable_results = store.newFormula()
         for v in p[3][1]:
-            variable_results.add(v, store.type, sparql['result'])
-            variable_results.add(v, sparql['id'], abbr(v.uriref()))
+#            variable_results.add(v, store.type, sparql['Binding'])
+            variable_results.add(v, sparql['bound'], abbr(v.uriref()))
         f.add(q, sparql['select'], variable_results.close())
 
         if p[2]:
@@ -567,7 +567,11 @@ class FromSparql(productionHandler):
 
         knowledge_base = f.newBlankNode()
         self.makePatterns(f, q, knowledge_base, p[5])
-        RulesMaker(self.sparql).implications(q, f, variable_results)
+        f3 = RulesMaker(self.sparql).implications(q, f, variable_results)
+        for triple in f3.statementsMatching(pred=sparql['implies']):
+            f4 = f3.newFormula()
+            f4.add(triple.object(), store.type, sparql['Result'])
+            f.add(triple.subject(), store.implies, f4.close())
         #TODO: I'm missing sorting and datasets
         return None
 
@@ -582,7 +586,9 @@ class FromSparql(productionHandler):
         f.add(q, sparql['construct'], p[2])
         
         self.makePatterns(f, q, p[4])
-        RulesMaker(self.sparql).implications(q, f, p[2])
+        f3 = RulesMaker(self.sparql).implications(q, f, p[2])
+        for triple in f3.statementsMatching(pred=sparql['implies']):
+            f.add(triple.subject(), store.implies, triple.object())
         return None
 
     def on_WhereClause(self, p):
@@ -1314,13 +1320,15 @@ class RulesMaker(object):
         self.ns = ns
 
     def implications(self, query, formula, totalResult):
+        retFormula = formula.newFormula()
         for where in formula.each(subj=query, pred=self.ns['where']):
             F = formula.newFormula()
             F.existentials().update(totalResult.existentials())
             bound_vars = self.find_vars(formula.universals(), where)
             unbound_vars = formula.universals() - bound_vars
             self.matching_subformula(F, unbound_vars, totalResult)
-            formula.add(where, self.ns['implies'], F.close())
+            retFormula.add(where, self.ns['implies'], F.close())
+        return retFormula
 
     def find_vars(self, vars, f):
         retVal = Set()
