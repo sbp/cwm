@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.137 2005-07-12 14:44:44 syosi Exp $
+$Id: llyn.py,v 1.138 2005-07-14 20:55:59 syosi Exp $
 
 
 RDF Store and Query engine
@@ -91,7 +91,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.137 $"
+cvsRevision = "$Revision: 1.138 $"
 
 
 # Magic resources we know about
@@ -1188,6 +1188,7 @@ class RDFStore(RDFSink) :
         import cwm_maths   # Mathematics, perl/string style
 	import cwm_list	   # List handling operations
 	import cwm_set     # Set operations
+	import cwm_sparql  # builtins for sparql
         cwm_string.register(self)
         cwm_math.register(self)
         cwm_trigo.register(self)
@@ -1197,6 +1198,7 @@ class RDFStore(RDFSink) :
         cwm_times.register(self)
 	cwm_list.register(self)
 	cwm_set.register(self)
+	cwm_sparql.register(self)
         if crypto:
 	    import cwm_crypto  # Cryptography
 	    cwm_crypto.register(self)  # would like to anyway to catch bug if used but not available
