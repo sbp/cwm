@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.15 2005-07-12 14:44:44 syosi Exp $
+$Id: reify.py,v 1.16 2005-07-21 15:22:59 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -151,24 +151,24 @@ class rFormula(Mixin, Formula):
 	    list = sink.store.nil.newList([sink.newLiteral(x.uriref()) for x in vars])
 	    klass = sink.newBlankNode()
             sink.add(klass, ooo, list)
-	    sink.add(F, vocab, klass) 
+	    sink.add(F, vocab, klass, why) 
 
 
 	#The great list of statements
         statementList = []
         for s in self.statements:
             subj = sink.newBlankNode()
-	    sink.add(subj, rei["subject"], s[SUBJ].reification(sink, myMap, why)) 
-	    sink.add(subj, rei["predicate"], s[PRED].reification(sink, myMap, why) )
-	    sink.add(subj, rei["object"], s[OBJ].reification(sink, myMap, why)) 
+	    sink.add(subj, rei["subject"], s[SUBJ].reification(sink, myMap, why), why) 
+	    sink.add(subj, rei["predicate"], s[PRED].reification(sink, myMap, why), why )
+	    sink.add(subj, rei["object"], s[OBJ].reification(sink, myMap, why), why) 
 	    statementList.append(subj)
             
     #The great class of statements
         StatementClass = sink.newBlankNode()
         realStatementList = sink.store.nil.newList(statementList)
-        sink.add(StatementClass, ooo, realStatementList)
+        sink.add(StatementClass, ooo, realStatementList,  why)
     #We now know something!
-        sink.add(F, rei["statements"], StatementClass)
+        sink.add(F, rei["statements"], StatementClass, why)
 	    
 	return F
 

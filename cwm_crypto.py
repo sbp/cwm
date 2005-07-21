@@ -9,8 +9,8 @@ cf. http://www.w3.org/2000/10/swap/cwm.py
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_crypto.py,v 1.10 2004-11-19 01:58:39 syosi Exp $'
-__version__ = '$Revision: 1.10 $'
+__cvsid__ = '$Id: cwm_crypto.py,v 1.11 2005-07-21 15:22:59 syosi Exp $'
+__version__ = '$Revision: 1.11 $'
 
 import md5, sha, binascii, quopri, base64
 from term import Function, ReverseFunction, LightBuiltIn
@@ -23,6 +23,7 @@ if USE_PKC:
         import Crypto.PublicKey.RSA as RSA
     except ImportError:
         USE_PKC = 0
+#        'we failed')
 
 # Some stuff that we need to know about
 

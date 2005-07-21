@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.15 2005-01-27 20:06:43 syosi Exp $
+$Id: why.py,v 1.16 2005-07-21 15:22:59 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves- we could make
@@ -148,14 +148,16 @@ class FormulaReason(Reason):
 
 	for e in self.formula.existentials():
 	    ko.add(me, reason.existential, e.uriref(), why=dontAsk)
-
-	for s, rea in self.statementReasons:
-	    pred = s.predicate()
-	    if pred is not self.store.forAll and pred is not self.store.forSome:
-		si = describeStatement(s, ko)
-		ko.add(si, rdf.type, reason.Extraction, why=dontAsk)
-		ko.add(si, reason.because, rea.explain(ko), why=dontAsk)
-		ko.add(me, reason.component, si, why=dontAsk)
+	    
+        for s, rea in self.statementReasons:
+            if rea is self:
+                raise ValueError(self, id(self), s)
+            pred = s.predicate()
+            if pred is not self.store.forAll and pred is not self.store.forSome:
+                si = describeStatement(s, ko)
+                ko.add(si, rdf.type, reason.Extraction, why=dontAsk)
+                ko.add(si, reason.because, rea.explain(ko), why=dontAsk)
+                ko.add(me, reason.component, si, why=dontAsk)
 	return me
 
 class BecauseMerge(FormulaReason):

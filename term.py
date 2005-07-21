@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.36 2005-07-12 18:47:01 syosi Exp $
+$Id: term.py,v 1.37 2005-07-21 15:22:59 syosi Exp $
 
 term
 
@@ -194,6 +194,14 @@ class Term(object):
 		return [ ({self: other}, None) ]
 	    return 0
 	
+class ErrorFlag(TypeError, Term):
+    __init__ = TypeError.__init__
+    __repr__ = object.__repr__
+    __str__ = TypeError.__str__
+#    uriref = lambda s: ':'
+    value = lambda s: TypeError
+
+
 
 class Node(Term):
     """A node in the graph

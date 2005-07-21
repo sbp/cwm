@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.21 2005-07-12 18:47:01 syosi Exp $
+$Id: formula.py,v 1.22 2005-07-21 15:22:59 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -59,7 +59,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.21 $"
+cvsRevision = "$Revision: 1.22 $"
 
 # Magic resources we know about
 
@@ -366,6 +366,7 @@ class Formula(AnonymousNode, CompoundTerm):
 	"""Load information from another formula, subsituting as we go
 	returns number of statements added (roughly)"""
         total = 0
+        subWhy=Because('I said so')
 	for v in old.universals():
 	    self.declareUniversal(bindings.get(v, v))
 	for v in old.existentials():
@@ -373,9 +374,9 @@ class Formula(AnonymousNode, CompoundTerm):
 	bindings2 = bindings.copy()
 	bindings2[old] = self
         for s in old.statements[:] :   # Copy list!
-	    total += self.add(subj=s[SUBJ].substitution(bindings2),
-		    pred=s[PRED].substitution(bindings2),
-		    obj=s[OBJ].substitution(bindings2),
+	    total += self.add(subj=s[SUBJ].substitution(bindings2, why=subWhy),
+		    pred=s[PRED].substitution(bindings2, why=subWhy),
+		    obj=s[OBJ].substitution(bindings2, why=subWhy),
 		    why=why)
         return total
                 
