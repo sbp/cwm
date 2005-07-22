@@ -2,7 +2,7 @@
 """
 Builtins for doing SPARQL queries in CWM
 
-$Id: cwm_sparql.py,v 1.4 2005-07-21 18:32:20 syosi Exp $
+$Id: cwm_sparql.py,v 1.5 2005-07-22 15:14:20 syosi Exp $
 
 """
 
@@ -166,7 +166,6 @@ class BI_query(LightBuiltIn, Function):
             return F
         if query.contains(obj=ns['SelectQuery']):
             node = query.the(pred=self.store.type, obj=ns['SelectQuery'])
-            print 'I got to here'
             outputList = []
             prefixTracker = RDFSink()
             prefixTracker.setDefaultNamespace(RESULTS_NS)

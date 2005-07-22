@@ -141,7 +141,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.42 2004-11-08 02:12:04 syosi Exp $"
+        version = "$Id: sax2rdf.py,v 1.43 2005-07-22 15:14:20 syosi Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -362,7 +362,7 @@ class RDFHandler(xml.sax.ContentHandler):
 				
 	self._delayedStatement = None
 
-	self._base = attrs.get((XML_NS_URI, "base"), self._base)
+	self._base = uripath.join(self._base, attrs.get((XML_NS_URI, "base"), self._base))
 	x = self._base.find("#")
 	if x >= 0: self._base = self._base[:x] # See rdf-tests/rdfcore/xmlbase/test013.rdf
 	
