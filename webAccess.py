@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.21 2005-07-12 14:44:44 syosi Exp $
+$Id: webAccess.py,v 1.22 2005-07-25 20:52:09 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -146,7 +146,7 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
         if diag.chatty_flag > 49: progress("Parsing as SPARQL")
         from sparql import sparql_parser
         import sparql2cwm
-        convertor = sparql2cwm.FromSparql(store, F)
+        convertor = sparql2cwm.FromSparql(store, F, why=why)
         import StringIO
         p = sparql_parser.N3Parser(StringIO.StringIO(buffer), sparql_parser.branches, convertor)
         F = p.parse(sparql_parser.start).close()
