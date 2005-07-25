@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.31 2005-06-06 20:16:15 syosi Exp $
+$Id: pretty.py,v 1.32 2005-07-25 19:01:03 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.31 $"
+cvsRevision = "$Revision: 1.32 $"
 
 # Magic resources we know about
 
@@ -107,12 +107,12 @@ class Serializer:
 			else:
 			    break
 		    p = p[:i]
-		    if len(p) <6 and self.store.namespaces.get(p, None)==None and p!='xml':
+		    if len(p) <6 and self.store.namespaces.get(p, None)==None: # and p[:3]!='xml':
 			pref = p
 		    else:
 			p = p[:5]
 			for l in (3, 2, 4, 1, 5):
-			    if self.store.namespaces.get(p[:l], None) ==None and p[:l]!='xml':
+			    if self.store.namespaces.get(p[:l], None) ==None: # and p[:l][:3]!='xml':
 				pref = p[:l]
 				break	
 			else:
