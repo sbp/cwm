@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.38 2005-07-22 15:14:20 syosi Exp $
+$Id: term.py,v 1.39 2005-07-28 20:03:22 syosi Exp $
 
 term
 
@@ -559,6 +559,8 @@ class List(CompoundTerm):
 	    x = x.rest
 	    import types
 	    set = set | y.occurringIn(vars)
+	if self in vars:
+            set.add(self)
 	return set
 
     def asSequence(self):

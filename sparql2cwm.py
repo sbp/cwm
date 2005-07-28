@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.11 2005-07-28 01:46:52 syosi Exp $
+$Id: sparql2cwm.py,v 1.12 2005-07-28 20:03:22 syosi Exp $
 """
 
 from set_importer import Set
@@ -814,6 +814,7 @@ class FromSparql(productionHandler):
     def on__QDISTINCT_E_Opt(self, p):
         if len(p) == 1:
             return None
+        return None
         raise NotImplementedError(`p`)
 
     def on_Var(self, p):
@@ -933,7 +934,7 @@ class FromSparql(productionHandler):
         pred = p[4][1]
         realPred = pred[1]
         if realPred == []:
-            realPred.append((('symbol', store.type), ('objectList', [('Var', self.sparql['LameTriple'])])))
+            realPred.append((('symbol', self.sparql['lamePred']), ('objectList', [('symbol', self.sparql['LameObject'])])))
         List = ('List', [k[1] for k in nodes])
         return [('Triple', (List, pred))] + extra
     
