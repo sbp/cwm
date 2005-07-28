@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.9 2005-06-06 20:16:15 syosi Exp $
+$Id: cwm_list.py,v 1.10 2005-07-28 01:46:51 syosi Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -94,7 +94,7 @@ class BI_member(LightBuiltIn, MultipleFunction):
     def evalObj(self,subj, queue, bindings, proof, query):
 	if not isinstance(subj, NonEmptyList) and not isinstance(subj, N3Set): return None
 	rea = None
-	return subj # [({obj:x}, rea) for x in subj]
+	return [x for x in subj] # [({obj:x}, rea) for x in subj]
 
 
 
