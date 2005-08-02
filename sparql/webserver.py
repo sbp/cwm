@@ -2,7 +2,7 @@
 A webserver for SPARQL
 
 """
-__version__ = '$Id: webserver.py,v 1.2 2005-08-01 21:53:40 syosi Exp $'
+__version__ = '$Id: webserver.py,v 1.3 2005-08-02 01:42:19 syosi Exp $'
 
 import BaseHTTPServer, urllib
 from cgi import parse_qs
@@ -61,7 +61,7 @@ class SPARQL_request_handler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.wfile.write(self.default)
         else:
             try:
-                ctype = 'text/plain'
+                ctype = 'application/sparql-results+xml'
                 retVal = sparql_handler(query).encode('utf_8')
                 self.send_response(200)
                 self.send_header("Content-type", ctype)
