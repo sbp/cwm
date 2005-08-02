@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.173 2005-08-02 00:44:25 syosi Exp $
+$Id: cwm.py,v 1.174 2005-08-02 21:07:39 syosi Exp $
 
 Closed World Machine
 
@@ -47,7 +47,7 @@ from swap import  diag
 from swap.why import FormulaReason
 from swap.diag import verbosity, setVerbosity, progress, tracking, setTracking
 from swap.uripath import join
-from swap.webAccess import urlopenForRDF, load   # http://www.w3.org/2000/10/swap/
+from swap.webAccess import urlopenForRDF, load, sandBoxed   # http://www.w3.org/2000/10/swap/
 
 # import re
 # import StringIO
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.173 $"
+cvsRevision = "$Revision: 1.174 $"
 
 
 
@@ -328,7 +328,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.173 2005-08-02 00:44:25 syosi Exp $"
+        version = "$Id: cwm.py,v 1.174 2005-08-02 21:07:39 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -596,6 +596,7 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == '-sparqlServer':
                 from swap.sparql import webserver
                 from swap import cwm_sparql
+                sandBoxed(True)
                 workingContext.stayOpen = False
 		workingContext = workingContext.canonicalize()
                 def _handler(s):

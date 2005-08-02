@@ -2,10 +2,11 @@
 A webserver for SPARQL
 
 """
-__version__ = '$Id: webserver.py,v 1.3 2005-08-02 01:42:19 syosi Exp $'
+__version__ = '$Id: webserver.py,v 1.4 2005-08-02 21:07:39 syosi Exp $'
 
 import BaseHTTPServer, urllib
 from cgi import parse_qs
+from sys import exc_info
 
 def sparql_handler(s):
     return s
@@ -61,15 +62,23 @@ class SPARQL_request_handler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.wfile.write(self.default)
         else:
             try:
-                ctype = 'application/sparql-results+xml'
-                retVal = sparql_handler(query).encode('utf_8')
+                retVal, ctype= sparql_handler(query)
+            except:
+                self.send_response(400)
+                resp = str(exc_info()[1])
+                print 'error is', resp
+                self.send_header("Content-type", 'text/plain')
+                self.send_header("Content-Length", str(len(resp)))
+                self.end_headers()
+                self.wfile.write(resp)
+            else:
+                retVal = retVal.encode('utf_8')
+                print ctype
                 self.send_response(200)
                 self.send_header("Content-type", ctype)
                 self.send_header("Content-Length", str(len(retVal)))
                 self.end_headers()
                 self.wfile.write(retVal)
-            except:
-                raise
 
 
 
