@@ -2,7 +2,7 @@
 """
 Builtins for doing SPARQL queries in CWM
 
-$Id: cwm_sparql.py,v 1.10 2005-08-01 21:53:39 syosi Exp $
+$Id: cwm_sparql.py,v 1.11 2005-08-02 00:44:25 syosi Exp $
 
 """
 
@@ -308,7 +308,7 @@ def sparql_queryString(source, queryString):
     applySparqlQueries(source, q, F)
     F = F.close()
     if q.contains(obj=ns['ConstructQuery']):
-        return F.n3String()
+        return F.rdfString()
     if q.contains(obj=ns['SelectQuery']) or q.contains(obj=ns['AskQuery']):
         return sparql_output(q, F)
     

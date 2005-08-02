@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.22 2005-07-21 15:22:59 syosi Exp $
+$Id: formula.py,v 1.23 2005-08-02 00:44:25 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -59,7 +59,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.22 $"
+cvsRevision = "$Revision: 1.23 $"
 
 # Magic resources we know about
 
@@ -487,7 +487,9 @@ class Formula(AnonymousNode, CompoundTerm):
     def rdfString(self, base=None, flags=""):
         "Dump the formula to an absolute string in RDF/XML"
         buffer=StringIO.StringIO()
-        _outSink = ToRDF(buffer, _outURI, base=base, flags=flags)
+        import toXML
+        _outURI = 'http://example.com/'
+        _outSink = toXML.ToRDF(buffer, _outURI, base=base, flags=flags)
         self.store.dumpNested(self, _outSink)
         return buffer.getvalue()
 
