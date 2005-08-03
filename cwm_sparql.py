@@ -2,7 +2,7 @@
 """
 Builtins for doing SPARQL queries in CWM
 
-$Id: cwm_sparql.py,v 1.13 2005-08-03 22:04:36 syosi Exp $
+$Id: cwm_sparql.py,v 1.14 2005-08-03 22:23:08 syosi Exp $
 
 """
 
@@ -211,7 +211,7 @@ class BI_query(LightBuiltIn, Function):
 
 def sparql_output(query, F):
     store = F.store
-    RESULTS_NS = 'http://www.w3.org/2005/06/sparqlResults'
+    RESULTS_NS = 'http://www.w3.org/2005/sparql-results#'
     ns = store.newSymbol(SPARQL_NS)
     if query.contains(obj=ns['SelectQuery']):
         node = query.the(pred=store.type, obj=ns['SelectQuery'])
