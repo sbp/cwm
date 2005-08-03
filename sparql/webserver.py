@@ -2,7 +2,7 @@
 A webserver for SPARQL
 
 """
-__version__ = '$Id: webserver.py,v 1.5 2005-08-03 18:08:30 syosi Exp $'
+__version__ = '$Id: webserver.py,v 1.6 2005-08-03 22:04:36 syosi Exp $'
 
 import BaseHTTPServer, urllib
 from cgi import parse_qs
@@ -65,6 +65,7 @@ class SPARQL_request_handler(BaseHTTPServer.BaseHTTPRequestHandler):
             try:
                 retVal, ctype= sparql_handler(query)
             except:
+                raise
                 self.send_response(400)
                 resp = str(exc_info()[1])
                 print 'error is', resp
