@@ -2,7 +2,7 @@
 A webserver for SPARQL
 
 """
-__version__ = '$Id: webserver.py,v 1.4 2005-08-02 21:07:39 syosi Exp $'
+__version__ = '$Id: webserver.py,v 1.5 2005-08-03 18:08:30 syosi Exp $'
 
 import BaseHTTPServer, urllib
 from cgi import parse_qs
@@ -31,7 +31,8 @@ The Cwm SPARQL server at %s<br />
 
 Enter a query here:<br />
 
-<form method="get" action="" name="sparql query"><textarea cols="80" rows="5" name="query">SELECT * {}</textarea><br />
+<form method="get" action="" name="sparql query"><textarea cols="80" rows="5" name="query">PREFIX log: <http://www.w3.org/2000/10/swap/log#>
+SELECT * {log:includes ?x ?y}</textarea><br />
 
   <button style="height: 2em; width: 5em;" name="Submit">Submit</button></form>
 
