@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.14 2005-08-03 18:02:57 syosi Exp $
+$Id: sparql2cwm.py,v 1.15 2005-08-04 20:46:17 syosi Exp $
 """
 
 from set_importer import Set
@@ -934,7 +934,7 @@ class FromSparql(productionHandler):
     def on_Triples3(self, p):
         store = self.store
         if len(p) == 3:
-            return [('Triple', (store.nil, p[2][1]))] + p[2][2]
+            return [('Triple', (('symbol', store.nil), p[2][1]))] + p[2][2]
         extra = p[1][2] + p[2][2] + p[4][2]
         nodes = [p[1][1]] + p[2][1]
         pred = p[4][1]
