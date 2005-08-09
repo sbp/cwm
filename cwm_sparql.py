@@ -2,7 +2,7 @@
 """
 Builtins for doing SPARQL queries in CWM
 
-$Id: cwm_sparql.py,v 1.16 2005-08-05 21:38:22 syosi Exp $
+$Id: cwm_sparql.py,v 1.17 2005-08-09 20:55:16 syosi Exp $
 
 """
 
@@ -27,7 +27,7 @@ except ImportError:
 
 from term import ErrorFlag as MyError
 
-SPARQL_NS = 'http://yosi.us/2005/sparql'
+SPARQL_NS = 'http://www.w3.org/2000/10/swap/sparqlCwm'
 
 
 def toBool(val, dt=None):

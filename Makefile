@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.74 2005-07-21 15:22:59 syosi Exp $
+# $Id: Makefile,v 1.75 2005-08-09 20:55:16 syosi Exp $
 
 
 PYTHON=python
@@ -7,16 +7,16 @@ YAPPS=yapps2.py
 
 TESTIN=test/sameDan.n3
 
-HTMLS= term.html formula.html pretty.html myStore.html check.html query.html RDFSink.html cwm.html cwm_crypto.html cwm_list.html cwm_math.html cwm_maths.html cwm_os.html cwm_string.html cwm_time.html cwm_times.html diag.html llyn.html notation3.html reify.html sax2rdf.html rdflib2rdf.html tab2n3.html thing.html toXML.html uripath.html xml2infoset.html why.html doc/changes.html
+HTMLS= term.html formula.html pretty.html myStore.html check.html query.html RDFSink.html cwm.html cwm_crypto.html cwm_list.html cwm_math.html cwm_sparql.html cwm_maths.html cwm_os.html cwm_string.html cwm_time.html cwm_times.html diag.html llyn.html notation3.html reify.html sax2rdf.html rdflib2rdf.html tab2n3.html thing.html toXML.html uripath.html xml2infoset.html why.html sparql2cwm.html doc/changes.html
 
-SOURCES = cwm.py cant.py delta.py notation3.py query.py llyn.py uripath.py diag.py RDFSink.py reify.py why.py myStore.py webAccess.py OrderedSequence.py term.py formula.py pretty.py cwm_list.py cwm_string.py cwm_os.py cwm_time.py isodate.py cwm_math.py cwm_trigo.py cwm_times.py cwm_maths.py toXML.py update.py sax2rdf.py rdflib_user.py rdfxml.py myStore.py __init__.py local_decimal.py isXML.py my_profiler.py cwm_crypto.py
+SOURCES = cwm.py cant.py delta.py notation3.py query.py llyn.py uripath.py diag.py RDFSink.py reify.py why.py myStore.py webAccess.py OrderedSequence.py term.py formula.py pretty.py cwm_list.py cwm_string.py cwm_os.py cwm_time.py isodate.py cwm_math.py cwm_trigo.py cwm_times.py cwm_maths.py toXML.py update.py sax2rdf.py rdflib_user.py rdfxml.py myStore.py __init__.py local_decimal.py isXML.py my_profiler.py cwm_crypto.py sparql/sparql_parser.py sparql/sparql_tokens.py sparql/sparql_tokens_table.py sparql/sparql_table.py
 DOC=doc/CwmHelp.htm
 
-GRAMMAR =  grammar/n3.n3 grammar/README.txt grammar/predictiveParser.py grammar/bnf2html.n3 grammar/Makefile grammar/bnf2html.n3 grammar/bnf.n3 grammar/bnf-rules.n3 grammar/n3-rdf.n3 grammar/n3-rules.n3 grammar/n3-yacc.c grammar/n3-ql.n3
+GRAMMAR =  grammar/n3.n3 grammar/README.txt grammar/predictiveParser.py grammar/bnf2html.n3 grammar/Makefile grammar/bnf2html.n3 grammar/bnf.n3 grammar/bnf-rules.n3 grammar/n3-rdf.n3 grammar/n3-rules.n3 grammar/n3-yacc.c grammar/n3-ql.n3 grammar/sparql.n3
 
 TESTS = test/Makefile test/regression.n3 test/list/detailed.tests test/ql/detailed.tests test/math/detailed.tests test/norm/detailed.tests test/n3parser.tests test/cwm/detailed.tests test/ntriples/detailed.tests test/delta/detailed.tests test/syntax/detailed.tests test/reify/detailed.tests test/testmeta.n3 test/retest.py
 
-VERSION = 1.0.1
+VERSION = 1.1.0
 TARNAME = cwm-$(VERSION)
 
 TARBALL_STUFF = README LICENSE LICENSE.rdf LICENSE.n3

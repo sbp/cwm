@@ -15,12 +15,12 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.22 2005-06-09 21:05:14 syosi Exp $'
-__version__ = '$Revision: 1.22 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.23 2005-08-09 20:55:16 syosi Exp $'
+__version__ = '$Revision: 1.23 $'
 
 import sys, string, re, urllib
 
-from term import LightBuiltIn, Function, ReverseFunction
+from term import LightBuiltIn, Function, ReverseFunction, ArgumentNotLiteral, Literal
 from local_decimal import Decimal
 import types
 
@@ -68,6 +68,8 @@ def numeric(s):
        type(s) == types.LongType or \
        type(s) is types.FloatType or \
        isinstance(s,Decimal): return s
+    if not isinstance(s, (Literal, str, unicode)):
+        raise ArgumentNotLiteral(s)
     if s.find('.') < 0 and s.find('e') < 0 : return long(s)
     return Decimal(s)
 

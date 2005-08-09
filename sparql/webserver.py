@@ -2,7 +2,7 @@
 A webserver for SPARQL
 
 """
-__version__ = '$Id: webserver.py,v 1.8 2005-08-04 20:46:18 syosi Exp $'
+__version__ = '$Id: webserver.py,v 1.9 2005-08-09 20:55:16 syosi Exp $'
 
 import BaseHTTPServer, urllib
 from cgi import parse_qs
@@ -107,7 +107,7 @@ class SPARQL_request_handler(BaseHTTPServer.BaseHTTPRequestHandler):
                 self.send_header("Content-Length", str(len(retVal)))
                 self.end_headers()
                 self.wfile.write(retVal)
-
+    do_POST = do_GET
 
 
 
