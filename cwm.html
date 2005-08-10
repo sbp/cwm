@@ -9,7 +9,7 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>cwm</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/syosi/CVS-local/WWW/2000/10/swap/cwm.py">/home/syosi/CVS-local/WWW/2000/10/swap/cwm.py</a></font></td></tr></table>
-    <p><tt>$Id: cwm.html,v 1.45 2005-08-10 15:05:38 syosi Exp $<br>
+    <p><tt>$Id: cwm.html,v 1.46 2005-08-10 17:03:22 syosi Exp $<br>
 &nbsp;<br>
 Closed&nbsp;World&nbsp;Machine<br>
 &nbsp;<br>
@@ -85,6 +85,8 @@ steps,&nbsp;in&nbsp;order&nbsp;left&nbsp;to&nbsp;right:<br>
 --apply=foo&nbsp;&nbsp;&nbsp;Read&nbsp;rules&nbsp;from&nbsp;foo,&nbsp;apply&nbsp;to&nbsp;store,&nbsp;adding&nbsp;conclusions&nbsp;to&nbsp;store<br>
 --patch=foo&nbsp;&nbsp;&nbsp;Read&nbsp;patches&nbsp;from&nbsp;foo,&nbsp;applying&nbsp;insertions&nbsp;and&nbsp;deletions&nbsp;to&nbsp;store<br>
 --filter=foo&nbsp;&nbsp;Read&nbsp;rules&nbsp;from&nbsp;foo,&nbsp;apply&nbsp;to&nbsp;store,&nbsp;REPLACING&nbsp;store&nbsp;with&nbsp;conclusions<br>
+--query=foo&nbsp;&nbsp;&nbsp;Read&nbsp;a&nbsp;N3QL&nbsp;query&nbsp;from&nbsp;foo,&nbsp;apply&nbsp;it&nbsp;to&nbsp;the&nbsp;store,&nbsp;and&nbsp;replace&nbsp;the&nbsp;store&nbsp;with&nbsp;its&nbsp;conclusions<br>
+--sparql=foo&nbsp;&nbsp;&nbsp;Read&nbsp;a&nbsp;SPARQL&nbsp;query&nbsp;from&nbsp;foo,&nbsp;apply&nbsp;it&nbsp;to&nbsp;the&nbsp;store,&nbsp;and&nbsp;replace&nbsp;the&nbsp;store&nbsp;with&nbsp;its&nbsp;conclusions<br>
 --rules&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apply&nbsp;rules&nbsp;in&nbsp;store&nbsp;to&nbsp;store,&nbsp;adding&nbsp;conclusions&nbsp;to&nbsp;store<br>
 --think&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;-rules&nbsp;but&nbsp;continue&nbsp;until&nbsp;no&nbsp;more&nbsp;rule&nbsp;matches&nbsp;(or&nbsp;forever!)<br>
 --engine=otter&nbsp;use&nbsp;otter&nbsp;(in&nbsp;your&nbsp;$PATH)&nbsp;instead&nbsp;of&nbsp;llyn&nbsp;for&nbsp;linking,&nbsp;etc<br>
@@ -102,6 +104,7 @@ steps,&nbsp;in&nbsp;order&nbsp;left&nbsp;to&nbsp;right:<br>
 --help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;this&nbsp;message<br>
 --revision&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;CVS&nbsp;revision&nbsp;numbers&nbsp;of&nbsp;major&nbsp;modules<br>
 --chatty=50&nbsp;&nbsp;&nbsp;Verbose&nbsp;debugging&nbsp;output&nbsp;of&nbsp;questionable&nbsp;use,&nbsp;range&nbsp;0-99<br>
+--sparqlServer&nbsp;instead&nbsp;of&nbsp;outputting,&nbsp;start&nbsp;a&nbsp;SPARQL&nbsp;server&nbsp;on&nbsp;port&nbsp;8000&nbsp;of&nbsp;the&nbsp;store<br>
 &nbsp;<br>
 finally:<br>
 &nbsp;<br>
@@ -151,7 +154,7 @@ Return&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;current&nbsp;working&n
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>cvsRevision</strong> = '$Revision: 1.45 $'<br>
+<td width="100%"><strong>cvsRevision</strong> = '$Revision: 1.46 $'<br>
 <strong>path</strong> = ['.', '/home/syosi/CVS-local/WWW/2000/10/swap', '/home/syosi/pychinko', '/usr/lib/python23.zip', '/usr/lib/python2.3', '/usr/lib/python2.3/plat-linux2', '/usr/lib/python2.3/lib-tk', '/usr/lib/python2.3/lib-dynload', '/usr/local/lib/python2.3/site-packages', '/usr/lib/python2.3/site-packages', '/usr/lib/python2.3/site-packages/HTMLgen', '/usr/lib/python2.3/site-packages/Numeric', '/usr/lib/python2.3/site-packages/gtk-2.0', '/usr/lib/python2.3/site-packages/wx-2.5.3-gtk2-unicode', '/usr/lib/site-python', '/home/syosi/CVS-local/WWW/2000/10']<br>
 <strong>qqq</strong> = '/home/syosi/CVS-local/WWW/2000/10/swap'<br>
 <strong>tracking</strong> = 0</td></tr></table>

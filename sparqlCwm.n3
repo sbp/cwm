@@ -1,6 +1,6 @@
 #  Builtins and terms for cwm's SPARQL support
 #
-# $Id: sparqlCwm.n3,v 1.2 2005-08-10 15:05:38 syosi Exp $
+# $Id: sparqlCwm.n3,v 1.3 2005-08-10 17:03:22 syosi Exp $
 
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -17,7 +17,8 @@ sparql:Query a rdfs:Class;
 # The classes of queries
 sparql:SelectQuery a rdfs:Class;
      rdfs:subClassOf sparql:Query;
-
+     rdfs:comment """The class that of all SPARQL queries.
+"""
 .
 
 sparql:AskQuery a rdfs:Class;

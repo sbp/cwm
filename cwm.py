@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.175 2005-08-05 21:38:22 syosi Exp $
+$Id: cwm.py,v 1.176 2005-08-10 17:03:22 syosi Exp $
 
 Closed World Machine
 
@@ -66,7 +66,7 @@ import sys
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.175 $"
+cvsRevision = "$Revision: 1.176 $"
 
 
 
@@ -109,6 +109,8 @@ steps, in order left to right:
 --apply=foo   Read rules from foo, apply to store, adding conclusions to store
 --patch=foo   Read patches from foo, applying insertions and deletions to store
 --filter=foo  Read rules from foo, apply to store, REPLACING store with conclusions
+--query=foo   Read a N3QL query from foo, apply it to the store, and replace the store with its conclusions
+--sparql=foo   Read a SPARQL query from foo, apply it to the store, and replace the store with its conclusions
 --rules       Apply rules in store to store, adding conclusions to store
 --think       as -rules but continue until no more rule matches (or forever!)
 --engine=otter use otter (in your $PATH) instead of llyn for linking, etc
@@ -126,6 +128,7 @@ steps, in order left to right:
 --help        print this message
 --revision    print CVS revision numbers of major modules
 --chatty=50   Verbose debugging output of questionable use, range 0-99
+--sparqlServer instead of outputting, start a SPARQL server on port 8000 of the store
 
 finally:
 
@@ -329,7 +332,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.175 2005-08-05 21:38:22 syosi Exp $"
+        version = "$Id: cwm.py,v 1.176 2005-08-10 17:03:22 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
