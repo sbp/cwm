@@ -1,4 +1,4 @@
-<> <#rcsid> "$Id: owl-rules.n3,v 1.1 2005-08-12 15:06:20 syosi Exp $".
+<> <#rcsid> "$Id: owl-rules.n3,v 1.2 2005-08-12 16:31:07 syosi Exp $".
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix math: <http://www.w3.org/2000/10/swap/math#>.
@@ -266,8 +266,8 @@ owl:equivalentClass a owl:SymmetricProperty.
 {?S rdf:first ?X} => {?S list:member ?X}.
 {?S rdf:rest ?B. ?B list:member ?X} => {?S list:member ?X}.
 
-{} => {rdf:nil :notItem ?X}.
-{?S rdf:first ?A. ?A owl:differentFrom ?X. ?S rdf:rest ?B. ?B :notItem ?X} => {?S :notItem ?X}.
+#{} => {rdf:nil :notItem ?X}.
+#{?S rdf:first ?A. ?A owl:differentFrom ?X. ?S rdf:rest ?B. ?B :notItem ?X} => {?S :notItem ?X}.
 
 #this won't work either
 #{} => {?X :includes rdf:nil}.
