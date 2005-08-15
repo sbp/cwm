@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.180 2005-06-09 21:05:14 syosi Exp $
+$Id: notation3.py,v 1.181 2005-08-15 14:36:36 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1092,8 +1092,8 @@ class SinkParser:
     def UEscape(self, str, i, startline):
         j = i
         count = 0
-        value = 0
-        while count < 8:  # Get 4 more characters
+        value = '\\U'
+        while count < 8:  # Get 8 more characters
             ch = str[j:j+1].lower()  # sbp http://ilrt.org/discovery/chatlogs/rdfig/2002-07-05
             j = j + 1
             if ch == "":
@@ -1103,11 +1103,17 @@ class SinkParser:
             if k < 0:
                 raise BadSyntax(self._thisDoc, startline, str, i,
                                 "bad string literal hex escape")
-            value = value * 16 + k
+            value = value + ch
             count = count + 1
-        uch = unichr(value)
+            
+        uch = value.decode('unicode-escape')
         return j, uch
 
+wide_build = True
+try:
+    unichr(0x10000)
+except ValueError:
+    wide_build = False
 
 # If we are going to do operators then they should generate
 #  [  is  operator:plus  of (  \1  \2 ) ]
@@ -1260,7 +1266,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.180 2005-06-09 21:05:14 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.181 2005-08-15 14:36:36 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)
