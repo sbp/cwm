@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.181 2005-08-15 14:36:36 syosi Exp $
+$Id: notation3.py,v 1.182 2005-08-15 16:28:43 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -1090,6 +1090,7 @@ class SinkParser:
         return j, uch
 
     def UEscape(self, str, i, startline):
+        stringType = type('')
         j = i
         count = 0
         value = '\\U'
@@ -1106,7 +1107,7 @@ class SinkParser:
             value = value + ch
             count = count + 1
             
-        uch = value.decode('unicode-escape')
+        uch = stringType(value).decode('unicode-escape')
         return j, uch
 
 wide_build = True
@@ -1266,7 +1267,7 @@ v   Use  "this log:forAll" instead of @forAll, and "this log:forAll" for "@forSo
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstring = "$Id: notation3.py,v 1.181 2005-08-15 14:36:36 syosi Exp $" # CVS CHANGES THIS
+            idstring = "$Id: notation3.py,v 1.182 2005-08-15 16:28:43 syosi Exp $" # CVS CHANGES THIS
             self._write("#       " + idstring[5:-2] + "\n\n") # Strip $s in case result is checked in
             if self.base: self._write("#   Base was: " + self.base + "\n")
         self._write("    " * self.indent)

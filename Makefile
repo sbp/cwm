@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.79 2005-08-11 15:13:29 syosi Exp $
+# $Id: Makefile,v 1.80 2005-08-15 16:28:43 syosi Exp $
 
 
 PYTHON=python
@@ -112,7 +112,7 @@ setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(GRAMMAR) $(TARBALL_STUFF) tested f
 	cd ,cwm-$(VERSION)-test/cwm-$(VERSION)/test && $(MAKE) post-install
 	$(PYTHON) -c 'print "".join([a for a in file(".htaccess")][:-1])[:-1]' > ,htaccess
 	echo 'RewriteRule ^cwm.tar.gz$ ' $(TARNAME).tar.gz '[L]' >> ,htaccess
-#	mv ,htaccess .htaccess
+	mv ,htaccess .htaccess
 	-cvs add $(TARNAME).tar.gz	
 
 yappstest: rdfn3_yapps.py rdfn3_yappstest.py
