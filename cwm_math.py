@@ -15,8 +15,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.23 2005-08-09 20:55:16 syosi Exp $'
-__version__ = '$Revision: 1.23 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.24 2005-08-16 13:49:21 timbl Exp $'
+__version__ = '$Revision: 1.24 $'
 
 import sys, string, re, urllib
 
@@ -201,8 +201,12 @@ class BI_equalTo(LightBuiltIn):
 
 class BI_notEqualTo(LightBuiltIn):
     def evaluate(self, subject, object):
-        return (float(subject) != float(object))
-
+	try:
+	    return (float(subject) != float(object))
+	except  (ValueError, AttributeError):
+	    return None # AttributeError: Symbol instance has no attribute '__float__'
+	# or: ValueError: invalid literal for float(): PT1H
+	    
 # memberCount - this is a proper forward function
 
 class BI_memberCount(LightBuiltIn, Function):

@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.10 2005-07-28 01:46:51 syosi Exp $
+$Id: cwm_list.py,v 1.11 2005-08-16 13:49:21 timbl Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -12,7 +12,7 @@ See cwm.py and the os module in python
 """
 
 
-from term import LightBuiltIn, Function, ReverseFunction, MultipleFunction,\
+from term import LightBuiltIn, RDFBuiltIn, Function, ReverseFunction, MultipleFunction,\
     MultipleReverseFunction, \
     CompoundTerm, N3Set, List, EmptyList, NonEmptyList
 
@@ -33,12 +33,12 @@ ListOperationsNamespace = "http://www.w3.org/2000/10/swap/list#"
 #   Light Built-in classes
 
 
-class BI_first(LightBuiltIn, Function):
+class BI_first(RDFBuiltIn, Function):
     def evalObj(self, subj, queue, bindings, proof, query):
 	if not isinstance(subj, NonEmptyList): return None
 	return subj.first
 
-class BI_rest(LightBuiltIn, Function):
+class BI_rest(RDFBuiltIn, Function):
     def evalObj(self, subj, queue, bindings, proof, query):
 	if not isinstance(subj, NonEmptyList): return None
 	return subj.rest

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.141 2005-08-09 20:55:16 syosi Exp $
+$Id: llyn.py,v 1.142 2005-08-16 13:49:21 timbl Exp $
 
 
 RDF Store and Query engine
@@ -93,7 +93,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.141 $"
+cvsRevision = "$Revision: 1.142 $"
 
 
 # Magic resources we know about
@@ -155,9 +155,9 @@ class IndexedFormula(Formula):
     """
     def __init__(self, store, uri=None):
         Formula.__init__(self, store, uri)
+#	self._redirections = {}
         self.descendents = None   # Placeholder for list of closure under subcontext
 	self.collector = None # Object collecting evidence, if any 
-	self._redirections = {}
 	self._newRedirections = {}  # not subsituted yet
 	self._index = {}
 	self._index[(None,None,None)] = self.statements
@@ -831,14 +831,14 @@ class BI_notIncludes(HeavyBuiltIn):
     def eval(self, subj, obj, queue, bindings, proof, query):
         store = subj.store
         if isinstance(subj, Formula) and isinstance(obj, Formula):
-            return not testIncludes(subj, obj,  bindings=bindings, smartIn=[]) # No (relevant) variables
+            return not testIncludes(subj, obj,  bindings=bindings, interpretBuiltins=0) # No (relevant) variables
         return 0   # Can't say it *doesn't* include it if it ain't a formula
 
 class BI_notIncludesWithBuiltins(HeavyBuiltIn):
     def eval(self, subj, obj, queue, bindings, proof, query):
         store = subj.store
         if isinstance(subj, Formula) and isinstance(obj, Formula):
-            return not testIncludes(subj, obj,  bindings=bindings, smartIn=[subj]) # No (relevant) variables
+            return not testIncludes(subj, obj,  bindings=bindings, interpretBuiltins=1) # No (relevant) variables
         return 0   # Can't say it *doesn't* include it if it ain't a formula
 
 

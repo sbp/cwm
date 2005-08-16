@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.41 2005-08-09 20:55:16 syosi Exp $
+$Id: term.py,v 1.42 2005-08-16 13:49:21 timbl Exp $
 
 term
 
@@ -987,6 +987,14 @@ class LightBuiltIn(GenericBuiltIn):
     
     Make your built-in a subclass of either this or HeavyBultIn to tell cwm when to
     run it.  Going out onto the web or net counts as heavy."""
+    pass
+
+class RDFBuiltIn(LightBuiltIn):
+    """An RDF built-in is a light built-in which is inherent in the RDF model.
+    
+    The only examples are (I think) rdf:first and rdf:rest which in the RDF model
+    are arcs but in cwm have to be builtins as Lists a a first class data type.
+."""
     pass
 
 class HeavyBuiltIn(GenericBuiltIn):

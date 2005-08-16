@@ -43,7 +43,7 @@ References:
  Not to mention,  published this month by coincidence:
   Kelly, Brian, [Whitehead Institute]  "Graph cannonicalization", Dr Dobb's Journal, May 2003.
  
- $Id: cant.py,v 1.13 2004-11-09 01:08:28 syosi Exp $
+ $Id: cant.py,v 1.14 2005-08-16 13:49:21 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -124,7 +124,7 @@ def main():
     verbose = 0
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hf:d:iv",
-	    ["help", "from=", "diff=" "ignoreErrors", "verbose"])
+	    ["help", "from=", "diff=", "to=", "ignoreErrors", "verbose"])
     except getopt.GetoptError:
         # print help information and exit:
         usage()
@@ -140,7 +140,7 @@ def main():
 	    ploughOn = 1
 	if o in ("-f", "--from"):
 	    testFiles.append(a)
-	if o in ("-d", "--diff"):
+	if o in ("-d", "--diff", "--to"):
 	    diffFiles.append(a)
 
     

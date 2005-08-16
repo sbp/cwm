@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.35 2005-08-05 21:38:22 syosi Exp $
+ $Id: retest.py,v 1.36 2005-08-16 13:49:21 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -236,10 +236,10 @@ def main():
 	    refFile = "ref/%s" % case
 	else:
 	    refFile = refTo(base(), ref.uriref())
-	    hash = u.rfind("#")
-	    slash = u.rfind("/")
-	    assert hash >0 and slash > 0
-	    case = u[slash+1:hash] + "_" + u[hash+1:] + ".out" # Make up temp filename
+	    case  = ""
+	    for ch in refFile:
+		if ch in "/#": case += "_"
+		else: case += ch  # Make up test-unique temp filename
 	description = str(kb.the(t, test.description))
 	arguments = str(kb.the(t, test.arguments))
 	environment = kb.the(t, test.environment)

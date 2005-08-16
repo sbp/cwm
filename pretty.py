@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.33 2005-07-25 21:01:59 syosi Exp $
+$Id: pretty.py,v 1.34 2005-08-16 13:49:21 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.33 $"
+cvsRevision = "$Revision: 1.34 $"
 
 # Magic resources we know about
 
@@ -45,7 +45,7 @@ class Serializer:
     """
     def __init__(self, F, sink, flags="", sorting=0):
 	self.context = F
-	assert F.canonical is not None, "Formula to be printed must be canonical"
+#	assert F.canonical is not None, "Formula to be printed must be canonical"
 	self.store = F.store
 	self.sink = sink
 	self.defaultNamespace = None
@@ -507,7 +507,7 @@ class Serializer:
         """
 
 	context = self.context
-        assert context.canonical is not None
+#        assert context.canonical is not None
 	self._scan(context)
         self.sink.startDoc()
         self.selectDefaultPrefix(Serializer.dumpNested)        
