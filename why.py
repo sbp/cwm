@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.16 2005-07-21 15:22:59 syosi Exp $
+$Id: why.py,v 1.17 2005-08-22 21:12:54 timbl Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves- we could make
@@ -71,7 +71,7 @@ class Reason:
 	"The representation of this object in the formula ko"
 	me = self.me.get(ko, None)
 	if me == None:
-	    me = ko.newBlankNode(why= dontAsk)	   # @@@ ko - specific, not reentrant
+	    me = ko.newBlankNode(why= dontAsk)	# @@@ ko - specific, not reentrant
 	    self.me[ko] = me
 	return me
 
@@ -106,7 +106,7 @@ class FormulaReason(Reason):
 	global proofOf
 	self.store = formula.store
 	proofOf[formula] = self
-	progress("@@@@@@@ Proof of %s is %s"%(formula, self))
+#	progress("@@@@@@@ Proof of %s is %s"%(formula, self))
 	return
 
     def	newStatement(self, s, why):

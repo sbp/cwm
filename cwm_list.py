@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.11 2005-08-16 13:49:21 timbl Exp $
+$Id: cwm_list.py,v 1.12 2005-08-22 21:12:53 timbl Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -12,8 +12,8 @@ See cwm.py and the os module in python
 """
 
 
-from term import LightBuiltIn, RDFBuiltIn, Function, ReverseFunction, MultipleFunction,\
-    MultipleReverseFunction, \
+from term import LightBuiltIn, RDFBuiltIn, Function, ReverseFunction, \
+    MultipleFunction, MultipleReverseFunction, \
     CompoundTerm, N3Set, List, EmptyList, NonEmptyList
 
 from set_importer import Set
@@ -25,7 +25,7 @@ from RDFSink import List_NS, Logic_NS
 
 ListOperationsNamespace = "http://www.w3.org/2000/10/swap/list#"
 
-###############################################################################################
+####################################################################
 #
 #                    List handling   B U I L T - I N s
 #
