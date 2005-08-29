@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.25 2005-08-22 21:12:53 timbl Exp $
+$Id: formula.py,v 1.26 2005-08-29 19:14:51 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.25 $"
+cvsRevision = "$Revision: 1.26 $"
 
 # Magic resources we know about
 
@@ -601,8 +601,8 @@ class StoredStatement:
         return "{"+`self[CONTEXT]`+":: "+`self[SUBJ]`+" "+`self[PRED]`+" "+`self[OBJ]`+"}"
 
 #   The order of statements is only for canonical output
-#   We cannot override __cmp__ or the object becomes unhashable, and can't be put into a dictionary.
-
+#   We cannot override __cmp__ or the object becomes unhashable,
+# and can't be put into a dictionary.
 
     def compareSubjPredObj(self, other):
         """Just compare SUBJ, Pred and OBJ, others the same
@@ -621,7 +621,7 @@ class StoredStatement:
             if s is not o:
                 return s.compareAnyTerm(o)
         return 0
-
+	
     def comparePredObj(self, other):
         """Just compare P and OBJ, others the same"""
         if self is other: return 0
@@ -718,7 +718,7 @@ class StoredStatement:
 	    f.declareUniversal(v)
 #	    progress("&&&&& Universals are %s\n\t in %s" % (f.universals(), f))
 	for v in ee:
-	    f.declareExistential(v.uriref(), why=why)
+	    f.declareExistential(v.uriref())
 	return f.close()  # probably slow - much slower than statement subclass of formula
 
 
