@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.143 2005-08-22 21:12:53 timbl Exp $
+$Id: llyn.py,v 1.144 2005-08-29 20:22:13 syosi Exp $
 
 
 RDF Store and Query engine
@@ -95,7 +95,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.143 $"
+cvsRevision = "$Revision: 1.144 $"
 
 
 # Magic resources we know about
@@ -486,7 +486,7 @@ class IndexedFormula(Formula):
             F.canonical = F
             return F
 
-        fl.sort(StoredStatement.compareSubjPredObj)
+        fl.sort()
 	fe = F.existentials()
 	#fe.sort(Term.compareAnyTerm)
 	fu = F.universals ()
@@ -497,7 +497,7 @@ class IndexedFormula(Formula):
 	    gkey = len(gl), len(G.universals()), len(G.existentials())
             if gkey != l: raise RuntimeError("@@Key of %s is %s instead of %s" %(G, `gkey`, `l`))
 
-	    gl.sort(StoredStatement.compareSubjPredObj)
+	    gl.sort()
             for se, oe, in  ((fe, G.existentials()),
 			     (fu, G.universals())):
                 if se != oe:
