@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.16 2005-08-05 21:38:22 syosi Exp $
+$Id: sparql2cwm.py,v 1.17 2005-09-01 21:03:10 syosi Exp $
 """
 
 from set_importer import Set
@@ -441,6 +441,8 @@ class FilterExpr(productionHandler):
     def on_Not(self, p):
         extra = getExtra(p[1])
         val = tuple(p[1])
+        if val == ('Error',):
+            return ['Error']
         return [makeTriple(val, ('symbol', self.anything['truthValue']), ('symbol', self.parent.false), safeVersion=getTrueOnError(p[0]))] + extra
 
     def on_And(self, p):
