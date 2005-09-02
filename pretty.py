@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.35 2005-08-29 20:22:13 syosi Exp $
+$Id: pretty.py,v 1.36 2005-09-02 18:19:26 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -26,7 +26,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, List_N
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.35 $"
+cvsRevision = "$Revision: 1.36 $"
 
 # Magic resources we know about
 
@@ -717,16 +717,13 @@ class Serializer:
 
         _anon, _incoming = self._topology(obj, context)
         if _anon and _incoming == 1:  # Embedded anonymous node in N3
-            if 0:
-                pass
-            else:
-                sink.startAnonymous(self.extern(triple))
-                ss = context.statementsMatching(subj=obj)
-                if sorting: ss.sort(StoredStatement.comparePredObj)
-                for t in ss:
-                    self.dumpStatement(sink, t.quad, sorting)
-                sink.endAnonymous(sub.asPair(), pre.asPair()) # Restore parse state
-                return
+            sink.startAnonymous(self.extern(triple))
+            ss = context.statementsMatching(subj=obj)
+            if sorting: ss.sort(StoredStatement.comparePredObj)
+            for t in ss:
+                self.dumpStatement(sink, t.quad, sorting)
+            sink.endAnonymous(sub.asPair(), pre.asPair()) # Restore parse state
+            return
 
         self._outputStatement(sink, triple)
 

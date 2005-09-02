@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.81 2005-08-22 21:12:53 timbl Exp $
+# $Id: Makefile,v 1.82 2005-09-02 18:19:25 syosi Exp $
 
 
 PYTHON=python
@@ -93,6 +93,7 @@ setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(GRAMMAR) $(TARBALL_STUFF) tested f
 	echo "cwm" > MANIFEST
 	echo "delta." >> MANIFEST
 	echo "cant" >> MANIFEST
+	echo "check.py" >> MANIFEST
 	echo "setup.py" >> MANIFEST
 	for A in $(TARBALL_STUFF) $(HTMLS) $(GRAMMAR) $(TESTS); do echo "$$A" >> MANIFEST; done
 	for A in $(SOURCES); do echo swap/"$$A" >> MANIFEST; done
