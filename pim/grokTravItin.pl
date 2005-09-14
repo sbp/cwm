@@ -9,7 +9,7 @@
 #  http://www.w3.org/2001/07dc-bos/grokNavItin.pl
 #  Id: grokNavItin.pl,v 1.8 2002/06/04 01:45:38 connolly Exp
 #
-# $Id: grokTravItin.pl,v 1.19 2005-02-24 15:06:23 connolly Exp $
+# $Id: grokTravItin.pl,v 1.20 2005-09-14 22:38:42 connolly Exp $
 # see changelog at end
 #
 
@@ -409,6 +409,7 @@ BRU BRUSSELS
 ATL ATLANTA
 HEL HELSINKI VANTAA
 MKE MILWAUKEE
+EDI EDINBURGH
 EODATA
 
     # SNA confirmed via http://www.ocair.com/
@@ -426,7 +427,10 @@ EODATA
 
 
 # $Log: grokTravItin.pl,v $
-# Revision 1.19  2005-02-24 15:06:23  connolly
+# Revision 1.20  2005-09-14 22:38:42  connolly
+# EDI
+#
+# Revision 1.19  2005/02/24 15:06:23  connolly
 # MKE
 #
 # Revision 1.18  2004/12/23 15:42:16  connolly
