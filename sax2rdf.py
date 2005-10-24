@@ -163,7 +163,8 @@ class RDFHandler(xml.sax.ContentHandler):
 
 	self._reason = why	# Why the parser w
 	self._reason2 = None	# Why these triples
-	if diag.tracking: self._reason2 = BecauseOfData(sink.newSymbol(thisDoc), because=self._reason)
+	if diag.tracking: self._reason2 = BecauseOfData(
+		    sink.newSymbol(thisDoc), because=self._reason)
 
         self._subject = None
         self._predicate = None
@@ -176,7 +177,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.44 2005-09-01 21:03:10 syosi Exp $"
+        version = "$Id: sax2rdf.py,v 1.45 2005-10-24 16:58:38 timbl Exp $"
         self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -755,7 +756,8 @@ class RDFXMLParser(RDFHandler):
 """
 
     def __init__(self, sink, openFormula, thisDoc=None,  flags="", why=None):
-        RDFHandler.__init__(self, sink, openFormula, thisDoc, flags=flags)
+        RDFHandler.__init__(self, sink, openFormula, thisDoc, flags=flags,
+	    why=why)
 	assert thisDoc != None, "Need document URI at the moment, sorry"
         p = xml.sax.make_parser()
         p.setFeature(feature_namespaces, 1)

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.27 2005-08-29 20:22:13 syosi Exp $
+$Id: formula.py,v 1.28 2005-10-24 16:58:38 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.27 $"
+cvsRevision = "$Revision: 1.28 $"
 
 # Magic resources we know about
 
@@ -402,7 +402,7 @@ class Formula(AnonymousNode, CompoundTerm):
 		    set = set | y.occurringIn(vars)
 	return set
 
-    def unify(self, other, vars, existentials, bindings):
+    def unify(self, other, vars=Set([]), existentials=Set([]),  bindings={}):
 	"""See Term.unify()
 	"""
 
@@ -686,7 +686,7 @@ class StoredStatement:
     def universals(self):
 	return self.occuringIn(self.quad[CONTEXT].universals())
 
-    def unify(self, other, vars, existentials, bindings):
+    def unify(self, other, vars=Set([]), existentials=Set([]),  bindings={}):
 	"""See Term.unify()
 	"""
 
@@ -721,7 +721,7 @@ class StoredStatement:
 	    f.declareUniversal(v)
 #	    progress("&&&&& Universals are %s\n\t in %s" % (f.universals(), f))
 	for v in ee:
-	    f.declareExistential(v.uriref())
+	    f.declareExistential(v)
 	return f.close()  # probably slow - much slower than statement subclass of formula
 
 

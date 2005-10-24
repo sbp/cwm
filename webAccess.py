@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.24 2005-08-15 16:28:43 syosi Exp $
+$Id: webAccess.py,v 1.25 2005-10-24 16:58:38 timbl Exp $
 
 
 Web access functionality building on urllib2
@@ -174,7 +174,9 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
         else:
             parser = os.environ.get("CWM_RDF_PARSER", "sax2rdf")
         import rdfxml
-        p = rdfxml.rdfxmlparser(store, F,  thisDoc=asIfFrom, flags=flags, parser=parser)
+        p = rdfxml.rdfxmlparser(store, F,  thisDoc=asIfFrom, flags=flags,
+		parser=parser, why=why)
+
 	p.feed(buffer)
 	F = p.close()
     else:

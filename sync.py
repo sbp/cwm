@@ -15,7 +15,7 @@ Uris are relative to present working directory.
 
 For motivation and explanation, see  <http://www.w3.org/DesignIssues/Diff>
 
-$Id: sync.py,v 1.1 2005-08-16 13:49:21 timbl Exp $
+$Id: sync.py,v 1.2 2005-10-24 16:58:38 timbl Exp $
 http://www.w3.org/2000/10/swap/diff.py
 """
 
@@ -36,8 +36,6 @@ try:
     from swap.diag import verbosity, setVerbosity, progress
     from swap import notation3    	# N3 parsers and generators
 
-
-    from swap.RDFSink import FORMULA, LITERAL, ANONYMOUS, Logic_NS
     from swap import uripath
     from swap.uripath import base
     from swap.myStore import  Namespace
@@ -53,7 +51,6 @@ except ImportError:
     import notation3    	# N3 parsers and generators
 
 
-    from RDFSink import FORMULA, LITERAL, ANONYMOUS, Logic_NS
     import uripath
     from uripath import base
     from myStore import  Namespace
@@ -111,7 +108,7 @@ def main():
 
     
 
-    version = "$Id: sync.py,v 1.1 2005-08-16 13:49:21 timbl Exp $"[1:-1]
+    version = "$Id: sync.py,v 1.2 2005-10-24 16:58:38 timbl Exp $"[1:-1]
     if len(oldFiles) != 1 or len(changedFiles) < 1:
 	usage()
 	sys.exit(2)
