@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.178 2005-10-24 16:58:38 timbl Exp $
+$Id: cwm.py,v 1.179 2005-10-28 01:38:42 timbl Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.178 $"
+cvsRevision = "$Revision: 1.179 $"
     
             
 
@@ -330,7 +330,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.178 2005-10-24 16:58:38 timbl Exp $"
+        version = "$Id: cwm.py,v 1.179 2005-10-28 01:38:42 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -406,6 +406,7 @@ rdf/xml files. Note that this requires rdflib.
 
                 
         for arg in sys.argv[1:]:  # Command line options after script name
+	    if verbosity()>5: progress("Processing %s." % (arg))
             if arg.startswith("--"): arg = arg[1:]   # Chop posix-style -- to -
             _equals = string.find(arg, "=")
             _lhs = ""
