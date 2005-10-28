@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.146 2005-10-26 19:07:13 timbl Exp $
+$Id: llyn.py,v 1.147 2005-10-28 01:33:06 timbl Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.146 $"
+cvsRevision = "$Revision: 1.147 $"
 
 
 # Magic resources we know about
@@ -879,12 +879,10 @@ class BI_semantics(HeavyBuiltIn, Function):
 
         if diag.chatty_flag > 10: progress("Reading and parsing " + doc.uriref())
         inputURI = doc.uriref()
-	if diag.tracking: flags="B"   # @@@@@@@@@@@ Yuk
-	else: flags=""
-        F = self.store.load(inputURI, why=becauseSubexpression, flags=flags)
+#	if diag.tracking: flags="B"   # @@@@@@@@@@@ Yuk
+#	else: flags=""
+        F = self.store.load(inputURI, why=becauseSubexpression)
         if diag.chatty_flag>10: progress("    semantics: %s" % (F))
-#	if diag.tracking:
-#	    proof.append(F.collector)
         return F.canonicalize()
 
 class BI_semanticsWithImportsClosure(HeavyBuiltIn, Function):
