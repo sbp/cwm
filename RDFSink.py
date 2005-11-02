@@ -17,7 +17,7 @@ REFERENCES
 
 """
 
-__version__ = "$Id: RDFSink.py,v 1.33 2005-10-24 16:58:38 timbl Exp $"
+__version__ = "$Id: RDFSink.py,v 1.34 2005-11-02 00:06:26 timbl Exp $"
 
 import uripath
 import time
@@ -103,7 +103,7 @@ def runNamespace():
 	except KeyError:
 	    runNamespaceValue = uripath.join(
 		uripath.base(), ".run-" + `time()` + "p"+ `getpid()` +"#")
-    runNamespaceValue = join(base(), runNamespaceValue) # absolutize
+	runNamespaceValue = join(base(), runNamespaceValue) # absolutize
     return runNamespaceValue
 
 nextu = 0

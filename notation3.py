@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.184 2005-10-24 16:58:38 timbl Exp $
+$Id: notation3.py,v 1.185 2005-11-02 00:06:26 timbl Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -45,7 +45,7 @@ from RDFSink import  LITERAL, LITERAL_DT, LITERAL_LANG, ANONYMOUS, SYMBOL
 from RDFSink import Logic_NS
 import diag
 
-from why import BecauseOfData, FormulaReason
+from why import BecauseOfData
 
 N3_forSome_URI = RDFSink.forSomeSym
 N3_forAll_URI = RDFSink.forAllSym
@@ -144,7 +144,6 @@ class SinkParser:
 		self._formula = store.newFormula(thisDoc + "#_formula")
 	    else:
 		self._formula = store.newFormula()
-		proof = FormulaReason(self._formula)
 	else:
 	    self._formula = openFormula
 	
@@ -1251,7 +1250,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.184 2005-10-24 16:58:38 timbl Exp $"
+            idstr = "$Id: notation3.py,v 1.185 2005-11-02 00:06:26 timbl Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS

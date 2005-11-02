@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.47 2005-10-26 19:07:13 timbl Exp $
+$Id: term.py,v 1.48 2005-11-02 00:06:26 timbl Exp $
 
 term
 
@@ -112,7 +112,7 @@ class Term(object):
         if p >= 0: return s[p+1:]
         return s
 
-    def debugString(self, already):
+    def debugString(self, already=[]):
 	return `self`  # unless more eleborate in superclass
 	
     def representation(self, base=None):
@@ -689,7 +689,7 @@ class NonEmptyList(List):
 #		res.append((nb3, None))
 #	return res
 
-    def debugString(self, already):
+    def debugString(self, already=[]):
 	s = `self`+" is ("
 	for i in self:
 	    s = s + i.debugString(already) + " "
