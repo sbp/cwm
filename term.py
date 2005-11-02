@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.48 2005-11-02 00:06:26 timbl Exp $
+$Id: term.py,v 1.49 2005-11-02 17:58:41 timbl Exp $
 
 term
 
@@ -196,6 +196,7 @@ class Term(object):
 					(self, other,vars, bindings))
 	try:
 	    x = bindings[self]
+	    assert x is not self
 	    return x.unify(other, vars, existentials, bindings)
 	except KeyError:	    
 	    if self is other: return [ ({}, None)]
