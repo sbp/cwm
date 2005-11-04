@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.180 2005-11-02 00:06:26 timbl Exp $
+$Id: cwm.py,v 1.181 2005-11-04 14:19:22 timbl Exp $
 
 Closed World Machine
 
@@ -46,7 +46,7 @@ import string, sys
 
 # From  http://www.w3.org/2000/10/swap/
 from swap import  diag
-from swap.why import  proofOf
+from swap.why import  explainFormula
 from swap.diag import verbosity, setVerbosity, progress, tracking, setTracking
 from swap.uripath import join
 from swap.webAccess import urlopenForRDF, load, sandBoxed 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.180 $"
+cvsRevision = "$Revision: 1.181 $"
     
             
 
@@ -330,7 +330,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.180 2005-11-02 00:06:26 timbl Exp $"
+        version = "$Id: cwm.py,v 1.181 2005-11-04 14:19:22 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -541,7 +541,7 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == "-why":
                 workingContext.stayOpen = False
 		workingContext = workingContext.close()
-		workingContext = proofOf[workingContext].explanation()
+		workingContext = explainFormula(workingContext)
 
             elif arg == "-dump":
                 

@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.49 2005-11-02 17:58:41 timbl Exp $
+$Id: term.py,v 1.50 2005-11-04 14:19:22 timbl Exp $
 
 term
 
@@ -197,6 +197,8 @@ class Term(object):
 	try:
 	    x = bindings[self]
 	    assert x is not self
+	    if diag.chatty_flag > 80:
+		progress("Unifying term BOUND %s to %s"%(self,x))
 	    return x.unify(other, vars, existentials, bindings)
 	except KeyError:	    
 	    if self is other: return [ ({}, None)]
