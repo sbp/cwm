@@ -8,7 +8,7 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.18 2005-08-22 21:12:54 timbl Exp $
+$Id: fin.py,v 1.19 2005-11-13 00:37:41 timbl Exp $
 """
 from swap import llyn, diag, notation3, RDFSink, uripath, myStore
 
@@ -314,6 +314,7 @@ def doCommand(year, inputURI="/dev/stdin"):
 #	    print year, yearInQuestion, `s`
 	    if  int(year) != int(yearInQuestion): continue
 	    month = int(date[5:7]) -1
+	    if month not in range(12): raise ValueError("Month %i"% month)
 	    
 	    payees = kb.each(subj=s, pred=qu_payee)
 	    if str(payees[0]) == "Check" and len(payees) >1: payee = payees[1]
@@ -368,7 +369,7 @@ def doCommand(year, inputURI="/dev/stdin"):
 	
 
 
-        version = "$Id: fin.py,v 1.18 2005-08-22 21:12:54 timbl Exp $"
+        version = "$Id: fin.py,v 1.19 2005-11-13 00:37:41 timbl Exp $"
 #	if not option_quiet:
 #	_outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
