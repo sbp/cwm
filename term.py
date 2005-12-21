@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.52 2005-12-21 22:15:27 timbl Exp $
+$Id: term.py,v 1.53 2005-12-21 22:55:24 timbl Exp $
 
 term
 
@@ -194,23 +194,17 @@ class Term(object):
 	if diag.chatty_flag > 97:
 	    progress("Unifying symbol %s with %s vars=%s, so far=%s"%
 					(self, other,vars, bindings))
-	try:
-	    x = bindings[self]
-	    assert x is not self
+	s = bindings.get(self, self)
+	if s is other:
+	    return [ ({}, None)]
+	if s in vars|existentials:
 	    if diag.chatty_flag > 80:
-		progress("(Unifying term note  %s is bound to to %s)"%(self,x))
-	    return x.unify(other, vars, existentials, bindings)
-	except KeyError:	    
-	    if self is other:
-		return [ ({}, None)]
-	    if self in vars|existentials:
-		if diag.chatty_flag > 80:
-		    progress("Unifying var or exi MATCHED %s to %s"%(self,other))
-		return [ ({self: other}, None) ]
-	    if diag.chatty_flag > 99:
-		progress("Failed Unifying symbol %s with %s vars=%s, so far=%s"%
-					(self, other,vars, bindings))
-	    return []
+		progress("Unifying var or exi MATCHED %s to %s"%(s, other))
+	    return [ ({s: other}, None) ]
+	if diag.chatty_flag > 99:
+	    progress("Failed Unifying symbol %s with %s vars=%s, so far=%s"%
+				    (self, other, vars, bindings))
+	return []
 	
 class ErrorFlag(TypeError, Term):
     __init__ = TypeError.__init__
