@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.181 2005-11-04 14:19:22 timbl Exp $
+$Id: cwm.py,v 1.182 2005-12-21 06:17:03 vkolovsk Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.181 $"
+cvsRevision = "$Revision: 1.182 $"
     
             
 
@@ -330,7 +330,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.181 2005-11-04 14:19:22 timbl Exp $"
+        version = "$Id: cwm.py,v 1.182 2005-12-21 06:17:03 vkolovsk Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -583,11 +583,11 @@ rdf/xml files. Note that this requires rdflib.
                 think(workingContext, mode=option_flags["think"])
 
             elif arg == '-pythink':
-                from swap import pycwmko
-                if True:
-                    pythink = pycwmko.directPychinkoQuery(workingContext)
-                    pythink()
-                else:
+                from swap import pycwmko                
+                pythink = pycwmko.directPychinkoQuery(workingContext)
+                return
+                #pythink()
+                """
                     from pychinko import interpreter
                     from swap.set_importer import Set, ImmutableSet
                     pyf = pycwmko.N3Loader.N3Loader()
@@ -600,6 +600,7 @@ rdf/xml files. Note that this requires rdflib.
                     workingContext = workingContext.store.newFormula()
                     reconv = pycwmko.FromPyStore(workingContext, pyf)
                     reconv.run()
+                """
 
             elif arg == '-sparqlServer':
                 from swap.sparql import webserver
