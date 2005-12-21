@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.30 2005-06-09 21:05:14 syosi Exp $
+$Id: cwm_string.py,v 1.31 2005-12-21 21:17:58 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -241,6 +241,21 @@ def xmlEscape(subj_py, markupChars):
     return result
 
 
+class BI_encodeForURI(LightBuiltIn, Function):
+    """Take a unicode string and return it encoded so as to pass in an
+    URI path segment. See
+    http://www.w3.org/TR/2005/CR-xpath-functions-20051103/#func-encode-for-uri"""
+    
+    def evaluateObject(self, subj_py):
+	return urllib.quote(subj_py, "#!~*'()")
+
+class BI_encodeForFragID(LightBuiltIn, Function):
+    """Take a unicode string and return it encoded so as to pass in
+    a URI grament identifier."""
+    
+    def evaluateObject(self, subj_py):
+	return urllib.quote(subj_py)
+
 
 #  Register the string built-ins with the store
 
@@ -273,5 +288,7 @@ def register(store):
     str.internFrag("notEqualIgnoringCase", BI_notEqualIgnoringCase)
     str.internFrag("xmlEscapeAttribute", BI_xmlEscapeAttribute)
     str.internFrag("xmlEscapeData", BI_xmlEscapeData)
+    str.internFrag("encodeForURI", BI_encodeForURI)
+    str.internFrag("encodeForFragID", BI_encodeForFragID)
 
     
