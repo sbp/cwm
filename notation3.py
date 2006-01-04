@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.185 2005-11-02 00:06:26 timbl Exp $
+$Id: notation3.py,v 1.186 2006-01-04 22:30:10 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -91,7 +91,7 @@ eol = re.compile(r'[ \t]*(#[^\n]*)?\r?\n')	# end  of line, poss. w/comment
 eof = re.compile(r'[ \t]*(#[^\n]*)?$')      	# end  of file, poss. w/comment
 ws = re.compile(r'[ \t]*')			# Whitespace not including NL
 signed_integer = re.compile(r'[-+]?[0-9]+')	# integer
-number_syntax = re.compile(r'([-+]?[0-9]+)(\.[0-9]+)?(e[-+]?[0-9]+)?')
+number_syntax = re.compile(r'(?P<integer>[-+]?[0-9]+)(?P<decimal>\.[0-9]+)?(?P<exponent>e[-+]?[0-9]+)?')
 digitstring = re.compile(r'[0-9]+')		# Unsigned integer	
 interesting = re.compile(r'[\\\r\n\"]')
 langcode = re.compile(r'[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?')
@@ -929,12 +929,12 @@ class SinkParser:
 		    raise BadSyntax(self._thisDoc, self.lines, str, i,
 				"Bad number syntax")
 		j = m.end()
-		if m.group(3) != None: # includes decimal exponent
+		if m.group('exponent') != None: # includes decimal exponent
 		    res.append(float(str[i:j]))
 #		    res.append(self._store.newLiteral(str[i:j],
 #			self._store.newSymbol(FLOAT_DATATYPE)))
-                elif m.group(2) != None:
-                    res.append(float(str[i:j]))
+                elif m.group('decimal') != None:
+                    res.append(Decimal(str[i:j]))
 		else:
 		    res.append(long(str[i:j]))
 #		    res.append(self._store.newLiteral(str[i:j],
@@ -1250,7 +1250,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.185 2005-11-02 00:06:26 timbl Exp $"
+            idstr = "$Id: notation3.py,v 1.186 2006-01-04 22:30:10 syosi Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
@@ -1509,9 +1509,15 @@ B   Turn any blank node into a existentially qualified explicitly named node.
 		if (dt_uri == INTEGER_DATATYPE):
 		    return str(long(s))
 		if (dt_uri == FLOAT_DATATYPE):
-		    return str(float(s))    # numeric value python-normalized
+		    retVal =  str(float(s))    # numeric value python-normalized
+		    if 'e' not in retVal:
+                        retVal += 'e+00'
+                    return retVal
 		if (dt_uri == DECIMAL_DATATYPE):
-		    return str(Decimal(s))
+		    retVal = str(Decimal(s))
+		    if '.' not in retVal:
+                        retVal += '.0'
+                    return retVal
 	    st = stringToN3(s, singleLine= singleLine, flags=self._flags)
 	    return st + "^^" + self.representationOf(context, (SYMBOL, dt))
 
