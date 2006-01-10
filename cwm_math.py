@@ -15,8 +15,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_math.py,v 1.24 2005-08-16 13:49:21 timbl Exp $'
-__version__ = '$Revision: 1.24 $'
+__cvsid__ = '$Id: cwm_math.py,v 1.25 2006-01-10 13:58:47 syosi Exp $'
+__version__ = '$Revision: 1.25 $'
 
 import sys, string, re, urllib
 
@@ -71,7 +71,8 @@ def numeric(s):
     if not isinstance(s, (Literal, str, unicode)):
         raise ArgumentNotLiteral(s)
     if s.find('.') < 0 and s.find('e') < 0 : return long(s)
-    return Decimal(s)
+    if 'e' not in s and 'E' not in s: return Decimal(s)
+    return float(s)
 
 class BI_absoluteValue(LightBuiltIn, Function):
     def evaluateObject(self, subj_py):

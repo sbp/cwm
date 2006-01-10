@@ -4,7 +4,7 @@ This is an implementation of the Decimal XML schema datatype in python
 
 magnitude is the log10 of the number we multiply it by to get an integer
 
-$Id: local_decimal.py,v 1.1 2005-06-09 21:05:14 syosi Exp $
+$Id: local_decimal.py,v 1.2 2006-01-10 13:58:47 syosi Exp $
 """
 
 from types import IntType, FloatType, LongType, StringTypes
@@ -144,6 +144,8 @@ class Decimal:
     def __coerce__(self, other):
         """x.__coerce__(y) <==> coerce(x, y)
         """
+        if other.__class__ == float:
+            return float(self), other
         return self, self.__class__(other)
         pass
     def __div__(self, other):
@@ -295,7 +297,7 @@ class Decimal:
     def __repr__(self):
         """x.__repr__() <==> repr(x)
         """
-        return str(self) + 'D'
+        return '%s("%s")' % (self.__class__.__name__, str(self))
     def __rfloordiv__(self, other):
         """x.__rfloordiv__(y) <==> y//x
         """
