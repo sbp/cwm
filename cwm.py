@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.182 2005-12-21 06:17:03 vkolovsk Exp $
+$Id: cwm.py,v 1.183 2006-01-13 14:48:54 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.182 $"
+cvsRevision = "$Revision: 1.183 $"
     
             
 
@@ -84,7 +84,7 @@ steps, in order left to right:
 --n3          Input & Output in N3 from now on. (Default)
 --rdf=flags   Input & Output ** in RDF and set given RDF flags
 --n3=flags    Input & Output in N3 and set N3 flags
---ntriples    Input & Output in NTriples (equiv --n3=uspartane -bySubject -quiet)
+--ntriples    Input & Output in NTriples (equiv --n3=usbpartane -bySubject -quiet)
 --language=x  Input & Output in "x" (rdf, n3, etc)  --rdf same as: --language=rdf
 --languageOptions=y     --n3=sp same as:  --language=n3 --languageOptions=sp
 --ugly        Store input and regurgitate, data only, fastest *
@@ -265,7 +265,7 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == "-sparqlResults": option_outputStyle = "-no"
             elif arg == "-triples" or arg == "-ntriples":
                 option_format = "n3"
-                option_flags["n3"] = "uspartanev"
+                option_flags["n3"] = "usbpartanev"
                 option_outputStyle = "-bySubject"
                 option_quiet = 1
             elif _lhs == "-outURI": option_outURI = _uri
@@ -330,7 +330,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.182 2005-12-21 06:17:03 vkolovsk Exp $"
+        version = "$Id: cwm.py,v 1.183 2006-01-13 14:48:54 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)

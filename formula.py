@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.31 2006-01-11 20:01:14 timbl Exp $
+$Id: formula.py,v 1.32 2006-01-13 14:48:54 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.31 $"
+cvsRevision = "$Revision: 1.32 $"
 
 # Magic resources we know about
 
@@ -732,7 +732,7 @@ class StoredStatement:
 
 	if diag.chatty_flag > 99: progress("Unifying statement %s with %s" %
 	    (`self`, `other`))
-	if not isinstance(other, StoredStatement): return []
+	if not isinstance(other, StoredStatement): raise TypeError
 	return unifySequence([self[PRED], self[SUBJ], self[OBJ]],
 	    [other[PRED], other[SUBJ], other[OBJ]], 
 	    vars, existentials, bindings)

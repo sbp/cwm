@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.31 2005-12-21 21:17:58 timbl Exp $
+$Id: cwm_string.py,v 1.32 2006-01-13 14:48:54 syosi Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -97,7 +97,7 @@ def normalizeWhitespace(s):
     return res
 
 #  String Constructors - more light built-ins
-make_string = str
+make_string = unicode
 
 class BI_concat(LightBuiltIn, ReverseFunction):
     def evaluateSubject(self, obj_py):

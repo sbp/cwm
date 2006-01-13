@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.22 2005-11-04 14:18:59 timbl Exp $
+$Id: why.py,v 1.23 2006-01-13 14:48:54 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -550,6 +550,7 @@ class BecauseBuiltIn(Reason):
 class BecauseIncludes(BecauseBuiltIn):
     """Because of the speific built-in log:includes"""
     pass
+
 
 
 # ends

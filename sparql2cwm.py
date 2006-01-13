@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.18 2005-12-21 20:36:46 syosi Exp $
+$Id: sparql2cwm.py,v 1.19 2006-01-13 14:48:54 syosi Exp $
 """
 
 from set_importer import Set
@@ -575,8 +575,8 @@ class FromSparql(productionHandler):
         self.xsd = store.newSymbol('http://www.w3.org/2001/XMLSchema')
         self.math = store.newSymbol('http://www.w3.org/2000/10/swap/math')
         self.numTypes = Set([self.xsd[k] for k in ['unsignedShort', 'short', 'nonPositiveInteger', 'decimal', 'unsignedInt', 'long', 'nonNegativeInteger', 'int', 'unsignedByte', 'positiveInteger', 'integer', 'byte', 'negativeInteger', 'unsignedLong']])
-        self.true = store.newLiteral('1', dt=self.xsd['boolean'])
-        self.false = store.newLiteral('0', dt=self.xsd['boolean'])
+        self.true = store.newLiteral('true', dt=self.xsd['boolean'])
+        self.false = store.newLiteral('false', dt=self.xsd['boolean'])
         self.anonymous_counter = 0
         self.uribase = uripath.base()
         self.dataSets = None
