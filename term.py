@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.55 2006-01-13 14:48:54 syosi Exp $
+$Id: term.py,v 1.56 2006-01-20 03:38:58 timbl Exp $
 
 term
 
@@ -237,7 +237,7 @@ class LabelledNode(Node):
 	retVal = cmp(s, o)
 	if retVal:
             return retVal
-	print "Error with '%s' being the same as '%s'" %(s,o)
+	progress( "Error with '%s' being the same as '%s'" %(s,o))
 	raise RuntimeError(
 	"""Internal error: URIref strings should not match if not same object,
 	comparing %s and %s""" % (s, o))
@@ -778,7 +778,7 @@ def unifySequence(self, other, vars=Set([]), existentials=Set([]),  bindings={},
     try:
         for a,b in nbs: pass
     except TypeError:
-        print nbs
+        progress("Bad nbs, should be seq of pairs: >>>" + `nbs` + "<<<")
         raise
     res = []
     for nb, reason in nbs:

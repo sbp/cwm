@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.149 2006-01-13 14:48:54 syosi Exp $
+$Id: llyn.py,v 1.150 2006-01-20 03:38:58 timbl Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.149 $"
+cvsRevision = "$Revision: 1.150 $"
 
 
 # Magic resources we know about
@@ -267,7 +267,7 @@ class IndexedFormula(Formula):
 	
 	In this implementation, we use the length of the sequence to be searched."""
         res = self._index.get((pred, subj, obj), [])
-        print self.statements, (pred, subj, obj)
+#        progress("searchable  %s, %s" %(self.statements, (pred, subj, obj))
 	return len(res), res
 
 
