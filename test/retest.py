@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.37 2006-01-22 16:22:02 timbl Exp $
+ $Id: retest.py,v 1.38 2006-01-23 21:06:21 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -430,15 +430,16 @@ def main():
 	    execute("""%s %s %s --chatty=100  %s  &> /dev/null""" %
 		(env, python_command, cwm_command, arguments))	
 
-	if proofs and kb.contains(t, rdf.type, test.CwmProofTest):
+	if proofs and kb.contains(subj=t, pred=rdf.type, obj=test.CwmProofTest):
 	    execute("""%s %s %s --quiet %s --base=a --why  > ,proofs/%s""" %
 		(env, python_command, cwm_command, arguments, case))
 	    execute("""%s ../check.py < ,proofs/%s | %s > ,temp/%s""" %
 		(python_command, case, cleanup , case))	
 	    if diff(case, refFile):
 		problem("######### from proof case %s: %scwm %s" %( case, env, arguments))
-	else:
-	    progress("No proof for "+`t`+ " "+`proofs`)
+#	else:
+#	    progress("No proof for "+`t`+ " "+`proofs`)
+#	    progress("@@ %s" %(kb.each(t,rdf.type)))
 	passes = passes + 1
 
 
