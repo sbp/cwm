@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.56 2006-01-20 03:38:58 timbl Exp $
+$Id: term.py,v 1.57 2006-01-23 22:17:57 syosi Exp $
 
 term
 
@@ -1023,7 +1023,7 @@ class Literal(Term):
 	return Set()
 
     def __repr__(self):
-        return '"' + self.string[0:8] + '"'
+        return '"' + self.string[0:4] + '...' + self.string[-4:] + '"'
 #        return self.string
 
     def asPair(self):

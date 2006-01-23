@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.150 2006-01-20 03:38:58 timbl Exp $
+$Id: llyn.py,v 1.151 2006-01-23 22:17:46 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.150 $"
+cvsRevision = "$Revision: 1.151 $"
 
 
 # Magic resources we know about
@@ -1063,7 +1063,8 @@ class BI_universalVariableName(RDFBuiltIn, MultipleFunction):
 	if not isinstance(subj, Formula): return None
 	s = str(obj)
 	for v in subj.universals():
-	    if v.uriref() == s: return 1
+            if v is s: return 1
+#	    if v.uriref() == s: return 1
 	return 0
 
     def evalObj(self,subj, queue, bindings, proof, query):
