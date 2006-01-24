@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.152 2006-01-24 14:56:37 syosi Exp $
+$Id: llyn.py,v 1.153 2006-01-24 22:09:26 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.152 $"
+cvsRevision = "$Revision: 1.153 $"
 
 
 # Magic resources we know about
@@ -724,8 +724,9 @@ class IndexedFormula(Formula):
 
     def unify(self, other, vars=Set([]), existentials=Set([]),  bindings={}):
         from query import n3Entails, testIncludes
-        return n3Entails(other, self, vars=vars, existentials=existentials) \
-               and n3Entails(self, other, vars=vars, existentials=existentials, bindings=bindings)
+        return n3Entails(other, self, vars=vars | existentials,
+                         existentials=Set(), bindings=bindings) # \
+##               and n3Entails(self, other, vars=vars, existentials=existentials, bindings=bindings)
 
 
 
@@ -1076,13 +1077,14 @@ class BI_universalVariableName(RDFBuiltIn): #, MultipleFunction):
 	if not isinstance(subj, Formula): return None
 	return [subj.newLiteral(x.uriref()) for x in subj.universals()]
 
-class BI_existentialVariableName(RDFBuiltIn, MultipleFunction):
+class BI_existentialVariableName(RDFBuiltIn): #, MultipleFunction):
     """Is the object the name of a existential variable in the subject?
     Can be used as a test, or returns a sequence of values.
     Currently gives BNode names too.  Maybe we make sep function for that?"""
     def eval(self, subj, obj, queue, bindings, proof, query):
 	if not isinstance(subj, Formula): return None
 	s = str(obj)
+	return obj in subj.existentials()
 	for v in subj.existentials():
 	    if v.uriref() == s: return 1
 	return 0
@@ -1210,7 +1212,8 @@ class RDFStore(RDFSink) :
 	
         self.universalVariableName = log.internFrag(
 			    "universalVariableName", BI_universalVariableName)
-        log.internFrag("existentialVariableName", BI_existentialVariableName)
+        self.existentialVariableName = log.internFrag(
+                            "existentialVariableName", BI_existentialVariableName)
         log.internFrag("conjunction", BI_conjunction)
         
 # Bidirectional things:
