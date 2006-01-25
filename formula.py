@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.33 2006-01-24 22:09:26 syosi Exp $
+$Id: formula.py,v 1.34 2006-01-25 03:16:10 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.33 $"
+cvsRevision = "$Revision: 1.34 $"
 
 # Magic resources we know about
 
@@ -400,6 +400,8 @@ class Formula(AnonymousNode, CompoundTerm):
 	return set
 
     def renameVars(self):
+        if self in self._renameVarsMap:
+            return self._renameVarsMap[self]
         m = {}
         n = {}
         F1 = self.newFormula()
@@ -422,7 +424,18 @@ class Formula(AnonymousNode, CompoundTerm):
                 if isinstance(node, Formula):
                     if node not in m2:
                         m2[node] = node.renameVars()
-        return newF.substitution(m2, why=Because("Vars in subexpressions must be renamed"))
+        retVal = newF.substitution(m2, why=Because("Vars in subexpressions must be renamed"))
+        self._renameVarsMap[self] = retVal
+        self._renameVarsMap[retVal] = retVal
+        return retVal
+
+
+    def resetRenames():
+        if diag.chatty_flag > 0:
+            progress("Resetting all renamed vars maps ---------------------------------")
+        Formula._renameVarsMap = {}
+    resetRenames = staticmethod(resetRenames)
+    _renameVarsMap = {}
 
     def unify(self, other, vars=Set([]), existentials=Set([]),  bindings={}):
 	"""See Term.unify()
