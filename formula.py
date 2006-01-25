@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.34 2006-01-25 03:16:10 syosi Exp $
+$Id: formula.py,v 1.35 2006-01-25 21:17:02 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.34 $"
+cvsRevision = "$Revision: 1.35 $"
 
 # Magic resources we know about
 
@@ -400,12 +400,13 @@ class Formula(AnonymousNode, CompoundTerm):
 	return set
 
     def renameVars(self):
-        if self in self._renameVarsMap:
-            return self._renameVarsMap[self]
+        if self._renameVarsMaps:
+            if self in self._renameVarsMaps[-1]:
+                return self._renameVarsMaps[-1][self]
         m = {}
         n = {}
         F1 = self.newFormula()
-        F1.loadFormulaWithSubstitution(self)
+        F1.loadFormulaWithSubstitution(self, why=Because("I need an open copy of self"))
         for v in F1.existentials().copy():
             m[v] = F1.newBlankNode()
         for v in F1.universals().copy():
@@ -425,17 +426,21 @@ class Formula(AnonymousNode, CompoundTerm):
                     if node not in m2:
                         m2[node] = node.renameVars()
         retVal = newF.substitution(m2, why=Because("Vars in subexpressions must be renamed"))
-        self._renameVarsMap[self] = retVal
-        self._renameVarsMap[retVal] = retVal
+        if self._renameVarsMaps:
+            self._renameVarsMaps[-1][self] = retVal
+            self._renameVarsMaps[-1][retVal] = retVal
         return retVal
 
 
-    def resetRenames():
-        if diag.chatty_flag > 0:
-            progress("Resetting all renamed vars maps ---------------------------------")
-        Formula._renameVarsMap = {}
+    def resetRenames(reset = True):
+        if reset:
+            if diag.chatty_flag > 0:
+                progress("Resetting all renamed vars maps ---------------------------------")
+            Formula._renameVarsMaps.append({})
+        else:
+            Formula._renameVarsMaps.pop()
     resetRenames = staticmethod(resetRenames)
-    _renameVarsMap = {}
+    _renameVarsMaps = []
 
     def unify(self, other, vars=Set([]), existentials=Set([]),  bindings={}):
 	"""See Term.unify()

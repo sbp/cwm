@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.32 2005-10-24 16:58:38 timbl Exp $
+$Id: toXML.py,v 1.33 2006-01-25 21:17:02 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -553,7 +553,8 @@ class XMLWriter:
 	    else:
 		break
 	while i<len(uriref):
-            if (not isXMLChar(uriref[i], NCNameStartChar)) or uriref[i-1] == ':':
+            if (not isXMLChar(uriref[i], NCNameStartChar)) or (uriref[i-1] == ':' and
+                                                               uriref.rfind(':', 0, i-1) < 0):
                 i = i+1
             else:
                 break
