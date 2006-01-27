@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.154 2006-01-25 21:17:02 syosi Exp $
+$Id: llyn.py,v 1.155 2006-01-27 02:05:52 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.154 $"
+cvsRevision = "$Revision: 1.155 $"
 
 
 # Magic resources we know about
@@ -1099,12 +1099,13 @@ class BI_enforceUniqueBinding(RDFBuiltIn):
     """Is the mapping from the variable in the subject to the name in the object unique?
 
     """
-    pass
-##    def eval(self, subj, obj, queue, bindings, proof, query):
-##	if not isinstance(subj, Formula): return None
-##	s = str(obj)
-##	if subj not in query.backwardMappings:
-##            query.backwardMappings[subj
+    def eval(self, subj, obj, queue, bindings, proof, query):
+	if not isinstance(subj, Formula): return None
+	s = str(obj)
+	if subj not in query.backwardMappings:
+            query.backwardMappings[subj] = s
+            return True
+        return query.backwardMappings[subj] == s
 
 class BI_conjunction(LightBuiltIn, Function):      # Light? well, I suppose so.
     """ The conjunction of a set of formulae is the set of statements which is
