@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.155 2006-01-27 02:05:52 syosi Exp $
+$Id: llyn.py,v 1.156 2006-02-01 22:59:38 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.155 $"
+cvsRevision = "$Revision: 1.156 $"
 
 
 # Magic resources we know about
@@ -417,6 +417,7 @@ class IndexedFormula(Formula):
         if list is None: self._index[(pred, None, None)]=[s]
         else: list.append(s)
 
+        rein = self.newSymbol('http://dig.csail.mit.edu/2005/09/rein/network#requester')
         list = self._index.get((pred, None, obj), None)
         if list is None: self._index[(pred, None, obj)]=[s]
         else: list.append(s)
@@ -1084,6 +1085,8 @@ class BI_existentialVariableName(RDFBuiltIn): #, MultipleFunction):
     def eval(self, subj, obj, queue, bindings, proof, query):
 	if not isinstance(subj, Formula): return None
 	s = str(obj)
+	if obj not in subj.existentials() and diag.chatty_flag > 25:
+            progress('Failed, which is odd. Subj="%s", Obj="%s"' % subj.debugString(), obj.debugString())
 	return obj in subj.existentials()
 	for v in subj.existentials():
 	    if v.uriref() == s: return 1

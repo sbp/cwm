@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.36 2006-01-30 22:14:34 syosi Exp $
+$Id: formula.py,v 1.37 2006-02-01 22:59:38 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.36 $"
+cvsRevision = "$Revision: 1.37 $"
 
 # Magic resources we know about
 
@@ -425,11 +425,15 @@ class Formula(AnonymousNode, CompoundTerm):
                 if isinstance(node, Formula):
                     if node not in m2:
                         m2[node] = node.renameVars()
-        retVal = newF.substitution(m2, why=Because("Vars in subexpressions must be renamed"))
+        retVal = newF.substitution(m2, why=Because("Vars in subexpressions must be renamed")).close()
         if self._renameVarsMaps:
             self._renameVarsMaps[-1][self] = retVal
-#            self._renameVarsMaps[-1][retVal] = retVal
+            self._renameVarsMaps[-1][retVal] = retVal
+        assert retVal.canonical is retVal, retVal
         return retVal
+
+##    def renameVars(self):
+##        return self
 
     def resetRenames(reset = True):
         if reset:
