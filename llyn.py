@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.156 2006-02-01 22:59:38 syosi Exp $
+$Id: llyn.py,v 1.157 2006-02-02 22:04:13 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.156 $"
+cvsRevision = "$Revision: 1.157 $"
 
 
 # Magic resources we know about
@@ -1024,6 +1024,13 @@ class BI_conclusion(HeavyBuiltIn, Function):
             self.store.storeQuad((store._experience, store.cufi, subj, F),
 		    why=BecauseOfExperience("conclusion"))  # Cache for later
             return F
+
+class BI_supports(HeavyBuiltIn):
+    """A more managable version of log:conclusion
+
+    """
+    def eval(self, subj, obj, queue, bindings, proof, query):
+        pass
 
 class BI_filter(LightBuiltIn, Function):
     """Filtering of formulae
