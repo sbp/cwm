@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.157 2006-02-02 22:04:13 syosi Exp $
+$Id: llyn.py,v 1.158 2006-02-09 17:18:13 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.157 $"
+cvsRevision = "$Revision: 1.158 $"
 
 
 # Magic resources we know about
@@ -1027,7 +1027,7 @@ class BI_conclusion(HeavyBuiltIn, Function):
 
 class BI_supports(HeavyBuiltIn):
     """A more managable version of log:conclusion
-
+The real version of this should appear in query.py
     """
     def eval(self, subj, obj, queue, bindings, proof, query):
         pass
@@ -1251,6 +1251,8 @@ class RDFStore(RDFSink) :
 # Heavy relational operators:
 
         self.includes =         log.internFrag( "includes", BI_includes)
+        self.supports =         log.internFrag( "supports", BI_supports)
+
 #        log.internFrag("directlyIncludes", BI_directlyIncludes)
         self.notIncludes = log.internFrag("notIncludes", BI_notIncludes)
         self.smartNotIncludes = log.internFrag("notIncludesWithBuiltins", BI_notIncludesWithBuiltins)

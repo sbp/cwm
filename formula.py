@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.38 2006-02-02 22:04:13 syosi Exp $
+$Id: formula.py,v 1.39 2006-02-09 17:18:13 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -60,7 +60,7 @@ from RDFSink import FORMULA, LITERAL, ANONYMOUS, SYMBOL
 
 
 
-cvsRevision = "$Revision: 1.38 $"
+cvsRevision = "$Revision: 1.39 $"
 
 # Magic resources we know about
 
@@ -446,7 +446,7 @@ class Formula(AnonymousNode, CompoundTerm):
 
     def resetRenames(reset = True):
         if reset:
-            if diag.chatty_flag > 0:
+            if diag.chatty_flag > 20:
                 progress("Resetting all renamed vars maps ---------------------------------")
             Formula._renameVarsMaps.append({})
         else:
