@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.158 2006-02-09 17:18:13 syosi Exp $
+$Id: llyn.py,v 1.159 2006-02-10 18:35:01 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.158 $"
+cvsRevision = "$Revision: 1.159 $"
 
 
 # Magic resources we know about
@@ -1519,7 +1519,7 @@ class RDFStore(RDFSink) :
                 return self.newLiteral(what and 'true' or 'false', self.boolean)
 	    if type(what) is types.ListType: #types.SequenceType:
 		return self.newList(what)
-	    raise RuntimeError("Eh?  can't intern "+`what`+" of type: "+`type(what)`)
+	    raise RuntimeError("Eh?  can't intern "+`what`+" of type: "+`what.__class__`)
 
         typ, urirefString = what
 
