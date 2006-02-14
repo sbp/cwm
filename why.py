@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.26 2006-02-10 18:35:01 syosi Exp $
+$Id: why.py,v 1.27 2006-02-14 17:54:09 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -427,9 +427,7 @@ class BecauseOfRule(Reason):
 
 
 
-def explainStatement(s, ko, ss=None):
-    si = describeStatement(s, ko)
-
+def getStatementReason(s):
     f = s.context()
     KBReasonTrackers = proofsOf.get(f, None)
 
@@ -444,7 +442,15 @@ def explainStatement(s, ko, ss=None):
 	""" % ( f, s, proofsOf, f.debugString()))	
 
     tracker = KBReasonTrackers[0]
-    statementReason = tracker.reasonForStatement.get(s, None)
+
+    return tracker.reasonForStatement.get(s, None)
+    
+
+def explainStatement(s, ko, ss=None):
+    si = describeStatement(s, ko)
+
+
+    statementReason = getStatementReason(s)
 
     if statementReason == None:
 	raise RuntimeError(
@@ -592,12 +598,13 @@ class BecauseSupports(BecauseBuiltIn):
         ko.add(me, reason.because, m, why=dontAsk)
         statementsForReason = {}  # reverse index: group by reason
         for s in self.reason:
-            rea = explainStatement(s, ko)
+            rea = getStatementReason(s)
 	    x = statementsForReason.get(rea, None)
 	    if x is None: statementsForReason[rea] = [s]
 	    else: x.append(s)
         for e in statementsForReason:
-            ko.add(m, reason.component, e, why=dontAsk)
+            r1 = e.explain(ko)
+            ko.add(m, reason.component, r1, why=dontAsk)
         if giveForumlaArguments:
             for x in self._subject, self._object:
                 proofs = proofsOf.get(x, None)
