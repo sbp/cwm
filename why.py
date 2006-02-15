@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.27 2006-02-14 17:54:09 syosi Exp $
+$Id: why.py,v 1.28 2006-02-15 15:38:40 timbl Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -98,7 +98,8 @@ def explainFormula(f):
     "Return the explanation formula for f"
     tr = proofsOf.get(f, None)
     if tr is None:
-	raise RuntimeError("No tracker")
+	raise RuntimeError(
+	    "No tracker. This may happen if the formula is validly empty.")
     return tr[0].explanation()
 
 
@@ -163,7 +164,7 @@ class Reason:
 
 	
 class KBReasonTracker(Reason):
-    """A Formula reason tracks the reasons for the statements in its formula.
+    """A reason tracker tracks the reasons for the statements in its formula.
     
     Beware that when a new formula is
     interned, the proofsOf dict must be informed that its identity has changed.
