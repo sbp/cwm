@@ -10,7 +10,7 @@ dc:description """
  For example, when data about you and your assietnt in merged,
  you will end up with an "assistant's email" and the like.
 """,
-"$Id: contact.n3,v 1.24 2005-12-06 22:20:32 timbl Exp $". # see changelog at the bottom.
+"$Id: contact.n3,v 1.25 2006-03-09 17:11:42 timbl Exp $". # see changelog at the bottom.
 
 
 @prefix : <http://www.w3.org/2000/10/swap/pim/contact#> .
@@ -288,8 +288,10 @@ mso:Spouse  a rdfs:Property;  .
 #  mso:User_3  a rdfs:Property .
 #  mso:User_4  a rdfs:Property .
 
-mso:WebPage  a rdf:Property;
-= :publicHomePage .              # I have many home pages, some for me some for others
+mso:WebPage  a rdf:Property.
+
+#= :publicHomePage .              # I have many home pages, some for me some for others
+
 :publicHomePage rdfs:subPropertyOf :homePage.
 :homePage a owl:InverseFunctionalProperty;
 	
@@ -300,7 +302,10 @@ mso:WebPage  a rdf:Property;
 
 <> dc:description """
 $Log: contact.n3,v $
-Revision 1.24  2005-12-06 22:20:32  timbl
+Revision 1.25  2006-03-09 17:11:42  timbl
+Update API to import from swap
+
+Revision 1.24  2005/12/06 22:20:32  timbl
 Add InverseFunctionalProperties
 
 Revision 1.23  2003/12/04 21:20:17  timbl
