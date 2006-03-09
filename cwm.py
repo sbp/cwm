@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.183 2006-01-13 14:48:54 syosi Exp $
+$Id: cwm.py,v 1.184 2006-03-09 06:28:53 vkolovsk Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.183 $"
+cvsRevision = "$Revision: 1.184 $"
     
             
 
@@ -330,7 +330,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.183 2006-01-13 14:48:54 syosi Exp $"
+        version = "$Id: cwm.py,v 1.184 2006-03-09 06:28:53 vkolovsk Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -582,10 +582,10 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == "-think":  
                 think(workingContext, mode=option_flags["think"])
 
-            elif arg == '-pythink':
+            elif arg == '-rete':
                 from swap import pycwmko                
                 pythink = pycwmko.directPychinkoQuery(workingContext)
-                return
+                #return
                 #pythink()
                 """
                     from pychinko import interpreter
