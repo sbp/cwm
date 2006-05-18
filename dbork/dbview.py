@@ -2,6 +2,10 @@
 """
 dbview -- view an SQL DB thru RDF glasses.
 
+  *** NOTE WELL ***
+  As of May 2006, active development has moved to
+  http://dig.csail.mit.edu/2006/dbview/dbview.py
+  
 an implementation of...
 
 [SWDB]
@@ -68,7 +72,7 @@ earlier dev notes, links, ...
  http://rdfig.xmlhack.com/2002/02/27/2002-02-27.html#1014821419.001175
 """
 
-__version__ = "$Id: dbview.py,v 1.19 2003-03-02 06:07:46 connolly Exp $" #@@consult python style guide
+__version__ = "$Id: dbview.py,v 1.20 2006-05-18 19:53:54 connolly Exp $" #@@consult python style guide
 
 
 from string import join, split
@@ -201,7 +205,7 @@ class DBViewHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.wfile.write("</ul>")
 
         self.wfile.write("""
-        <address>Dan C@@ $Revision: 1.19 $ $Date: 2003-03-02 06:07:46 $</address>
+        <address>Dan C@@ $Revision: 1.20 $ $Date: 2006-05-18 19:53:54 $</address>
         </body></html>
         """)
 
@@ -783,7 +787,10 @@ if __name__ == '__main__':
 
 
 # $Log: dbview.py,v $
-# Revision 1.19  2003-03-02 06:07:46  connolly
+# Revision 1.20  2006-05-18 19:53:54  connolly
+# note development has moved
+#
+# Revision 1.19  2003/03/02 06:07:46  connolly
 # updated per bind API change, XML serializer move to toXML module
 #
 # Revision 1.18  2002/03/16 06:14:53  connolly
