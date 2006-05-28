@@ -1,0 +1,9 @@
+# $Id: animal-goal.n3,v 1.1 2006-05-28 16:35:20 connolly Exp $
+# see animals.n3 and animal-proof.n3 target in the Makefile
+
+@prefix : <http://www.daml.org/2000/12/daml+oil-ex#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+
+@keywords is, of, a.
+
+{ bob owl:differentFrom ?who } => { bob owl:differentFrom ?who }.
