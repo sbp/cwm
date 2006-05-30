@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.159 2006-02-10 18:35:01 syosi Exp $
+$Id: llyn.py,v 1.160 2006-05-30 21:08:05 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.159 $"
+cvsRevision = "$Revision: 1.160 $"
 
 
 # Magic resources we know about
@@ -360,7 +360,7 @@ class IndexedFormula(Formula):
 		else: var, val = obj, subj
 		newBindings[var] = val
 		if diag.chatty_flag > 90: progress("Equality: %s = %s" % (`var`, `val`))
-		self.substituteEqualsInPlace(newBindings)
+		self.substituteEqualsInPlace(newBindings)		
 		return 1
 
 	if "T" in self._closureMode:
@@ -764,6 +764,7 @@ class BI_notEqualTo(LightBuiltIn):
     def eval(self, subj, obj, queue, bindings, proof, query):
         return (subj is not obj)   # Assumes interning
 
+BI_SameAs = BI_EqualTo
 
 # Functions 
     
@@ -1246,7 +1247,8 @@ class RDFStore(RDFSink) :
         log.internFrag("notEqualTo", BI_notEqualTo)
         log.internFrag("reification", BI_reification)
 
-	self.sameAs = self.symbol(OWL_NS + "sameAs")
+        owl = self.symbol(OWL_NS[:-1])
+        self.sameAs = owl.internFrag("sameAs", BI_SameAs)
 
 # Heavy relational operators:
 

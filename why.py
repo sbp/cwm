@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.28 2006-02-15 15:38:40 timbl Exp $
+$Id: why.py,v 1.29 2006-05-30 21:08:05 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -335,6 +335,7 @@ class Premise(Reason):
     has to tell a Premis what statements it has.
     """
     def __init__(self, str, because=None):
+#        raise RuntimeError
 	Reason.__init__(self)
 	self._string = str
 	self._reason = because
