@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.15 2005-06-10 19:12:00 syosi Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.16 2006-06-09 19:11:05 syosi Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 try:
@@ -244,7 +244,7 @@ class PredictiveParser:
             parser.atMode = False
         else:
             parser.keywords = [ "a", "is", "of", "this" ]
-        print parser.keywords
+        #print parser.keywords
 	parser.verb = 0  # Verbosity
 	parser.keywordMode = 0  # In a keyword statement, adding keywords
 	
