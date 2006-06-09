@@ -10,7 +10,7 @@ Command line options for debug:
  -c50   Set verbosity for inference done by cwm code to 50
  -p50   Set verobsity when parsing top 50    
 """
-__version__ = '$Id: check.py,v 1.39 2006-06-09 14:56:20 connolly Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.40 2006-06-09 19:15:15 connolly Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import CONTEXT, PRED, SUBJ, OBJ
@@ -21,11 +21,9 @@ from swap.diag import verbosity, setVerbosity, progress
 from swap import diag
 from swap.query import testIncludes
 
-# Standard python
-import sys, getopt
-from sys import argv, exit
-
 import swap.llyn # Chosen engine registers itself
+import sys # to get exception info for diagnostics
+
 
 reason = Namespace("http://www.w3.org/2000/10/swap/reason#")
 log = Namespace("http://www.w3.org/2000/10/swap/log#")
@@ -561,9 +559,9 @@ def main(argv):
 	fyi("Proof looks OK.   %i Steps" % proofSteps, thresh=5)
 	setVerbosity(0)
 	print proved.n3String().encode('utf-8')
-	exit(0)
+	sys.exit(0)
     progress("Proof invalid.")
-    exit(-1)
+    sys.exit(-1)
 
 ################################
 # test harness and diagnostics
@@ -616,7 +614,8 @@ def _s2f(s, base):
 
 if __name__ == "__main__":
     """This trick prevents the pydoc from actually running the script"""
-    import sys
+    import sys, getopt
+
     if '--test' in sys.argv:
         _test()
     else:
