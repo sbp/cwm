@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.40 2006-06-09 15:56:39 connolly Exp $
+$Id: formula.py,v 1.41 2006-06-09 18:09:03 connolly Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,20 +20,14 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.40 2006-06-09 15:56:39 connolly Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.41 2006-06-09 18:09:03 connolly Exp $'[1:-1]
 
 
 from __future__ import generators
 
 import types
-import string
-import re
 import StringIO
-import sys
-import time
-import uripath
-
-from OrderedSequence import merge
+import sys # for outputstrings. shouldn't be here - DWC
 
 from set_importer import Set, ImmutableSet
 
@@ -594,6 +588,8 @@ class Formula(AnonymousNode, CompoundTerm):
         To output a string, associate (using the given relation) with a key
         such that the order of the keys is the order in which you want the corresponding
         strings output.
+
+        @@ what is this doing here??
         """
         if channel == None:
             channel = sys.stdout
