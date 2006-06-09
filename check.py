@@ -10,7 +10,7 @@ Command line options for debug:
  -c50   Set verbosity for inference done by cwm code to 50
  -p50   Set verobsity when parsing top 50    
 """
-# check that proof
+__version__ = '$Id: check.py,v 1.39 2006-06-09 14:56:20 connolly Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import CONTEXT, PRED, SUBJ, OBJ
