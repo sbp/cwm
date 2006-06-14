@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.160 2006-05-30 21:08:05 syosi Exp $
+$Id: llyn.py,v 1.161 2006-06-14 21:01:02 syosi Exp $
 
 
 RDF Store and Query engine
@@ -100,7 +100,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.160 $"
+cvsRevision = "$Revision: 1.161 $"
 
 
 # Magic resources we know about
@@ -1094,7 +1094,7 @@ class BI_existentialVariableName(RDFBuiltIn): #, MultipleFunction):
 	if not isinstance(subj, Formula): return None
 	s = str(obj)
 	if obj not in subj.existentials() and diag.chatty_flag > 25:
-            progress('Failed, which is odd. Subj="%s", Obj="%s"' % subj.debugString(), obj.debugString())
+            progress('Failed, which is odd. Subj="%s", Obj="%s"' % (subj.debugString(), obj.debugString()))
 	return obj in subj.existentials()
 	for v in subj.existentials():
 	    if v.uriref() == s: return 1
