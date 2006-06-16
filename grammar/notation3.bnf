@@ -1,4 +1,4 @@
-/* $Id: notation3.bnf,v 1.6 2006-06-16 14:03:38 connolly Exp $ */
+/* $Id: notation3.bnf,v 1.7 2006-06-16 14:19:01 connolly Exp $ */
 /* transcribe from n3.n3 revision 1.28 date: 2006/02/15 15:49:00 */
 
 /* The N3 Full Grammar */
@@ -24,13 +24,13 @@
 	       | existential
 	       | simpleStatement
 
-[7] universal ::= "@forAll" symbol ("," symbol)*
+[7] universal ::= "@forAll" (symbol ("," symbol)*)?
 
-[8] existential ::= "@forSome" symbol ("," symbol)*
+[8] existential ::= "@forSome" (symbol ("," symbol)*)?
 
 
 [9] declaration ::= "@prefix" prefix explicituri
-    		|   "@keywords" barename ("," barename)*
+    		|   "@keywords" (barename ("," barename)*)?
 
 [10] simpleStatement ::= subject propertylist
 
