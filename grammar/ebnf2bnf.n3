@@ -4,7 +4,7 @@
 <> dc:description """reduce EBNF to BNF;
 i.e. rewrite ?, +, * operators using alt and seq
 """,
-"$Id: ebnf2bnf.n3,v 1.2 2006-06-17 03:20:04 connolly Exp $";
+"$Id: ebnf2bnf.n3,v 1.3 2006-06-17 05:14:56 connolly Exp $";
 rdfs:seeAlso <ebnf>, <ebnf.n3>, <ebnf.rdf>.
 
 @prefix g: <http://www.w3.org/2000/10/swap/grammar/ebnf#>.
@@ -20,4 +20,4 @@ rdfs:seeAlso <ebnf>, <ebnf.n3>, <ebnf.rdf>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 g:alt rdfs:domain g:NonTerminal.
 g:seq rdfs:domain g:NonTerminal.
-{ ?S [ rdfs:somain ?C ] [] } => { ?S a ?C }.
+{ ?S [ rdfs:domain ?C ] [] } => { ?S a ?C }.
