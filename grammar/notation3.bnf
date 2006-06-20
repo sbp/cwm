@@ -3,7 +3,7 @@
 /* which see  http://www.w3.org/TR/2004/REC-xml11-20040204/#sec-notation */
 /* and see http://en.wikipedia.org/wiki/Extended_Backus-Naur_form */
 
-/* $Id: notation3.bnf,v 1.11 2006-06-20 18:28:52 connolly Exp $ */
+/* $Id: notation3.bnf,v 1.12 2006-06-20 21:15:23 connolly Exp $ */
 /* transcribe from n3.n3 revision 1.28 date: 2006/02/15 15:49:00 */
 
 [1] document ::= (statement ".")*
@@ -31,7 +31,8 @@
 
 [9] simpleStatement ::= term propertylist
 
-[10] propertylist ::= (verb term objecttail (";" propertylist)*)?
+[10] propertylist ::= (property (";" property)*)?
+[10a] property ::= verb term objecttail
 
 [11] objecttail ::= ("," term)*
 
