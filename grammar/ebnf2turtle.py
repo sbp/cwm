@@ -3,7 +3,7 @@ bnf2turtle -- write a turtle version of an EBNF grammar
 =======================================================
 
 :Author: `Dan Connolly`_
-:Version: $Revision: 1.2 $ of $Date: 2006-06-17 05:27:41 $
+:Version: $Revision: 1.3 $ of $Date: 2006-06-20 04:43:10 $
 :Copyright: `W3C Open Source License`_ Share and enjoy.
 
 .. _Dan Connolly: http://www.w3.org/People/Connolly/
@@ -141,7 +141,7 @@ Check them a la::
 
 """
 
-__version__ = "$Id: ebnf2turtle.py,v 1.2 2006-06-17 05:27:41 connolly Exp $"
+__version__ = "$Id: ebnf2turtle.py,v 1.3 2006-06-20 04:43:10 connolly Exp $"
 
 import re
 
@@ -166,13 +166,14 @@ def toTurtle(lines, pfx, ns):
 def eachRule(lines):
     """turn an iterator over lines into an iterator over rule strings.
 
-    a line that starts with [ or @ starts a new rule
+    a line that starts with [ and a digit or @ starts a new rule
     """
     
     r = ''
     for l in lines:
+        l = l.lstrip()
         if l.startswith("/*"): continue # whole-line comments only
-        if l.startswith('[') or l.startswith('@'):
+        if re.match(r"^\[\d+\]", l) or l.startswith('@'):
             if r: yield r
             r = l.strip()
         else:
@@ -497,7 +498,11 @@ if __name__ == '__main__':
     else: main(sys.argv)
 
 # $Log: ebnf2turtle.py,v $
-# Revision 1.2  2006-06-17 05:27:41  connolly
+# Revision 1.3  2006-06-20 04:43:10  connolly
+# be more discriminating about breaking lines in order to handle
+# Andy's turtle.html bnf
+#
+# Revision 1.2  2006/06/17 05:27:41  connolly
 # use separate namespaces for g:seq and re:seq
 # move --test arg check out of main
 #
