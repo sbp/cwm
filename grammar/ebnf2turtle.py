@@ -3,7 +3,7 @@ bnf2turtle -- write a turtle version of an EBNF grammar
 =======================================================
 
 :Author: `Dan Connolly`_
-:Version: $Revision: 1.5 $ of $Date: 2006-06-20 05:59:10 $
+:Version: $Revision: 1.6 $ of $Date: 2006-06-20 08:18:39 $
 :Copyright: `W3C Open Source License`_ Share and enjoy.
 
 .. _Dan Connolly: http://www.w3.org/People/Connolly/
@@ -141,7 +141,7 @@ Check them a la::
 
 """
 
-__version__ = "$Id: ebnf2turtle.py,v 1.5 2006-06-20 05:59:10 connolly Exp $"
+__version__ = "$Id: ebnf2turtle.py,v 1.6 2006-06-20 08:18:39 connolly Exp $"
 
 import re
 
@@ -157,7 +157,7 @@ def toTurtle(lines, pfx, ns):
     startTurtle(pfx, ns)
     token = 0
     for r in eachRule(lines):
-        if r == '@terminals': token = 1
+        if r.strip() == '@terminals': token = 1
         else:
             num, sym, expr = ruleParts(r)
             # all caps symbols are tokens
@@ -174,13 +174,14 @@ def eachRule(lines):
     
     r = ''
     for l in lines:
-        l = l.lstrip()
+        l = l.strip()
         if l.startswith("/*"): continue # whole-line comments only
-        if re.match(r"^\[\d+\]", l) or l.startswith('@'):
+        if re.match(r"^\[\d\w*\]", l) or l.startswith('@'):
             if r: yield r
-            r = l.strip()
+            r = l
         else:
-            r += ' ' + l.strip()
+            if r: r += ' '
+            r += l
     if r: yield r
 
 
@@ -395,8 +396,6 @@ def token(s):
         return ((s[0],) , s[1:])
     else:
         raise ValueError, "unrecognized token: %s" % s
-
-
 ##########
 # turtle generation
 #
@@ -518,7 +517,10 @@ if __name__ == '__main__':
     else: main(sys.argv)
 
 # $Log: ebnf2turtle.py,v $
-# Revision 1.5  2006-06-20 05:59:10  connolly
+# Revision 1.6  2006-06-20 08:18:39  connolly
+# more line-splitting fixes
+#
+# Revision 1.5  2006/06/20 05:59:10  connolly
 # properly escape #xNN notation in regex's
 # join lines with a space to avoid merging tokens
 #
