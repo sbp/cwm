@@ -3,7 +3,7 @@ bnf2turtle -- write a turtle version of an EBNF grammar
 =======================================================
 
 :Author: `Dan Connolly`_
-:Version: $Revision: 1.3 $ of $Date: 2006-06-20 04:43:10 $
+:Version: $Revision: 1.4 $ of $Date: 2006-06-20 04:57:16 $
 :Copyright: `W3C Open Source License`_ Share and enjoy.
 
 .. _Dan Connolly: http://www.w3.org/People/Connolly/
@@ -141,7 +141,7 @@ Check them a la::
 
 """
 
-__version__ = "$Id: ebnf2turtle.py,v 1.3 2006-06-20 04:43:10 connolly Exp $"
+__version__ = "$Id: ebnf2turtle.py,v 1.4 2006-06-20 04:57:16 connolly Exp $"
 
 import re
 
@@ -160,6 +160,9 @@ def toTurtle(lines, pfx, ns):
         if r == '@terminals': token = 1
         else:
             num, sym, expr = ruleParts(r)
+            # all caps symbols are tokens
+            import sys
+            if re.match("[A-Z_]+$", sym): token = 1
             asTurtle(num, sym, expr, token, r)
 
 
@@ -498,7 +501,10 @@ if __name__ == '__main__':
     else: main(sys.argv)
 
 # $Log: ebnf2turtle.py,v $
-# Revision 1.3  2006-06-20 04:43:10  connolly
+# Revision 1.4  2006-06-20 04:57:16  connolly
+# all caps symbol signals a switch to terminals
+#
+# Revision 1.3  2006/06/20 04:43:10  connolly
 # be more discriminating about breaking lines in order to handle
 # Andy's turtle.html bnf
 #
