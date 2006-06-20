@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.41 2006-06-09 22:16:06 connolly Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.42 2006-06-20 16:26:30 connolly Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -170,8 +170,8 @@ class Checker(FormulaCache):
     def result(self, r, policy, level=0):
         """Get the result of a proof step.
 
-        r       is the step to be checked, or none if the root reason
-                The root reason is the reason of type reason:Proof
+        r       is the step to be checked; in the case of the root reason,
+                proof.the(pred=rdf.type, obj=reason.Proof)
 
         level   is just the nesting level for diagnostic output
 
