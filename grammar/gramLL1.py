@@ -1,4 +1,4 @@
-# $Id: gramLL1.py,v 1.3 2006-06-17 08:32:20 connolly Exp $
+# $Id: gramLL1.py,v 1.4 2006-06-20 04:46:23 connolly Exp $
 from swap import myStore, term
 from swap.RDFSink import RDF_NS_URI
 from swap.term import Literal, Fragment #umm... why not Symbol?
@@ -21,6 +21,8 @@ def main(argv):
     else:
         import simplejson #http://cheeseshop.python.org/pypi/simplejson
         import sys
+        start = it['rules'][0][0]
+        print "SYNTAX_%s = " % start,
         simplejson.dump(it, sys.stdout)
 
 
@@ -134,7 +136,10 @@ if __name__ == '__main__':
 
 
 # $Log: gramLL1.py,v $
-# Revision 1.3  2006-06-17 08:32:20  connolly
+# Revision 1.4  2006-06-20 04:46:23  connolly
+# json version of turtle grammar from Andy Mon, 19 Jun 2006 16:12:03 +0100
+#
+# Revision 1.3  2006/06/17 08:32:20  connolly
 # found a javascript parser generator that implements SLR table generation
 # so we don't need first/follow.
 #
