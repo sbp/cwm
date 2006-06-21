@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.43 2006-06-21 17:43:20 syosi Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.44 2006-06-21 19:59:31 syosi Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -84,7 +84,12 @@ class FormulaCache(object):
 def topLevelLoad(uri=None, flags=''):
         graph = formula()
         graph.setClosureMode("e")    # Implement sameAs by smushing
-        return load(uri, flags=flags, openFormula=graph)
+        graph = load(uri, flags=flags, openFormula=graph)
+        bindings = {}
+        for s in graph.statementsMatching(pred=reason.representedBy):
+            val, _, key = s.spo()
+            bindings[key] = val
+        return graph.substitution(bindings)
 
 
 def n3Entails(f, g, skipIncludes=0, level=0):
