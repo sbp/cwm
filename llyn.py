@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.161 2006-06-14 21:01:02 syosi Exp $
+$Id: llyn.py,v 1.162 2006-06-21 13:58:13 timbl Exp $
 
 
 RDF Store and Query engine
@@ -61,6 +61,7 @@ import urllib # for log:content
 import md5, binascii  # for building md5 URIs
 
 import uripath
+from uripath import canonical
 
 from why import smushedFormula
 
@@ -100,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.161 $"
+cvsRevision = "$Revision: 1.162 $"
 
 
 # Magic resources we know about
@@ -1532,6 +1533,7 @@ class RDFStore(RDFSink) :
         if typ == LITERAL_LANG:
 	    return self.newLiteral(urirefString[0], None, urirefString[1])
         else:
+	    urirefString = canonical(urirefString)
             assert ':' in urirefString, "must be absolute: %s" % urirefString
 
             hash = string.rfind(urirefString, "#")
