@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.30 2006-06-21 17:43:20 syosi Exp $
+$Id: why.py,v 1.31 2006-06-21 17:47:23 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -171,7 +171,7 @@ class Reason:
 def formulaStandIn(self, ko,f):
     try:
         m = self[(ko,f)]
-        progress('cache hit, we save $$!')
+        #progress('cache hit, we save $$!')
         return m
     except KeyError:
         standIn = ko.newBlankNode(why= dontAsk)
