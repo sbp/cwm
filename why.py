@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.33 2006-06-22 15:29:57 syosi Exp $
+$Id: why.py,v 1.34 2006-06-22 17:19:38 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -168,7 +168,7 @@ class Reason:
 	raise RuntimeError("What, no explain method for this class?")
 	
 
-MAX_INLINE_SIZE = 2
+MAX_INLINE_SIZE = 10
 
 def formulaStandIn(self, ko,f):
     if len(f) <= MAX_INLINE_SIZE:
