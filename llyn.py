@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.162 2006-06-21 13:58:13 timbl Exp $
+$Id: llyn.py,v 1.163 2006-06-22 13:20:02 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.162 $"
+cvsRevision = "$Revision: 1.163 $"
 
 
 # Magic resources we know about
@@ -355,7 +355,9 @@ class IndexedFormula(Formula):
 	if "e" in self._closureMode:
 	    if pred is store.sameAs:
 		if subj is obj: return 0 # ignore a = a
-		if ((subj in self.existentials() and obj not in self.existentials())
+		if obj in self.existentials() and subj not in self.existentials():
+                    var, val = obj, subj
+		elif ((subj in self.existentials() and obj not in self.existentials())
 		    or (subj.generated() and not obj.generated())
 		    or Term.compareAnyTerm(obj, subj) < 0): var, val = subj, obj
 		else: var, val = obj, subj
