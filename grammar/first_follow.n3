@@ -3,7 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 <> dc:title "first and follow rules for LL(1) grammars";
-dc:description "$Id: first_follow.n3,v 1.3 2006-06-17 08:33:10 connolly Exp $";
+dc:description "$Id: first_follow.n3,v 1.4 2006-06-22 22:04:51 connolly Exp $";
 dc:source [
  = <http://en.wikipedia.org/wiki/LL_parser#Constructing_an_LL.281.29_parsing_table>;
  dc:title "Constructing an LL(1) parsing table";
@@ -22,18 +22,16 @@ dc:source [
 
 @keywords is, of, a.
 
-#hmm... perhaps g:NonTerminal and g:Terminal shoule be w.r.t. a language...
-
 ######## first
 # from wikipedia:
 
 # Fi(a w' ) = { a } for every terminal a
 { ?A g:seq [ rdf:first ?T ].
-  ?T a g:Terminal.
+  ?A g:nonTerminal [ g:terminal ?T].
 } => { ?A first ?T }.
 
 { ?A g:alt [ list:member ?T ].
-  ?T a g:Terminal.
+  ?A g:nonTerminal [ g:terminal ?T].
 } => { ?A first ?T }.
 
 # Fi(A w' ) = Fi(A) for every nonterminal A with ε not in Fi(A)
@@ -64,8 +62,7 @@ dc:source [
 #    * if the terminal a is in Fi(w' ), then add a to Fo(Ai)
 { ?AW g:seq [ rdf:first ?A; rdf:rest ?W ].
   [ g:seq ?W ] first ?T.
-  ?A a g:NonTerminal.
-  ?T a g:Terminal.
+  ?A g:nonTerminal [ g:terminal ?T].
 } => { ?A follow ?T }.
 
 #    * if ε is in Fi(w' ), then add Fo(Aj) to Fo(Ai)
