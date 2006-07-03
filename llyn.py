@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.163 2006-06-22 13:20:02 syosi Exp $
+$Id: llyn.py,v 1.164 2006-07-03 21:33:46 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.163 $"
+cvsRevision = "$Revision: 1.164 $"
 
 
 # Magic resources we know about
@@ -435,6 +435,12 @@ class IndexedFormula(Formula):
 
 	if self._closureMode != "":
 	    self.checkClosure(subj, pred, obj)
+
+	try:
+            if self.isWorkingContext and diag.chatty_flag > 40:
+                progress("adding",  (subj, pred, obj))
+        except:
+            pass
 
         return 1  # One statement has been added  @@ ignore closure extras from closure
 		    # Obsolete this return value? @@@ 
@@ -1537,6 +1543,7 @@ class RDFStore(RDFSink) :
         else:
 	    urirefString = canonical(urirefString)
             assert ':' in urirefString, "must be absolute: %s" % urirefString
+
 
             hash = string.rfind(urirefString, "#")
             if hash < 0 :     # This is a resource with no fragment
