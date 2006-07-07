@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.165 2006-07-07 03:30:52 syosi Exp $
+$Id: llyn.py,v 1.166 2006-07-07 17:45:28 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.165 $"
+cvsRevision = "$Revision: 1.166 $"
 
 
 # Magic resources we know about
@@ -439,7 +439,7 @@ class IndexedFormula(Formula):
 	    self.checkClosure(subj, pred, obj)
 
 	try:
-            if self.isWorkingContext and diag.chatty_flag > 40:
+            if self.isWorkingContext and diag.chatty_flag > 20:
                 progress("adding",  (subj, pred, obj))
         except:
             pass
