@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.46 2006-07-07 19:11:42 syosi Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.47 2006-07-07 21:58:58 syosi Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -250,7 +250,7 @@ class Checker(FormulaCache):
     ##    setVerbosity(1000)
         fyi("About to check if proved %s matches given %s" % (g, f), level=level, thresh=100)
         if f is not None and f.unify(g) == []:
-            setVerbosity(1000)
+            diag.chatty_flag=1000
             f.unify(g)
             setVerbosity(0)
             raise LogicalFallacy("%s: Calculated formula: %s\ndoes not match given: %s" %

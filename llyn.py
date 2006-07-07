@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.166 2006-07-07 17:45:28 syosi Exp $
+$Id: llyn.py,v 1.167 2006-07-07 21:58:58 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.166 $"
+cvsRevision = "$Revision: 1.167 $"
 
 
 # Magic resources we know about
@@ -736,7 +736,8 @@ class IndexedFormula(Formula):
 
     def unify(self, other, vars=Set([]), existentials=Set([]),  bindings={}):
         from query import n3Entails, testIncludes
-        return n3Entails(other, self, vars=vars | existentials,
+        freeVars = self.freeVariables()
+        return n3Entails(other, self, vars=vars | existentials | freeVars,
                          existentials=Set(), bindings=bindings) # \
 ##               and n3Entails(self, other, vars=vars, existentials=existentials, bindings=bindings)
 
