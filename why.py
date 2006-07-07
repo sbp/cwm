@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.36 2006-07-07 17:45:28 syosi Exp $
+$Id: why.py,v 1.37 2006-07-07 21:53:41 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -354,7 +354,7 @@ class Because(Reason):
 	"""Describe this reason to an RDF store
 	Returns the value of this reason as interned in the store.
 	"""
-	raise RuntimeError("You have got to be kidding me.")
+	raise RuntimeError("An internal Object slipped out, but we caught it.")
 	me = self.me.get(ko, None)
 	if me != None: return me  #  Only do this once
 	me = self.meIn(ko)

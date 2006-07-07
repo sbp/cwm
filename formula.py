@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.43 2006-07-07 17:45:28 syosi Exp $
+$Id: formula.py,v 1.44 2006-07-07 21:53:40 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,7 +20,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.43 2006-07-07 17:45:28 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.44 2006-07-07 21:53:40 syosi Exp $'[1:-1]
 
 
 from __future__ import generators
@@ -381,7 +381,7 @@ For future reference, use newUniversal
                                  bindings2, why=subWhy).substitution(
                                     bindings3, why=subWhy),
 		              why=why)
-        return total
+        return bindings3, total
                 
     def substituteEquals(self, bindings, newBindings):
 	"""Return this or a version of me with subsitution made
@@ -686,7 +686,7 @@ For future reference, use newUniversal
         retVal = Set()
         for statement in self:
             for node in statement.spo():
-                retVal.update(node.freeVariables)
+                retVal.update(node.freeVariables())
         retVal.difference_update(self.existentials())
         retVal.difference_update(self.universals())
         if self.canonical:
