@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.37 2005-10-24 16:58:38 timbl Exp $
+$Id: pretty.py,v 1.38 2006-07-07 03:30:52 syosi Exp $
 
 Printing of N3 and RDF formulae
 
@@ -17,7 +17,7 @@ import string
 import diag
 from diag import progress, verbosity, tracking
 from term import   Literal, Symbol, Fragment, AnonymousNode, \
-    AnonymousVariable, FragmentNil, \
+    AnonymousVariable, FragmentNil, AnonymousUniversal, \
     Term, CompoundTerm, List, EmptyList, NonEmptyList, N3Set
 from formula import Formula, StoredStatement
 
@@ -29,7 +29,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, \
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.37 $"
+cvsRevision = "$Revision: 1.38 $"
 
 # Magic resources we know about
 
@@ -54,7 +54,10 @@ def auPair(x):
 	if x.lang:
 	    return LITERAL_LANG, (x.string, x.lang)
 	return (LITERAL, x.string)
-    
+
+    if isinstance(x, AnonymousUniversal):
+        if x.uri:
+            return (SYMBOL, x.uriref())
     if isinstance(x, AnonymousNode):
 	return (ANONYMOUS, x.uriref())
     else:

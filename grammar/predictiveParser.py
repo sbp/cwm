@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.16 2006-06-09 19:11:05 syosi Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.17 2006-07-07 03:30:52 syosi Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 try:
@@ -55,9 +55,9 @@ import re
 from codecs import utf_8_encode
 
 BNF = Namespace("http://www.w3.org/2000/10/swap/grammar/bnf#")
-#RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+RDF = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+REGEX = Namespace("http://www.w3.org/2000/10/swap/grammar/regex#")
     
-
 
 branchTable = {}
 tokenRegexps = {}
@@ -175,6 +175,20 @@ def doProduction(lhs):
 	    "No record of what token %s can start with" % `lhs`))
 	if chatty_flag: progress("\tCan start with: %s" % cc) 
 	return
+    if g.contains(subj=lhs, pred=RDF.type, obj=REGEX.Regex):
+        import regex
+        rhs = regex.makeRegex(g, lhs)
+	try:
+            tokenRegexps[lhs] = re.compile(rhs, re.U)
+        except:
+            print rhs
+            raise
+	cc = g.each(subj=lhs, pred=BNF.canStartWith)
+	if cc == []: progress (recordError(
+	    "No record of what token %s can start with" % `lhs`))
+	if chatty_flag: progress("\tCan start with: %s" % cc) 
+	return         
+    
     rhs = g.the(pred=BNF.mustBeOneSequence, subj=lhs)
     if rhs == None:
 	progress (recordError("No definition of " + `lhs`))
