@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.188 2006-07-07 03:30:52 syosi Exp $
+$Id: notation3.py,v 1.189 2006-07-09 20:34:01 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -97,6 +97,8 @@ digitstring = re.compile(r'[0-9]+')		# Unsigned integer
 interesting = re.compile(r'[\\\r\n\"]')
 langcode = re.compile(r'[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?')
 #"
+
+
 
 class SinkParser:
     def __init__(self, store, openFormula=None, thisDoc="", baseURI=None,
@@ -276,7 +278,7 @@ class SinkParser:
 			"Bad variable list after @forAll")
 	    for x in res:
 		#self._context.declareUniversal(x)
-                self._variables[x] =  self._context.newUniversal(x.uriref())
+                self._variables[x.uriref()] =  self._context.newUniversal(x)
 	    return i
 
 	j = self.tok('forSome', str, i)
@@ -1289,7 +1291,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.188 2006-07-07 03:30:52 syosi Exp $"
+            idstr = "$Id: notation3.py,v 1.189 2006-07-09 20:34:01 syosi Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
