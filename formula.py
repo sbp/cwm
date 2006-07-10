@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.44 2006-07-07 21:53:40 syosi Exp $
+$Id: formula.py,v 1.45 2006-07-10 19:25:32 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,7 +20,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.44 2006-07-07 21:53:40 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.45 2006-07-10 19:25:32 syosi Exp $'[1:-1]
 
 
 from __future__ import generators
@@ -208,7 +208,7 @@ For future reference, use newUniversal
 	if v not in self._universalVariables:
 	    self._universalVariables.add(v)
             if self.occurringIn(Set([self.newSymbol(v.uriref())])):
-                raise ValueError
+                raise ValueError("Are you trying to confuse me with %s?" % v)
 	
     def declareExistential(self, v):
 	if verbosity() > 90: progress("Declare existential:", v)

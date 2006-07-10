@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.39 2006-07-10 17:07:19 connolly Exp $
+$Id: why.py,v 1.40 2006-07-10 19:25:32 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -101,7 +101,7 @@ def explainFormula(f, flags=""):
     "Return the explanation formula for f"
     tr = proofsOf.get(f, None)
     if tr is None:
-	raise RuntimeError(
+	raise ValueError(
 	    "No tracker. This may happen if the formula is validly empty.")
     return tr[0].explanation(flags=flags)
 
@@ -567,6 +567,8 @@ class BecauseOfData(Because):
 	Reason.__init__(self)
 	self._source = source
 	self._reason = because
+	if because == None:
+	    raise RuntimeError("Why are we doing this?")
 	return
 
     def explain(self, ko, flags):
@@ -579,10 +581,8 @@ class BecauseOfData(Because):
 	if diag.chatty_flag>49: progress("Parsing reason=%s ko=%s"%(self,me))
 	ko.add(subj=me, pred=rdf.type, obj=reason.Parsing, why=dontAsk)
 	ko.add(subj=me, pred=reason.source, obj=self._source, why=dontAsk)
-        if self._reason:
-            ko.add(subj=me, pred=reason.because,
-                   obj=self._reason.explain(ko, flags=flags),
-                   why=dontAsk)
+	ko.add(subj=me, pred=reason.because, obj=self._reason.explain(ko, flags=flags),
+							why=dontAsk)
 	return me
 
 
