@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.38 2006-07-10 17:02:27 syosi Exp $
+$Id: why.py,v 1.39 2006-07-10 17:07:19 connolly Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -567,8 +567,6 @@ class BecauseOfData(Because):
 	Reason.__init__(self)
 	self._source = source
 	self._reason = because
-	if because == None:
-	    raise RuntimeError("Why are we doing this?")
 	return
 
     def explain(self, ko, flags):
@@ -581,8 +579,10 @@ class BecauseOfData(Because):
 	if diag.chatty_flag>49: progress("Parsing reason=%s ko=%s"%(self,me))
 	ko.add(subj=me, pred=rdf.type, obj=reason.Parsing, why=dontAsk)
 	ko.add(subj=me, pred=reason.source, obj=self._source, why=dontAsk)
-	ko.add(subj=me, pred=reason.because, obj=self._reason.explain(ko, flags=flags),
-							why=dontAsk)
+        if self._reason:
+            ko.add(subj=me, pred=reason.because,
+                   obj=self._reason.explain(ko, flags=flags),
+                   why=dontAsk)
 	return me
 
 
