@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.37 2006-07-07 21:53:41 syosi Exp $
+$Id: why.py,v 1.38 2006-07-10 17:02:27 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -396,7 +396,8 @@ class Premise(Reason):
 				why=dontAsk)
 
 	if not self.statements:
-	    raise RuntimeError("No given data for Premise %s" % self)
+            pass
+##	    raise RuntimeError("No given data for Premise %s" % self)
 	else:
 	    prem = _subsetFormula(self.statements)
 	    standIn = formulaStandIn(ko,prem, flags=flags)
