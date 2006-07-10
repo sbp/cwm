@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.189 2006-07-09 20:34:01 syosi Exp $
+$Id: notation3.py,v 1.190 2006-07-10 14:20:31 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -278,7 +278,8 @@ class SinkParser:
 			"Bad variable list after @forAll")
 	    for x in res:
 		#self._context.declareUniversal(x)
-                self._variables[x.uriref()] =  self._context.newUniversal(x)
+                if x not in self._variables or x in self._parentVariables:
+                    self._variables[x] =  self._context.newUniversal(x)
 	    return i
 
 	j = self.tok('forSome', str, i)
@@ -858,7 +859,7 @@ class SinkParser:
 	    raise BadSyntax(self._thisDoc, self.lines, str, j,
 		"Can't use ?xxx syntax for variable in outermost level: %s"
 		% str[j-1:i])
-	varURI = self._baseURI + "#" +str[j:i]
+	varURI = self._store.newSymbol(self._baseURI + "#" +str[j:i])
 	if varURI not in self._parentVariables:
             self._parentVariables[varURI] = self._parentContext.newUniversal(varURI
 			    , why=self._reason2) 
@@ -1291,7 +1292,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.189 2006-07-09 20:34:01 syosi Exp $"
+            idstr = "$Id: notation3.py,v 1.190 2006-07-10 14:20:31 syosi Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
