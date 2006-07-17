@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.51 2006-07-11 18:49:51 syosi Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.52 2006-07-17 18:25:19 syosi Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -567,6 +567,7 @@ def checkBuiltin(r, f, checker, policy, level=0):
                 fyi("Failed reverse n3Entails!\n\n\n")
         else:
             global debugLevelForInference
+            raise StopIteration
             fyi("Failed forward n3Entails!\n\n\n")
             debugLevelForInference = 1000
             n3Entails(obj, result)

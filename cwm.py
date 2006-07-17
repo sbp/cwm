@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.186 2006-07-07 03:30:52 syosi Exp $
+$Id: cwm.py,v 1.187 2006-07-17 18:25:19 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.186 $"
+cvsRevision = "$Revision: 1.187 $"
     
             
 
@@ -271,6 +271,7 @@ rdf/xml files. Note that this requires rdflib.
 		diag.setTracking(1)
             elif arg == "-bySubject": option_outputStyle = arg
             elif arg == "-no": option_outputStyle = "-no"
+            elif arg == "-debugString": option_outputStyle = "-debugString"
             elif arg == "-strings": option_outputStyle = "-no"
             elif arg == "-sparqlResults": option_outputStyle = "-no"
             elif arg == "-triples" or arg == "-ntriples":
@@ -343,7 +344,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.186 2006-07-07 03:30:52 syosi Exp $"
+        version = "$Id: cwm.py,v 1.187 2006-07-17 18:25:19 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -493,7 +494,10 @@ rdf/xml files. Note that this requires rdflib.
                 option_quiet = 1
 
             elif arg == "-bySubject":
-                option_outputStyle = arg            
+                option_outputStyle = arg
+
+            elif arg == "-debugString":
+                option_outputStyle = arg
 
             elif arg[:7] == "-apply=":
 		workingContext = workingContext.canonicalize()
@@ -714,6 +718,8 @@ rdf/xml files. Note that this requires rdflib.
                     _store.dumpBySubject(workingContext, _outSink)
                 elif option_outputStyle == "-no":
                     pass
+                elif option_outputStyle == "-debugString":
+                    print workingContext.debugString()
                 else:  # "-best"
                     _store.dumpNested(workingContext, _outSink,
 			    flags=option_flags[option_format])
