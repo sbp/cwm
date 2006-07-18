@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.46 2006-07-17 18:25:19 syosi Exp $
+$Id: formula.py,v 1.47 2006-07-18 17:05:30 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,7 +20,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.46 2006-07-17 18:25:19 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.47 2006-07-18 17:05:30 syosi Exp $'[1:-1]
 
 
 from __future__ import generators
@@ -445,7 +445,9 @@ For future reference, use newUniversal
         #progress('bindings are %s' % m)
 
         retVal = F1.substitution(m, why=Because("Vars must be renamed"), cannon=False, keepOpen=True)
-        retVal.canonical = retVal
+        self._renameVarsMaps.append(0)
+        retVal = retVal.canonicalize()
+        self._renameVarsMaps.pop()
         if self._renameVarsMaps:
             self._renameVarsMaps[-1][self] = retVal
             self._renameVarsMaps[-1][retVal] = retVal
