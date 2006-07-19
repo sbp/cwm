@@ -1,6 +1,6 @@
 # Schema for database concepts
 #
-# $Id: db.n3,v 1.11 2006-07-13 11:28:13 timbl Exp $
+# $Id: db.n3,v 1.12 2006-07-19 21:29:30 timbl Exp $
 #
 # See http://www.w3.org/DesignIssues/RDB-RDF.html#table
 #
@@ -25,7 +25,7 @@ Note that table documents are namespace documents: when you
 define a prefix to correspond to the table document's URI with a hash on,
 then the table document automatically an RDF schema for the namespace. 
 """;
- doc:version "$Id: db.n3,v 1.11 2006-07-13 11:28:13 timbl Exp $".
+ doc:version "$Id: db.n3,v 1.12 2006-07-19 21:29:30 timbl Exp $".
 
  
 db:Database a rdfs:Class;
@@ -102,13 +102,12 @@ are followed.
     table).
 """.
 
-db:primaryKey rdfs:subPropertyOf db:column;
-    a owl:FunctionalProperty;    # You can only have one primary key in a table
-    rdfs:range  owl:InverseFunctionalProperty; # No two rows can have same value of a key
+
+db:primaryKeyColumn rdfs:subPropertyOf db:column;
+    rdfs:label "primary key column";
     rdfs:comment"""
-The fact that a table has primary key means that a row document exists
-whose URI is formed by concatenating the URI of the table, a slash, and
-the URI-encoded value of the primary key value for that row.
+A primary key column is a column which is either the primary
+key, or is one of several columns which form the primary key, of a table.
 """.
 
 db:RowDocument a rdfs:Class; rdfs:subClassOf doc:Work;
