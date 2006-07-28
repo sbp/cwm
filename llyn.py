@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.170 2006-07-18 17:05:31 syosi Exp $
+$Id: llyn.py,v 1.171 2006-07-28 22:13:55 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.170 $"
+cvsRevision = "$Revision: 1.171 $"
 
 
 # Magic resources we know about
@@ -996,7 +996,9 @@ class BI_semanticsWithImportsClosure(HeavyBuiltIn, Function):
         if diag.chatty_flag>10: progress("Reading and parsing with closure done.    semantics: %s" % (F))
 #  	if diag.tracking:
 #            proof.append(F.collector)
-        return F.close()
+        F = F.close()
+        store.storeQuad((store._experience, store.semanticsWithImportsClosure, doc, F))
+        return F
     
 class BI_semanticsOrError(BI_semantics):
     """ Either get and parse to semantics or return an error message on any error """
