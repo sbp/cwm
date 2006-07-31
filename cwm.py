@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.187 2006-07-17 18:25:19 syosi Exp $
+$Id: cwm.py,v 1.188 2006-07-31 21:37:54 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.187 $"
+cvsRevision = "$Revision: 1.188 $"
     
             
 
@@ -320,6 +320,9 @@ rdf/xml files. Note that this requires rdflib.
                 if _gotInput == 1:  # But input file *is*, 
                     _outURI = option_inputs[0]        # Just output to same URI
                     option_baseURI = _outURI          # using that as base.
+                if diag.tracking:
+                    _outURI = RDFSink.runNamespace()[:-1]
+                    option_baseURI = _outURI
 
         #  Fix the output sink
         if option_format == "rdf":
@@ -344,7 +347,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.187 2006-07-17 18:25:19 syosi Exp $"
+        version = "$Id: cwm.py,v 1.188 2006-07-31 21:37:54 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.171 2006-07-28 22:13:55 syosi Exp $
+$Id: llyn.py,v 1.172 2006-07-31 21:37:54 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from OrderedSequence import indentString
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.171 $"
+cvsRevision = "$Revision: 1.172 $"
 
 
 # Magic resources we know about
@@ -170,6 +170,9 @@ def memoize(f):
         n = arg_hash((args, keywords))
         if n not in mymap:
             mymap[n] = f(*args, **keywords)
+        else:
+            if diag.chatty_flag > 10:
+                progress("momoizing helped!")
         return mymap[n]
     return k
 
@@ -1245,10 +1248,12 @@ class BI_reification(HeavyBuiltIn, Function, ReverseFunction):
         self.store.storeQuad((self.store._experience, self.store.type, f, 3), why=BecauseOfExperience("SomethingOrOther"))
         return q
 
+import weakref
+
 class Disjoint_set(object):
     class disjoint_set_node(object):
         def __init__(self, val):
-            self.value = val
+            self.value = weakref.ref(val)
             self.parent = None
             self.rank = 0
         def link(self, other):
@@ -1272,7 +1277,7 @@ class Disjoint_set(object):
         __call__ = find_set
 
     def __init__(self):
-        self.map = {}
+        self.map = weakref.WeakKeyDictionary()
 
     def add(self, f):
         self.map[f] = self.disjoint_set_node(f)
@@ -1297,6 +1302,7 @@ class RDFStore(RDFSink) :
 #        self.formulae = []     # List of all formulae        
         self._experience = None   #  A formula of all the things program run knows from direct experience
         self._formulaeOfLength = {} # A dictionary of all the constant formuale in the store, lookup by length key.
+        self._formulaeOfLengthPerWorkingContext = {}
         self.size = 0
         self._equivalentFormulae = Disjoint_set()
         

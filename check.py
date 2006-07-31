@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.52 2006-07-17 18:25:19 syosi Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.53 2006-07-31 21:37:54 syosi Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -783,7 +783,7 @@ def _profile(argv):
     profiler.close()
     stats = hotshot.stats.load(logfile)
     stats.strip_dirs()
-    stats.sort_stats('time', 'calls')
+    stats.sort_stats('cumulative', 'time', 'calls')
     stats.print_stats(50)
 
 if __name__ == "__main__": # we're running as a script, not imported...

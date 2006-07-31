@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.47 2006-07-18 17:05:30 syosi Exp $
+$Id: formula.py,v 1.48 2006-07-31 21:37:54 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,7 +20,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.47 2006-07-18 17:05:30 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.48 2006-07-31 21:37:54 syosi Exp $'[1:-1]
 
 
 from __future__ import generators
@@ -344,7 +344,7 @@ For future reference, use newUniversal
 
     def substitution(self, bindings, why=None, cannon=False, keepOpen=False):
 	"Return this or a version of me with subsitution made"
-	assert type(bindings) is type({})
+	assert isinstance(bindings, dict)
 	store = self.store
 	if self in bindings:
             return bindings[self]
