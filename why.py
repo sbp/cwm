@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.43 2006-07-31 21:37:54 syosi Exp $
+$Id: why.py,v 1.44 2006-08-01 00:47:45 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -235,7 +235,7 @@ class KBReasonTracker(Reason):
 	    progress("Believing %s because of %s"%(s, why))
 	assert why is not self
 	self.reasonForStatement[s]=why
-	if isinstance(why, Premise, BecauseOfRule):
+	if isinstance(why, (Premise, BecauseOfRule)):
 	    why.statements.add(s)
 
 
