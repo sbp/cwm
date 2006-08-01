@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.44 2006-08-01 00:47:45 syosi Exp $
+$Id: why.py,v 1.45 2006-08-01 01:01:26 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -235,7 +235,7 @@ class KBReasonTracker(Reason):
 	    progress("Believing %s because of %s"%(s, why))
 	assert why is not self
 	self.reasonForStatement[s]=why
-	if isinstance(why, (Premise, BecauseOfRule)):
+	if isinstance(why, (Premise, BecauseOfRule, BecauseOfData)):
 	    why.statements.add(s)
 
 
@@ -579,6 +579,7 @@ class BecauseOfData(Because):
 	Reason.__init__(self)
 	self._source = source
 	self._reason = because
+	self.statements = Set()
 	return
 
     def explain(self, ko, flags):
@@ -595,6 +596,13 @@ class BecauseOfData(Because):
             ko.add(subj=me, pred=reason.because, 
                    obj=self._reason.explain(ko, flags=flags),
                    why=dontAsk)
+        if "g" in flags:
+	    prem = _subsetFormula(self.statements)
+	    standIn = formulaStandIn(ko,prem, flags=flags)
+	    ko.add(me, reason.gives, standIn, why=dontAsk)
+	    if diag.chatty_flag >59:
+		progress("Rule (%s) is:\n%s" % 
+			( self._string, prem.n3String()))
 	return me
 
 
