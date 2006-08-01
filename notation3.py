@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.190 2006-07-10 14:20:31 syosi Exp $
+$Id: notation3.py,v 1.191 2006-08-01 01:14:04 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -45,7 +45,7 @@ from RDFSink import  LITERAL, LITERAL_DT, LITERAL_LANG, ANONYMOUS, SYMBOL
 from RDFSink import Logic_NS
 import diag
 
-from why import BecauseOfData
+from why import BecauseOfData, becauseSubexpression
 
 N3_forSome_URI = RDFSink.forSomeSym
 N3_forAll_URI = RDFSink.forAllSym
@@ -573,6 +573,8 @@ class SinkParser:
                 self._parentVariables = self._variables
                 self._anonymousNodes = {}
                 self._variables = self._variables.copy()
+                reason2 = self._reason2
+                self._reason2 = becauseSubexpression
                 if subj is None: subj = self._store.newFormula()
                 self._context = subj
                 
@@ -593,6 +595,7 @@ class SinkParser:
                 self._variables = self._parentVariables
                 self._parentVariables = grandParentVariables
                 self._context = self._parentContext
+                self._reason2 = reason2
                 self._parentContext = oldParentContext
                 res.append(subj.close())   #  No use until closed
                 return j
@@ -1292,7 +1295,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.190 2006-07-10 14:20:31 syosi Exp $"
+            idstr = "$Id: notation3.py,v 1.191 2006-08-01 01:14:04 syosi Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
