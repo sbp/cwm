@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.53 2006-07-31 21:37:54 syosi Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.54 2006-08-02 16:59:14 syosi Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -76,9 +76,10 @@ class FormulaCache(object):
         f = self._loaded.get(uri, None)
         if f == None:
             setVerbosity(debugLevelForParsing)
-            f = load(uri, flags="B") # why B? -DWC
+            f = load(uri, flags="B").close() # why B? -DWC
             setVerbosity(0)
             self._loaded[uri] = f
+            assert f.canonical is f, `f.canonical`
         return f
 
 def topLevelLoad(uri=None, flags=''):
@@ -567,7 +568,7 @@ def checkBuiltin(r, f, checker, policy, level=0):
                 fyi("Failed reverse n3Entails!\n\n\n")
         else:
             global debugLevelForInference
-            raise StopIteration
+#            raise StopIteration
             fyi("Failed forward n3Entails!\n\n\n")
             debugLevelForInference = 1000
             n3Entails(obj, result)

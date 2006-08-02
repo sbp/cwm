@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.48 2006-07-31 21:37:54 syosi Exp $
+$Id: formula.py,v 1.49 2006-08-02 16:59:14 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,7 +20,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.48 2006-07-31 21:37:54 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.49 2006-08-02 16:59:14 syosi Exp $'[1:-1]
 
 
 from __future__ import generators
@@ -132,6 +132,9 @@ class Formula(AnonymousNode, CompoundTerm):
 	for i in range(ls):
 	    diff = cmp(s[i],o[i])
 	    if diff != 0: return diff
+	return 0
+	import why
+	raise RuntimeError("%s\n%s" % (dict(why.proofsOf), self.debugString()))
 	raise RuntimeError("Identical formulae not interned! Length %i: %s\n\t%s\n vs\t%s" % (
 		    ls, `s`, self.debugString(), other.debugString()))
 

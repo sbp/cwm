@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.25 2005-10-24 16:58:38 timbl Exp $
+$Id: webAccess.py,v 1.26 2006-08-02 16:59:14 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -16,6 +16,8 @@ import sys, os
 
 #import urllib
 import urllib2, urllib  # Python standard
+
+from why import newTopLevelFormula
 
 import uripath # http://www.w3.org/2000/10/swap/uripath.py
 import diag
@@ -79,7 +81,7 @@ def urlopenForRDF(addr, referer=None):
     return q
 
 def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
-		flags="", referer=None, why=None):
+		flags="", referer=None, why=None, topLevel=False):
     """Get and parse document.  Guesses format if necessary.
 
     uri:      if None, load from standard input.
@@ -155,6 +157,8 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
 	F = openFormula
     else:
 	F = store.newFormula()
+    if topLevel:
+        newTopLevelFormula(F)
     import os
     if guess == "x-application/sparql":
         if diag.chatty_flag > 49: progress("Parsing as SPARQL")
