@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.38 2006-01-23 21:06:21 timbl Exp $
+ $Id: retest.py,v 1.39 2006-08-09 23:20:42 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -80,11 +80,17 @@ def problem(str):
 def usage():
     print __doc__
 
-def execute(cmd1):
+from subprocess import Popen, call, PIPE
+
+def execute(cmd1, noStdErr=False):
     global verbose, no_action
     if verbose: print "    "+cmd1
     if no_action: return
-    result = system(cmd1)
+    if noStdErr:
+        stderr = file('/dev/null', 'w')
+    else:
+        stderr = None
+    result = call(cmd1, shell=True, stderr=stderr)
     if result != 0:
 	raise RuntimeError("Error %i executing %s" %(result, cmd1))
 
@@ -428,7 +434,7 @@ def main():
 
 	if chatty and not verboseDebug:
 	    execute("""%s %s %s --chatty=100  %s  &> /dev/null""" %
-		(env, python_command, cwm_command, arguments))	
+		(env, python_command, cwm_command, arguments), noStdErr=True)	
 
 	if proofs and kb.contains(subj=t, pred=rdf.type, obj=test.CwmProofTest):
 	    execute("""%s %s %s --quiet %s --base=a --why  > ,proofs/%s""" %

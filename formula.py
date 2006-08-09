@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.49 2006-08-02 16:59:14 syosi Exp $
+$Id: formula.py,v 1.50 2006-08-09 23:20:42 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -20,7 +20,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.49 2006-08-02 16:59:14 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.50 2006-08-09 23:20:42 syosi Exp $'[1:-1]
 
 
 from __future__ import generators
@@ -46,7 +46,7 @@ from RDFSink import FORMULA, SYMBOL
 
 
 
-from why import Because
+from why import Because, isTopLevel
 
 
 ###################################### Forumula
@@ -379,6 +379,9 @@ For future reference, use newUniversal
             subj=s[SUBJ].substitution(
                                  bindings2, why=subWhy, cannon=cannon).substitution(
                                     bindings3, why=subWhy, cannon=cannon)
+            if isTopLevel(self) and isinstance(subj, Formula) and not subj.reallyCanonical:
+                subj = subj.reopen()
+                subj = subj.canonicalize(cannon=True)
             if subj is not s[SUBJ]:
                 bindings2[s[SUBJ]] = subj
 	    pred=s[PRED].substitution(

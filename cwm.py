@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.189 2006-08-02 16:59:14 syosi Exp $
+$Id: cwm.py,v 1.190 2006-08-09 23:20:42 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.189 $"
+cvsRevision = "$Revision: 1.190 $"
     
             
 
@@ -347,7 +347,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.189 2006-08-02 16:59:14 syosi Exp $"
+        version = "$Id: cwm.py,v 1.190 2006-08-09 23:20:42 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -573,8 +573,7 @@ rdf/xml files. Note that this requires rdflib.
 		progress("\nDump of working formula:\n" + workingContext.debugString())
 		
             elif arg == "-purge":
-                
-		workingContext.reopen()
+    		workingContext.reopen()
                 _store.purge(workingContext)
 		
             elif arg == "-purge-rules" or arg == "-data":
