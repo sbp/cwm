@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.47 2006-08-09 23:20:42 syosi Exp $
+$Id: why.py,v 1.48 2006-08-24 17:54:01 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -459,7 +459,7 @@ class BecauseOfRule(Reason):
 	me = self.meIn(ko)
 	if diag.chatty_flag>49: progress("Inference=%s ko=%s"%(self,me))
 	ko.add(subj=me, pred=rdf.type, obj=reason.Inference, why=dontAsk) 
-	for var, val in self._bindings.items():
+	for var, (val, source) in self._bindings.items():
 	    b = ko.newBlankNode(why= dontAsk)
 	    ko.add(subj=me, pred=reason.binding, obj=b, why= dontAsk)
 	    ko.add(subj=b, pred=reason.variable,
