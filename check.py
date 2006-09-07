@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.54 2006-08-02 16:59:14 syosi Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.55 2006-09-07 05:17:13 connolly Exp $'[1:-1]
 
 from swap.myStore import load, Namespace, formula
 from swap.RDFSink import PRED, SUBJ, OBJ
@@ -792,7 +792,7 @@ if __name__ == "__main__": # we're running as a script, not imported...
 
     if '--test' in sys.argv:
         _test()
-    if '--profile' in sys.argv:
+    elif '--profile' in sys.argv:
         _profile(sys.argv)
     else:
         main(sys.argv)
