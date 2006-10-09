@@ -31,7 +31,7 @@ This program is or was http://www.w3.org/2000/10/swap/grammar/predictiveParser.p
 W3C open source licence. Enjoy. Tim BL
 """
 
-__version__ = "$Id: predictiveParser.py,v 1.17 2006-07-07 03:30:52 syosi Exp $"
+__version__ = "$Id: predictiveParser.py,v 1.18 2006-10-09 21:14:01 timbl Exp $"
 
 # SWAP http://www.w3.org/2000/10/swap
 try:
@@ -168,7 +168,7 @@ def doProduction(lhs):
 	try:
             tokenRegexps[lhs] = re.compile(rhs.value(), re.U)
         except:
-            print rhs.value()
+            print rhs.value().encode('utf-8')
             raise
 	cc = g.each(subj=lhs, pred=BNF.canStartWith)
 	if cc == []: progress (recordError(
