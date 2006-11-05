@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.32 2006-01-13 14:48:54 syosi Exp $
+$Id: cwm_string.py,v 1.33 2006-11-05 00:51:14 connolly Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -170,6 +170,21 @@ class BI_search(LightBuiltIn, Function):
             return m.groups()
         if verbosity() > 80: progress("search didn't match")
 
+class BI_split(LightBuiltIn, Function):
+    """split a string into a list of strings
+    takes a list of 2 strings and an integer; the first is the
+    input data, and the second is a regex
+    see re.split in http://docs.python.org/lib/node46.html
+
+    """
+    
+    def evaluateObject(self, subj_py):
+        store = self.store
+        str, pat, q = subj_py
+        patc = re.compile(pat)
+        return patc.split(str, q)
+
+
 class BI_stringToList(LightBuiltIn, Function, ReverseFunction):
     """You need nothing else. Makes a string a list of characters, and visa versa.
 
@@ -276,6 +291,7 @@ def register(store):
     str.internFrag("concatenation", BI_concatenation)
     str.internFrag("scrape", BI_scrape)
     str.internFrag("search", BI_search)
+    str.internFrag("split", BI_split)
     str.internFrag("stringToList", BI_stringToList)
     str.internFrag("format", BI_format)
     str.internFrag("matches", BI_matches)
