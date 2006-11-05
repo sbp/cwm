@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.33 2006-11-05 00:51:14 connolly Exp $
+$Id: cwm_string.py,v 1.34 2006-11-05 02:59:33 connolly Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -185,6 +185,17 @@ class BI_split(LightBuiltIn, Function):
         return patc.split(str, q)
 
 
+class BI_tokenize(LightBuiltIn, Function):
+    """like split without the max arg
+    """
+    
+    def evaluateObject(self, subj_py):
+        store = self.store
+        str, pat = subj_py
+        patc = re.compile(pat)
+        return patc.split(str)
+
+
 class BI_stringToList(LightBuiltIn, Function, ReverseFunction):
     """You need nothing else. Makes a string a list of characters, and visa versa.
 
@@ -271,6 +282,14 @@ class BI_encodeForFragID(LightBuiltIn, Function):
     def evaluateObject(self, subj_py):
 	return urllib.quote(subj_py)
 
+class BI_resolve_uri(LightBuiltIn, Function):
+    """see http://www.w3.org/2006/xpath-functions#resolve-uri"""
+    
+    def evaluateObject(self, subj_py):
+        import uripath
+        there, base = subj_py
+	return uripath.join(base, there)
+
 
 #  Register the string built-ins with the store
 
@@ -308,3 +327,7 @@ def register(store):
     str.internFrag("encodeForFragID", BI_encodeForFragID)
 
     
+    fn = store.symbol("http://www.w3.org/2006/xpath-functions")
+    fn.internFrag("resolve-uri", BI_resolve_uri)
+    fn.internFrag("tokenize", BI_tokenize)
+
