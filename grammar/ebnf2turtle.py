@@ -3,7 +3,7 @@ bnf2turtle -- write a turtle version of an EBNF grammar
 =======================================================
 
 :Author: `Dan Connolly`_
-:Version: $Revision: 1.10 $ of $Date: 2006-06-21 00:53:31 $
+:Version: $Revision: 1.11 $ of $Date: 2006-11-15 19:59:25 $
 :Copyright: `W3C Open Source License`_ Share and enjoy.
 
 .. _Dan Connolly: http://www.w3.org/People/Connolly/
@@ -140,7 +140,7 @@ Check them a la::
 
 """
 
-__version__ = "$Id: ebnf2turtle.py,v 1.10 2006-06-21 00:53:31 connolly Exp $"
+__version__ = "$Id: ebnf2turtle.py,v 1.11 2006-11-15 19:59:25 connolly Exp $"
 
 import re
 
@@ -460,7 +460,7 @@ def ttlExpr(expr, pfx, indent, obj=1):
         if ket: print indent + ket
 
     elif op == '+':
-        print indent + bra + "%s:rep " % pfx
+        print indent + bra + "%s:plus " % pfx
         ttlExpr(args, pfx, indent + '  ')
         if ket: print indent + ket
 
@@ -562,7 +562,10 @@ if __name__ == '__main__':
     else: main(sys.argv)
 
 # $Log: ebnf2turtle.py,v $
-# Revision 1.10  2006-06-21 00:53:31  connolly
+# Revision 1.11  2006-11-15 19:59:25  connolly
+# change rep to plus, eps to empty
+#
+# Revision 1.10  2006/06/21 00:53:31  connolly
 # added a special case for #x5c (\) in rehex/cclass
 #
 # Revision 1.9  2006/06/20 23:26:29  connolly
