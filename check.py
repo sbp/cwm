@@ -12,16 +12,18 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.56 2006-10-18 05:08:55 connolly Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.57 2006-12-14 07:01:14 connolly Exp $'[1:-1]
 
-from swap.myStore import load, Namespace, formula
-from swap.RDFSink import PRED, SUBJ, OBJ
-from swap.set_importer import Set
-from swap.term import List, Literal, CompoundTerm, BuiltIn, Function
+
+# mystore and term should be swappable with rdflib; shared interfaces
+from swap.myStore import load, Namespace, formula #@@get rid of the global store
+from swap.RDFSink import PRED, SUBJ, OBJ #@@ this is the old quad API; should go.
+from swap.set_importer import Set # which python version shall we support?
+from swap.term import List, Literal, CompoundTerm, BuiltIn, Function #@@ TODO: split built-ins out of swap.term. don't rely on interning at the interface
 from swap.llyn import Formula #@@ dependency should not be be necessary
 from swap.diag import verbosity, setVerbosity, progress
 from swap import diag
-from swap.query import testIncludes
+from swap.query import testIncludes #see also http://en.wikipedia.org/wiki/Unification . Currently cwm's unification algorithm is spread all over the place.
 
 import swap.llyn # Chosen engine registers itself
 import sys # to get exception info for diagnostics
@@ -867,7 +869,7 @@ def _s2f(s, base):
     """make a formula from a string.
 
     Cribbed from llyn.BI_parsedAsN3
-    should be part of the myStore API, no?
+    should be part of the myStore API, no? yes. TODO
 
     >>> _s2f("<#sky> <#color> <#blue>.", "http://example/socrates")
     {sky color blue}
