@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.51 2006-08-24 17:54:01 syosi Exp $
+$Id: formula.py,v 1.52 2007-01-03 16:17:58 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -19,11 +19,10 @@ and the redfoot/rdflib interface, a python RDF API:
    http://rdflib.net/latest/doc/triple_store.html
 
 """
-
-__version__ = '$Id: formula.py,v 1.51 2006-08-24 17:54:01 syosi Exp $'[1:-1]
-
-
 from __future__ import generators
+
+
+__version__ = '$Id: formula.py,v 1.52 2007-01-03 16:17:58 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -348,7 +347,7 @@ For future reference, use newUniversal
     def substitution(self, bindings, why=None, cannon=False, keepOpen=False):
 	"Return this or a version of me with subsitution made"
 	assert isinstance(bindings, dict)
-	store = self.store
+        store = self.store
 	if self in bindings:
             return bindings[self]
 	oc = self.occurringIn(bindings.keys())

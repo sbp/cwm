@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.39 2006-08-09 23:20:42 syosi Exp $
+ $Id: retest.py,v 1.40 2007-01-03 16:17:58 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -226,7 +226,7 @@ def main():
     problems = []
     
     REFWD="http://example.com/swap/test"
-    WD = "file:" + os.getcwd()
+    WD = base()[:-1] 
     
     #def basicTest(case, desc, args)
 

@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.20 2006-07-07 03:30:52 syosi Exp $
+$Id: sparql2cwm.py,v 1.21 2007-01-03 16:17:58 syosi Exp $
 """
 
 from set_importer import Set
@@ -24,7 +24,7 @@ def value(self, newVal=None):
 verbose = value.__get__([0])
 reason2 = value.__get__([0])
 
-def abbr(prodURI): 
+def abbr(prodURI):
    return prodURI.split('#').pop()
 
 class typedThing(unicode):

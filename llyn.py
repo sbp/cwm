@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.175 2006-08-24 17:54:01 syosi Exp $
+$Id: llyn.py,v 1.176 2007-01-03 16:17:58 syosi Exp $
 
 
 RDF Store and Query engine
@@ -99,7 +99,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.175 $"
+cvsRevision = "$Revision: 1.176 $"
 
 
 # Magic resources we know about
@@ -326,7 +326,7 @@ class IndexedFormula(Formula):
 	obj = obj.substituteEquals(self._redirections, newBindings)
 	    
         if diag.chatty_flag > 90:
-            progress("Add statement (size before %i, %i statements) to %s:\n {%s %s %s}" % (
+            progress(u"Add statement (size before %i, %i statements) to %s:\n {%s %s %s}" % (
 		self.store.size, len(self.statements),`self`,  `subj`, `pred`, `obj`) )
         if self.statementsMatching(pred, subj, obj):
             if diag.chatty_flag > 97:
