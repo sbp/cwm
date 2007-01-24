@@ -16,7 +16,7 @@
         <seeAlso r:resource="http://dev.w3.org/cvsweb/2000/quacken/"/>
         <seeAlso r:resource="http://dev.w3.org/cvsweb/~checkout~/2000/quacken/vocab.n3?rev=1.1"/>
         <seeAlso r:resource="http://www.intuit.com/support/quicken/2002/win/1177.html"/>
-        <doc:version>$Id: qif.rdf,v 1.2 2007-01-24 19:19:35 timbl Exp $</doc:version>
+        <doc:version>$Id: qif.rdf,v 1.3 2007-01-24 19:20:41 timbl Exp $</doc:version>
     </r:Description>
 
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Account">
@@ -33,6 +33,13 @@
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Transaction">
         <label>transaction</label>
     </Class>
+
+    <r:Property r:about="http://www.w3.org/2000/10/swap/pim/qif#accordingTo">
+        <comment>The document which is the source of data for this transaction.</comment>
+        <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
+        <label>statement</label>
+        <range r:resource="http://www.w3.org/2000/10/swap/pim/doc#Work"/>
+    </r:Property>
 
     <r:Property r:about="http://www.w3.org/2000/10/swap/pim/qif#amount">
         <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
