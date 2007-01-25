@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.67 2007-01-25 20:26:50 timbl Exp $
+$Id: term.py,v 1.68 2007-01-25 22:53:06 timbl Exp $
 
 term
 
@@ -1497,7 +1497,7 @@ class XMLLiteral(Literal):
 
     def __str__(self):
 	if not self.string:
-	    self.string = Canonicalize(self.dom, None, exclude=1) 
+	    self.string = Canonicalize(self.dom, None, unsuppressedPrefixes=[]) 
 	return self.string 
 
     def __int__(self):

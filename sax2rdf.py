@@ -186,8 +186,8 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
 	self.merge = self.sink.newSymbol(NODE_MERGE_URI)
         self.sink.startDoc()
-        version = "$Id: sax2rdf.py,v 1.46 2007-01-25 20:26:50 timbl Exp $"
-        self.sink.makeComment("RDF parsed by "+version[1:-1])
+        version = "$Id: sax2rdf.py,v 1.47 2007-01-25 22:53:06 timbl Exp $"
+#        self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
 	    self.sink.setDefaultNamespace(self._thisDoc+"#")
@@ -519,7 +519,6 @@ class RDFHandler(xml.sax.ContentHandler):
 			    self.domDocument = self.domImplementation.createDocument(
 				'http://www.w3.org/1999/02/22-rdf-syntax-ns', 'envelope', None)
 			    self.domElement = self.domDocument.documentElement
-			    
 		    else:
 			raise SyntaxError("Unknown parse type '%s'" % value )
                 elif name == "nodeID":
@@ -777,12 +776,55 @@ class RDFHandler(xml.sax.ContentHandler):
         self.LiteralNS.append(declared)
         nsMap = self._prefixMap[-1]
         if name[0]:
+            prefix = nsMap[name[0]]
+            if prefix:
+		e = self.domDocument.createElementNS(name[0], prefix + ':' + name[1])
+            else:
+		e = self.domDocument.createElementNS(name[0], name[1])
+            for ns in [name] + attrs.keys():
+                ns = ns[0]
+                if not ns in declared:
+                    prefix = nsMap.get(ns, None)
+		    if prefix is None:
+			columnNumber = self._p.getColumnNumber()
+			lineNumber = self._p.getLineNumber()
+			where = "Undefined namespace '%s' parsing XML at column %i in line %i of <%s>\n\t" % (
+				    ns, columnNumber, lineNumber, self._thisDoc)
+			raise SyntaxError(where + sys.exc_info()[1].__str__())
+
+                    declared[ns] = prefix
+                    if prefix:
+#                        self.testdata += (' xmlns:%s="%s"' % (prefix, ns))
+			e.setAttribute('xmlns:'+prefix, ns)   # use setAttributeNS? What NS?
+                    else:
+                        # self.testdata += (' xmlns="%s"' % ns)
+			e.setAttribute('xmlns', ns) 
+        else:
+	    e = self.domDocument.createElement(name[1])
+
+	self.domElement.appendChild(e)
+	self.domElement = e
+	# progress("@@@ self.domElement.namespaceURI=", self.domElement.namespaceURI)
+
+        for (name, value) in attrs.items():
+            if name[0]:
+		e.setAttributeNS(name[0], declared[name[0]] + ":" + name[1], value)
+            else:
+		e.setAttributeNS(name[1], value) #@@@ Missing prefix on qname
+        
+    def literal_element_start_DOM_OLD(self, name, qname, attrs):
+
+        declared = self.LiteralNS[-1].copy()
+        self.LiteralNS.append(declared)
+        nsMap = self._prefixMap[-1]
+        if name[0]:
 	    e = self.domDocument.createElementNS(name[0], name[1])
 #	    progress("@@@ XML literal name: ", name)
 	else:
 	    e = self.domDocument.createElement(name[1])
 	self.domElement.appendChild(e)
 	self.domElement = e
+	# progress("@@@ self.domElement.namespaceURI=", self.domElement.namespaceURI)
 
         for (name, value) in attrs.items():
             if name[0]:

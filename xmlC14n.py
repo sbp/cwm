@@ -23,7 +23,7 @@ Authors:
     "Joseph M. Reagle Jr." <reagle@w3.org>
     "Rich Salz" <rsalz@zolera.com>
 
-$Date: 2007-01-25 20:26:50 $ by $Author: timbl $
+$Date: 2007-01-25 22:53:06 $ by $Author: timbl $
 '''
 
 _copyright = '''Copyright 2001, Zolera Systems Inc.  All Rights Reserved.
@@ -36,6 +36,9 @@ or
   W3C Software License
   http://www.w3.org/Consortium/Legal/copyright-software-19980720
 '''
+
+
+# from diag import progress, chatty_flag
 
 import string
 from xml.dom import Node
@@ -257,10 +260,14 @@ class _implementation:
         ns_local = ns_parent.copy()
         xml_attrs_local = {}
 
+	# progress("_do_element node.nodeName=", node.nodeName)
+	# progress("_do_element node.namespaceURI", node.namespaceURI)
+	# progress("_do_element node.tocml()", node.toxml())
         # Divide attributes into NS, XML, and others.
         other_attrs = initial_other_attrs[:]
         in_subset = _in_subset(self.subset, node)
         for a in _attrs(node):
+	    # progress("\t_do_element a.nodeName=", a.nodeName)
             if a.namespaceURI == XMLNS.BASE:
                 n = a.nodeName
                 if n == "xmlns:": n = "xmlns"        # DOM bug workaround

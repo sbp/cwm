@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.34 2007-01-25 20:26:50 timbl Exp $
+$Id: toXML.py,v 1.35 2007-01-25 22:53:06 timbl Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -322,7 +322,7 @@ z  - Allow relative URIs for namespaces
 	    nid = self._nodeID.get(obj, None)
 	    if nid == None:
 		objn = self.referenceTo( obj[1])
-		progress("@@@ objn=%s, obj[1]=%s" %(objn, obj[1]))
+		# progress("@@@ objn=%s, obj[1]=%s" %(objn, obj[1]))
 		nid2 = self._nodeID.get(pred, None)
 		if nid2 is None:
                     self._xwr.emptyElement(pred[1], [(RDF_NS_URI+' resource', objn)], self.prefixes)
