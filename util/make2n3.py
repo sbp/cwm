@@ -5,9 +5,9 @@ import string
 import os
 import re
 
-version = "$Id: make2n3.py,v 1.5 2002-10-08 20:59:09 timbl Exp $"[1:-1]
+version = "$Id: make2n3.py,v 1.6 2007-01-25 20:26:51 timbl Exp $"[1:-1]
 
-import  notation3  # from http://www.w3.org/2000/10/swap/notation3.py
+from swap import notation3  # from http://www.w3.org/2000/10/swap/notation3.py
 
 global verbose
 global recursive
@@ -174,7 +174,7 @@ Syntax:    make2n3  <file>
 
     where <file> can be omitted and if so defaults to Makefile.
     This program was http://www.w3.org/2000/10/swap/util/make2p3.py
-    $Id: make2n3.py,v 1.5 2002-10-08 20:59:09 timbl Exp $
+    $Id: make2n3.py,v 1.6 2007-01-25 20:26:51 timbl Exp $
     
     -v  verbose
 """

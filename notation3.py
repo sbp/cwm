@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.191 2006-08-01 01:14:04 syosi Exp $
+$Id: notation3.py,v 1.192 2007-01-25 20:26:50 timbl Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -41,9 +41,10 @@ from uripath import refTo, join
 import uripath
 import RDFSink
 from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4
-from RDFSink import  LITERAL, LITERAL_DT, LITERAL_LANG, ANONYMOUS, SYMBOL
+from RDFSink import  LITERAL, XMLLITERAL, LITERAL_DT, LITERAL_LANG, ANONYMOUS, SYMBOL
 from RDFSink import Logic_NS
 import diag
+from xmlC14n import Canonicalize
 
 from why import BecauseOfData, becauseSubexpression
 
@@ -1295,7 +1296,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.191 2006-08-01 01:14:04 syosi Exp $"
+            idstr = "$Id: notation3.py,v 1.192 2007-01-25 20:26:50 timbl Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
@@ -1545,6 +1546,12 @@ B   Turn any blank node into a existentially qualified explicitly named node.
         singleLine = "n" in self._flags
         if ty == LITERAL:
 	    return stringToN3(value, singleLine=singleLine, flags = self._flags)
+
+        if ty == XMLLITERAL:
+	    st = Canonicalize(value, None, unsuppressedPrefixes=['foo'])
+	    st = stringToN3(st, singleLine=singleLine, flags=self._flags)
+	    return st + "^^" + self.representationOf(context, (SYMBOL,
+		    "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"))
 
         if ty == LITERAL_DT:
 	    s, dt = value

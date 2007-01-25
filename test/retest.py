@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.40 2007-01-03 16:17:58 syosi Exp $
+ $Id: retest.py,v 1.41 2007-01-25 20:26:50 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -64,7 +64,7 @@ no_action = 0
 
 def localize(uri):
     """Get URI relative to where this lives"""
-    import uripath
+    from swap import uripath
     return uripath.refTo("http://www.w3.org/2000/10/swap/test/retest.py", uri)
 
 def problem(str):

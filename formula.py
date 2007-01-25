@@ -1,7 +1,8 @@
+from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.52 2007-01-03 16:17:58 syosi Exp $
+$Id: formula.py,v 1.53 2007-01-25 20:26:50 timbl Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -19,10 +20,8 @@ and the redfoot/rdflib interface, a python RDF API:
    http://rdflib.net/latest/doc/triple_store.html
 
 """
-from __future__ import generators
 
-
-__version__ = '$Id: formula.py,v 1.52 2007-01-03 16:17:58 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.53 2007-01-25 20:26:50 timbl Exp $'[1:-1]
 
 import types
 import StringIO
@@ -187,6 +186,12 @@ class Formula(AnonymousNode, CompoundTerm):
 	
 	The literal is created in the same store as the formula."""
 	return self.store.newLiteral(str, dt, lang)
+
+    def newXMLLiteral(self, doc):
+	"""Create or reuse the internal representation of the RDF literal whose string is given
+	
+	The literal is created in the same store as the formula."""
+	return self.store.newXMLLiteral(doc)
 
     def intern(self, value):
 	return self.store.intern(value)

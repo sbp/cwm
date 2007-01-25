@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_set.py,v 1.2 2005-01-19 20:14:37 syosi Exp $
+$Id: cwm_set.py,v 1.3 2007-01-25 20:26:50 timbl Exp $
 
 set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -149,7 +149,7 @@ class BI_objects(LightBuiltIn, Function):
         return N3Set([x.object() for x in subj])
 
 class BI_triples(LightBuiltIn, Function):
-    """Return the set of subjects used in a formula
+    """Return the set of triple used in a formula
 
     """
     def evalObj(self, subj, queue, bindings, proof, query):

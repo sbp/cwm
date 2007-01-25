@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.38 2006-07-07 03:30:52 syosi Exp $
+$Id: pretty.py,v 1.39 2007-01-25 20:26:50 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -16,20 +16,20 @@ import string
 
 import diag
 from diag import progress, verbosity, tracking
-from term import   Literal, Symbol, Fragment, AnonymousNode, \
+from term import   Literal, XMLLiteral, Symbol, Fragment, AnonymousNode, \
     AnonymousVariable, FragmentNil, AnonymousUniversal, \
     Term, CompoundTerm, List, EmptyList, NonEmptyList, N3Set
 from formula import Formula, StoredStatement
 
 from RDFSink import Logic_NS, RDFSink, forSomeSym, forAllSym
 from RDFSink import CONTEXT, PRED, SUBJ, OBJ, PARTS, ALL4, \
-	    ANONYMOUS, SYMBOL, LITERAL, LITERAL_DT, LITERAL_LANG
+	    ANONYMOUS, SYMBOL, LITERAL, LITERAL_DT, LITERAL_LANG, XMLLITERAL
 from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, \
 		    List_NS
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.38 $"
+cvsRevision = "$Revision: 1.39 $"
 
 # Magic resources we know about
 
@@ -48,9 +48,11 @@ prefixchars = "abcdefghijklmnopqustuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def auPair(x):
     """Encode as object-free form for unparser interface"""
+    if isinstance(x, XMLLiteral):
+	return (XMLLITERAL, x.dom)
     if isinstance(x, Literal):
 	if x.datatype:
-	    return LITERAL_DT, (x.string, x.datatype.uriref())
+	    return LITERAL_DT, (str(x), x.datatype.uriref()) # could be XMLLit
 	if x.lang:
 	    return LITERAL_LANG, (x.string, x.lang)
 	return (LITERAL, x.string)

@@ -17,7 +17,7 @@ import re
 
 PREFIX="/sw"
 
-version = "$Id: fink2n3.py,v 1.6 2002-06-22 11:53:41 timbl Exp $"[1:-1]
+version = "$Id: fink2n3.py,v 1.7 2007-01-25 20:26:51 timbl Exp $"[1:-1]
 macros = { "N": "_parent", "n":"Package",  "v":"Version", "r": "Revision",
 	    "p": "_prefix", "P": "_prefix"}
 
@@ -30,7 +30,8 @@ qualified = re.compile(r'(.*)(\(.*\)) *')
 terminator = re.compile(r'^ *<< *$')   # must be on a line all by itself, save whitespace
 blank = re.compile(r'[ \t]*')
 commaEnd = re.compile(r'.*, *$')
-import  notation3
+
+from swap import  notation3  # http://www.w3.org/2000/10/swap
 
 def ss(str):
     """Format string for output"""
@@ -295,7 +296,7 @@ Syntax:    make2n3  [-r] <file>
 
     where <file> can be omitted and if so defaults to /sw/fink/dists .
     This program was http://www.w3.org/2000/10/swap/util/fink2p3.py
-    $Id: fink2n3.py,v 1.6 2002-06-22 11:53:41 timbl Exp $
+    $Id: fink2n3.py,v 1.7 2007-01-25 20:26:51 timbl Exp $
 """
         else:
             print """Bad option argument.""", arg, ". use -? for help."
