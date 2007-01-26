@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.192 2007-01-25 20:26:50 timbl Exp $
+$Id: notation3.py,v 1.193 2007-01-26 03:33:01 timbl Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -34,6 +34,8 @@ import string
 import codecs # python 2-ism; for writing utf-8 in RDF/xml output
 import urllib
 import re
+
+from sax2rdf import XMLtoDOM # Incestuous.. would be nice to separate N3 and XML
 
 # SWAP http://www.w3.org/2000/10/swap
 from diag import verbosity, setVerbosity, progress
@@ -997,6 +999,10 @@ class SinkParser:
 		    res2 = []
 		    j = self.uri_ref2(str, j+2, res2) # Read datatype URI
 		    dt = res2[0]
+		    if dt.uriref() == "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral":
+			dom = XMLtoDOM(s)
+			res.append(self._store.newXMLLiteral(dom))
+			return j
                 res.append(self._store.newLiteral(s, dt, lang))
 		return j
 	    else:
@@ -1296,7 +1302,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.192 2007-01-25 20:26:50 timbl Exp $"
+            idstr = "$Id: notation3.py,v 1.193 2007-01-26 03:33:01 timbl Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
