@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: llyn.py,v 1.178 2007-01-26 03:33:01 timbl Exp $
+$Id: llyn.py,v 1.179 2007-01-29 18:52:20 timbl Exp $
 
 
 RDF Store and Query engine
@@ -63,6 +63,8 @@ import md5, binascii  # for building md5 URIs
 import uripath
 from uripath import canonical
 
+from sax2rdf import XMLtoDOM
+
 from why import smushedFormula, Premise, newTopLevelFormula, isTopLevel
 
 import notation3    # N3 parsers and generators, and RDF generator
@@ -99,7 +101,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.178 $"
+cvsRevision = "$Revision: 1.179 $"
 
 
 # Magic resources we know about
@@ -1069,6 +1071,12 @@ class BI_content(HeavyBuiltIn, Function):
                          doc,
                          C))
         return C
+
+class BI_xmlTree(HeavyBuiltIn, Function):
+    def evalObj(self, subj, queue, bindings, proof, query):
+	x= BI_content.evalObj(self, subj, queue, bindings, proof, query)
+	dom = XMLtoDOM(x.value())
+	return subj.store.intern((XMLLITERAL, dom))
 
 class BI_parsedAsN3(HeavyBuiltIn, Function):
     def evalObj(self, subj, queue, bindings, proof, query):
