@@ -189,7 +189,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._items = [] # for <rdf:li> containers
         self._litDepth = 0
 	
-        version = "$Id: sax2rdf.py,v 1.48 2007-01-26 03:33:01 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.49 2007-01-29 18:54:18 timbl Exp $"
 #        self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -652,7 +652,7 @@ class RDFHandler(xml.sax.ContentHandler):
 		    e = self.domDocument.documentElement.firstChild
 		    while e.nodeType == e.TEXT_NODE:
 			e = e.nextSibling
-		    progress("@@@ e=", e, e.nodeName)
+		    #progress("@@@ e=", e, e.nodeName)
 		    self.domElement = e   # Leave for literal parser to pick up
 		    if self.sink:
 			self.sink.makeStatement(( self._context,
