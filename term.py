@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.68 2007-01-25 22:53:06 timbl Exp $
+$Id: term.py,v 1.69 2007-01-29 18:54:47 timbl Exp $
 
 term
 
@@ -62,7 +62,7 @@ if sys.hexversion < 0x02030000:
 
 ########################################  Storage URI Handling
 #
-#  In general a Term has a URI which may or may not have
+#  In general a Symbol has a URI which may or may not have
 # a "#" and fragment identifier.  This code keeps track of URIs
 # which are the same up to the hash, so as to make it easy to discover
 # for example whether a term is a local identifier within a document
