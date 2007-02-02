@@ -15,7 +15,7 @@ import string
 import os
 import re
 
-version = "$Id: pww.py,v 1.2 2007-02-02 19:29:27 timbl Exp $"[1:-1]
+version = "$Id: pww.py,v 1.3 2007-02-02 19:29:59 timbl Exp $"[1:-1]
 
 files = []
 
@@ -30,7 +30,6 @@ while basedir:
 	if slash < 0:
 	    sys.exit(-1)
 	basedir = basedir[:slash]
-	print "trying ", basedir
 	continue
 
 base = f.readline()
