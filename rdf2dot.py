@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: rdf2dot.py,v 1.6 2006-12-18 21:57:03 connolly Exp $
+$Id: rdf2dot.py,v 1.7 2007-02-07 06:45:16 connolly Exp $
 
 by Dan Connolly
 copyright (c) 2001 by W3C (MIT, INRIA, Keio)
@@ -31,7 +31,7 @@ from swap.myStore import load, Namespace
 GV = Namespace('http://www.w3.org/2001/02pd/gv#')
 RDF = Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 
-RCSId='$Id: rdf2dot.py,v 1.6 2006-12-18 21:57:03 connolly Exp $'
+RCSId='$Id: rdf2dot.py,v 1.7 2007-02-07 06:45:16 connolly Exp $'
 
 def dotTop(text):
     text("/* transformed by %s */\n" % RCSId)
@@ -54,6 +54,7 @@ EdgeAttributes = (
     )
 
 # graph attributes see Graphviz spec table 3
+# hmm... needs update w.r.t http://www.graphviz.org/doc/info/attrs.html
 GraphAttributes = (
     GV.center,
     GV.clusterrank,
@@ -77,6 +78,7 @@ GraphAttributes = (
     GV.ranksep,
     GV.ratio,
     GV.size,
+    GV.shape,
     GV.style,
     )
 
