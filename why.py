@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.49 2007-01-25 20:26:50 timbl Exp $
+$Id: why.py,v 1.50 2007-02-08 19:48:11 syosi Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -114,7 +114,7 @@ def explainFormula(f, flags=""):
     tr = proofsOf.get(f, None)
     if tr is None:
 	raise ValueError(
-	    "No tracker. This may happen if the formula is validly empty. f=%s, proofsOf=%s" % (f, dict(proofsOf)))
+	    "No tracker. This may happen if the formula is validly empty. f=%s, proofsOf=%s" % (f.debugString(), dict(proofsOf)))
     if not tr:
         raise ValueError(dict(proofsOf))
     try:
@@ -480,7 +480,6 @@ class BecauseOfRule(Reason):
 	ev = []  # For PML compatability we will store it as a collection
 	for s in self._evidence:
 	    if isinstance(s, BecauseBuiltIn):
-		raise "eh? this is silly - ever reached? s is statment not step"
                 try:
 		    e = s.explain(ko, flags=flags)
                 except:

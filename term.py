@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.69 2007-01-29 18:54:47 timbl Exp $
+$Id: term.py,v 1.70 2007-02-08 19:48:11 syosi Exp $
 
 term
 
@@ -1513,6 +1513,7 @@ class XMLLiteral(Literal):
 	return Set()
 
     def __repr__(self):
+        self.__str__()
         return '"' + self.string[0:7] + '...' + self.string[-4:] + '"'
 #        return self.string
 

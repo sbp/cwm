@@ -1,7 +1,6 @@
 #! /usr/bin/python
 """
-
-$Id: llyn.py,v 1.179 2007-01-29 18:52:20 timbl Exp $
+$Id: llyn.py,v 1.180 2007-02-08 19:48:11 syosi Exp $
 
 
 RDF Store and Query engine
@@ -64,6 +63,7 @@ import uripath
 from uripath import canonical
 
 from sax2rdf import XMLtoDOM
+import xml.dom.minidom
 
 from why import smushedFormula, Premise, newTopLevelFormula, isTopLevel
 
@@ -101,7 +101,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.179 $"
+cvsRevision = "$Revision: 1.180 $"
 
 
 # Magic resources we know about
@@ -851,6 +851,11 @@ class BI_notEqualTo(LightBuiltIn):
         return (subj is not obj)   # Assumes interning
 
 BI_SameAs = BI_EqualTo
+
+#### I hope this is never really added
+##class BI_RunAsPython(LightBuiltIn, Function):
+##    def evaluateObject(self, subject):
+##        return eval(subject)
 
 # Functions 
     

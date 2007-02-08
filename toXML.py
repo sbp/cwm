@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.36 2007-01-26 03:33:01 timbl Exp $
+$Id: toXML.py,v 1.37 2007-02-08 19:48:11 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -238,6 +238,7 @@ z  - Allow relative URIs for namespaces
     def makeStatement(self,  tuple, why=None, aIsPossible=0):
         context, pred, subj, obj = tuple # Context is ignored
 
+
         if self.stack[-1]:
 	    if pred == N3_first:
 		pred = RDF_li
@@ -321,7 +322,7 @@ z  - Allow relative URIs for namespaces
 	    else:
 		raise RuntimeError("Unexpected subject", `subj`)
 
-	elif obj[0] not in (XMLLITERAL, LITERAL, LITERAL_DT, LITERAL_LANG):
+	if obj[0] not in (XMLLITERAL, LITERAL, LITERAL_DT, LITERAL_LANG):
 	    nid = self._nodeID.get(obj, None)
 	    if nid == None:
 		objn = self.referenceTo( obj[1])
