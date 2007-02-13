@@ -2,7 +2,7 @@ from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.53 2007-01-25 20:26:50 timbl Exp $
+$Id: formula.py,v 1.54 2007-02-13 21:35:32 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -21,7 +21,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.53 2007-01-25 20:26:50 timbl Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.54 2007-02-13 21:35:32 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -404,6 +404,30 @@ For future reference, use newUniversal
 		              obj=obj,
 		              why=why)
         return bindings3, total
+
+    def subSet(self, statements, why=None):
+        f = self.newFormula()
+        for s in statements:
+            c, p, s, o = s.quad
+            f.add(s, p, o, why=why)
+            assert c is self
+
+	uu = f.occurringIn(self.universals())
+	ee = f.occurringIn(self.existentials())
+	bindings = {}
+	
+	f = self.newFormula()   ## do it right this time, with vars
+	for v in uu:
+#	    progress("&&&&& New universal is %s\n\t in %s" % (v.uriref(), f))
+	    bindings[v] = f.newUniversal(v)
+#	    progress("&&&&& Universals are %s\n\t in %s" % (f.universals(), f))
+	for v in ee:
+	    f.declareExistential(v)
+	for s in statements:
+            c, p, s, o = s.quad
+            f.add(s.substitution(bindings, why=why), p.substitution(bindings, why=why), o.substitution(bindings, why=why), why=why)
+	return f.close()  # probably slow - much slower than statement subclass of formula
+
                 
     def substituteEquals(self, bindings, newBindings):
 	"""Return this or a version of me with subsitution made
