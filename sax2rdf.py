@@ -189,7 +189,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._items = [] # for <rdf:li> containers
         self._litDepth = 0
 	
-        version = "$Id: sax2rdf.py,v 1.49 2007-01-29 18:54:18 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.50 2007-02-13 19:42:35 connolly Exp $"
 #        self.sink.makeComment("RDF parsed by "+version[1:-1])
 
 	if "D" in self.flags:  # Assume default namespace declaration
@@ -787,7 +787,7 @@ class RDFHandler(xml.sax.ContentHandler):
 		e = self.domDocument.createElementNS(name[0], name[1])
             for ns in [name] + attrs.keys():
                 ns = ns[0]
-                if not ns in declared:
+                if ns and not ns in declared:
                     prefix = nsMap.get(ns, None)
 		    if prefix is None:
 			columnNumber = self._p.getColumnNumber()
@@ -814,7 +814,7 @@ class RDFHandler(xml.sax.ContentHandler):
             if name[0]:
 		e.setAttributeNS(name[0], declared[name[0]] + ":" + name[1], value)
             else:
-		e.setAttributeNS(name[1], value) #@@@ Missing prefix on qname
+		e.setAttributeNS(None, name[1], value)
         
     def literal_element_start_DOM_OLD(self, name, qname, attrs):
 

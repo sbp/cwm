@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: llyn.py,v 1.180 2007-02-08 19:48:11 syosi Exp $
+$Id: llyn.py,v 1.181 2007-02-13 19:42:35 connolly Exp $
 
 
 RDF Store and Query engine
@@ -39,7 +39,7 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.
 """
 
-# emacsbug="""emacs got confused by long string above@@"""
+# emacsbug="""emacs got confused by long string above"""
 
 from __future__ import generators
 # see http://www.amk.ca/python/2.2/index.html#SECTION000500000000000000000
@@ -78,7 +78,8 @@ from diag import progress, verbosity, tracking
 from term import BuiltIn, LightBuiltIn, RDFBuiltIn, HeavyBuiltIn, Function, \
     MultipleFunction, ReverseFunction, MultipleReverseFunction, \
     Literal, XMLLiteral, Symbol, Fragment, FragmentNil, Term, LabelledNode, \
-    CompoundTerm, List, EmptyList, NonEmptyList, AnonymousNode, N3Set
+    CompoundTerm, List, EmptyList, NonEmptyList, AnonymousNode, N3Set, \
+    UnknownType
 from formula import Formula, StoredStatement
 import reify
 
@@ -101,7 +102,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.180 $"
+cvsRevision = "$Revision: 1.181 $"
 
 
 # Magic resources we know about
@@ -887,7 +888,15 @@ class BI_dtlit(LightBuiltIn, Function):
     """built a datatype literal from a string and a uri"""
      
     def evaluateObject(self, subj_py):
-	return self.store.newLiteral(subj_py[0], subj_py[1])
+        lex, dt = subj_py
+        if dt is self.store.symbol("http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"):
+            try:
+                dom = XMLtoDOM(lex)
+            except SyntaxError, e:
+                raise UnknownType # really malformed literal
+            return self.store.newXMLLiteral(dom)
+        else:
+            return self.store.newLiteral(lex, dt)
 
 
 class BI_rawUri(BI_uri):
