@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.70 2007-02-08 19:48:11 syosi Exp $
+$Id: term.py,v 1.71 2007-02-15 00:37:10 connolly Exp $
 
 term
 
@@ -1526,7 +1526,7 @@ class XMLLiteral(Literal):
     def compareTerm(self, other):
 	"Assume is also a literal - see function compareTerm in formula.py"
 	if self.datatype == other.datatype:
-	    diff = cmp(str(self), str(other))
+	    diff = cmp(unicode(self), unicode(other))
 	    return diff
 	    return cmp(self.lang, other.lang)
 	else:
