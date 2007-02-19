@@ -122,7 +122,7 @@ def extract(path):
     
     wr( """# n3  http://www.w3.org/DesignIssues/Notation3.
 # From vCard data in %s
-# Extracted by $Id: vcard2n3.py,v 1.4 2007-02-16 01:57:27 timbl Exp $ 
+# Extracted by $Id: vcard2n3.py,v 1.5 2007-02-19 02:22:31 timbl Exp $ 
 @prefix : <#>.
 @prefix loc: <#loc_>.
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -138,7 +138,7 @@ def extract(path):
     input.close()
     
     wr("# Length: " + `len(b)`+ "starts ")
-    for i in range(8): wr(" %2x"%ord(b[i]))
+    wr(" ".join(["%2x"%ord(ch) for ch in b[:8]]))
     wr("\n")
     if ord(b[0])==0 and ord(b[1]) == ord('B'):  #  UTF16 with MSB byte order unmarked    
 	d = "\xfe\xff"   # Add byte order mark
