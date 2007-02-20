@@ -43,13 +43,13 @@ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 """
 
 
-__version__ = '$Id: toIcal.py,v 2.38 2006-10-09 13:32:20 connolly Exp $'
+__version__ = '$Id: toIcal.py,v 2.39 2007-02-20 14:49:24 timbl Exp $'
 
 
 from string import maketrans, translate
 
-from myStore import Namespace, load, setStore # http://www.w3.org/2000/10/swap/
-from RDFSink import LITERAL_DT
+from swap.myStore import Namespace, load, setStore # http://www.w3.org/2000/10/swap/
+from swap.RDFSink import LITERAL_DT
 
 #hmm... generate from schema?
 from fromIcal import iCalendarDefs # http://www.w3.org/2002/12/cal/ 
@@ -427,7 +427,10 @@ if __name__ == '__main__':
 
 
 # $Log: toIcal.py,v $
-# Revision 2.38  2006-10-09 13:32:20  connolly
+# Revision 2.39  2007-02-20 14:49:24  timbl
+# from swap.* import
+#
+# Revision 2.38  2006/10/09 13:32:20  connolly
 # refine the --floattz hack
 #
 # Revision 2.37  2006/10/03 05:31:23  connolly
