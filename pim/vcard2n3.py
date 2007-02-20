@@ -122,7 +122,7 @@ def extract(path):
     
     wr( """# n3  http://www.w3.org/DesignIssues/Notation3.
 # From vCard data in %s
-# Extracted by $Id: vcard2n3.py,v 1.5 2007-02-19 02:22:31 timbl Exp $ 
+# Extracted by $Id: vcard2n3.py,v 1.6 2007-02-20 14:50:09 timbl Exp $ 
 @prefix : <#>.
 @prefix loc: <#loc_>.
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -349,9 +349,9 @@ def extract(path):
 	    if n == 'x-ablabel':
 		pred = 'v:'+n
 		if value[:4] == "_$!<" and value[-4:] == ">!$_": # [sic]
-		    obj = "abl:"+munge(value[4:-4])
+		    obj = "abl:"+munge(value[4:-4]).lower()
 		else:  # User generated
-		    obj = "user:"+munge(value)
+		    obj = "user:"+munge(value).lower()
 	    else:
 		pred, obj = predicateObject(n, props, value)
 	    groupData[group].append((pred, obj))
