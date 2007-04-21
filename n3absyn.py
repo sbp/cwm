@@ -55,7 +55,7 @@ MathML musings...
 
 """
 
-__version__ = '$Id: n3absyn.py,v 1.13 2007-04-21 06:29:19 connolly Exp $'
+__version__ = '$Id: n3absyn.py,v 1.14 2007-04-21 06:46:02 connolly Exp $'
 
 import sys
 
@@ -321,28 +321,25 @@ def ikl_sentence(f, subscripts):
 	    yield ' '
 	    rest = f['parts']
 
-        # quantifiers
-        elif 'Q' in f:
-            head = f['Q']
-            yield '('
-            yield head
-            yield ' ('
-            for v in f['Vars']:
-                yield v
-                yield ' '
-            yield ')\n'
-            rest = [f['f']]
-
-        else:
-            raise RuntimeError, 'unimplemented IKL sentence head: %s' % head
-        
-        for expr in rest:
-            for s in ikl_sentence(expr, subscripts):
-                yield s
-        yield ')\n'
+    # quantifiers
+    elif 'Q' in f:
+	head = f['Q']
+	yield '('
+	yield head
+	yield ' ('
+	for v in f['Vars']:
+	    yield v
+	    yield ' '
+	yield ')\n'
+	rest = [f['f']]
 
     else:
-        raise RuntimeError, 'unimplemented syntactic type: %s %s' % (f, type(f))
+	raise RuntimeError, 'unimplemented IKL sentence head: %s' % head
+
+    for expr in rest:
+	for s in ikl_sentence(expr, subscripts):
+	    yield s
+    yield ')\n'
 
     
 def ikl_term(f, subscripts):
