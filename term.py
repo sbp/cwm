@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.71 2007-02-15 00:37:10 connolly Exp $
+$Id: term.py,v 1.72 2007-05-10 18:38:55 syosi Exp $
 
 term
 
@@ -560,6 +560,9 @@ class Universal(Term):
 
 class Existential(Term):
     __repr__ = object.__repr__
+
+class SkolemFunction(Existential):
+    pass
 
 class AnonymousVariable(AnonymousNode):
     """An anonymous node which is existentially quantified in a given context.
