@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.193 2007-01-26 03:33:01 timbl Exp $
+$Id: notation3.py,v 1.194 2007-06-14 14:55:56 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -1302,7 +1302,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.193 2007-01-26 03:33:01 timbl Exp $"
+            idstr = "$Id: notation3.py,v 1.194 2007-06-14 14:55:56 syosi Exp $"
 	    # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
 	    # Strip "$" in case the N3 file is checked in to CVS
@@ -1554,7 +1554,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
 	    return stringToN3(value, singleLine=singleLine, flags = self._flags)
 
         if ty == XMLLITERAL:
-	    st = Canonicalize(value, None, unsuppressedPrefixes=['foo'])
+	    st = ''.join([Canonicalize(x, None, unsuppressedPrefixes=['foo']) for x in value.childNodes])
 	    st = stringToN3(st, singleLine=singleLine, flags=self._flags)
 	    return st + "^^" + self.representationOf(context, (SYMBOL,
 		    "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"))

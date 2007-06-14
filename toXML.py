@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.37 2007-02-08 19:48:11 syosi Exp $
+$Id: toXML.py,v 1.38 2007-06-14 14:55:56 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -354,7 +354,7 @@ z  - Allow relative URIs for namespaces
 	if obj[0] == XMLLITERAL:
 	    # XML literal
 	    dom = obj[1]
-	    self._xwr.passXML(Canonicalize(dom))
+	    self._xwr.passXML(''.join([Canonicalize(x) for x in dom.childNodes]))
 	else:
 	    self._xwr.data(v)
         self._xwr.endElement()

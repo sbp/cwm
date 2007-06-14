@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.30 2007-05-10 18:38:55 syosi Exp $
+$Id: webAccess.py,v 1.31 2007-06-14 14:55:56 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -80,7 +80,7 @@ def webget(addr, referer=None, types=[]):
         if addr[:5] == 'file:':
             raise SecurityError('local file access prohibited')
 
-    addr = cacheHack(addr)
+#    addr = cacheHack(addr)
 
     # work around python stdlib bugs with data: URIs
     # buggy in 2.4.2 with CStringIO
