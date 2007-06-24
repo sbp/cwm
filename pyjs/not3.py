@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: not3.py,v 1.4 2007-06-24 15:42:14 timbl Exp $
+$Id: not3.py,v 1.5 2007-06-24 15:53:43 timbl Exp $
 
 HAND EDITED FOR CONVERSION TO JAVASCRIPT
 
@@ -118,6 +118,7 @@ class SinkParser:
 	self._thisDoc = thisDoc
 	self.source = store.sym(thisDoc)
         self.lines = 0              # for error handling
+	self.statementCount = 0	    # for stats only
 	self.startOfLine = 0	    # For calculating character number
 	self.previousLine = 0	    # For calculating character number
         self._genPrefix = genPrefix
@@ -331,9 +332,10 @@ class SinkParser:
 
     def makeStatement(self, quad):
         #$$$$$$$$$$$$$$$$$$$$$
-        alert( "Parser output: " + quad)
+        alert( "Parser output SPO: " + [quad[2], quad[1], quad[3]] )
 #        self._store.makeStatement(quad, why=self._reason2)
         quad[0].add(quad[2], quad[1], quad[3], self.source)
+	self.statementCount += 1
 
 
 
