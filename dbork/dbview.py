@@ -72,7 +72,7 @@ earlier dev notes, links, ...
  http://rdfig.xmlhack.com/2002/02/27/2002-02-27.html#1014821419.001175
 """
 
-__version__ = "$Id: dbview.py,v 1.20 2006-05-18 19:53:54 connolly Exp $" #@@consult python style guide
+__version__ = "$Id: dbview.py,v 1.21 2007-06-26 02:36:16 syosi Exp $" #@@consult python style guide
 
 
 from string import join, split
@@ -205,7 +205,7 @@ class DBViewHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.wfile.write("</ul>")
 
         self.wfile.write("""
-        <address>Dan C@@ $Revision: 1.20 $ $Date: 2006-05-18 19:53:54 $</address>
+        <address>Dan C@@ $Revision: 1.21 $ $Date: 2007-06-26 02:36:16 $</address>
         </body></html>
         """)
 
@@ -339,13 +339,13 @@ def askdb(db, dbaddr, sink, fields, tables, keys, joins, condextra):
 
 
     while 1:
-	row=c.fetchone()
-	if not row:
+        row=c.fetchone()
+        if not row:
             break
 
         things = [None] * len(tables)
 
-	col = 0
+        col = 0
         for ti in range(len(tables)):
             if fields[ti]:
                 tbl = tables[ti]
@@ -787,7 +787,10 @@ if __name__ == '__main__':
 
 
 # $Log: dbview.py,v $
-# Revision 1.20  2006-05-18 19:53:54  connolly
+# Revision 1.21  2007-06-26 02:36:16  syosi
+# fix tabs
+#
+# Revision 1.20  2006/05/18 19:53:54  connolly
 # note development has moved
 #
 # Revision 1.19  2003/03/02 06:07:46  connolly

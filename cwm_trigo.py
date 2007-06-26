@@ -14,8 +14,8 @@ http://rdfig.xmlhack.com/2003/09/23/2003-09-23.html#1064356689.846120
 """
 
 __author__ = 'Karl Dubost'
-__cvsid__ = '$Id: cwm_trigo.py,v 1.12 2004-05-16 20:37:21 connolly Exp $'
-__version__ = '$Revision: 1.12 $'
+__cvsid__ = '$Id: cwm_trigo.py,v 1.13 2007-06-26 02:36:15 syosi Exp $'
+__version__ = '$Revision: 1.13 $'
 __all__ = ["evaluateObject"]
 
 from math import sin, acos, asin, atan, atan2, cos, cosh, sinh, tan, tanh
@@ -47,9 +47,9 @@ class BI_atan2(LightBuiltIn, Function):
         
         Return the arc tangent (measured in radians) of y/x.
         Unlike atan(y/x), the signs of both x and y are considered.
-	-- Karl""" 
+        -- Karl""" 
         if len(numeric(subj_py)) == 2:
-        	return atan2(numeric(subj_py[0]),numeric(subj_py[1]))
+                return atan2(numeric(subj_py[0]),numeric(subj_py[1]))
         else: return None
 
 class BI_cos(LightBuiltIn, Function, ReverseFunction):
@@ -60,7 +60,7 @@ class BI_cos(LightBuiltIn, Function, ReverseFunction):
         return cos(numeric(subj_py))
 
     def evaluateSubject(self, x):
-	try:
+        try:
             return acos(numeric(x))
         except ValueError:
             return None

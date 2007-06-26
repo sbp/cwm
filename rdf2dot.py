@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: rdf2dot.py,v 1.7 2007-02-07 06:45:16 connolly Exp $
+$Id: rdf2dot.py,v 1.8 2007-06-26 02:36:15 syosi Exp $
 
 by Dan Connolly
 copyright (c) 2001 by W3C (MIT, INRIA, Keio)
@@ -18,10 +18,10 @@ class Usage(Exception):
     """python rdf2dot.py foo.rdf > foo.dot
     """
     def __init__(self, msg):
-	self._msg = msg
+        self._msg = msg
 
     def __str__(self):
-	return "%s\nUsage: %s" % (self._msg, self.__doc__)
+        return "%s\nUsage: %s" % (self._msg, self.__doc__)
 
 
 import sys, os
@@ -31,7 +31,7 @@ from swap.myStore import load, Namespace
 GV = Namespace('http://www.w3.org/2001/02pd/gv#')
 RDF = Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 
-RCSId='$Id: rdf2dot.py,v 1.7 2007-02-07 06:45:16 connolly Exp $'
+RCSId='$Id: rdf2dot.py,v 1.8 2007-06-26 02:36:15 syosi Exp $'
 
 def dotTop(text):
     text("/* transformed by %s */\n" % RCSId)
@@ -92,11 +92,11 @@ def eachGraph(text, store, it, props, cluster=''):
     text("%s N%d" % (cluster, abs(hash(it.uriref()))))
     text(" {\n")
     for p in props:
-	for o in store.each(subj = it, pred = p):
+        for o in store.each(subj = it, pred = p):
             text('%s="%s";\n' % (p.fragid, o)) # @@ quoting o
 
     for n in store.each(subj=it, pred=GV.hasNode):
-	eachNode(text, store, n, props) #@@hmm... node props = graph props?
+        eachNode(text, store, n, props) #@@hmm... node props = graph props?
 
     for sub in store.each(subj=it, pred=GV.subgraph):
         raise RuntimeError, "subgraph not yet implemented@@"
@@ -106,13 +106,13 @@ def eachNode(text, store, gnode, props):
     text('"%s" [' % gnode.uriref())
 
     for p in props:
-	for o in store.each(subj = gnode, pred = p):
+        for o in store.each(subj = gnode, pred = p):
             text('%s="%s",\n' % (p.fragid, o)) # @@ quoting o
     text("];\n")
 
     for p in store.each(pred=RDF.type, obj=GV.EdgeProperty):
-	for o in store.each(subj=gnode, pred = p):
-	    text('"%s" -> "%s"' % (gnode.uriref(), o.uriref()))
+        for o in store.each(subj=gnode, pred = p):
+            text('"%s" -> "%s"' % (gnode.uriref(), o.uriref()))
 
             text(" [\n")
             for attr in EdgeAttributes:
@@ -129,9 +129,9 @@ def progress(*args):
 
 def main(argv):
     try:
-	ref = argv[1]
+        ref = argv[1]
     except:
-	raise Usage("missing input file/URI")
+        raise Usage("missing input file/URI")
 
     f = load(ref)
 
@@ -140,6 +140,6 @@ def main(argv):
 
 if __name__ == '__main__':
     try:
-	main(sys.argv)
+        main(sys.argv)
     except Usage, e:
-	print >>sys.stderr, e
+        print >>sys.stderr, e

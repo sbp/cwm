@@ -2,7 +2,7 @@
 """
 Builtins for doing SPARQL queries in CWM
 
-$Id: cwm_sparql.py,v 1.18 2006-01-13 14:48:54 syosi Exp $
+$Id: cwm_sparql.py,v 1.19 2007-06-26 02:36:15 syosi Exp $
 
 """
 
@@ -326,8 +326,8 @@ class BI_semantics(HeavyBuiltIn, Function):
         inputURI = doc.uriref()
         F = self.store.load(inputURI, contentType="x-application/sparql")
         if diag.chatty_flag>10: progress("    semantics: %s" % (F))
-	if diag.tracking:
-	    proof.append(F.collector)
+        if diag.tracking:
+            proof.append(F.collector)
         return F.canonicalize()
 
 def register(store):

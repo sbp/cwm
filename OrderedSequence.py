@@ -6,7 +6,7 @@ sequences. This makes an ordered sequence a practical representation of a set.
 
 @@ Now python has sets, these should be used where the ordering is not otherwise
 necessary.  @@ check 
-$Id: OrderedSequence.py,v 1.1 2004-01-28 22:54:58 timbl Exp $
+$Id: OrderedSequence.py,v 1.2 2007-06-26 02:36:15 syosi Exp $
 """
 
 def merge(a,b):
@@ -70,13 +70,13 @@ def minus(a,b):
         if j==n:   # No more of b, return rest of a
             return result + a[i:]
         if i==m:   # No more of a, some of b - error
-	    raise ValueError("Cannot remove items" + `b[j:]`)
+            raise ValueError("Cannot remove items" + `b[j:]`)
             return result + b[j:]
         if a[i] < b[j]:
             result.append(a[i])
             i = i + 1
         elif a[i] > b[j]:
-	    raise ValueError("Cannot remove item" + `b[j]`)
+            raise ValueError("Cannot remove item" + `b[j]`)
             j = j + 1
         else:  # a[i]=b[j]
             i = i + 1

@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_os.py,v 1.11 2005-08-16 13:49:21 timbl Exp $
+$Id: cwm_os.py,v 1.12 2007-06-26 02:36:15 syosi Exp $
 
 Operating systems built-ins for cwm
 http://www.w3.org/2000/10/swap/string.py
@@ -60,7 +60,7 @@ class BI_baseRelative(LightBuiltIn, Function, ReverseFunction):
         progress("Warning: os:baseRelative input is not a string: "+`subj_py`)
 
     def evaluateSubject(self, subj_py):
-	return BI_baseAbsolute.evaluateObject(self, subj_py)
+        return BI_baseAbsolute.evaluateObject(self, subj_py)
 
 # Command line argument: read-only
 #  The command lines are passed though cwm using "--with" and into the RDFStore when init'ed.

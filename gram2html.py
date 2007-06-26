@@ -4,7 +4,7 @@ gram2html -- convert Yapps grammar to HTML
 Share and Enjoy. Open Source license:
 Copyright (c) 2001 W3C (MIT, INRIA, Keio)
 http://www.w3.org/Consortium/Legal/copyright-software-19980720
-$Id: gram2html.py,v 1.3 2002-08-15 23:24:17 connolly Exp $
+$Id: gram2html.py,v 1.4 2007-06-26 02:36:15 syosi Exp $
 see log at end
 
 REFERENCES
@@ -13,7 +13,7 @@ REFERENCES
   Sat, 18 Aug 2001 16:54:32 GMT
   Last modified 13:21 Sun 26 Nov 2000 , Amit Patel 
 
-$Id: gram2html.py,v 1.3 2002-08-15 23:24:17 connolly Exp $
+$Id: gram2html.py,v 1.4 2007-06-26 02:36:15 syosi Exp $
 """
 
 from string import find
@@ -104,8 +104,8 @@ def generate(title, inputfilename, outputfilename=''):
     dummy, dummy, dummy, encWriter = codecs.lookup('utf-8')
 
     if not outputfilename:
-	if inputfilename[-2:]=='.g': outputfilename = inputfilename[:-2]+'.html'
-	else: raise "Invalid Filename", outputfilename
+        if inputfilename[-2:]=='.g': outputfilename = inputfilename[:-2]+'.html'
+        else: raise "Invalid Filename", outputfilename
         
     DIVIDER = '\n%%\n' # This pattern separates the pre/post parsers
     preparser, postparser = None, None # Code before and after the parser desc
@@ -166,7 +166,10 @@ if __name__ == '__main__':
     main(sys.argv)
 
 # $Log: gram2html.py,v $
-# Revision 1.3  2002-08-15 23:24:17  connolly
+# Revision 1.4  2007-06-26 02:36:15  syosi
+# fix tabs
+#
+# Revision 1.3  2002/08/15 23:24:17  connolly
 # updated grammar, cited YAPPS
 #
 # Revision 1.2  2002/07/17 19:33:48  connolly
