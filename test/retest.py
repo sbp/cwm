@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.42 2007-06-26 02:36:16 syosi Exp $
+ $Id: retest.py,v 1.43 2007-06-27 17:58:39 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -423,7 +423,8 @@ def main():
         print "%3i/%i %-30s  %s" %(tests, totalTests, urel, description)
     #    print "      %scwm %s   giving %s" %(arguments, case)
         assert case and description and arguments
-        cleanup = """sed -e 's/\$[I]d.*\$//g' -e "s;%s;%s;g" -e '/@prefix run/d'""" % (WD, REFWD)
+        cleanup = """sed -e 's/\$[I]d.*\$//g' -e "s;%s;%s;g" -e '/@prefix run/d' -e 's;%s;%s;g'""" % (WD, REFWD,
+                                                                                                      cwm_command, '../cwm.py')
         
         if normal:
             execute("""CWM_RUN_NS="run#" %s %s %s --quiet %s | %s > ,temp/%s""" %
