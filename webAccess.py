@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.32 2007-06-26 02:36:16 syosi Exp $
+$Id: webAccess.py,v 1.33 2007-07-16 15:48:32 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -90,8 +90,8 @@ def webget(addr, referer=None, types=[]):
 
     req = urllib2.Request(addr)
 
-    for t in types:
-        req.add_header('Accept', t)
+    if types:
+        req.add_header('Accept', ','.join(types))
 
     if referer: #consistently misspelt
         req.add_header('Referer', referer)
@@ -218,9 +218,13 @@ def load(store, uri=None, openFormula=None, asIfFrom=None, contentType=None,
         else:
             p = notation3.SinkParser(store, F,  thisDoc=asIfFrom,flags=flags, why=why)
 
-        p.startDoc()
-        p.feed(buffer)
-        p.endDoc()
+        try:
+            p.startDoc()
+            p.feed(buffer)
+            p.endDoc()
+        except:
+            progress("Failed to parse %s" % uri or buffer)
+            raise
         
     if not openFormula:
         F = F.close()
