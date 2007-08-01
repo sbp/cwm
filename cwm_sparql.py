@@ -2,7 +2,7 @@
 """
 Builtins for doing SPARQL queries in CWM
 
-$Id: cwm_sparql.py,v 1.19 2007-06-26 02:36:15 syosi Exp $
+$Id: cwm_sparql.py,v 1.20 2007-08-01 01:32:02 syosi Exp $
 
 """
 
@@ -37,7 +37,7 @@ class BI_truthValue(LightBuiltIn):
 ##            print '%s makes %s' % (subj, toBool(str(subj), subj.datatype.fragid))
 ##            print '%s makes %s' % (obj, toBool(str(obj), obj.datatype.fragid))
 ##            print 'I got here on %s, %s, returning %s' % (subj, obj, toBool(str(subj), subj.datatype.fragid) is toBool(str(obj), obj.datatype.fragid))
-            return toBool(str(subj), subj.datatype.fragid) is toBool(str(obj), obj.datatype.fragid)
+            return toBool(str(subj), subj.datatype) is toBool(str(obj), obj.datatype)
         raise TypeError("%s type cannot be converted to boolean" % `subj.__class`)
 
 class BI_typeErrorIsTrue(LightBuiltIn):
