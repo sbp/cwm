@@ -1,6 +1,10 @@
 /*
 
-$Id: not3.js,v 1.11 2007-07-17 02:21:15 timbl Exp $
+<<<<<<< not3.js
+$Id: not3.js,v 1.12 2007-08-06 16:13:56 syosi Exp $
+=======
+$Id: not3.js,v 1.12 2007-08-06 16:13:56 syosi Exp $
+>>>>>>> 1.11
 
 HAND EDITED FOR CONVERSION TO JAVASCRIPT
 

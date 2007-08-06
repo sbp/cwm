@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.195 2007-06-26 02:36:15 syosi Exp $
+$Id: notation3.py,v 1.196 2007-08-06 16:13:56 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -1000,7 +1000,13 @@ class SinkParser:
                     j = self.uri_ref2(str, j+2, res2) # Read datatype URI
                     dt = res2[0]
                     if dt.uriref() == "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral":
-                        dom = XMLtoDOM(s)
+                        try:
+                            dom = XMLtoDOM('<rdf:envelope xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns">'
+                                           + s
+                                           + '</rdf:envelope>').firstChild
+                        except:
+                            print 's="%s"' % s
+                            raise
                         res.append(self._store.newXMLLiteral(dom))
                         return j
                 res.append(self._store.newLiteral(s, dt, lang))
@@ -1302,7 +1308,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.195 2007-06-26 02:36:15 syosi Exp $"
+            idstr = "$Id: notation3.py,v 1.196 2007-08-06 16:13:56 syosi Exp $"
             # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
             # Strip "$" in case the N3 file is checked in to CVS

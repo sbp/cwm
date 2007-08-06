@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.193 2007-06-26 02:36:15 syosi Exp $
+$Id: cwm.py,v 1.194 2007-08-06 16:13:56 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.193 $"
+cvsRevision = "$Revision: 1.194 $"
     
             
 
@@ -276,7 +276,7 @@ rdf/xml files. Note that this requires rdflib.
             elif arg == "-sparqlResults": option_outputStyle = "-no"
             elif arg == "-triples" or arg == "-ntriples":
                 option_format = "n3"
-                option_flags["n3"] = "usbpartanev"
+                option_flags["n3"] = "bravestpun"
                 option_outputStyle = "-bySubject"
                 option_quiet = 1
             elif _lhs == "-outURI": option_outURI = _uri
@@ -348,7 +348,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.193 2007-06-26 02:36:15 syosi Exp $"
+        version = "$Id: cwm.py,v 1.194 2007-08-06 16:13:56 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)

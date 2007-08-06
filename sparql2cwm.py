@@ -3,7 +3,7 @@
 
 This is meant to be used with a sparql.n3 based SPARQL parser, to add the query to cwm
 
-$Id: sparql2cwm.py,v 1.23 2007-06-26 02:36:15 syosi Exp $
+$Id: sparql2cwm.py,v 1.24 2007-08-06 16:13:56 syosi Exp $
 """
 
 from set_importer import Set
@@ -1460,7 +1460,7 @@ class FromSparql(productionHandler):
         if funcName == 'IT_isURI':
             return (typedThing('isURI', 'boolean'), p[3])
         if funcName == 'IT_STR':
-            return (typedThing('string', 'literal', ['literal', 'symbol']), p[3])
+            return (typedThing('String', 'literal', ['literal', 'symbol']), p[3])
         if funcName == 'IT_LANG':
             return (typedThing('lang', 'literal', ['literal']), p[3])
         if funcName == 'IT_DATATYPE':

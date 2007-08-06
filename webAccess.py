@@ -5,7 +5,7 @@ This module implements some basic bits of the web architecture:
 dereferencing a URI to get a document, with content negotiation,
 and deciding on the basis of the Internet Content Type what to do with it.
 
-$Id: webAccess.py,v 1.33 2007-07-16 15:48:32 syosi Exp $
+$Id: webAccess.py,v 1.34 2007-08-06 16:13:56 syosi Exp $
 
 
 Web access functionality building on urllib2
@@ -66,7 +66,9 @@ def urlopenForRDF(addr, referer=None):
     """
     return webget(addr,
                   types=['text/rdf+n3',
-                         'application/rdf+xml'],
+                         'application/rdf+xml'
+       #                  ,'application/x-turtle'    # Why not ask for turtle?
+                         ], 
                   referer = referer)
 
 

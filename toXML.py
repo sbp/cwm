@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: toXML.py,v 1.39 2007-06-26 02:36:15 syosi Exp $
+$Id: toXML.py,v 1.40 2007-08-06 16:13:56 syosi Exp $
 
 
 This module implements basic sources and sinks for RDF data.
@@ -274,6 +274,9 @@ z  - Allow relative URIs for namespaces
             self._formula = context   # Asssume first statement is in outermost context @@
         predn = self.referenceTo( pred[1])
         subjn = self.referenceTo( subj[1])
+        
+        if pred == (SYMBOL, RDF_NS_URI+'Description'):
+            raise ValueError('rdf:Description is not a valid predicate')
 
         if self._subj != subj:
             if self._subj:
