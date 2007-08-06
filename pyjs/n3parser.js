@@ -160,11 +160,7 @@ function __SyntaxError(details) {
 
 /*
 
-<<<<<<< n3parser.js
-$Id: n3parser.js,v 1.10 2007-08-06 16:13:56 syosi Exp $
-=======
-$Id: n3parser.js,v 1.10 2007-08-06 16:13:56 syosi Exp $
->>>>>>> 1.9
+$Id: n3parser.js,v 1.11 2007-08-06 17:17:31 syosi Exp $
 
 HAND EDITED FOR CONVERSION TO JAVASCRIPT
 

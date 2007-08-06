@@ -1,10 +1,6 @@
 /*
 
-<<<<<<< not3.js
-$Id: not3.js,v 1.12 2007-08-06 16:13:56 syosi Exp $
-=======
-$Id: not3.js,v 1.12 2007-08-06 16:13:56 syosi Exp $
->>>>>>> 1.11
+$Id: not3.js,v 1.13 2007-08-06 17:17:31 syosi Exp $
 
 HAND EDITED FOR CONVERSION TO JAVASCRIPT
 
