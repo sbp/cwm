@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.77 2007-08-06 16:13:56 syosi Exp $
+$Id: term.py,v 1.78 2007-08-21 15:39:54 syosi Exp $
 
 term
 
@@ -1323,6 +1323,7 @@ def unifySet(self, other, bindings=Env(), otherBindings=Env(),
             yield (env1, env2)
 
 def occurs_check(self, other, env2):
+    return not other.occurringIn(set([self]))
     return True ### @@@ Need real check
 
 ##########################################################################
