@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.194 2007-08-06 16:13:56 syosi Exp $
+$Id: cwm.py,v 1.195 2007-08-23 16:28:29 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.194 $"
+cvsRevision = "$Revision: 1.195 $"
     
             
 
@@ -348,7 +348,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.194 2007-08-06 16:13:56 syosi Exp $"
+        version = "$Id: cwm.py,v 1.195 2007-08-23 16:28:29 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -696,7 +696,7 @@ rdf/xml files. Note that this requires rdflib.
                 if not sparql_query_formula:
                     raise ValueError('No query')
                 else:
-                    sys.stdout.write(outputString(sparql_query_formula, workingContext).encode('utf_8'))
+                    sys.stdout.write(outputString(sparql_query_formula, workingContext)[0].encode('utf_8'))
                     option_outputStyle = "-no"
                     
                 

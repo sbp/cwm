@@ -2,7 +2,7 @@ from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.59 2007-08-06 16:13:56 syosi Exp $
+$Id: formula.py,v 1.60 2007-08-23 16:28:29 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -21,7 +21,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.59 2007-08-06 16:13:56 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.60 2007-08-23 16:28:29 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -663,6 +663,15 @@ For future reference, use newUniversal
                                       quiet=1, base=base, flags=flags)
         self.store.dumpNested(self, _outSink)
         return buffer.getvalue().decode('utf_8')
+
+    def ntString(self, base=None, flags="bravestpun"):
+        "Dump the formula to an absolute string in N3"
+        buffer=StringIO.StringIO()
+        _outSink = notation3.ToN3(buffer.write,
+                                      quiet=1, base=base, flags=flags)
+        self.store.dumpBySubject(self, _outSink)
+        return buffer.getvalue().decode('utf_8')
+
 
     def rdfString(self, base=None, flags=""):
         "Dump the formula to an absolute string in RDF/XML"
