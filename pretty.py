@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.40 2007-06-26 02:36:15 syosi Exp $
+$Id: pretty.py,v 1.41 2007-09-09 22:51:42 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -29,7 +29,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, \
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.40 $"
+cvsRevision = "$Revision: 1.41 $"
 
 # Magic resources we know about
 
@@ -131,6 +131,8 @@ class Serializer:
 
         self.defaultNamespace = mp
 
+        # Make up prefixes for things which don't have them:
+        
         for r, count in counts.items():
             if count > 1 and r != mp:
                 if self.store.prefixes.get(r, None) is None:
@@ -179,25 +181,6 @@ class Serializer:
             except KeyError:
                 pass
         return
-
-
-    def _subFormulae(self, F, path = []):
-        """Returns a sequence of the all the formulae nested within this one.
-        
-        slow... only used in pretty print functions.
-        """
-
-        set = [F]
-        path2 = path + [ F ]     # Avoid loops
-        for s in F.statements:
-            for p in PRED, SUBJ, OBJ:
-                if isinstance(s[p], Formula):
-                    if s[p] not in path2:
-                        set2 = self._subFormulae(s[p], path2)
-                        for c in set2:
-                            if c not in set: set.append(c)
-        return set
-
 
     def dumpPrefixes(self):
         if self.defaultNamespace is not None:
