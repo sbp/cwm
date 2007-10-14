@@ -191,7 +191,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
         self._usedIDs = Set()
         
-        version = "$Id: sax2rdf.py,v 1.53 2007-08-06 16:13:56 syosi Exp $"
+        version = "$Id: sax2rdf.py,v 1.54 2007-10-14 00:05:09 syosi Exp $"
 #        self.sink.makeComment("RDF parsed by "+version[1:-1])
 
         if "D" in self.flags:  # Assume default namespace declaration
@@ -382,6 +382,7 @@ class RDFHandler(xml.sax.ContentHandler):
 
         #print "startPrefixMapping with prefix=", prefix, "uri=", `uri`
         prefix = prefix or ""
+        uri = uri or ""
         uri = self.uriref(uri)
 
         if self._nsmap:
