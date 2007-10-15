@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.197 2007-09-09 22:49:43 timbl Exp $
+$Id: notation3.py,v 1.198 2007-10-15 14:55:54 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -34,6 +34,7 @@ import string
 import codecs # python 2-ism; for writing utf-8 in RDF/xml output
 import urllib
 import re
+from warnings import warn
 
 from sax2rdf import XMLtoDOM # Incestuous.. would be nice to separate N3 and XML
 
@@ -326,7 +327,7 @@ class SinkParser:
 
             if self._baseURI:
                 ns = join(self._baseURI, ns)
-            else:
+            elif ':' not in ns:
                 raise BadSyntax(self._thisDoc, self.lines, str, j,
                     "With no previous base URI, cannot use relative URI in @base  <"+ns+">")
             assert ':' in ns # must be absolute
@@ -646,8 +647,8 @@ class SinkParser:
 
         j = self.tok('this', str, i)   # This context
         if j>=0:
-            raise BadSyntax(self._thisDoc, self.lines, str, i,
-                "Keyword 'this' was ancient N3. Now use @forSome and @forAll keywords.")
+            warn(''.__class__(BadSyntax(self._thisDoc, self.lines, str, i,
+                "Keyword 'this' was ancient N3. Now use @forSome and @forAll keywords.")))
             res.append(self._context)
             return j
 
@@ -1334,7 +1335,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write("\n#  Notation3 generation by\n")
-            idstr = "$Id: notation3.py,v 1.197 2007-09-09 22:49:43 timbl Exp $"
+            idstr = "$Id: notation3.py,v 1.198 2007-10-15 14:55:54 syosi Exp $"
             # CVS CHANGES THE ABOVE LINE
             self._write("#       " + idstr[5:-2] + "\n\n") 
             # Strip "$" in case the N3 file is checked in to CVS
