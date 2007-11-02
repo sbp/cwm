@@ -4,7 +4,7 @@
 Syntax:    python ldif2n3.py  <file>
 
     This program is or was http://www.w3.org/2000/10/swap/pim/ldif2p3.py
-    $Id: ldif2n3.py,v 1.5 2007-06-26 02:36:16 syosi Exp $
+    $Id: ldif2n3.py,v 1.6 2007-11-02 14:21:35 timbl Exp $
     
     -v  verbose
     -l  pure ldiff vocabulary in output, no translation to foaf etc 
@@ -20,7 +20,7 @@ import sha, binascii, base64
 from swap.notation3 import stringToN3 # http://www.w3.org/2000/10/swap/notation3.py
 
 
-version = "$Id: ldif2n3.py,v 1.5 2007-06-26 02:36:16 syosi Exp $"[1:-1]
+version = "$Id: ldif2n3.py,v 1.6 2007-11-02 14:21:35 timbl Exp $"[1:-1]
 
 global verbose
 global hideMailbox
@@ -57,6 +57,8 @@ def convert(path):
     inPerson = 0
     dataline = re.compile(r'([a-zA-Z0-9_]*): +(.*)')
     base64line = re.compile(r'([a-zA-Z0-9_]*):: +(.*)')
+    urline = re.compile(r'([a-zA-Z0-9_]*):< +(.*)')
+    commentLine = re.compile(r'^#.*')
 
     
     asFoaf = { "cn": "foaf:name" }
@@ -71,19 +73,21 @@ def convert(path):
                 break
             if eol+1 < len(buf) and buf[eol+1] == ' ':  # DOES LDIF fold lines??
                 l += buf[nextLine:eol]
-                nextLine = eol+2 # After the '\n '              
+                nextLine = eol+2 # After the '\n '                
                 continue
             l += buf[nextLine:eol]
             nextLine = eol+1
             break
         while l and l[-1:] in "\r\n": l = l[:-1]
         
+        if commentLine.match(l): continue
+
         m = blank.match(l)
         if m:
             print "    ]."
             inPerson = 0
             continue
-        
+        valtype = 'LITERAL'
         m = dataline.match(l)
         if m:
             field = m.group(1)
@@ -92,8 +96,13 @@ def convert(path):
             m = base64line.match(l)
             if m:
                 field = m.group(1)
-                value = m.group(2)
                 value = base64.decodestring(m.group(2))
+            else:
+                m = urlline.match(l)
+                if m:
+                    field = m.group(1)
+                    value = m.group(2)
+                    valtype = 'SYMBOL' 
         if m:
             if not inPerson:
                 print "    ["
