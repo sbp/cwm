@@ -191,7 +191,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
         self._usedIDs = Set()
         
-        version = "$Id: sax2rdf.py,v 1.54 2007-10-14 00:05:09 syosi Exp $"
+        version = "$Id: sax2rdf.py,v 1.55 2007-11-04 18:51:43 syosi Exp $"
 #        self.sink.makeComment("RDF parsed by "+version[1:-1])
 
         if "D" in self.flags:  # Assume default namespace declaration
@@ -880,6 +880,7 @@ class RDFXMLParser(RDFHandler):
              (default it is to ignore unless rdf:RDF at top level)
         L  - If non-rdf attributes have no namespace prefix, assume in local <#> namespace
         D  - Assume default namespace decalred as local document is assume xmlns=""
+        R  -  Do not require an outer <rdf:RDF>, treating the file as RDF content (opposite of T)
 
     Note: The parser (sax2rdf) does not support reification, bagIds, or parseType=Literal.
           It does support the rest of RDF inc. datatypes, xml:lang, and nodeIds.
