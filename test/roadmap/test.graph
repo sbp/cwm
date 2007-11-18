@@ -16,10 +16,10 @@
      @prefix v: <http://www.w3.org/2001/04/roadmap/var#> .
     
     
-    <sw.n3>     doc:version "$Id: test.graph,v 1.1 2001-12-08 03:29:52 timbl Exp $";
+    <sw.n3>     doc:version "$Id: test.graph,v 1.2 2007-11-18 02:01:58 syosi Exp $";
          gv:digraph swws:theGraph .
     
-    this     log:forAll swws:n1,
+    @forAll swws:n1,
                 swws:n2,
                 swws:p,
                 swws:type,
@@ -28,7 +28,7 @@
                 v:p,
                 v:s .
     
-    <w3c.n3>     doc:version "$Id: test.graph,v 1.1 2001-12-08 03:29:52 timbl Exp $" .
+    <w3c.n3>     doc:version "$Id: test.graph,v 1.2 2007-11-18 02:01:58 syosi Exp $" .
     
   
     
@@ -46,7 +46,7 @@
     
     
     swws:theGraph gv:hasNode swws:k_dep, swws:k_something;
-         gv:label "W3C Semantic Web Planned Components $Date: 2001-12-08 03:29:52 $";
+         gv:label "W3C Semantic Web Planned Components $Date: 2007-11-18 02:01:58 $";
          gv:subgraph swws:key;
          swws:likes rm:current,
                 rm:external,

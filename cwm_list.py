@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.13 2007-06-26 02:36:15 syosi Exp $
+$Id: cwm_list.py,v 1.14 2007-11-18 02:01:56 syosi Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -131,6 +131,7 @@ def register(store):
     ns.internFrag("in", BI_in)
     ns.internFrag("member", BI_member)
     ns.internFrag("last", BI_last)
+    ns.internFrag("lastElement", BI_lastElem)
     ns.internFrag("append", BI_append)
     ns.internFrag("members", BI_members)
 ##    ns.internFrag("map", BI_map)

@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.44 2007-07-10 18:04:17 syosi Exp $
+ $Id: retest.py,v 1.45 2007-11-18 02:01:57 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -562,8 +562,8 @@ I should have.
 
 
     timeMatcher = re.compile(r'\t([0-9]+)m([0-9]+)\.([0-9]+)s')
-    from test.pystone import pystones
-    pyStoneTime = pystones()[1]
+##    from test.pystone import pystones
+##    pyStoneTime = pystones()[1]
     for u, theTime, description, env, arguments in perfData:
         tests = tests + 1
         if tests < start: continue
