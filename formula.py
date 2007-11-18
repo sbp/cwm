@@ -2,7 +2,7 @@ from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.60 2007-08-23 16:28:29 syosi Exp $
+$Id: formula.py,v 1.61 2007-11-18 03:40:44 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -21,7 +21,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.60 2007-08-23 16:28:29 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.61 2007-11-18 03:40:44 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -802,6 +802,8 @@ class StoredStatement:
         """Just compare SUBJ, Pred and OBJ, others the same
         Avoid loops by spotting reference to containing formula"""
         if self is other: return 0
+        if not isinstance(other, StoredStatement):
+            return cmp(self.__class__, other.__class__)
         sc = self.quad[CONTEXT]
         oc = other.quad[CONTEXT]
         for p in [SUBJ, PRED, OBJ]: # Note NOT internal order
