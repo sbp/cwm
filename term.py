@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: term.py,v 1.78 2007-08-21 15:39:54 syosi Exp $
+$Id: term.py,v 1.79 2007-11-18 03:45:22 syosi Exp $
 
 term
 
@@ -1271,7 +1271,7 @@ def unify(self, other, bindings=Env(), otherBindings=Env(),
     elif isinstance(self, (Set, ImmutableSet)):
         for x in unifySet(self, other, env1, env2, vars, existentials, n1Source=n1Source, n2Source=n2Source):
             yield x
-    elif type(self) is type([]):
+    elif type(self) is tuple:
         for x in unifySequence(self, other, env1, env2, vars, existentials, n1Source=n1Source, n2Source=n2Source):
             yield x
     elif hasattr(self, 'unifySecondary') and hasattr(other, 'unifySecondary'):
