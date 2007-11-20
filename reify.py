@@ -7,7 +7,7 @@ The strategy used is different from that of the reifier
 in notation3.py, that tries to reify what it outputs.
 This simply puts the reification into the sink given,
 or a new one, depending on the function called.
-$Id: reify.py,v 1.17 2007-06-26 02:36:15 syosi Exp $
+$Id: reify.py,v 1.18 2007-11-20 15:07:14 syosi Exp $
 """
 from term import BuiltIn, LightBuiltIn, LabelledNode, \
     HeavyBuiltIn, Function, ReverseFunction, AnonymousNode, \
@@ -214,7 +214,7 @@ def flatten(formula):
                 continue
             break
         else:
-            print a
+            pass
     returnFormula = formula.newFormula()
     for a in still_needed_existentials.keys():
         returnFormula.declareExistential(a)
