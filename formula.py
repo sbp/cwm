@@ -2,7 +2,7 @@ from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.61 2007-11-18 03:40:44 syosi Exp $
+$Id: formula.py,v 1.62 2007-12-11 21:18:08 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -21,7 +21,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.61 2007-11-18 03:40:44 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.62 2007-12-11 21:18:08 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -85,6 +85,7 @@ class Formula(AnonymousNode, CompoundTerm):
         self._universalVariables = Set()
         self.stayOpen = 0   # If set, works as a knowledegbase, never canonicalized.
         self._redirections = {}  # Used for equalities
+
         
     def __repr__(self):
         if self.statements == []:
@@ -726,9 +727,9 @@ For future reference, use newUniversal
         """Yes, any identifier you see for this is arbitrary."""
         return 1
 
-    def asPair(self):
-        """Return an old representation. Obsolete"""
-        return (FORMULA, self.uriref())
+#    def asPair(self):
+#        """Return an old representation. Obsolete"""
+#        return (FORMULA, self.uriref())
 
     def subjects(self, pred=None, obj=None):
         """Obsolete - use each(pred=..., obj=...)"""

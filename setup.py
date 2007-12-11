@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # borrowing liberally from Eikeon's setup.py for rdflib
 # an attempt at a setup.py installer for Cwm/SWAP
-# version: $Id: setup.py,v 1.21 2007-11-18 02:01:57 syosi Exp $
+# version: $Id: setup.py,v 1.22 2007-12-11 21:18:08 syosi Exp $
 # by Dan Brickley <danbri@w3.org>
 #
 # STATUS: this file now works
@@ -46,7 +46,7 @@ setup(
     package_dir = {'swap': 'swap'},
     packages = ['swap'],
 #    py_modules = ['cwm', 'delta', 'cant'],
-    scripts = ['cwm', 'delta', 'cant'],
+    scripts = ['cwm', 'delta', 'cant.py'],
    )
     # todo, figure out which other modules are in public APIs
     # --danbri

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.199 2007-11-18 02:01:56 syosi Exp $
+$Id: notation3.py,v 1.200 2007-12-11 21:18:08 syosi Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -1335,7 +1335,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write(u"\n#  Notation3 generation by\n")
-            idstr = u"$Id: notation3.py,v 1.199 2007-11-18 02:01:56 syosi Exp $"
+            idstr = u"$Id: notation3.py,v 1.200 2007-12-11 21:18:08 syosi Exp $"
             # CVS CHANGES THE ABOVE LINE
             self._write(u"#       " + idstr[5:-2] + u"\n\n") 
             # Strip "$" in case the N3 file is checked in to CVS
@@ -1529,7 +1529,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
                 if (pred != (SYMBOL, N3_forAll_URI) and
                     pred != (SYMBOL, N3_forSome_URI)):
                     raise ValueError(
-                     "On N3 output, 'this' used with bad predicate: %s" % pred)
+                     "On N3 output, 'this' used with bad predicate: %s" % (pred, ))
             self._subj = subj
             self._pred = None
 

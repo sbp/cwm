@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: llyn.py,v 1.184 2007-08-06 16:13:56 syosi Exp $
+$Id: llyn.py,v 1.185 2007-12-11 21:18:08 syosi Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.184 $"
+cvsRevision = "$Revision: 1.185 $"
 
 
 # Magic resources we know about
@@ -188,6 +188,7 @@ VARHASH = VARHASH()
 ####
 ###  /BCHAIN
 ####
+
 
 ###################################### Forumula
 #
