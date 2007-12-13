@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.196 2007-12-11 21:18:08 syosi Exp $
+$Id: cwm.py,v 1.197 2007-12-13 15:38:39 syosi Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.196 $"
+cvsRevision = "$Revision: 1.197 $"
     
             
 
@@ -119,6 +119,7 @@ steps, in order left to right:
 --revision    print CVS revision numbers of major modules
 --chatty=50   Verbose debugging output of questionable use, range 0-99
 --sparqlServer instead of outputting, start a SPARQL server on port 8000 of the store
+--sparqlResults        After sparql query, print in sparqlResults format instead of rdf
 
 finally:
 
@@ -348,7 +349,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.196 2007-12-11 21:18:08 syosi Exp $"
+        version = "$Id: cwm.py,v 1.197 2007-12-13 15:38:39 syosi Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
