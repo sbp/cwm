@@ -2,7 +2,7 @@ from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.62 2007-12-11 21:18:08 syosi Exp $
+$Id: formula.py,v 1.63 2007-12-16 00:22:59 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -21,7 +21,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.62 2007-12-11 21:18:08 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.63 2007-12-16 00:22:59 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -379,6 +379,7 @@ For future reference, use newUniversal
         for v in old.existentials():
             self.declareExistential(bindings.get(v, v))
         bindings2[old] = self
+        realStatementList = []
         for s in old.statements[:] :   # Copy list!
             subj=s[SUBJ].substitution(
                                  bindings2, why=subWhy, cannon=cannon).substitution(
@@ -414,11 +415,22 @@ For future reference, use newUniversal
                                   pred=pred,
                                   obj=obj,
                                   why=why)
+                realStatementList.append((subj, pred, obj))
             except AssertionError:
                 print 'subj=%s' % subj.debugString()
                 print 'oldSubj=%s' % (s[SUBJ].debugString(),)
                 print 'subj.canonical=%s' % subj.canonical.debugString()
                 raise
+        if diag.chatty_flag > 80:
+            def thing2string(x):
+                if isinstance(x, (tuple, list)):
+                    return '[' + ', '.join([thing2string(y) for y in x]) + ']'
+                if isinstance(x, List):
+                    return '(' + ' '.join([thing2string(y) for y in x]) + ')'
+                else:
+                    return str(x)
+            progress('We added the following triples: %s' % (''.join(['\n\t%s' % thing2string(x) for x in realStatementList]),))
+
         return bindings3, total
 
     def subSet(self, statements, why=None):
