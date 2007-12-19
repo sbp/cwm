@@ -1,4 +1,4 @@
-$Id: README,v 1.11 2005-11-21 22:19:31 vkolovsk Exp $
+$Id: README,v 1.12 2007-12-19 23:59:03 syosi Exp $
 
 Cwm is a general-purpose data processor for the semantic  
 web, somewhat like sed, awk, etc. for text files or XSLT for XML. 
@@ -34,10 +34,18 @@ If a test fails: There are three possiblilities:
 		This is highly unlikely.
 
 
-== What's New In this Release (1.1.0) ==
+== What's New In this Release (1.2.0) ==
 For a complete list of changes, look at doc/changes.html
 
-Release 1.1.0
+Release 1.2.0
+== Proof updates
+  Putting --why at the end of a command line will generate a proof,
+and has had much debugging.
+
+== General bugfixes.
+
+
+Release 1.1.0 (never released)
 
 ==Performance Improvements
     * Cwm now uses Python Sets instead of lists to store many things
