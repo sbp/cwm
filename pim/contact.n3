@@ -10,7 +10,7 @@ dc:description """
  For example, when data about you and your assietnt in merged,
  you will end up with an "assistant's email" and the like.
 """,
-"$Id: contact.n3,v 1.31 2007-05-23 18:56:09 timbl Exp $". # see changelog at the bottom.
+"$Id: contact.n3,v 1.32 2008-01-05 21:42:37 timbl Exp $". # see changelog at the bottom.
 
 
 @prefix : <http://www.w3.org/2000/10/swap/pim/contact#> .
@@ -116,7 +116,7 @@ doc:persistencePolicy
 
 ########## Properties of the ConactLocation
 
-:address a rdf:Property, owl:FunctionalProperty, owl:InnverseFunctionalProperty;
+:address a rdf:Property, owl:FunctionalProperty, owl:InverseFunctionalProperty;
     rdfs:domain :ContactLocation; rdfs:range :Address;
     rdfs:label "address"@en .
 

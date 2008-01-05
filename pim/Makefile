@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.11 2007-01-25 20:26:50 timbl Exp $
+# $Id: Makefile,v 1.12 2008-01-05 21:42:37 timbl Exp $
 
 # The year being processed, typically this year
 
@@ -37,7 +37,7 @@ include $(UMLP)/XSLTPROC.mak
 .n3.rdf:
 	$(PYTHON) $(CWM) $< --rdf >$@
 
-all: travelFig.rdf ical
+all: travelFig.rdf ical contact.rdf
 
 travelFig.rdf: travelFig.xml
 

@@ -22,7 +22,7 @@ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 """
 
 
-__version__ = '$Id: toLdif.py,v 1.3 2007-06-26 02:36:16 syosi Exp $'
+__version__ = '$Id: toLdif.py,v 1.4 2008-01-05 21:42:37 timbl Exp $'
 
 
 from string import maketrans, translate
@@ -91,7 +91,6 @@ def wr(buf):
 
 def backslashEncode(val):
     text = val.encode('ascii') # Just check
-    # @@TODO: wrap at 75 cols
     for c in ('\\'):  # cal: ('\\', ';', ',')
         text = text.replace(c, "\\"+c)
     text = text.replace('\n', "\\n")
