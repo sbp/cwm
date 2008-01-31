@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.87 2007-12-16 00:22:59 syosi Exp $
+# $Id: Makefile,v 1.88 2008-01-31 15:28:19 syosi Exp $
 
 
 PYTHON=python
@@ -98,7 +98,7 @@ setup_tarball: $(SOURCES) $(HTMLS) $(TESTS) $(GRAMMAR) $(TARBALL_STUFF) tested f
 	ln cant.py cant
 	echo "cwm" > MANIFEST
 	echo "delta." >> MANIFEST
-	echo "cant" >> MANIFEST
+	echo "cant.py" >> MANIFEST
 	echo "check.py" >> MANIFEST
 	echo "setup.py" >> MANIFEST
 	for A in $(TARBALL_STUFF) $(HTMLS) $(GRAMMAR) $(TESTS); do echo "$$A" >> MANIFEST; done
