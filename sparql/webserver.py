@@ -2,7 +2,7 @@
 A webserver for SPARQL
 
 """
-__version__ = '$Id: webserver.py,v 1.9 2005-08-09 20:55:16 syosi Exp $'
+__version__ = '$Id: webserver.py,v 1.10 2008-01-31 14:59:33 syosi Exp $'
 
 import BaseHTTPServer, urllib
 from cgi import parse_qs
@@ -54,6 +54,7 @@ class SPARQL_request_handler(BaseHTTPServer.BaseHTTPRequestHandler):
     query_file = '/'
     default = default_string % query_file
     def do_GET(self):
+        print dict(self.headers)
         try:
             file, query = self.path.split('?', 1)
         except ValueError:
