@@ -21,7 +21,7 @@ or nothing will happen.
 
 Example:    python retest.py -n -f regression.n3
 
- $Id: retest.py,v 1.45 2007-11-18 02:01:57 syosi Exp $
+ $Id: retest.py,v 1.46 2008-02-05 16:11:35 syosi Exp $
 This is or was http://www.w3.org/2000/10/swap/test/retest.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
@@ -86,11 +86,14 @@ def execute(cmd1, noStdErr=False):
     global verbose, no_action
     if verbose: print "    "+cmd1
     if no_action: return
-    if noStdErr:
-        stderr = file('/dev/null', 'w')
-    else:
-        stderr = None
-    result = call(cmd1, shell=True, stderr=stderr)
+    stderr = None
+    try:
+        if noStdErr:
+            stderr = file('/dev/null', 'w')
+        result = call(cmd1, shell=True, stderr=stderr)
+    finally:
+        if stderr:
+            stderr.close()
     if result != 0:
         raise RuntimeError("Error %i executing %s" %(result, cmd1))
 

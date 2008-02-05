@@ -2,7 +2,7 @@ from __future__ import generators
 #! /usr/bin/python
 """
 
-$Id: formula.py,v 1.63 2007-12-16 00:22:59 syosi Exp $
+$Id: formula.py,v 1.64 2008-02-05 16:11:35 syosi Exp $
 
 Formula
 See:  http://www.w3.org/DesignIssues/Notation3
@@ -21,7 +21,7 @@ and the redfoot/rdflib interface, a python RDF API:
 
 """
 
-__version__ = '$Id: formula.py,v 1.63 2007-12-16 00:22:59 syosi Exp $'[1:-1]
+__version__ = '$Id: formula.py,v 1.64 2008-02-05 16:11:35 syosi Exp $'[1:-1]
 
 import types
 import StringIO
@@ -208,7 +208,7 @@ class Formula(AnonymousNode, CompoundTerm):
 
     
     def declareUniversal(self, v, key=None):
-        if key is not AnonymousUniversal:
+        if False and key is not AnonymousUniversal:
             raise RuntimeError("""We have now disallowed the calling of declareUniversal.
 For future reference, use newUniversal
 """)
