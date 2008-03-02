@@ -1,7 +1,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 <> dc:description """
- $Id: pd2ical.n3,v 1.2 2001-07-26 13:48:05 connolly Exp $
+ $Id: pd2ical.n3,v 1.3 2008-03-02 23:03:36 timbl Exp $
  palm datebook to ical
 """.
 
@@ -15,8 +15,8 @@
 @prefix : <pd2ical#>.
 @prefix p2i: <pd2ical#>.
 
-this log:forAll v:e, v:i, v:date, v:desc.
-this log:forSome v:cal.
+@forAll v:e, v:i, v:date, v:desc.
+@forSome v:cal.
 
 v:cal a ical:VCALENDAR.
 

@@ -4,7 +4,7 @@
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
 
 <> dc:title "U.S. Gazetteer rules: place names/zips to lat/long";
-  dc:description "$Id: usPlace2LatLong.n3,v 1.2 2002-01-23 09:16:36 connolly Exp $";
+  dc:description "$Id: usPlace2LatLong.n3,v 1.3 2008-03-02 23:03:36 timbl Exp $";
   dc:source <http://www.census.gov/cgi-bin/gazetteer>.
 
 @prefix r: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
@@ -19,7 +19,7 @@
 
 @prefix : <?#>.
 
-this log:forAll :where, :cityN, :stN, :i, :pg, :txt.
+@forAll :where, :cityN, :stN, :i, :pg, :txt.
 
 
 { :where p:cityName :cityN;
@@ -60,7 +60,8 @@ this log:forAll :where, :cityN, :stN, :i, :pg, :txt.
   log:implies {
     :where map:x :long; map:y :lat; :_latMag :latMag; :_latX :latX.
   }.
-this log:forAll :lat, :latMag, :latX, :long, :longMag, :longX.
+
+@forAll :lat, :latMag, :latX, :long, :longMag, :longX.
 
 
 # test data...

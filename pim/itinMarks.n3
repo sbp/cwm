@@ -2,7 +2,7 @@
 
 @prefix dc: <http://purl.org/dc/elements/1.1/>.
 <> dc:description """comput xplanet markers from an itinerary""",
-"$Id: itinMarks.n3,v 1.4 2004-04-19 16:31:08 connolly Exp $";
+"$Id: itinMarks.n3,v 1.5 2008-03-02 23:03:36 timbl Exp $";
 dc:relation <airportLookup.n3>.
 
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
@@ -16,7 +16,7 @@ dc:relation <airportLookup.n3>.
 
 @prefix : <itinMarks#>.
 
-this log:forAll :LAT1, :LON1, :IATA, :TXT, :T1, :T2,
+@forAll :LAT1, :LON1, :IATA, :TXT, :T1, :T2,
   :YMD, :DOW, :DOWN, :DDD, :P, :Q, :PN, :C, :R.
 
 

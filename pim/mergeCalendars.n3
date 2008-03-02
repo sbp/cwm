@@ -1,4 +1,4 @@
-# $Id: mergeCalendars.n3,v 1.1 2004-02-22 21:28:34 connolly Exp $
+# $Id: mergeCalendars.n3,v 1.2 2008-03-02 23:03:36 timbl Exp $
 @prefix cal: <http://www.w3.org/2002/12/cal/ical#>.
 @prefix s:   <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix r:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
@@ -6,7 +6,7 @@
 
 @prefix : <#>.
 
-this log:forAll :S, :P, :O.
+@forAll :S, :P, :O.
 
 { ?E a cal:Vevent;
      s:seeAlso ?DOC.
@@ -23,6 +23,9 @@ this log:forAll :S, :P, :O.
 
 
 # $Log: mergeCalendars.n3,v $
-# Revision 1.1  2004-02-22 21:28:34  connolly
+# Revision 1.2  2008-03-02 23:03:36  timbl
+# get rid of old this log:forAll syntax
+#
+# Revision 1.1  2004/02/22 21:28:34  connolly
 # works in one case
 #

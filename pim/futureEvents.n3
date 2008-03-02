@@ -1,4 +1,4 @@
-# $Id: futureEvents.n3,v 1.1 2003-02-20 22:54:52 connolly Exp $
+# $Id: futureEvents.n3,v 1.2 2008-03-02 23:03:36 timbl Exp $
 # @@ dc:description
 
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -20,7 +20,7 @@
 
 #:window :start "20021214". #@@ enhance ical2rdf.pl to put hyphens in dates
 
-this log:forAll :CAL, :EV, :ID, :RULE, :SUMMARY, :FREQ,
+@forAll :CAL, :EV, :ID, :RULE, :SUMMARY, :FREQ,
 	:START, :STARTDATETIME, :STARTTZ, :STARTDATE, :KEY, :WHEN, :VAL.
 
 

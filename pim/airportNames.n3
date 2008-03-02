@@ -4,7 +4,7 @@
 """map navigant (sabre?) airport names to IATA-based
 daml.org names; relate to opencyc:fromLocation and opencyc:toLocation""",
 "@@TODO: constraint the premise of the mapping rule a bit?",
-"$Id: airportNames.n3,v 1.4 2002-09-22 21:55:50 connolly Exp $";
+"$Id: airportNames.n3,v 1.5 2008-03-02 23:03:36 timbl Exp $";
 dc:relation <grokTravItin.pl>.
 
 @prefix k: <http://opencyc.sourceforge.net/daml/cyc.daml#> .
@@ -34,7 +34,7 @@ a:PHX k:nameString "PHOENIX".
 @prefix :  <?var#>.
 @prefix v: <?var#>.
 
-this log:forAll :P, :Q, :X, :Y.
+@forAll :P, :Q, :X, :Y.
 
 #special case of UnambiguousProperty and =, perhaps
 k:nameString :determines k:fromLocation, k:toLocation.

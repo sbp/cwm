@@ -13,7 +13,7 @@ If neither --tracks or --waypoints are asked for, nothing will happen.
 
 This is an RDF application.
 See also Morten F's http://www.wasab.dk/morten/2003/10/garmin2rdf.py
-$Id: fromGarmin.py,v 1.7 2007-06-26 02:36:16 syosi Exp $
+$Id: fromGarmin.py,v 1.8 2008-03-02 23:03:36 timbl Exp $
 """
 
 # Regular python library
@@ -107,9 +107,11 @@ def doCommand(serialDevice=None, outputURI=None, doTracks=1, doWaypoints=1, verb
                 f.add(point, WGS.lat, obj=intern(degrees(p.slat)))
                 f.add(point, WGS.long, obj=intern(degrees(p.slon)))
 #               if verbose: progress("    time=", p.time)
+#                progress('p.time='+`p.time`) # @@
                 if p.time == 0 or p.time == 0xffffffffL:
                     if verbose: progress("time=%8x, ignoring" % p.time)
-                f.add(point, WGS.time, obj=intern(isodate.fullString(TimeEpoch+p.time)))
+                else:
+                    f.add(point, WGS.time, obj=intern(isodate.fullString(TimeEpoch+p.time)))
 
    phys.f.close()  # Should really be done by the del() below, but isn't
    del(phys) # close serial link (?)
