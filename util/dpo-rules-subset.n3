@@ -17,11 +17,11 @@
 @prefix : <validate#> .       # For our use
 @prefix v: <validate.n3#> .	# Hint for others use
 
-
+@forAll <#x>, <#y>, <#z> .
 @forAll <#p>, <#p1>, <#p2>,	# Properties
 	 <#c>, <#c1>, <#c2>.   # Classes
 
-<> doc:version "$Id: dpo-rules-subset.n3,v 1.3 2009-02-26 17:08:01 timbl Exp $".
+<> doc:version "$Id: dpo-rules-subset.n3,v 1.4 2009-02-26 17:10:45 timbl Exp $".
 
 # The following is a subset of the properties of =, which should not need stating.
 # But cwm currently doesn't know a lot about = inherently. @@
@@ -94,7 +94,6 @@ rdfs:subClassOf 		a daml:TransitiveProperty .
 
 # The first NOT we come across is disjointWith:
 
-@forAll <#x>, <#y>, <#z> .
 { 	<#x> a <#y> .
 	<#x> a <#z> .
 	<#y> daml:disjointFrom <#z> } log:implies { <#x> v:ERROR  "Member of disjoint classes" } .
