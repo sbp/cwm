@@ -1,7 +1,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 <> dc:description """functional, i.e. unambiguous, properties""",
- "$Id: funcProp.n3,v 1.1 2002-10-02 17:23:43 connolly Exp $".
+ "$Id: funcProp.n3,v 1.2 2009-02-26 17:08:01 timbl Exp $".
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 
@@ -11,7 +11,7 @@
 
 @prefix : <#>.
 
-this log:forAll :X, :Y, :Z, :P.
+@forAll :X, :Y, :Z, :P.
 
 { :P a ont:UnambiguousProperty.
   :X :P :Y.

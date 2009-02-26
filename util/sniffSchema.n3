@@ -3,7 +3,7 @@
 <> dc:description """
 Sniff a schema from some RDF data.
 """,
-"$Id: sniffSchema.n3,v 1.5 2002-07-18 05:39:40 connolly Exp $";
+"$Id: sniffSchema.n3,v 1.6 2009-02-26 17:08:01 timbl Exp $";
 dc:relation <sniffSchema.rdf>, <sniffSchema.n3>.
 
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -15,7 +15,7 @@ dc:relation <sniffSchema.rdf>, <sniffSchema.n3>.
 @prefix   : <http://www.w3.org/2000/10/swap/util/sniffSchema#>.
 @prefix ss: <http://www.w3.org/2000/10/swap/util/sniffSchema#>.
 
-this log:forAll :P, :C, :X, :T.
+@forAll :P, :C, :X, :T.
 
 # declare the properties I'm using...
 # thanks to the DAML validator for keeping me honest.

@@ -1,13 +1,13 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 <> dc:description """substitution of equals for equals, 3 cases""",
- "$Id: subst.n3,v 1.3 2002-10-02 17:30:15 sandro Exp $".
+ "$Id: subst.n3,v 1.4 2009-02-26 17:08:01 timbl Exp $".
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 
 @prefix : <#>.
 
-this log:forAll :X, :Y, :Z, :P, :Q.
+@forAll :X, :Y, :Z, :P, :Q.
 
 { :X :P :Y. :X = :Z.
   :P log:notEqualTo log:forAll, log:forSome    #HIDELINE
