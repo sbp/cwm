@@ -9,7 +9,7 @@ usage, eg:
 
 This is an RDF application.
 
-$Id: fin.py,v 1.21 2007-06-26 02:36:16 syosi Exp $
+$Id: fin.py,v 1.22 2009-06-27 02:40:20 timbl Exp $
 """
 from swap import llyn, diag, notation3, RDFSink, uripath, myStore
 
@@ -376,7 +376,7 @@ def doCommand(year, inputURI="/dev/stdin"):
         
 
 
-        version = "$Id: fin.py,v 1.21 2007-06-26 02:36:16 syosi Exp $"
+        version = "$Id: fin.py,v 1.22 2009-06-27 02:40:20 timbl Exp $"
 #       if not option_quiet:
 #       _outSink.makeComment("<address>Processed by " + version[1:-1]+"</address>") # Strip $ to disarm
 
@@ -411,7 +411,7 @@ def doCommand(year, inputURI="/dev/stdin"):
         
 #  Chart of income stacked up against expenses
         print "<p><a href='chart.svg'><p>Chart of day-day income vs expense</p><img src='chart.svg'></a></p>"
-        print "<p><a href='chart.svg'><p>Chart of all income vs expense</p><img src='all.svg'></a></p>"
+        print "<p><a href='all.svg'><p>Chart of all income vs expense</p><img src='all.svg'></a></p>"
 
         writeChart(filename = "chart.svg",
             categories=quCategories + [ qu.UnclassifiedIncome, qu.UnclassifiedOutgoing],
