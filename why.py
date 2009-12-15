@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.53 2007-06-27 17:58:39 syosi Exp $
+$Id: why.py,v 1.54 2009-12-15 14:55:57 connolly Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -135,6 +135,7 @@ def _giveTerm(x, ko):
     from formula import Formula
     if isinstance(x, Formula):
         b = ko.newBlankNode(why=dontAsk)
+        x = x.close() # per timbl Tue, 15 Dec 2009 08:53:04 -0500
         ko.add(subj=x, pred=ko.store.sameAs, obj=b,
                         why=dontAsk)
         return b
