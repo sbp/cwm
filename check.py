@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.61 2009-12-17 03:45:10 connolly Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.62 2009-12-17 06:59:36 connolly Exp $'[1:-1]
 
 
 # mystore and term should be swappable with rdflib; shared interfaces
@@ -865,13 +865,14 @@ def main(argv):
         if report:
             sys.stdout.write(PfReportHeader)
             c.report(sys.stdout)
-            sys.stdout.write("\n\nConclusion::\n")
+            sys.stdout.write("\n\nConclusion::\n\n")
 
         proved = c.result(c.conjecture()[1], policy=policy)
 
         fyi("Proof looks OK.   %i Steps" % proofSteps, thresh=5)
         setVerbosity(0)
-        print proved.n3String().encode('utf-8')
+        txt = proved.n3String().encode('utf-8')
+        print "\n".join(['  ' + ln.strip() for ln in txt.split("\n")])
 
     except InvalidProof, e:
         progress("Proof invalid:", e)
