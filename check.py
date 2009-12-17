@@ -12,7 +12,7 @@ Command line options for debug:
 
 @@for more command line options, see main() in source
 """
-__version__ = '$Id: check.py,v 1.60 2009-12-15 16:28:14 connolly Exp $'[1:-1]
+__version__ = '$Id: check.py,v 1.61 2009-12-17 03:45:10 connolly Exp $'[1:-1]
 
 
 # mystore and term should be swappable with rdflib; shared interfaces
@@ -737,7 +737,7 @@ def checkBuiltin(r, f, checker, policy, level=0):
                          "predicate: %s "
                          "subject: %s "
                          "object: %s "
-                         "result: %s" % (s, pred, o, r), level)
+                         "result: %s" % (pred, s, o, r), level)
 
 
 def atomicFormulaTerms(f):
