@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: why.py,v 1.54 2009-12-15 14:55:57 connolly Exp $
+$Id: why.py,v 1.55 2009-12-20 22:55:51 connolly Exp $
 
 A class for storing the reason why something is known.
 The dontAsk constant reason is used as a reason for the explanations themselves-
@@ -27,7 +27,6 @@ from set_importer import Set, sorted
 
 import urllib # for hasContent
 import uripath # DanC's tested and correct one
-import md5, binascii  # for building md5 URIs
 
 from uripath import refTo
 from myStore  import Namespace
