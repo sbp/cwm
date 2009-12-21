@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.37 2008-02-15 00:43:45 syosi Exp $
+$Id: cwm_string.py,v 1.38 2009-12-21 02:43:12 connolly Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -15,7 +15,6 @@ import re
 from diag import verbosity, progress
 
 import urllib # for hasContent
-import md5, binascii  # for building md5 URIs
 
 from term import LightBuiltIn, ReverseFunction, Function, UnknownType
 from local_decimal import Decimal
