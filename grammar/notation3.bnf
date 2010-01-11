@@ -3,7 +3,7 @@
 /* which see  http://www.w3.org/TR/2004/REC-xml11-20040204/#sec-notation */
 /* and see http://en.wikipedia.org/wiki/Extended_Backus-Naur_form */
 
-/* $Id: notation3.bnf,v 1.14 2006-06-22 22:03:21 connolly Exp $ */
+/* $Id: notation3.bnf,v 1.15 2010-01-11 20:59:24 connolly Exp $ */
 /* transcribe from n3.n3 revision 1.28 date: 2006/02/15 15:49:00 */
 
 [1] document ::= (statement ".")*
@@ -78,7 +78,8 @@
 
 [26] integer ::= [+-]? [0-9]+
 [27] double	::= [+-]? [0-9]+ ("." [0-9]+)? ( [eE] [+-]? [0-9]+)
-[28] decimal	::= [+-]? [0-9]+ ("." [0-9]+)?
+/* in SPARQL, decimals can have exponents too. Java too, I think. */
+[28] decimal	::= [+-]? [0-9]+ ("." [0-9]+)
 
 /* borrowed from SPARQL spec, which excludes newlines and other nastiness */
 [29] uriref ::=	'<' ([^<>'{}|^`]-[#x01-#x20])* '>'
