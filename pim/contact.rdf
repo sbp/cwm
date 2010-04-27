@@ -24,7 +24,7 @@
  For example, when data about you and your assietnt in merged,
  you will end up with an "assistant's email" and the like.
 </dc:description>
-        <dc:description>$Id: contact.rdf,v 1.15 2010-04-27 20:28:41 timbl Exp $</dc:description>
+        <dc:description>$Id: contact.rdf,v 1.16 2010-04-27 21:09:10 timbl Exp $</dc:description>
         <dc:title>Contact: Utility concepts for everyday life</dc:title>
         <doc:creator rdf:resource="http://www.w3.org/People/Berners-Lee/card#i"/>
         <doc:persistencePolicy rdf:parseType="Resource">
@@ -294,6 +294,11 @@
     <rdf:Description rdf:about="http://www.w3.org/2000/10/swap/pim/contact#postalCode">
         <domain rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#Address"/>
     </rdf:Description>
+
+    <rdf:Property rdf:about="http://www.w3.org/2000/10/swap/pim/contact#preferredURI">
+        <comment>A string which is the URI a person, organization, etc, prefers that people use for them.</comment>
+        <label>preferred</label>
+    </rdf:Property>
 
     <rdf:Description rdf:about="http://www.w3.org/2000/10/swap/pim/contact#publicHomePage">
         <subPropertyOf rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#homePage"/>
