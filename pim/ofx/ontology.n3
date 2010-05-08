@@ -11,13 +11,14 @@
 
 @keywords a, is, of.
 
-<>  doc:version "$Id: ontology.n3,v 1.2 2010-04-05 16:05:12 timbl Exp $";
+<>  doc:version "$Id: ontology.n3,v 1.3 2010-05-08 19:26:37 timbl Exp $";
 
-<> s:comment """This is an ontology for data converted from the Online Financial Exchange XML
+    s:comment """This is an ontology for data converted from the Online Financial Exchange XML
 format for downlodable bank statements, etc. 
 """.
 
-NAME a rdf:Property; s:label "name"; is s:subPropertyOf s:label.
+NAME a rdf:Property; s:label "name"; s:subPropertyOf s:label.
+
 # This can be used as a label for a transaction (but is not ideal as one).
 
 
