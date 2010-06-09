@@ -3,7 +3,7 @@ bnf2turtle -- write a turtle version of an EBNF grammar
 =======================================================
 
 :Author: `Dan Connolly`_
-:Version: $Revision: 1.11 $ of $Date: 2006-11-15 19:59:25 $
+:Version: $Revision: 1.12 $ of $Date: 2010-06-09 15:17:33 $
 :Copyright: `W3C Open Source License`_ Share and enjoy.
 
 .. _Dan Connolly: http://www.w3.org/People/Connolly/
@@ -14,7 +14,7 @@ Usage
 
 Invoke a la::
 
-  python bnf2turtle.py foo.bnf pfx uri >foo.ttl
+  python bnf2turtle.py foo.bnf pfx lang uri >foo.ttl
 
 where foo.bnf is full of lines like::
 
@@ -140,7 +140,7 @@ Check them a la::
 
 """
 
-__version__ = "$Id: ebnf2turtle.py,v 1.11 2006-11-15 19:59:25 connolly Exp $"
+__version__ = "$Id: ebnf2turtle.py,v 1.12 2010-06-09 15:17:33 dom Exp $"
 
 import re
 
@@ -562,7 +562,10 @@ if __name__ == '__main__':
     else: main(sys.argv)
 
 # $Log: ebnf2turtle.py,v $
-# Revision 1.11  2006-11-15 19:59:25  connolly
+# Revision 1.12  2010-06-09 15:17:33  dom
+# added lang parameter in usage
+#
+# Revision 1.11  2006/11/15 19:59:25  connolly
 # change rep to plus, eps to empty
 #
 # Revision 1.10  2006/06/21 00:53:31  connolly
