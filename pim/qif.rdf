@@ -16,7 +16,7 @@
         <seeAlso r:resource="http://dev.w3.org/cvsweb/2000/quacken/"/>
         <seeAlso r:resource="http://dev.w3.org/cvsweb/~checkout~/2000/quacken/vocab.n3?rev=1.1"/>
         <seeAlso r:resource="http://www.intuit.com/support/quicken/2002/win/1177.html"/>
-        <doc:version>$Id: qif.rdf,v 1.4 2010-06-22 21:25:48 timbl Exp $</doc:version>
+        <doc:version>$Id: qif.rdf,v 1.5 2010-07-15 13:20:32 timbl Exp $</doc:version>
     </r:Description>
 
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Account">
@@ -42,6 +42,16 @@
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Unclassified">
         <label>unclassified</label>
         <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
+    </Class>
+
+    <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#UnclassifiedIncome">
+        <label>unclassified income</label>
+        <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#Unclassified"/>
+    </Class>
+
+    <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#UnclassifiedOutgoing">
+        <label>unclassified outgoing</label>
+        <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#Unclassified"/>
     </Class>
 
     <r:Property r:about="http://www.w3.org/2000/10/swap/pim/qif#accordingTo">
