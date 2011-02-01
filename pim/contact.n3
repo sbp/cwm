@@ -10,7 +10,7 @@ dc:description """
  For example, when data about you and your assietnt in merged,
  you will end up with an "assistant's email" and the like.
 """,
-"$Id: contact.n3,v 1.35 2010-05-10 19:04:55 timbl Exp $". # see changelog at the bottom.
+"$Id: contact.n3,v 1.36 2011-02-01 04:13:21 timbl Exp $". # see changelog at the bottom.
 
 
 @prefix : <http://www.w3.org/2000/10/swap/pim/contact#> .
@@ -142,8 +142,10 @@ doc:persistencePolicy
     is rdfs:domain of :street, :street2, :street3,
 		:city, :stateOrProvince, :postalCode, :country .
 
-stateOrProvince a rdfs:Property;
-    rdfs:label "region".
+region a rdf:Property;
+    rdfs:label "region";
+    rdfs:comment """The sub-national unit such as state (us),
+province (ca), county (uk), département (fr), and so on""".
     
 :zip rdfs:subPropertyOf :postalCode.
 
