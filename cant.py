@@ -25,7 +25,8 @@ of the SWAP code so that it can be used to test the SWAP code. It doesn't
 boast any fancy algorithms - just tries to get the job done for the small
 files in the test datasets.
 
-The algorithm to generate a "signature" for each bnode. This is just found by looking in its immediate viscinity, treating any local bnode as a blank.
+The algorithm to generate a "signature" for each bnode. This is just found
+by looking in its immediate viscinity, treating any local bnode as a blank.
 Bnodes which have signatures
 unique within the graph can be allocated cannonical identifiers as a function
 of the ordering of the signatures. These are then treated as fixed nodes.
@@ -43,12 +44,20 @@ References:
  Not to mention,  published this month by coincidence:
   Kelly, Brian, [Whitehead Institute]  "Graph cannonicalization", Dr Dobb's Journal, May 2003.
  
- $Id: cant.py,v 1.15 2007-06-26 02:36:15 syosi Exp $
+ $Id: cant.py,v 1.16 2012-01-30 09:30:20 timbl Exp $
 This is or was http://www.w3.org/2000/10/swap/cant.py
 W3C open source licence <http://www.w3.org/Consortium/Legal/copyright-software.html>.
 
 2004-02-31 Serious bug fixed.  This is a test program, shoul dbe itself tested.
                 Quis custodiet ipsos custodes?
+                
+                
+From Manu Sporny 2012-01-16:
+
+Differences between cant.py and our implementation from Dave Longley:
+I took a quick peek, saw that it doesn't handle symmetries in the graph (and says so that it is a major failing)...just a quick skim made it look like it does more or less what the shallow/simple compare part of my algorithm does... it doesn't handle all the isomorphic nonsense for the deep comparison.
+I didn't see where you're dealing with graph isomorphisms (which require you to calculate a lexicographical path string for every bnode in the graph that needs to be named).
+[This is the signature below I think - timbl]
 """
 # canticle - Canonicalizer of NTriples Independent of Cwm , Llyn, Etc. ?
 import os

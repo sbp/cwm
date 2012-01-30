@@ -1,5 +1,6 @@
 #!/usr/bin/python
-#
+#       Convert Fink (Debian Packaging system) data to RDF
+# 
 # See http://fink.sourceforge.net/doc/packaging/reference.php
 #   and http://fink.sourceforge.net/doc/packaging/format.php#format
 # See http://www.w3.org/DesignIssues/Notation3.html
@@ -17,7 +18,7 @@ import re
 
 PREFIX="/sw"
 
-version = "$Id: fink2n3.py,v 1.8 2007-06-26 02:36:17 syosi Exp $"[1:-1]
+version = "$Id: fink2n3.py,v 1.9 2012-01-30 09:30:24 timbl Exp $"[1:-1]
 macros = { "N": "_parent", "n":"Package",  "v":"Version", "r": "Revision",
             "p": "_prefix", "P": "_prefix"}
 
@@ -292,11 +293,11 @@ for arg in sys.argv[1:]:
         elif arg == "-?" or arg == "-h" or arg == "--help":
             print """Convert Fink .info format  to n3 format.
 
-Syntax:    make2n3  [-r] <file>
+Syntax:    python fink2n3.py  [-r] <file>
 
     where <file> can be omitted and if so defaults to /sw/fink/dists .
     This program was http://www.w3.org/2000/10/swap/util/fink2p3.py
-    $Id: fink2n3.py,v 1.8 2007-06-26 02:36:17 syosi Exp $
+    $Id: fink2n3.py,v 1.9 2012-01-30 09:30:24 timbl Exp $
 """
         else:
             print """Bad option argument.""", arg, ". use -? for help."

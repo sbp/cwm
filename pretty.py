@@ -1,7 +1,7 @@
 #! /usr/bin/python
 """
 
-$Id: pretty.py,v 1.41 2007-09-09 22:51:42 timbl Exp $
+$Id: pretty.py,v 1.42 2012-01-30 09:30:20 timbl Exp $
 
 Printing of N3 and RDF formulae
 
@@ -29,7 +29,7 @@ from RDFSink import N3_nil, N3_first, N3_rest, OWL_NS, N3_Empty, N3_List, \
 from RDFSink import RDF_NS_URI
 from RDFSink import RDF_type_URI
 
-cvsRevision = "$Revision: 1.41 $"
+cvsRevision = "$Revision: 1.42 $"
 
 # Magic resources we know about
 
@@ -729,7 +729,7 @@ class Serializer:
             if collectionSyntaxOK:
                 sink.startListObject(auxPairs(triple))
                 for ele in obj:
-                    self.dumpStatement(sink, (context, self.store.li, obj, ele),
+                    self.dumpStatement(sink, (context, self.store.li, obj, ele), #  @@@ THIS IS WRONG IN XML !!!
                         sorting)
                 sink.endListObject(auPair(sub), auPair(pre))
             else:

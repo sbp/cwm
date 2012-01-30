@@ -2,7 +2,7 @@
 """
 
 
-$Id: cwm_list.py,v 1.15 2007-11-18 02:13:20 syosi Exp $
+$Id: cwm_list.py,v 1.16 2012-01-30 09:30:20 timbl Exp $
 
 List and set built-ins for cwm
 http://www.w3.org/2000/10/swap/cwm_list.py
@@ -100,8 +100,7 @@ class BI_member(LightBuiltIn, MultipleFunction):
 
 class BI_append(LightBuiltIn, Function):
     """Takes a list of lists, and appends them together.
-
-
+    
     """
     def evalObj(self, subj, queue, bindings, proof, query):
         if not isinstance(subj, NonEmptyList): return None

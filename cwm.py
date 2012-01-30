@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-$Id: cwm.py,v 1.197 2007-12-13 15:38:39 syosi Exp $
+$Id: cwm.py,v 1.198 2012-01-30 09:30:20 timbl Exp $
 
 Closed World Machine
 
@@ -62,7 +62,7 @@ from swap import  uripath
 from swap import  llyn
 from swap import  RDFSink
 
-cvsRevision = "$Revision: 1.197 $"
+cvsRevision = "$Revision: 1.198 $"
     
             
 
@@ -349,7 +349,7 @@ rdf/xml files. Note that this requires rdflib.
         else:
             raise NotImplementedError
 
-        version = "$Id: cwm.py,v 1.197 2007-12-13 15:38:39 syosi Exp $"
+        version = "$Id: cwm.py,v 1.198 2012-01-30 09:30:20 timbl Exp $"
         if not option_quiet and option_outputStyle != "-no":
             _outSink.makeComment("Processed by " + version[1:-1]) # Strip $ to disarm
             _outSink.makeComment("    using base " + option_baseURI)
@@ -381,7 +381,7 @@ rdf/xml files. Note that this requires rdflib.
             else: # default input
                 if option_first_format is None: option_first_format = option_format
                 ContentType={ "rdf": "application/xml+rdf", "n3":
-                                    "text/rdf+n3", "sparql":
+                                    "text/n3", "sparql":
                               "x-application/sparql"}[option_first_format]
                 workingContext = _store.load(
     #                            asIfFrom = join(_baseURI, ".stdin"),
@@ -442,7 +442,7 @@ rdf/xml files. Note that this requires rdflib.
                 _inputURI = join(option_baseURI, splitFrag(arg)[0])
                 assert ':' in _inputURI
                 ContentType={ "rdf": "application/xml+rdf", "n3":
-                                "text/rdf+n3",
+                                "text/n3",
                               "sparql": "x-application/sparql"}[option_format]
 
                 if not option_pipe: workingContext.reopen()
