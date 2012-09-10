@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 """
-$Id: notation3.py,v 1.202 2012-01-30 09:30:20 timbl Exp $
+$Id: notation3.py,v 1.203 2012-09-10 20:16:51 timbl Exp $
 
 
 This module implements a Nptation3 parser, and the final
@@ -633,6 +633,9 @@ class SinkParser:
                 i = self.skipSpace(str, j)
                 if i<0: raise BadSyntax(self._thisDoc, self.lines,
                                     str, i, "needed ')', found end.")                    
+                if str[i:i+2] == '$)':
+                    j = i+2
+                    break
                 if str[i:i+1] == ')':
                     j = i+1
                     break
@@ -1350,7 +1353,7 @@ B   Turn any blank node into a existentially qualified explicitly named node.
  
         if not self._quiet:  # Suppress stuff which will confuse test diffs
             self._write(u"\n#  Notation3 generation by\n")
-            idstr = u"$Id: notation3.py,v 1.202 2012-01-30 09:30:20 timbl Exp $"
+            idstr = u"$Id: notation3.py,v 1.203 2012-09-10 20:16:51 timbl Exp $"
             # CVS CHANGES THE ABOVE LINE
             self._write(u"#       " + idstr[5:-2] + u"\n\n") 
             # Strip "$" in case the N3 file is checked in to CVS
