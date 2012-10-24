@@ -1,5 +1,5 @@
 
-<!-- Processed by Id: cwm.py,v 1.197 2007/12/13 15:38:39 syosi Exp -->
+<!-- Processed by Id: cwm.py,v 1.198 2012/01/30 09:30:20 timbl Exp -->
 <!--     using base file:///devel/WWW/2000/10/swap/pim/qif.n3-->
 
 
@@ -16,7 +16,7 @@
         <seeAlso r:resource="http://dev.w3.org/cvsweb/2000/quacken/"/>
         <seeAlso r:resource="http://dev.w3.org/cvsweb/~checkout~/2000/quacken/vocab.n3?rev=1.1"/>
         <seeAlso r:resource="http://www.intuit.com/support/quicken/2002/win/1177.html"/>
-        <doc:version>$Id: qif.rdf,v 1.5 2010-07-15 13:20:32 timbl Exp $</doc:version>
+        <doc:version>$Id: qif.rdf,v 1.6 2012-10-24 01:13:54 timbl Exp $</doc:version>
     </r:Description>
 
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Account">
@@ -33,6 +33,16 @@
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Classified">
         <label>classified</label>
         <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
+    </Class>
+
+    <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Receipt">
+        <label>receipt</label>
+        <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#SupportingDocument"/>
+    </Class>
+
+    <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#SupportingDocument">
+        <label>supporting document</label>
+        <subClassOf r:resource="http://www.w3.org/2006/gen/ont#InformationResource"/>
     </Class>
 
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Transaction">
