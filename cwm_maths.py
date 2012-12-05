@@ -16,8 +16,8 @@ http://ilrt.org/discovery/chatlogs/rdfig/2001-12-01.txt from
 """
 
 __author__ = 'Sean B. Palmer'
-__cvsid__ = '$Id: cwm_maths.py,v 1.11 2005-06-09 21:05:14 syosi Exp $'
-__version__ = '$Revision: 1.11 $'
+__cvsid__ = '$Id: cwm_maths.py,v 1.12 2012-12-05 18:28:20 timbl Exp $'
+__version__ = '$Revision: 1.12 $'
 
 import sys, string, re, urllib
 
@@ -138,11 +138,11 @@ class BI_remainderOf(LightBuiltIn, ReverseFunction):
 
 class BI_negation(LightBuiltIn, Function, ReverseFunction):
 
-    def evalaluateObject(self, subject):
+    def evaluateObject(self, subject):
             t = -Decimal(subject)
             if t is not None: return tidy(t)
 
-    def evalaluateSubject(self, object):
+    def evaluateSubject(self, object):
             t = -Decimal(object)
             if t is not None: return tidy(t)
 
