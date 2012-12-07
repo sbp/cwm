@@ -16,7 +16,7 @@
         <seeAlso r:resource="http://dev.w3.org/cvsweb/2000/quacken/"/>
         <seeAlso r:resource="http://dev.w3.org/cvsweb/~checkout~/2000/quacken/vocab.n3?rev=1.1"/>
         <seeAlso r:resource="http://www.intuit.com/support/quicken/2002/win/1177.html"/>
-        <doc:version>$Id: qif.rdf,v 1.6 2012-10-24 01:13:54 timbl Exp $</doc:version>
+        <doc:version>$Id: qif.rdf,v 1.7 2012-12-07 05:34:07 timbl Exp $</doc:version>
     </r:Description>
 
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Account">
@@ -38,6 +38,12 @@
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#Receipt">
         <label>receipt</label>
         <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#SupportingDocument"/>
+    </Class>
+
+    <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#SplitTransaction">
+        <comment>A transaction which has to be split into parts for classification.</comment>
+        <label>split transaction</label>
+        <subClassOf r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
     </Class>
 
     <Class r:about="http://www.w3.org/2000/10/swap/pim/qif#SupportingDocument">
@@ -90,6 +96,24 @@
         <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
         <label>payee</label>
         <subPropertyOf r:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+    </r:Property>
+
+    <r:Property r:about="http://www.w3.org/2000/10/swap/pim/qif#splitPart">
+        <comment>A transaction representing a part of this transaction.
+    The sum of the amounts of the parts must equal the amount of this transaction.</comment>
+        <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#SplitTransaction"/>
+        <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
+        <label>part</label>
+        <range r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
+    </r:Property>
+
+    <r:Property r:about="http://www.w3.org/2000/10/swap/pim/qif#splitReverse">
+        <comment>A reverse transaction, putting this transaction back in the Split account, for redistribution as parts.
+    The amount of the reverse transaction must be the negation of this transaction.</comment>
+        <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#SplitTransaction"/>
+        <domain r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
+        <label>part</label>
+        <range r:resource="http://www.w3.org/2000/10/swap/pim/qif#Transaction"/>
     </r:Property>
 
     <r:Property r:about="http://www.w3.org/2000/10/swap/pim/qif#toAccount">
