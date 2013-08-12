@@ -191,7 +191,7 @@ class RDFHandler(xml.sax.ContentHandler):
         self._litDepth = 0
         self._usedIDs = Set()
         
-        version = "$Id: sax2rdf.py,v 1.56 2012-01-30 09:30:20 timbl Exp $"
+        version = "$Id: sax2rdf.py,v 1.57 2013-08-12 18:16:46 timbl Exp $"
 #        self.sink.makeComment("RDF parsed by "+version[1:-1])
 
         if "D" in self.flags:  # Assume default namespace declaration
@@ -296,15 +296,15 @@ class RDFHandler(xml.sax.ContentHandler):
                 elif ln == "datatype":
                     pass  #later
                 elif RDF_NS_URI + ln in propertyAttributeExceptions:
-                    raise BadSyntax(sys.exc_info(), "%s is not a valid attribute named here" % uri)
+                    raise BadSyntax(sys.exc_info(), "%s is not a valid attribute named here" % RDF_NS_URI + ln)
                 else:
                     if not ns:
                         if "L" not in self.flags:  # assume local?
                             raise BadSyntax(sys.exc_info(), "No namespace on property attribute %s" % ln)
                         properties.append((self._thisDoc + "#" + ln, value))
                     else:
-                        properties.append((uri, value))# If no uri, syntax error @@
-#                    self.sink.makeComment("xml2rdf: Ignored attribute "+uri)
+                        properties.append((RDF_NS_URI + ln, value))# If no uri, syntax error @@
+#                    self.sink.makeComment("xml2rdf: Ignored attribute "+ RDF_NS_URI + ln)
             elif ns == XML_NS_URI:
                 pass    # lang already done, others ignored
 
