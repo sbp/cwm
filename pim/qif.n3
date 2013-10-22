@@ -12,7 +12,7 @@
 @prefix ui: <http://www.w3.org/ns/ui#>.
 @prefix dc: <http://purl.org/dc/elements/1.1/>.
 
-<> doc:version "$Id: qif.n3,v 1.13 2013-04-16 14:07:53 timbl Exp $";
+<> doc:version "$Id: qif.n3,v 1.14 2013-10-22 15:22:57 timbl Exp $";
   dc:title "An ontology for personal finances";
   s:seeAlso <qif2n3.py>, <http://dev.w3.org/cvsweb/2000/quacken/>,
 	<http://dev.w3.org/cvsweb/~checkout~/2000/quacken/vocab.n3?rev=1.1>,
@@ -89,12 +89,8 @@ q:DocumentMetadataForm a ui:Form;
         """The date is the date of the document, for example for an invoice or email,
         or if none available a date of e.g. a described transaction, event etc."""@en; ui:style "background-color: #ffe;"],
         [ ui:sequence 4; a ui:DateField; ui:property dc:date ],
-        [ ui:sequence 4; a ui:MultiLineTextField; ui:property s:comment ].
+        [ ui:sequence 5; a ui:MultiLineTextField; ui:property s:comment ].
 
 
-#  No .. use http://www.w3.org/ns/pim/trip#trip
-#q:trip a r:Property; s:label "trip";
-#    s:comment "The trip associated with this transaction, etc. For expenses purposes, for example.";
-#    s:range trip:Trip.
 
 #ENDS
