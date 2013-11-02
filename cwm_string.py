@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.40 2013-11-02 15:56:30 timbl Exp $
+$Id: cwm_string.py,v 1.41 2013-11-02 16:23:24 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -74,7 +74,7 @@ class BI_ContainsRoughly(LightBuiltIn):
 
 class BI_DoesNotContainRoughly(LightBuiltIn):
     def eval(self,  subj, obj, queue, bindings, proof, query):
-        return normalizeWhitespace(subj.string.lower()).find(normalizeWhitespace(obj.string.lower())) >= 0
+        return normalizeWhitespace(subj.string.lower()).find(normalizeWhitespace(obj.string.lower())) < 0
 
 class BI_DoesNotContain(LightBuiltIn): # Converse of the above
     def eval(self,  subj, obj, queue, bindings, proof, query):
