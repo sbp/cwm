@@ -1,6 +1,6 @@
 #! /usr/bin/python
 """
-$Id: llyn.py,v 1.188 2012-01-30 09:30:20 timbl Exp $
+$Id: llyn.py,v 1.189 2013-11-02 15:57:15 timbl Exp $
 
 
 RDF Store and Query engine
@@ -101,7 +101,7 @@ from pretty import Serializer
 
 LITERAL_URI_prefix = "data:application/rdf+n3-literal;"
 Delta_NS = "http://www.w3.org/2004/delta#"
-cvsRevision = "$Revision: 1.188 $"
+cvsRevision = "$Revision: 1.189 $"
 
 
 # Magic resources we know about
@@ -763,9 +763,10 @@ class IndexedFormula(Formula):
         
         Check whether this new list (given as bnode) causes other things to become lists.
         Set up redirection so the list is used from now on instead of the bnode.        
-        Internal function.
+        Internal function. This is the de-reification of lists from (first, rest) form.
 
-        This function is extraordinarily slow, .08 seconds per call on reify/reify3.n3"""
+        This function is extraordinarily slow, .08 seconds per call on reify/reify3.n3.
+        It can hit the python recursion limit with a long list!"""
         if diag.chatty_flag > 80: progress("New list was %s, now %s = %s"%(`bnode`, `list`, `list.value()`))
         if isinstance(bnode, List): return  ##@@@@@ why is this necessary? weid.
         newBindings[bnode] = list
