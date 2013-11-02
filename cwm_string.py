@@ -1,7 +1,7 @@
 #! /usr/bin/python 
 """
 
-$Id: cwm_string.py,v 1.39 2010-12-17 22:09:50 timbl Exp $
+$Id: cwm_string.py,v 1.40 2013-11-02 15:56:30 timbl Exp $
 
 String built-ins for cwm
 This started as http://www.w3.org/2000/10/swap/string.py
@@ -69,6 +69,10 @@ class BI_ContainsIgnoringCase(LightBuiltIn):
         return subj.string.lower().find(obj.string.lower()) >= 0
 
 class BI_ContainsRoughly(LightBuiltIn):
+    def eval(self,  subj, obj, queue, bindings, proof, query):
+        return normalizeWhitespace(subj.string.lower()).find(normalizeWhitespace(obj.string.lower())) >= 0
+
+class BI_DoesNotContainRoughly(LightBuiltIn):
     def eval(self,  subj, obj, queue, bindings, proof, query):
         return normalizeWhitespace(subj.string.lower()).find(normalizeWhitespace(obj.string.lower())) >= 0
 
@@ -360,6 +364,7 @@ def register(store):
     str.internFrag("contains", BI_Contains)
     str.internFrag("containsIgnoringCase", BI_ContainsIgnoringCase)
     str.internFrag("containsRoughly", BI_ContainsRoughly)
+    str.internFrag("notContainsRoughly", BI_DoesNotContainRoughly)
     str.internFrag("doesNotContain", BI_DoesNotContain)
     str.internFrag("equalIgnoringCase", BI_equalIgnoringCase)
     str.internFrag("notEqualIgnoringCase", BI_notEqualIgnoringCase)
