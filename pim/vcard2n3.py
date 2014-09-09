@@ -122,7 +122,7 @@ def extract(path):
     
     wr( """# n3  http://www.w3.org/DesignIssues/Notation3.
 # From vCard data in %s
-# Extracted by $Id: vcard2n3.py,v 1.7 2007-06-26 02:36:16 syosi Exp $ 
+# Extracted by $Id: vcard2n3.py,v 1.8 2014-09-09 13:12:23 timbl Exp $ 
 @prefix : <#>.
 @prefix loc: <#loc_>.
 @prefix s: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -382,13 +382,8 @@ def extract(path):
 
 def do(path):
     if verbose: sys.stderr.write("Doing " + path + "\n")
-#    if os.path.isdir(path):
-#        if recursive:
-#            for name in os.listdir(path):
-#                do(path + "/" + name)
-#    else:
-#       if path[-4:].lower() == ".vcr" or path[-6:] == ".vcard":
     extract(path) 
+
 ###################################
 
 def _test():
@@ -405,9 +400,7 @@ files = []
 
 for arg in sys.argv[1:]:
     if arg[0:1] == "-":
-#        if arg == "-r": recursive = 1    # Recursive
-#        elif arg == "-f": nochange = 0   # Fix
-        if arg == "-v": verbose = 1   # Tell me even about files which were ok
+        if arg == "-v": verbose = 1  
         if arg == '-t':
             _test()
             sys.exit(0)
@@ -415,7 +408,6 @@ for arg in sys.argv[1:]:
             print """Bad option argument.
             -v  verbose
             -t  self-test
-            -f  fix files instead of just looking
 
 """
             sys.exit(-1)
