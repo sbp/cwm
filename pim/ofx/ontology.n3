@@ -11,7 +11,7 @@
 
 @keywords a, is, of.
 
-<>  doc:version "$Id: ontology.n3,v 1.4 2010-07-15 13:21:57 timbl Exp $";
+<>  doc:version "$Id: ontology.n3,v 1.5 2015-01-10 00:25:32 timbl Exp $";
 
     s:comment """This is an ontology for data converted from the Online Financial Exchange XML
 format for downlodable bank statements, etc. 
@@ -37,6 +37,6 @@ DTPOSTED a rdf:Property; s:label "posted".
 
 # Of accounts:
 
-ACCTID a  a rdf:Property; s:label "account number".
-ACCTID a  a rdf:Property; s:label "account type".
-BANKID a  a rdf:Property; s:label "bank number".
+ACCTID a rdf:Property; s:label "account number".
+ACCTTYPE a rdf:Property; s:label "account type".
+BANKID a rdf:Property; s:label "bank number".
