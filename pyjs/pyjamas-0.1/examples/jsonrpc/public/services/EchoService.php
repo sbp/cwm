@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("phpolait/phpolait.php");
 
 class EchoService {
